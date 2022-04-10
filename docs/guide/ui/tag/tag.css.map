@@ -1,0 +1,1 @@
+{"mappings":"AACI;EACI;EACA","sources":["docs-src/guide/ui/tag/tag.scss"],"sourcesContent":[".preview {\n    > * {\n        margin: 1rem;\n        font-size: 1.5rem;\n    }\n}"],"names":[],"version":3,"file":"tag.css.map","sourceRoot":"../../../../"}

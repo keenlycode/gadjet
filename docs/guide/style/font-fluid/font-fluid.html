@@ -1,0 +1,154 @@
+<html>
+<head>
+
+<title>gadjet : HTML5 User Interface Framework</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="../../../lib/gadjet/dist/normalize.css?v=34">
+<link rel="stylesheet" href="../../../base.css?v=34">
+<script defer src="../../../base.js?v=34"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNJ0R8Y1D7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NNJ0R8Y1D7');
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../guide/base.css?v=34">
+<script defer src="../../../guide/base.js?v=34"></script>
+
+<script defer src="font-fluid.js?v=34"></script>
+
+</head>
+<body>
+
+<div class="container">
+<h1>Fluid font</h1>
+<p>Dynamic font size relative to viewport width.</p>
+<h2>Preview</h2>
+<hr />
+<div class="preview">
+    <p class="font-fluid">Try resizing your browser to see font size change</p>
+</div>
+<h2>Import</h2>
+<hr />
+<p><el-tag class="title-block">js</el-tag></p>
+<pre><code class="language-js">import { fontFluid } from 'gadjet/dist/module/style/font-fluid.js';
+</code></pre>
+<h2>Function signature</h2>
+<hr />
+<pre><code class="language-ts">fontFluid({
+    vwMin: number = 300,
+    vwMax: number = 1200,
+    fontSizeMin: number = 16,
+    fontSizeMax: number = 18
+}) =&gt; string;
+</code></pre>
+<p><el-tag class="title-block">param <code>{ vwMin: number = 300 }</code></el-tag></p>
+<blockquote class="fn-detail">
+Minimum viewport width in px unit to calculate font size ratio.
+</blockquote>
+<p><el-tag class="title-block">param <code>{ vwMax: number = 1200 }</code></el-tag></p>
+<blockquote class="fn-detail">
+Maximum viewport in px width to calculate font size ratio.
+</blockquote>
+<p><el-tag class="title-block">param <code>{ fontSizeMin: number = 16 }</code></el-tag></p>
+<blockquote class="fn-detail">
+Minimum font size at vwMin.
+</blockquote>
+<p><el-tag class="title-block">param <code>{ fontSizeMax: number = 18 }</code></el-tag></p>
+<blockquote class="fn-detail">
+Maximum font size at vwMax.
+</blockquote>
+<p><el-tag class="title-block">return</el-tag></p>
+<blockquote class="fn-detail">
+CSS string
+</blockquote>
+<h2>Usage</h2>
+<hr />
+<p><el-tag class="title-block">js</el-tag></p>
+<pre><code class="language-js">import { addStyle } from 'gadjet/dist/style.js';
+import { fontFluid } from 'gadjet/dist/module/style/font-fluid.js';
+
+addStyle`
+html {
+    ${fontFluid({
+        vwMin: 300,
+        vwMax: 1200,
+        fontSizeMin: 16,
+        fontSizeMax: 18
+    })}
+}`;
+</code></pre>
+
+</div>
+
+
+
+
+
+<script defer>
+var sidebar = null // declare `sidebar` as global variable
+window.addEventListener('load', function () {
+    sidebar = document.querySelector('el-sidebar')
+    var sidebarButton = document.querySelector('#sidebar-button');
+    sidebarButton.addEventListener('click', function () {
+        sidebar.show();
+    });
+});
+</script>
+
+<el-button-pin id="sidebar-button" class="bg-theme-violet-int">☰</el-button-pin>
+<el-sidebar id="sidebar" showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="../../../" class="bg-theme-violet-int">gadjet</a>
+            <el-button-square onclick="sidebar.hide()" class="bg-theme-yellow-int">✕</el-button-square>
+        </div>
+        <div el="menu">
+            <a class="h" href="../../../guide/intro.html">Introduction</a>
+            <a class="h" href="../../../guide/getting-started.html">Getting Started</a>
+            <a class="h" href="../../../guide/style/style.html">Style</a>
+            <div class="list">
+                <a href="../../../guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="../../../guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="../../../guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="../../../guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="../../../guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="../../../guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="../../../guide/ui/badge/badge.html">Badge</a>
+                <a href="../../../guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="../../../guide/ui/button/button.html">Buttons</a>
+                <a href="../../../guide/ui/card/card.html">Card</a>
+                <a href="../../../guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="../../../guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="../../../guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="../../../guide/ui/input/input.html">Input</a>
+                <a href="../../../guide/ui/menu/menu.html">Menu</a>
+                <a href="../../../guide/ui/progress/progress.html">Progress</a>
+                <a href="../../../guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="../../../guide/ui/switch/switch.html">Switch</a>
+                <a href="../../../guide/ui/tab/tab.html">Tab</a>
+                <a href="../../../guide/ui/table/table.html">Table</a>
+                <a href="../../../guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>
+
+
+
+<div id="footer">
+</div>
+
+</body>
+</html>

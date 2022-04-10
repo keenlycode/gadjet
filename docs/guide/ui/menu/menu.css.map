@@ -1,0 +1,1 @@
+{"mappings":"AAAA;EACI","sources":["docs-src/guide/ui/menu/menu.scss"],"sourcesContent":["el-menu {\n    width: 300px;\n}"],"names":[],"version":3,"file":"menu.css.map","sourceRoot":"../../../../"}

@@ -1,0 +1,1 @@
+{"mappings":"AAAA;EACI;EACA;EACA;EACA;EACA;EACA","sources":["docs-src/index.scss"],"sourcesContent":[".container {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: 90%;\n    max-width: 1200px;\n    margin: auto;\n}"],"names":[],"version":3,"file":"index.css.map","sourceRoot":"../"}
