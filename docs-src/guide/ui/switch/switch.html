@@ -1,0 +1,15 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="switch.css?v={{_v}}">
+<script defer src="switch.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+{{ markdown('switch.html.md') }}
+</div>
+{% endblock %}

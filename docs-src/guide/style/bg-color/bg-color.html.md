@@ -1,0 +1,47 @@
+# Background color
+
+Background color with proper text color (black or white);
+
+## Preview
+---
+<div class="preview">
+    <div class="bg-theme-blueGreen" style="padding: 0.5rem;">#97D8C4</div>
+    <div class="bg-theme-violet" style="padding: 0.5rem;">#7900FF</div>
+</div>
+
+## Import
+---
+<el-tag class="title-block">js</el-tag>
+```js
+import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
+```
+
+## Function signature
+---
+```ts
+bgColor(color: string = 'blue') => string;
+```
+
+<el-tag class="title-block">param <code>color: string = 'blue'</code></el-tag>
+<blockquote class="fn-detail">
+CSS color for background
+</blockquote>
+
+<el-tag class="title-block">return</el-tag>
+<blockquote class="fn-detail">
+CSS string
+</blockquote>
+
+## Usage
+---
+
+<el-tag class="title-block">js</el-tag>
+```js
+import { addStyle } from 'gadjet/dist/style.js';
+import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
+
+addStyle`
+div {
+    ${bgColor('blue')}
+}`;
+```

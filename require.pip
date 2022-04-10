@@ -1,0 +1,4 @@
+Jinja2==3.0.3
+mistune==2.0.2
+watchgod==0.7
+engrave==2.0.0

@@ -1,0 +1,15 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../' %}
+
+{% block head %}
+{{ super() }}
+<script defer src="ui.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('ui.html.md') }}
+</div>
+{% endblock %}

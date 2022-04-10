@@ -1,0 +1,16 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="file-manager.css?v={{_v}}">
+<script defer src="file-manager.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('file-manager.html.md') }}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="getting-started.css?v={{_v}}">
+<script defer type="module" src="getting-started.js?v={{_v}}"></script>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+{{markdown('getting-started.html.md')}}
+</div>
+{% endblock %}

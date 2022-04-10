@@ -1,0 +1,16 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="html-editor.css?v={{_v}}">
+<script defer src="html-editor.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('html-editor.html.md') }}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<script defer src="font-fluid.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+{{ markdown('font-fluid.html.md') }}
+</div>
+{% endblock %}

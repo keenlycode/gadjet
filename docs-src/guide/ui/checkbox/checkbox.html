@@ -1,0 +1,16 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="checkbox.css?v={{_v}}">
+<script defer src="checkbox.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('checkbox.html.md') }}
+</div>
+{% endblock %}

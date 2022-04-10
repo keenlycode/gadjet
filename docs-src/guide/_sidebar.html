@@ -1,0 +1,50 @@
+<script defer>
+var sidebar = null // declare `sidebar` as global variable
+window.addEventListener('load', function () {
+    sidebar = document.querySelector('el-sidebar')
+    var sidebarButton = document.querySelector('#sidebar-button');
+    sidebarButton.addEventListener('click', function () {
+        sidebar.show();
+    });
+});
+</script>
+
+<el-button-pin id="sidebar-button" class="bg-theme-violet-int">☰</el-button-pin>
+<el-sidebar id="sidebar" showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="{{to_root}}" class="bg-theme-violet-int">gadjet</a>
+            <el-button-square onclick="sidebar.hide()" class="bg-theme-yellow-int">✕</el-button-square>
+        </div>
+        <div el="menu">
+            <a class="h" href="{{to_root}}guide/intro.html">Introduction</a>
+            <a class="h" href="{{to_root}}guide/getting-started.html">Getting Started</a>
+            <a class="h" href="{{to_root}}guide/style/style.html">Style</a>
+            <div class="list">
+                <a href="{{to_root}}guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="{{to_root}}guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="{{to_root}}guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="{{to_root}}guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="{{to_root}}guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="{{to_root}}guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="{{to_root}}guide/ui/badge/badge.html">Badge</a>
+                <a href="{{to_root}}guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="{{to_root}}guide/ui/button/button.html">Buttons</a>
+                <a href="{{to_root}}guide/ui/card/card.html">Card</a>
+                <a href="{{to_root}}guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="{{to_root}}guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="{{to_root}}guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="{{to_root}}guide/ui/input/input.html">Input</a>
+                <a href="{{to_root}}guide/ui/menu/menu.html">Menu</a>
+                <a href="{{to_root}}guide/ui/progress/progress.html">Progress</a>
+                <a href="{{to_root}}guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="{{to_root}}guide/ui/switch/switch.html">Switch</a>
+                <a href="{{to_root}}guide/ui/tab/tab.html">Tab</a>
+                <a href="{{to_root}}guide/ui/table/table.html">Table</a>
+                <a href="{{to_root}}guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>

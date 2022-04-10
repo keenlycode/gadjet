@@ -1,0 +1,16 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="box-arrow.css?v={{_v}}">
+<script defer src="box-arrow.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('box-arrow.html.md') }}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'guide/_base.html' %}
+
+{% set to_root = '../../../' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="card.css?v={{_v}}">
+<script defer src="card.js?v={{_v}}"></script>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="container">
+{{ markdown('card.html.md') }}
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{
+    "name": "gadjet",
+    "version": "0.1.10-dev",
+    "description": "HTML5 User Interface",
+    "keywords": [
+        "html5",
+        "javascript",
+        "css",
+        "css-in-js",
+        "ui",
+        "user interface"
+    ],
+    "repository": {
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/nitipit/gadjet"
+        }
+    },
+    "url": "https://nitipit.github.io/gadjet/",
+    "homepage": "https://nitipit.github.io/gadjet/",
+    "author": "Nitipit Nontasuwan <nitipit@gmail.com>",
+    "license": "MIT",
+    "files": [
+        "dist/**/*",
+        "src/**/*"
+    ],
+    "type": "module",
+    "module": "dist/module/gadjet.js",
+    "source": "src/gadjet.ts",
+    "targets": {
+        "main": false,
+        "module": false,
+        "normalize.css": {
+            "source": "node_modules/normalize.css/normalize.css",
+            "sourceMap": true,
+            "distDir": "dist/",
+            "optimize": true
+        },
+        "gadjet.js": {
+            "source": "src/gadjet.ts",
+            "sourceMap": true,
+            "distDir": "dist/",
+            "outputFormat": "esmodule",
+            "isLibrary": true,
+            "optimize": true
+        },
+        "docs": {
+            "sourceMap": true,
+            "distDir": "docs/",
+            "optimize": true
+        }
+    },
+    "dependencies": {
+        "@emotion/css": "^11.5.0",
+        "@popperjs/core": "^2.11.0",
+        "@tiptap/core": "^2.0.0-beta.129",
+        "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
+        "@tiptap/starter-kit": "^2.0.0-beta.131",
+        "color": "^4.0.1",
+        "gadjet": "file:./",
+        "normalize.css": "^8.0.1",
+        "uhtml": "^2.7.6"
+    },
+    "devDependencies": {
+        "@parcel/packager-xml": "^2.2.1",
+        "@parcel/transformer-sass": "^2.2.1",
+        "@parcel/transformer-xml": "^2.2.1",
+        "highlight.js": "^11.3.1",
+        "parcel": "^2.2.1",
+        "sass": "^1.43.4"
+    }
+}
