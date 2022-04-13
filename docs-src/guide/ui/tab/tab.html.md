@@ -36,3 +36,11 @@ Tab.tagStyle({
     <div>Payment</div>
 </el-tab>
 ```
+
+## Element API
+---
+<el-tag class="title-block">fn <code>setupTab(): void</code></el-tag>
+<blockquote class="fn-detail">
+Setup javascript and event for tabs. Should be called if tab elements has
+been modified.
+</blockquote>
