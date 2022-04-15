@@ -32,6 +32,8 @@ export class TabStyle extends StyleClass {
             align-items: center;
             cursor: pointer;
             padding: 0.25em 0.5em 0.25em 0.5em;
+            line-height: 1;
+            height: 1.8em;
         }
         > div:not(:last-of-type) {
             border-right-style: solid;

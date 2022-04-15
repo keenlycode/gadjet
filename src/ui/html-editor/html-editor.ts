@@ -180,7 +180,26 @@ export class HTMLEditor extends StyledElement {
             extensions: [
                 StarterKit,
                 FloatingMenuExt.configure({
-                    element: this.querySelector(FloatingMenu.tagName)
+                    element: this.querySelector(FloatingMenu.tagName),
+                    shouldShow: ({ editor, view, state, oldState }) => {
+                        const { selection } = state
+                        const { $anchor, empty } = selection
+                        const isRootDepth = $anchor.depth === 1
+                        const isEmptyTextBlock = $anchor.parent.isTextblock
+                            && !$anchor.parent.type.spec.code
+                            && !$anchor.parent.textContent
+
+                        if (
+                            !view.hasFocus()
+                            || !empty
+                            || !isRootDepth
+                            || !isEmptyTextBlock
+                            || !editor.isEditable
+                        ) {
+                            return false
+                        }
+                        return true
+                    }
                 })
             ],
         });
