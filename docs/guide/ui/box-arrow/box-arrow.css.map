@@ -1,1 +1,0 @@
-{"mappings":"AACI;EACI;EACA","sources":["docs-src/guide/ui/box-arrow/box-arrow.scss"],"sourcesContent":[".preview {\n    el-box-arrow {\n        padding: 0.5rem;\n        margin: 0.5rem;\n    }\n}"],"names":[],"version":3,"file":"box-arrow.css.map","sourceRoot":"../../../../"}
