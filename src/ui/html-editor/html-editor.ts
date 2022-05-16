@@ -162,7 +162,6 @@ export class HTMLEditor extends StyledElement {
         `);
     }
 
-    editorElement: HTMLElement;
     editor: Editor;
     floatingMenu: FloatingMenu;
     headingMenu: HeadingMenu;
