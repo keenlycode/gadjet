@@ -169,6 +169,11 @@ export class HTMLEditor extends StyledElement {
 
     constructor() {
         super();
+        this.render();
+    };
+
+    render() {
+        this.innerHTML = '';
         this.headingMenu = new HeadingMenu();
         this.floatingMenu = new FloatingMenu();
         this.floatingMenu.append(this.headingMenu);
@@ -215,5 +220,5 @@ export class HTMLEditor extends StyledElement {
             childList: true,
             subtree: true
         });
-    };
+    }
 };
