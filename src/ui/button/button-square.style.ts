@@ -1,5 +1,6 @@
 import { StyleClass } from "../ui";
 import { ButtonStyle } from "./button.style";
+import { aspectRatio } from "../../style";
 
 export interface ButtonSquareStyleParam {
     color?: string;
@@ -17,10 +18,7 @@ export class ButtonSquareStyle extends StyleClass {
         let css = `
         ${ButtonStyle.css(style)}
         user-select: none;
-        min-width: 2em;
-        max-width: 2em;
-        min-height: 2em;
-        max-height: 2em;
+        ${aspectRatio('1/1')}
         ${this.style(style)}
         `.trim();
 
