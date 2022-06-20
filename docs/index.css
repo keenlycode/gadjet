@@ -1,0 +1,10 @@
+.container {
+  width: 90%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  display: flex;
+}
+
+/*# sourceMappingURL=index.css.map */

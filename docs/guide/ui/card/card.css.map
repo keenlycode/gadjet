@@ -1,0 +1,1 @@
+{"mappings":"AACI;;;;;;AAOA","sources":["docs-src/guide/ui/card/card.scss"],"sourcesContent":["el-card {\n    > h2 {\n        padding: 0 1rem;\n        margin: 0;\n        padding: 0.8rem 0.5rem;\n        border-radius: 4px 4px 0 0;\n    }\n\n    > p {\n        padding: 0.5rem 1rem;\n    }\n}"],"names":[],"version":3,"file":"card.css.map","sourceRoot":"../../../../"}

@@ -1,0 +1,172 @@
+<html>
+<head>
+
+<title>gadjet : HTML5 User Interface Framework</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="../../../lib/gadjet/dist/normalize.css?v=36">
+<link rel="stylesheet" href="../../../base.css?v=36">
+<script defer src="../../../base.js?v=36"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNJ0R8Y1D7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NNJ0R8Y1D7');
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../guide/base.css?v=36">
+<script defer src="../../../guide/base.js?v=36"></script>
+
+<script defer src="./progress.js?v=36"></script>
+
+</head>
+<body>
+
+<div class="container">
+<h1>Progress</h1>
+<h2>Progress Bar</h2>
+<hr />
+<div class="preview">
+    <div style="width: 200px;">
+        <div class="row">
+            <el-progress-bar></el-progress-bar>
+        </div>
+        <div class="row" style="margin-top: 1rem;">
+            <el-progress-bar value="0"></el-progress-bar>
+        </div>
+        <div class="row" style="margin-top: 1rem;">
+            <el-progress-bar value="50"></el-progress-bar>
+        </div>
+        <div class="row" style="margin-top: 1rem;">
+            <el-progress-bar value="100"></el-progress-bar>
+        </div>
+    </div>
+</div>
+<h3>Coding</h3>
+<p><el-tag class="title-block">js <code>&lt;script defer&gt;</code></el-tag></p>
+<pre><code class="language-js">import {define} from 'gadjet/dist/module/ui/ui.js';
+import {ProgressBar} from 'gadjet/dist/module/ui/progress/progress-bar.js';
+define('el-progress-bar', ProgressBar);
+ProgressBar.tagStyle({
+    progressColor: 'blue',
+    barColor: '#ccc',
+    thickness: '5px',
+    borderRadius: '5px'
+})
+</code></pre>
+<p><el-tag class="title-block">html</el-tag></p>
+<pre><code class="language-html">&lt;el-progress-bar&gt;&lt;/el-progress-bar&gt;
+&lt;el-progress-bar value=&quot;0&quot; max=&quot;100&quot;&gt;&lt;/el-progress-bar&gt;
+&lt;el-progress-bar value=&quot;50&quot; max=&quot;100&quot;&gt;&lt;/el-progress-bar&gt;
+&lt;el-progress-bar value=&quot;100&quot; max=&quot;100&quot;&gt;&lt;/el-progress-bar&gt;
+</code></pre>
+<h3>Element API</h3>
+<p><el-tag class="title-block">prop<code>value</code></el-tag></p>
+<blockquote class="fn-detail">
+Progress value, will change to loop if set to <code>null</code>
+</blockquote>
+<p><el-tag class="title-block">prop<code>max</code></el-tag></p>
+<blockquote class="fn-detail">
+Get/set progress max value.
+</blockquote>
+<h2>Progress Circle</h2>
+<hr />
+<div class="preview">
+    <el-progress-circle style="width: 3em;"></el-progress-circle>
+</div>
+<h3>Coding</h3>
+<p><el-tag class="title-block">js <code>&lt;script defer&gt;</code></el-tag></p>
+<pre><code class="language-js">import { define } from 'gadjet/dist/module/ui/ui.js';
+import { ProgressCircle } from 'gadjet/dist/module/ui/progress/progress-circle.js';
+define('el-progress-circle', ProgressCircle);
+ProgressCircle.tagStyle({
+    radius: 75,
+    trackWidth: 25,
+    trackColor: '#ccc',
+    progressColor: 'blue'
+})
+</code></pre>
+<p><el-tag class="title-block">html</el-tag></p>
+<pre><code class="language-html">&lt;el-progress-circle&gt;&lt;/el-progress-circle&gt;
+</code></pre>
+<h3>Element API</h3>
+<p><el-tag class="title-block">prop<code>value</code></el-tag></p>
+<blockquote class="fn-detail">
+Get/set progress value, will change to loop if set to <code>null</code>
+</blockquote>
+<p><el-tag class="title-block">prop<code>max</code></el-tag></p>
+<blockquote class="fn-detail">
+Get/set progress max value.
+</blockquote>
+
+</div>
+
+
+
+
+
+<script defer>
+var sidebar = null // declare `sidebar` as global variable
+window.addEventListener('load', function () {
+    sidebar = document.querySelector('el-sidebar')
+    var sidebarButton = document.querySelector('#sidebar-button');
+    sidebarButton.addEventListener('click', function () {
+        sidebar.show();
+    });
+});
+</script>
+
+<el-button-pin id="sidebar-button" class="bg-theme-violet-int">☰</el-button-pin>
+<el-sidebar id="sidebar" showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="../../../" class="bg-theme-violet-int">gadjet</a>
+            <el-button-square onclick="sidebar.hide()" class="bg-theme-yellow-int">✕</el-button-square>
+        </div>
+        <div el="menu">
+            <a class="h" href="../../../guide/intro.html">Introduction</a>
+            <a class="h" href="../../../guide/getting-started.html">Getting Started</a>
+            <a class="h" href="../../../guide/style/style.html">Style</a>
+            <div class="list">
+                <a href="../../../guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="../../../guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="../../../guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="../../../guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="../../../guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="../../../guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="../../../guide/ui/badge/badge.html">Badge</a>
+                <a href="../../../guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="../../../guide/ui/button/button.html">Buttons</a>
+                <a href="../../../guide/ui/card/card.html">Card</a>
+                <a href="../../../guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="../../../guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="../../../guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="../../../guide/ui/input/input.html">Input</a>
+                <a href="../../../guide/ui/menu/menu.html">Menu</a>
+                <a href="../../../guide/ui/progress/progress.html">Progress</a>
+                <a href="../../../guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="../../../guide/ui/switch/switch.html">Switch</a>
+                <a href="../../../guide/ui/tab/tab.html">Tab</a>
+                <a href="../../../guide/ui/table/table.html">Table</a>
+                <a href="../../../guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>
+
+
+
+<div id="footer">
+</div>
+
+</body>
+</html>
