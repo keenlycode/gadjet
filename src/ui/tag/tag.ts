@@ -4,11 +4,11 @@ import { TagStyle, TagStyleParam } from "./tag.style";
 export class Tag extends StyledElement {
     static Style = TagStyle;
 
-    static tagStyle(style?: TagStyleParam): void {
+    static tagStyle(style?: string | TagStyleParam): void {
         super.tagStyle(style);
     }
 
-    static classStyle(class_: string, style?: TagStyleParam): void {
+    static classStyle(class_: string, style?: string | TagStyleParam): void {
         super.classStyle(class_, style);
     }
 

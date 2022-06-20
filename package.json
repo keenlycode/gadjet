@@ -1,6 +1,6 @@
 {
     "name": "gadjet",
-    "version": "0.1.11-dev",
+    "version": "0.1.11",
     "description": "HTML5 User Interface",
     "keywords": [
         "html5",
@@ -57,7 +57,6 @@
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
         "color": "^4.0.1",
-        "gadjet": "file:./",
         "normalize.css": "^8.0.1",
         "uhtml": "^2.7.6"
     },
