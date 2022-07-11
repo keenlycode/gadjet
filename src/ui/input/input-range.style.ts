@@ -33,6 +33,7 @@ export class InputRangeStyle extends StyleClass {
             width: 100%;
             background: transparent;
             position: absolute;
+            margin: 0;
         }
 
         input[type="range"]::-webkit-slider-thumb {
@@ -42,6 +43,8 @@ export class InputRangeStyle extends StyleClass {
             border: 1px solid grey;
             border-radius: 50%;
             cursor: pointer;
+            margin: 0;
+            padding: 0;
         }
         div[el="fill"] {
             position: absolute;
