@@ -77,7 +77,7 @@ except the import path which start with `gadjet/src/` instead of
 <el-tag class="title-block">ts</el-tag>
 ```ts
 import { define } from 'gadjet/src/ui/ui';
-import { InputTag } from 'gadget/src/ui/input/input-tag';
+import { InputTag } from 'gadjet/src/ui/input/input-tag';
 ```
 
 ## Style, Class and Element API

@@ -5,7 +5,7 @@ and Javascript (ES6). It relies on **\<web-component/\>**
 and **CSS-in-JS** to acheive it's goals to be **adaptive**, **extensible**
 and **modular** as much as possible.
 
-**gadget** establish it's core concept on `StyledElement` class which
+**gadjet** establish it's core concept on `StyledElement` class which
 provides dynamic style methods to apply **CSS-in-JS** with **\<web-component/>**
 as described in class structure below.
 
@@ -25,7 +25,7 @@ to extend and use. For example, let's see how we define and use badge in Javascr
 <el-tag class="title-block">js<code>\<script defer></code></el-tag>
 ```js
 // filename: script.js
-import { define, Badge } from 'gadget.js';
+import { define, Badge } from 'gadjet.js';
 
 // define custom element, register tag name `el-badge` to class `Badge`
 // and also add CSS style to defined tag.

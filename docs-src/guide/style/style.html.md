@@ -1,10 +1,10 @@
 # Style
 
-**gadget** provide useful style portion which can be used with HTML elements and
+**gadjet** provide useful style portion which can be used with HTML elements and
 can be injected to HTML page by tag template <code>addStyle</code>.
 
 ```js
-import * as style from from 'gadget/dist/module/style.js';
+import * as style from from 'gadjet/dist/module/style.js';
 
 /* Add interactive background color to <button> element by inject CSS
 into HTML Page */

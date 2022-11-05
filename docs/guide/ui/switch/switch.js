@@ -142,88 +142,15 @@
       this[globalName] = mainExports;
     }
   }
-})({"bFRfe":[function(require,module,exports) {
+})({"9i6dn":[function(require,module,exports) {
 "use strict";
+var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 module.bundle.HMR_BUNDLE_ID = "9ce39c77a0ea31ca";
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-    if (!it) {
-        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-            if (it) o = it;
-            var i = 0;
-            var F = function F() {};
-            return {
-                s: F,
-                n: function n() {
-                    if (i >= o.length) return {
-                        done: true
-                    };
-                    return {
-                        done: false,
-                        value: o[i++]
-                    };
-                },
-                e: function e(_e) {
-                    throw _e;
-                },
-                f: F
-            };
-        }
-        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    var normalCompletion = true, didErr = false, err;
-    return {
-        s: function s() {
-            it = it.call(o);
-        },
-        n: function n() {
-            var step = it.next();
-            normalCompletion = step.done;
-            return step;
-        },
-        e: function e(_e2) {
-            didErr = true;
-            err = _e2;
-        },
-        f: function f() {
-            try {
-                if (!normalCompletion && it.return != null) it.return();
-            } finally{
-                if (didErr) throw err;
-            }
-        }
-    };
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser */ /*::
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -253,6 +180,8 @@ interface ParcelModule {
 interface ExtensionContext {
   runtime: {|
     reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
   |};
 }
 declare var module: {bundle: ParcelRequire, ...};
@@ -262,7 +191,11 @@ declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
 declare var chrome: ExtensionContext;
 declare var browser: ExtensionContext;
-*/ var OVERLAY_ID = '__parcel__error__overlay__';
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
@@ -270,10 +203,10 @@ function Module(moduleName) {
         data: module.bundle.hotData,
         _acceptCallbacks: [],
         _disposeCallbacks: [],
-        accept: function accept(fn) {
+        accept: function(fn) {
             this._acceptCallbacks.push(fn || function() {});
         },
-        dispose: function dispose(fn) {
+        dispose: function(fn) {
             this._disposeCallbacks.push(fn);
         }
     };
@@ -282,62 +215,54 @@ function Module(moduleName) {
 module.bundle.Module = Module;
 var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
 }
 function getPort() {
     return HMR_PORT || location.port;
 } // eslint-disable-next-line no-redeclare
 var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
-    var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
-    ws.onmessage = function(event) {
+    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
+    var ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/"); // Web extension context
+    var extCtx = typeof chrome === "undefined" ? typeof browser === "undefined" ? null : browser : chrome; // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    } // $FlowFixMe
+    ws.onmessage = async function(event) {
         checkedAssets = {} /*: {|[string]: boolean|} */ ;
         acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
-        if (data.type === 'update') {
+        if (data.type === "update") {
             // Remove error overlay if there is one
-            if (typeof document !== 'undefined') removeErrorOverlay();
-            var assets = data.assets.filter(function(asset) {
-                return asset.envHash === HMR_ENV_HASH;
-            }); // Handle HMR Update
-            var handled = assets.every(function(asset) {
-                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH); // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
             });
             if (handled) {
-                console.clear();
-                assets.forEach(function(asset) {
-                    hmrApply(module.bundle.root, asset);
-                });
+                console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
                 for(var i = 0; i < assetsToAccept.length; i++){
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else if ('reload' in location) location.reload();
-            else {
-                // Web extension context
-                var ext = typeof chrome === 'undefined' ? typeof browser === 'undefined' ? null : browser : chrome;
-                if (ext && ext.runtime && ext.runtime.reload) ext.runtime.reload();
-            }
+            } else fullReload();
         }
-        if (data.type === 'error') {
+        if (data.type === "error") {
             // Log parcel errors to console
-            var _iterator = _createForOfIteratorHelper(data.diagnostics.ansi), _step;
-            try {
-                for(_iterator.s(); !(_step = _iterator.n()).done;){
-                    var ansiDiagnostic = _step.value;
-                    var stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                    console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
-                }
-            } catch (err) {
-                _iterator.e(err);
-            } finally{
-                _iterator.f();
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
             }
-            if (typeof document !== 'undefined') {
+            if (typeof document !== "undefined") {
                 // Render the fancy html overlay
                 removeErrorOverlay();
                 var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
@@ -349,37 +274,46 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         console.error(e.message);
     };
     ws.onclose = function() {
-        console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+        console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
     };
 }
 function removeErrorOverlay() {
     var overlay = document.getElementById(OVERLAY_ID);
     if (overlay) {
         overlay.remove();
-        console.log('[parcel] ✨ Error resolved');
+        console.log("[parcel] ✨ Error resolved");
     }
 }
 function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement('div');
+    var overlay = document.createElement("div");
     overlay.id = OVERLAY_ID;
-    var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    var _iterator2 = _createForOfIteratorHelper(diagnostics), _step2;
-    try {
-        for(_iterator2.s(); !(_step2 = _iterator2.n()).done;){
-            var diagnostic = _step2.value;
-            var stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
-            errorHTML += "\n      <div>\n        <div style=\"font-size: 18px; font-weight: bold; margin-top: 20px;\">\n          \uD83D\uDEA8 ".concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
-                return '<div>💡 ' + hint + '</div>';
-            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? "<div>\uD83D\uDCDD <a style=\"color: violet\" href=\"".concat(diagnostic.documentation, "\" target=\"_blank\">Learn more</a></div>") : '', "\n      </div>\n    ");
-        }
-    } catch (err) {
-        _iterator2.e(err);
-    } finally{
-        _iterator2.f();
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          🚨 ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>📝 <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
     }
-    errorHTML += '</div>';
+    errorHTML += "</div>";
     overlay.innerHTML = errorHTML;
     return overlay;
+}
+function fullReload() {
+    if ("reload" in location) location.reload();
+    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
 }
 function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
     var modules = bundle.modules;
@@ -402,7 +336,7 @@ function updateLink(link) {
         if (link.parentNode !== null) // $FlowFixMe
         link.parentNode.removeChild(link);
     };
-    newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now()); // $FlowFixMe
+    newLink.setAttribute("href", link.getAttribute("href").split("?")[0] + "?" + Date.now()); // $FlowFixMe
     link.parentNode.insertBefore(newLink, link.nextSibling);
 }
 var cssTimeout = null;
@@ -412,33 +346,105 @@ function reloadCSS() {
         var links = document.querySelectorAll('link[rel="stylesheet"]');
         for(var i = 0; i < links.length; i++){
             // $FlowFixMe[incompatible-type]
-            var href = links[i].getAttribute('href');
+            var href = links[i].getAttribute("href");
             var hostname = getHostname();
-            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
             var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
     }, 50);
 }
+function hmrDownload(asset) {
+    if (asset.type === "js") {
+        if (typeof document !== "undefined") {
+            let script = document.createElement("script");
+            script.src = asset.url + "?t=" + Date.now();
+            if (asset.outputFormat === "esmodule") script.type = "module";
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === "function") {
+            // Worker scripts
+            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + "?t=" + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension bugfix for Chromium
+                    // https://bugs.chromium.org/p/chromium/issues/detail?id=1255412#c12
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3) {
+                        if (typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                            extCtx.runtime.reload();
+                            return;
+                        }
+                        asset.url = extCtx.runtime.getURL("/__parcel_hmr_proxy__?url=" + encodeURIComponent(asset.url + "?t=" + Date.now()));
+                        return hmrDownload(asset);
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
 function hmrApply(bundle, asset) {
     var modules = bundle.modules;
     if (!modules) return;
-    if (asset.type === 'css') reloadCSS();
-    else if (asset.type === 'js') {
-        var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
         if (deps) {
             if (modules[asset.id]) {
                 // Remove dependencies that are removed and will become orphaned.
                 // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                var oldDeps = modules[asset.id][1];
-                for(var dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    var id = oldDeps[dep];
-                    var parents = getParents(module.bundle.root, id);
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
                     if (parents.length === 1) hmrDelete(module.bundle.root, id);
                 }
             }
-            var fn = new Function('require', 'module', 'exports', asset.output);
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+             // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
             modules[asset.id] = [
                 fn,
                 deps
@@ -446,43 +452,43 @@ function hmrApply(bundle, asset) {
         } else if (bundle.parent) hmrApply(bundle.parent, asset);
     }
 }
-function hmrDelete(bundle, id1) {
-    var modules = bundle.modules;
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
     if (!modules) return;
-    if (modules[id1]) {
+    if (modules[id]) {
         // Collect dependencies that will become orphaned when this module is deleted.
-        var deps = modules[id1][1];
-        var orphans = [];
-        for(var dep in deps){
-            var parents = getParents(module.bundle.root, deps[dep]);
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
             if (parents.length === 1) orphans.push(deps[dep]);
         } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
-        delete modules[id1];
-        delete bundle.cache[id1]; // Now delete the orphans.
-        orphans.forEach(function(id) {
+        delete modules[id];
+        delete bundle.cache[id]; // Now delete the orphans.
+        orphans.forEach((id)=>{
             hmrDelete(module.bundle.root, id);
         });
-    } else if (bundle.parent) hmrDelete(bundle.parent, id1);
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
 }
 function hmrAcceptCheck(bundle, id, depsByBundle) {
     if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
      // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    var parents = getParents(module.bundle.root, id);
-    var accepted = false;
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
     while(parents.length > 0){
-        var v = parents.shift();
-        var a = hmrAcceptCheckOne(v[0], v[1], null);
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
         if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
         accepted = true;
         else {
             // Otherwise, queue the parents in the next level upward.
-            var p = getParents(module.bundle.root, v[1]);
+            let p = getParents(module.bundle.root, v[1]);
             if (p.length === 0) {
                 // If there are no parents, then we've reached an entry without accepting. Reload.
                 accepted = false;
                 break;
             }
-            parents.push.apply(parents, _toConsumableArray(p));
+            parents.push(...p);
         }
     }
     return accepted;
@@ -528,17 +534,14 @@ function hmrAcceptRun(bundle, id) {
 },{}],"7b7hZ":[function(require,module,exports) {
 var _ui = require("gadjet/src/ui/ui");
 var _switch = require("gadjet/src/ui/switch/switch");
-_ui.define('el-switch', _switch.Switch);
+(0, _ui.define)("el-switch", (0, _switch.Switch));
 
 },{"gadjet/src/ui/ui":"jSLlu","gadjet/src/ui/switch/switch":"hhPA0"}],"jSLlu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "define", ()=>define
-);
-parcelHelpers.export(exports, "StyleClass", ()=>StyleClass
-);
-parcelHelpers.export(exports, "StyledElement", ()=>StyledElement
-);
+parcelHelpers.export(exports, "define", ()=>define);
+parcelHelpers.export(exports, "StyleClass", ()=>StyleClass);
+parcelHelpers.export(exports, "StyledElement", ()=>StyledElement);
 var _css = require("@emotion/css");
 const define = (tagName, Class = StyledElement)=>{
     // Order of this function belows are very crucial.
@@ -549,10 +552,10 @@ const define = (tagName, Class = StyledElement)=>{
 };
 class StyleClass {
     static css(style = {}) {
-        return '';
+        return "";
     }
     static style(style = {}) {
-        return '';
+        return "";
     }
 }
 class StyledElement extends HTMLElement {
@@ -563,33 +566,33 @@ class StyledElement extends HTMLElement {
         customElements.define(tagName, this);
     }
     static initStyle(style) {
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName} {
             ${this.Style.css(style)}
         }`;
     }
     static tagStyle(style) {
         if (typeof style == "string") {
-            _css.injectGlobal`
+            (0, _css.injectGlobal)`
             ${this.tagName} {
                 ${style}
             }`;
             return;
         }
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName} {
             ${this.Style.style(style)}
         }`;
     }
     static classStyle(class_, style) {
         if (typeof style == "string") {
-            _css.injectGlobal`
+            (0, _css.injectGlobal)`
             ${this.tagName}.${class_} {
                 ${style}
             }`;
             return;
         }
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName}.${class_} {
             ${this.Style.style(style)}
         }`;
@@ -600,9 +603,9 @@ class StyledElement extends HTMLElement {
     }
     addStyle(style) {
         let className;
-        if (typeof style == 'string') className = _css.css`${style}`;
-        else if (style instanceof Object) className = _css.css`${this._class.Style.style(style)}`;
-        className = _css.cx(...this.classList, className);
+        if (typeof style == "string") className = (0, _css.css)`${style}`;
+        else if (style instanceof Object) className = (0, _css.css)`${this._class.Style.style(style)}`;
+        className = (0, _css.cx)(...this.classList, className);
         this.className = className;
     }
 }
@@ -610,33 +613,23 @@ class StyledElement extends HTMLElement {
 },{"@emotion/css":"gyRZs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gyRZs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "cache", ()=>cache
-);
-parcelHelpers.export(exports, "css", ()=>css
-);
-parcelHelpers.export(exports, "cx", ()=>cx
-);
-parcelHelpers.export(exports, "flush", ()=>flush
-);
-parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles
-);
-parcelHelpers.export(exports, "hydrate", ()=>hydrate
-);
-parcelHelpers.export(exports, "injectGlobal", ()=>injectGlobal
-);
-parcelHelpers.export(exports, "keyframes", ()=>keyframes
-);
-parcelHelpers.export(exports, "merge", ()=>merge
-);
-parcelHelpers.export(exports, "sheet", ()=>sheet
-);
+parcelHelpers.export(exports, "cache", ()=>cache);
+parcelHelpers.export(exports, "css", ()=>css);
+parcelHelpers.export(exports, "cx", ()=>cx);
+parcelHelpers.export(exports, "flush", ()=>flush);
+parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles);
+parcelHelpers.export(exports, "hydrate", ()=>hydrate);
+parcelHelpers.export(exports, "injectGlobal", ()=>injectGlobal);
+parcelHelpers.export(exports, "keyframes", ()=>keyframes);
+parcelHelpers.export(exports, "merge", ()=>merge);
+parcelHelpers.export(exports, "sheet", ()=>sheet);
 var _cache = require("@emotion/cache");
 var _serialize = require("@emotion/serialize");
 var _utils = require("@emotion/utils");
 var _emotionCssCreateInstanceEsmJs = require("../create-instance/dist/emotion-css-create-instance.esm.js");
 var _emotionCssCreateInstanceEsmJsDefault = parcelHelpers.interopDefault(_emotionCssCreateInstanceEsmJs);
-var _createEmotion = _emotionCssCreateInstanceEsmJsDefault.default({
-    key: 'css'
+var _createEmotion = (0, _emotionCssCreateInstanceEsmJsDefault.default)({
+    key: "css"
 }), flush = _createEmotion.flush, hydrate = _createEmotion.hydrate, cx = _createEmotion.cx, merge = _createEmotion.merge, getRegisteredStyles = _createEmotion.getRegisteredStyles, injectGlobal = _createEmotion.injectGlobal, keyframes = _createEmotion.keyframes, css = _createEmotion.css, sheet = _createEmotion.sheet, cache = _createEmotion.cache;
 
 },{"@emotion/cache":"3Umtj","@emotion/serialize":"kS2E2","@emotion/utils":"6UI8e","../create-instance/dist/emotion-css-create-instance.esm.js":"k89zX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Umtj":[function(require,module,exports) {
@@ -654,55 +647,55 @@ var identifierWithPointTracking = function identifierWithPointTracking(begin, po
     var character = 0;
     while(true){
         previous = character;
-        character = _stylis.peek(); // &\f
+        character = (0, _stylis.peek)(); // &\f
         if (previous === 38 && character === 12) points[index] = 1;
-        if (_stylis.token(character)) break;
-        _stylis.next();
+        if ((0, _stylis.token)(character)) break;
+        (0, _stylis.next)();
     }
-    return _stylis.slice(begin, _stylis.position);
+    return (0, _stylis.slice)(begin, (0, _stylis.position));
 };
 var toRules = function toRules(parsed, points) {
     // pretend we've started with a comma
     var index = -1;
     var character = 44;
-    do switch(_stylis.token(character)){
+    do switch((0, _stylis.token)(character)){
         case 0:
             // &\f
-            if (character === 38 && _stylis.peek() === 12) // this is not 100% correct, we don't account for literal sequences here - like for example quoted strings
+            if (character === 38 && (0, _stylis.peek)() === 12) // this is not 100% correct, we don't account for literal sequences here - like for example quoted strings
             // stylis inserts \f after & to know when & where it should replace this sequence with the context selector
             // and when it should just concatenate the outer and inner selectors
             // it's very unlikely for this sequence to actually appear in a different context, so we just leverage this fact here
             points[index] = 1;
-            parsed[index] += identifierWithPointTracking(_stylis.position - 1, points, index);
+            parsed[index] += identifierWithPointTracking((0, _stylis.position) - 1, points, index);
             break;
         case 2:
-            parsed[index] += _stylis.delimit(character);
+            parsed[index] += (0, _stylis.delimit)(character);
             break;
         case 4:
             // comma
             if (character === 44) {
                 // colon
-                parsed[++index] = _stylis.peek() === 58 ? '&\f' : '';
+                parsed[++index] = (0, _stylis.peek)() === 58 ? "&\f" : "";
                 points[index] = parsed[index].length;
                 break;
             }
         // fallthrough
         default:
-            parsed[index] += _stylis.from(character);
+            parsed[index] += (0, _stylis.from)(character);
     }
-    while (character = _stylis.next())
+    while (character = (0, _stylis.next)());
     return parsed;
 };
 var getRules = function getRules(value, points) {
-    return _stylis.dealloc(toRules(_stylis.alloc(value), points));
+    return (0, _stylis.dealloc)(toRules((0, _stylis.alloc)(value), points));
 }; // WeakSet would be more appropriate, but only WeakMap is supported in IE11
 var fixedElements = /* #__PURE__ */ new WeakMap();
 var compat = function compat(element) {
-    if (element.type !== 'rule' || !element.parent || // negative .length indicates that this rule has been already prefixed
+    if (element.type !== "rule" || !element.parent || // negative .length indicates that this rule has been already prefixed
     element.length < 1) return;
     var value = element.value, parent = element.parent;
     var isImplicitRule = element.column === parent.column && element.line === parent.line;
-    while(parent.type !== 'rule'){
+    while(parent.type !== "rule"){
         parent = parent.parent;
         if (!parent) return;
     } // short-circuit for the simplest case
@@ -717,28 +710,28 @@ var compat = function compat(element) {
     for(var i = 0, k = 0; i < rules.length; i++)for(var j = 0; j < parentRules.length; j++, k++)element.props[k] = points[i] ? rules[i].replace(/&\f/g, parentRules[j]) : parentRules[j] + " " + rules[i];
 };
 var removeLabel = function removeLabel(element) {
-    if (element.type === 'decl') {
+    if (element.type === "decl") {
         var value = element.value;
         if (value.charCodeAt(0) === 108 && value.charCodeAt(2) === 98) {
             // this ignores label
-            element["return"] = '';
-            element.value = '';
+            element["return"] = "";
+            element.value = "";
         }
     }
 };
-var ignoreFlag = 'emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason';
+var ignoreFlag = "emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason";
 var isIgnoringComment = function isIgnoringComment(element) {
-    return !!element && element.type === 'comm' && element.children.indexOf(ignoreFlag) > -1;
+    return !!element && element.type === "comm" && element.children.indexOf(ignoreFlag) > -1;
 };
 var createUnsafeSelectorsAlarm = function createUnsafeSelectorsAlarm(cache) {
     return function(element, index, children) {
-        if (element.type !== 'rule') return;
+        if (element.type !== "rule") return;
         var unsafePseudoClasses = element.value.match(/(:first|:nth|:nth-last)-child/g);
         if (unsafePseudoClasses && cache.compat !== true) {
             var prevElement = index > 0 ? children[index - 1] : null;
             if (prevElement && isIgnoringComment(last(prevElement.children))) return;
             unsafePseudoClasses.forEach(function(unsafePseudoClass) {
-                console.error("The pseudo class \"" + unsafePseudoClass + "\" is potentially unsafe when doing server-side rendering. Try changing it to \"" + unsafePseudoClass.split('-child')[0] + "-of-type\".");
+                console.error('The pseudo class "' + unsafePseudoClass + '" is potentially unsafe when doing server-side rendering. Try changing it to "' + unsafePseudoClass.split("-child")[0] + '-of-type".');
             });
         }
     };
@@ -755,11 +748,11 @@ var isPrependedWithRegularRules = function isPrependedWithRegularRules(index, ch
 // so they don't get handed to the `sheet` (or anything else)
 // as that could potentially lead to additional logs which in turn could be overhelming to the user
 var nullifyElement = function nullifyElement(element) {
-    element.type = '';
-    element.value = '';
-    element["return"] = '';
-    element.children = '';
-    element.props = '';
+    element.type = "";
+    element.value = "";
+    element["return"] = "";
+    element.children = "";
+    element.props = "";
 };
 var incorrectImportAlarm = function incorrectImportAlarm(element, index, children) {
     if (!isImportRule(element)) return;
@@ -772,12 +765,12 @@ var incorrectImportAlarm = function incorrectImportAlarm(element, index, childre
     }
 };
 var defaultStylisPlugins = [
-    _stylis.prefixer
+    (0, _stylis.prefixer)
 ];
 var createCache = function createCache(options) {
     var key = options.key;
     if (!key) throw new Error("You have to configure `key` for your cache. Please make sure it's unique (and not equal to 'css') as it's used for linking styles to your cache.\nIf multiple caches share the same key they might \"fight\" for each other's style elements.");
-    if (key === 'css') {
+    if (key === "css") {
         var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])"); // get SSRed styles out of the way of React's hydration
         // document.head is a safe place to move them to(though note document.head is not necessarily the last place they will be)
         // note this very very intentionally targets all style elements regardless of the key to ensure
@@ -789,22 +782,22 @@ var createCache = function createCache(options) {
             // Emotion 10 client-side inserted styles did not have data-s (but importantly did not have a space in their data-emotion attributes)
             // so checking for the space ensures that loading Emotion 11 after Emotion 10 has inserted some styles
             // will not result in the Emotion 10 styles being destroyed
-            var dataEmotionAttribute = node.getAttribute('data-emotion');
-            if (dataEmotionAttribute.indexOf(' ') === -1) return;
+            var dataEmotionAttribute = node.getAttribute("data-emotion");
+            if (dataEmotionAttribute.indexOf(" ") === -1) return;
             document.head.appendChild(node);
-            node.setAttribute('data-s', '');
+            node.setAttribute("data-s", "");
         });
     }
     var stylisPlugins = options.stylisPlugins || defaultStylisPlugins;
     // $FlowFixMe
-    if (/[^a-z-]/.test(key)) throw new Error("Emotion key must only contain lower case alphabetical characters and - but \"" + key + "\" was passed");
+    if (/[^a-z-]/.test(key)) throw new Error('Emotion key must only contain lower case alphabetical characters and - but "' + key + '" was passed');
     var inserted = {}; // $FlowFixMe
     var container;
     var nodesToHydrate = [];
     container = options.container || document.head;
     Array.prototype.forEach.call(// means that the style elements we're looking at are only Emotion 11 server-rendered style elements
-    document.querySelectorAll("style[data-emotion^=\"" + key + " \"]"), function(node) {
-        var attrib = node.getAttribute("data-emotion").split(' '); // $FlowFixMe
+    document.querySelectorAll('style[data-emotion^="' + key + ' "]'), function(node) {
+        var attrib = node.getAttribute("data-emotion").split(" "); // $FlowFixMe
         for(var i = 1; i < attrib.length; i++)inserted[attrib[i]] = true;
         nodesToHydrate.push(node);
     });
@@ -820,19 +813,19 @@ var createCache = function createCache(options) {
     }), incorrectImportAlarm);
     var currentSheet;
     var finalizingPlugins = [
-        _stylis.stringify,
+        (0, _stylis.stringify),
         function(element) {
             if (!element.root) {
                 if (element["return"]) currentSheet.insert(element["return"]);
-                else if (element.value && element.type !== _stylis.COMMENT) // insert empty rule in non-production environments
+                else if (element.value && element.type !== (0, _stylis.COMMENT)) // insert empty rule in non-production environments
                 // so @emotion/jest can grab `key` from the (JS)DOM for caches without any rules inserted yet
                 currentSheet.insert(element.value + "{}");
             }
         }
     ];
-    var serializer = _stylis.middleware(omnipresentPlugins.concat(stylisPlugins, finalizingPlugins));
+    var serializer = (0, _stylis.middleware)(omnipresentPlugins.concat(stylisPlugins, finalizingPlugins));
     var stylis = function stylis(styles) {
-        return _stylis.serialize(_stylis.compile(styles), serializer);
+        return (0, _stylis.serialize)((0, _stylis.compile)(styles), serializer);
     };
     _insert = function insert(selector, serialized, sheet, shouldCache) {
         currentSheet = sheet;
@@ -846,7 +839,7 @@ var createCache = function createCache(options) {
     };
     var cache = {
         key: key,
-        sheet: new _sheet.StyleSheet({
+        sheet: new (0, _sheet.StyleSheet)({
             key: key,
             container: container,
             nonce: options.nonce,
@@ -867,8 +860,7 @@ exports.default = createCache;
 },{"@emotion/sheet":"1BWeq","stylis":"bMCXt","@emotion/weak-memoize":"iicyL","@emotion/memoize":"WW7h8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1BWeq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "StyleSheet", ()=>StyleSheet
-);
+parcelHelpers.export(exports, "StyleSheet", ()=>StyleSheet);
 /*
 
 Based off glamor's StyleSheet, thanks Sunil ❤️
@@ -901,15 +893,15 @@ function sheetForTag(tag) {
     }
 }
 function createStyleElement(options) {
-    var tag = document.createElement('style');
-    tag.setAttribute('data-emotion', options.key);
-    if (options.nonce !== undefined) tag.setAttribute('nonce', options.nonce);
-    tag.appendChild(document.createTextNode(''));
-    tag.setAttribute('data-s', '');
+    var tag = document.createElement("style");
+    tag.setAttribute("data-emotion", options.key);
+    if (options.nonce !== undefined) tag.setAttribute("nonce", options.nonce);
+    tag.appendChild(document.createTextNode(""));
+    tag.setAttribute("data-s", "");
     return tag;
 }
 var StyleSheet = /*#__PURE__*/ function() {
-    function StyleSheet1(options) {
+    function StyleSheet(options) {
         var _this = this;
         this._insertTag = function(tag) {
             var before;
@@ -931,7 +923,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         this.insertionPoint = options.insertionPoint;
         this.before = null;
     }
-    var _proto = StyleSheet1.prototype;
+    var _proto = StyleSheet.prototype;
     _proto.hydrate = function hydrate(nodes) {
         nodes.forEach(this._insertTag);
     };
@@ -945,7 +937,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         if (isImportRule && this._alreadyInsertedOrderInsensitiveRule) // this would only cause problem in speedy mode
         // but we don't want enabling speedy to affect the observable behavior
         // so we report this error at all times
-        console.error("You're attempting to insert the following rule:\n" + rule + '\n\n`@import` rules must be before all other types of rules in a stylesheet but other rules have already been inserted. Please ensure that `@import` rules are before all other rules.');
+        console.error("You're attempting to insert the following rule:\n" + rule + "\n\n`@import` rules must be before all other types of rules in a stylesheet but other rules have already been inserted. Please ensure that `@import` rules are before all other rules.");
         this._alreadyInsertedOrderInsensitiveRule = this._alreadyInsertedOrderInsensitiveRule || !isImportRule;
         if (this.isSpeedy) {
             var sheet = sheetForTag(tag);
@@ -954,7 +946,7 @@ var StyleSheet = /*#__PURE__*/ function() {
                 // the big drawback is that the css won't be editable in devtools
                 sheet.insertRule(rule, sheet.cssRules.length);
             } catch (e) {
-                if (!/:(-moz-placeholder|-moz-focus-inner|-moz-focusring|-ms-input-placeholder|-moz-read-write|-moz-read-only|-ms-clear){/.test(rule)) console.error("There was a problem inserting the following rule: \"" + rule + "\"", e);
+                if (!/:(-moz-placeholder|-moz-focus-inner|-moz-focusring|-ms-input-placeholder|-moz-read-write|-moz-read-only|-ms-clear){/.test(rule)) console.error('There was a problem inserting the following rule: "' + rule + '"', e);
             }
         } else tag.appendChild(document.createTextNode(rule));
         this.ctr++;
@@ -968,7 +960,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         this.ctr = 0;
         this._alreadyInsertedOrderInsensitiveRule = false;
     };
-    return StyleSheet1;
+    return StyleSheet;
 }();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
@@ -978,13 +970,13 @@ exports.interopDefault = function(a) {
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
+    Object.defineProperty(a, "__esModule", {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -1004,144 +996,75 @@ exports.export = function(dest, destName, get) {
 },{}],"bMCXt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CHARSET", ()=>f
-);
-parcelHelpers.export(exports, "COMMENT", ()=>c
-);
-parcelHelpers.export(exports, "COUNTER_STYLE", ()=>w
-);
-parcelHelpers.export(exports, "DECLARATION", ()=>t
-);
-parcelHelpers.export(exports, "DOCUMENT", ()=>v
-);
-parcelHelpers.export(exports, "FONT_FACE", ()=>b
-);
-parcelHelpers.export(exports, "FONT_FEATURE_VALUES", ()=>$
-);
-parcelHelpers.export(exports, "IMPORT", ()=>i
-);
-parcelHelpers.export(exports, "KEYFRAMES", ()=>p
-);
-parcelHelpers.export(exports, "MEDIA", ()=>u
-);
-parcelHelpers.export(exports, "MOZ", ()=>r
-);
-parcelHelpers.export(exports, "MS", ()=>e
-);
-parcelHelpers.export(exports, "NAMESPACE", ()=>h
-);
-parcelHelpers.export(exports, "PAGE", ()=>s
-);
-parcelHelpers.export(exports, "RULESET", ()=>n
-);
-parcelHelpers.export(exports, "SUPPORTS", ()=>l
-);
-parcelHelpers.export(exports, "VIEWPORT", ()=>o
-);
-parcelHelpers.export(exports, "WEBKIT", ()=>a
-);
-parcelHelpers.export(exports, "abs", ()=>k
-);
-parcelHelpers.export(exports, "alloc", ()=>U
-);
-parcelHelpers.export(exports, "append", ()=>S
-);
-parcelHelpers.export(exports, "assign", ()=>g
-);
-parcelHelpers.export(exports, "caret", ()=>Q
-);
-parcelHelpers.export(exports, "char", ()=>K
-);
-parcelHelpers.export(exports, "character", ()=>G
-);
-parcelHelpers.export(exports, "characters", ()=>H
-);
-parcelHelpers.export(exports, "charat", ()=>z
-);
-parcelHelpers.export(exports, "column", ()=>D
-);
-parcelHelpers.export(exports, "combine", ()=>q
-);
-parcelHelpers.export(exports, "comment", ()=>se
-);
-parcelHelpers.export(exports, "commenter", ()=>re
-);
-parcelHelpers.export(exports, "compile", ()=>ce
-);
-parcelHelpers.export(exports, "copy", ()=>J
-);
-parcelHelpers.export(exports, "dealloc", ()=>V
-);
-parcelHelpers.export(exports, "declaration", ()=>ue
-);
-parcelHelpers.export(exports, "delimit", ()=>W
-);
-parcelHelpers.export(exports, "delimiter", ()=>ee
-);
-parcelHelpers.export(exports, "escaping", ()=>_
-);
-parcelHelpers.export(exports, "from", ()=>d
-);
-parcelHelpers.export(exports, "hash", ()=>m
-);
-parcelHelpers.export(exports, "identifier", ()=>ae
-);
-parcelHelpers.export(exports, "indexof", ()=>C
-);
-parcelHelpers.export(exports, "length", ()=>E
-);
-parcelHelpers.export(exports, "line", ()=>B
-);
-parcelHelpers.export(exports, "match", ()=>y
-);
-parcelHelpers.export(exports, "middleware", ()=>le
-);
-parcelHelpers.export(exports, "namespace", ()=>pe
-);
-parcelHelpers.export(exports, "next", ()=>N
-);
-parcelHelpers.export(exports, "node", ()=>I
-);
-parcelHelpers.export(exports, "parse", ()=>ne
-);
-parcelHelpers.export(exports, "peek", ()=>P
-);
-parcelHelpers.export(exports, "position", ()=>F
-);
-parcelHelpers.export(exports, "prefix", ()=>ie
-);
-parcelHelpers.export(exports, "prefixer", ()=>he
-);
-parcelHelpers.export(exports, "prev", ()=>L
-);
-parcelHelpers.export(exports, "replace", ()=>j
-);
-parcelHelpers.export(exports, "ruleset", ()=>te
-);
-parcelHelpers.export(exports, "rulesheet", ()=>ve
-);
-parcelHelpers.export(exports, "serialize", ()=>fe
-);
-parcelHelpers.export(exports, "sizeof", ()=>M
-);
-parcelHelpers.export(exports, "slice", ()=>R
-);
-parcelHelpers.export(exports, "stringify", ()=>oe
-);
-parcelHelpers.export(exports, "strlen", ()=>O
-);
-parcelHelpers.export(exports, "substr", ()=>A
-);
-parcelHelpers.export(exports, "token", ()=>T
-);
-parcelHelpers.export(exports, "tokenize", ()=>X
-);
-parcelHelpers.export(exports, "tokenizer", ()=>Z
-);
-parcelHelpers.export(exports, "trim", ()=>x
-);
-parcelHelpers.export(exports, "whitespace", ()=>Y
-);
+parcelHelpers.export(exports, "CHARSET", ()=>f);
+parcelHelpers.export(exports, "COMMENT", ()=>c);
+parcelHelpers.export(exports, "COUNTER_STYLE", ()=>w);
+parcelHelpers.export(exports, "DECLARATION", ()=>t);
+parcelHelpers.export(exports, "DOCUMENT", ()=>v);
+parcelHelpers.export(exports, "FONT_FACE", ()=>b);
+parcelHelpers.export(exports, "FONT_FEATURE_VALUES", ()=>$);
+parcelHelpers.export(exports, "IMPORT", ()=>i);
+parcelHelpers.export(exports, "KEYFRAMES", ()=>p);
+parcelHelpers.export(exports, "MEDIA", ()=>u);
+parcelHelpers.export(exports, "MOZ", ()=>r);
+parcelHelpers.export(exports, "MS", ()=>e);
+parcelHelpers.export(exports, "NAMESPACE", ()=>h);
+parcelHelpers.export(exports, "PAGE", ()=>s);
+parcelHelpers.export(exports, "RULESET", ()=>n);
+parcelHelpers.export(exports, "SUPPORTS", ()=>l);
+parcelHelpers.export(exports, "VIEWPORT", ()=>o);
+parcelHelpers.export(exports, "WEBKIT", ()=>a);
+parcelHelpers.export(exports, "abs", ()=>k);
+parcelHelpers.export(exports, "alloc", ()=>U);
+parcelHelpers.export(exports, "append", ()=>S);
+parcelHelpers.export(exports, "assign", ()=>g);
+parcelHelpers.export(exports, "caret", ()=>Q);
+parcelHelpers.export(exports, "char", ()=>K);
+parcelHelpers.export(exports, "character", ()=>G);
+parcelHelpers.export(exports, "characters", ()=>H);
+parcelHelpers.export(exports, "charat", ()=>z);
+parcelHelpers.export(exports, "column", ()=>D);
+parcelHelpers.export(exports, "combine", ()=>q);
+parcelHelpers.export(exports, "comment", ()=>se);
+parcelHelpers.export(exports, "commenter", ()=>re);
+parcelHelpers.export(exports, "compile", ()=>ce);
+parcelHelpers.export(exports, "copy", ()=>J);
+parcelHelpers.export(exports, "dealloc", ()=>V);
+parcelHelpers.export(exports, "declaration", ()=>ue);
+parcelHelpers.export(exports, "delimit", ()=>W);
+parcelHelpers.export(exports, "delimiter", ()=>ee);
+parcelHelpers.export(exports, "escaping", ()=>_);
+parcelHelpers.export(exports, "from", ()=>d);
+parcelHelpers.export(exports, "hash", ()=>m);
+parcelHelpers.export(exports, "identifier", ()=>ae);
+parcelHelpers.export(exports, "indexof", ()=>C);
+parcelHelpers.export(exports, "length", ()=>E);
+parcelHelpers.export(exports, "line", ()=>B);
+parcelHelpers.export(exports, "match", ()=>y);
+parcelHelpers.export(exports, "middleware", ()=>le);
+parcelHelpers.export(exports, "namespace", ()=>pe);
+parcelHelpers.export(exports, "next", ()=>N);
+parcelHelpers.export(exports, "node", ()=>I);
+parcelHelpers.export(exports, "parse", ()=>ne);
+parcelHelpers.export(exports, "peek", ()=>P);
+parcelHelpers.export(exports, "position", ()=>F);
+parcelHelpers.export(exports, "prefix", ()=>ie);
+parcelHelpers.export(exports, "prefixer", ()=>he);
+parcelHelpers.export(exports, "prev", ()=>L);
+parcelHelpers.export(exports, "replace", ()=>j);
+parcelHelpers.export(exports, "ruleset", ()=>te);
+parcelHelpers.export(exports, "rulesheet", ()=>ve);
+parcelHelpers.export(exports, "serialize", ()=>fe);
+parcelHelpers.export(exports, "sizeof", ()=>M);
+parcelHelpers.export(exports, "slice", ()=>R);
+parcelHelpers.export(exports, "stringify", ()=>oe);
+parcelHelpers.export(exports, "strlen", ()=>O);
+parcelHelpers.export(exports, "substr", ()=>A);
+parcelHelpers.export(exports, "token", ()=>T);
+parcelHelpers.export(exports, "tokenize", ()=>X);
+parcelHelpers.export(exports, "tokenizer", ()=>Z);
+parcelHelpers.export(exports, "trim", ()=>x);
+parcelHelpers.export(exports, "whitespace", ()=>Y);
 var e = "-ms-";
 var r = "-moz-";
 var a = "-webkit-";
@@ -1163,38 +1086,38 @@ var $ = "@font-feature-values";
 var k = Math.abs;
 var d = String.fromCharCode;
 var g = Object.assign;
-function m(e1, r1) {
-    return (((r1 << 2 ^ z(e1, 0)) << 2 ^ z(e1, 1)) << 2 ^ z(e1, 2)) << 2 ^ z(e1, 3);
+function m(e, r) {
+    return (((r << 2 ^ z(e, 0)) << 2 ^ z(e, 1)) << 2 ^ z(e, 2)) << 2 ^ z(e, 3);
 }
-function x(e2) {
-    return e2.trim();
+function x(e) {
+    return e.trim();
 }
-function y(e3, r2) {
-    return (e3 = r2.exec(e3)) ? e3[0] : e3;
+function y(e, r) {
+    return (e = r.exec(e)) ? e[0] : e;
 }
-function j(e4, r3, a1) {
-    return e4.replace(r3, a1);
+function j(e, r, a) {
+    return e.replace(r, a);
 }
-function C(e5, r4) {
-    return e5.indexOf(r4);
+function C(e, r) {
+    return e.indexOf(r);
 }
-function z(e6, r5) {
-    return e6.charCodeAt(r5) | 0;
+function z(e, r) {
+    return e.charCodeAt(r) | 0;
 }
-function A(e7, r6, a2) {
-    return e7.slice(r6, a2);
+function A(e, r, a) {
+    return e.slice(r, a);
 }
-function O(e8) {
-    return e8.length;
+function O(e) {
+    return e.length;
 }
-function M(e9) {
-    return e9.length;
+function M(e) {
+    return e.length;
 }
-function S(e10, r7) {
-    return r7.push(e10), e10;
+function S(e, r) {
+    return r.push(e), e;
 }
-function q(e11, r8) {
-    return e11.map(r8).join("");
+function q(e, r) {
+    return e.map(r).join("");
 }
 var B = 1;
 var D = 1;
@@ -1202,24 +1125,24 @@ var E = 0;
 var F = 0;
 var G = 0;
 var H = "";
-function I(e12, r9, a3, c1, n1, t1, s1) {
+function I(e, r, a, c, n, t, s) {
     return {
-        value: e12,
-        root: r9,
-        parent: a3,
-        type: c1,
-        props: n1,
-        children: t1,
+        value: e,
+        root: r,
+        parent: a,
+        type: c,
+        props: n,
+        children: t,
         line: B,
         column: D,
-        length: s1,
+        length: s,
         return: ""
     };
 }
-function J(e13, r10) {
-    return g(I("", null, null, "", null, null, 0), e13, {
-        length: -e13.length
-    }, r10);
+function J(e, r) {
+    return g(I("", null, null, "", null, null, 0), e, {
+        length: -e.length
+    }, r);
 }
 function K() {
     return G;
@@ -1240,11 +1163,11 @@ function P() {
 function Q() {
     return F;
 }
-function R(e14, r11) {
-    return A(H, e14, r11);
+function R(e, r) {
+    return A(H, e, r);
 }
-function T(e15) {
-    switch(e15){
+function T(e) {
+    switch(e){
         case 0:
         case 9:
         case 10:
@@ -1275,50 +1198,50 @@ function T(e15) {
     }
     return 0;
 }
-function U(e16) {
-    return B = D = 1, E = O(H = e16), F = 0, [];
+function U(e) {
+    return B = D = 1, E = O(H = e), F = 0, [];
 }
-function V(e17) {
-    return H = "", e17;
+function V(e) {
+    return H = "", e;
 }
-function W(e18) {
-    return x(R(F - 1, ee(e18 === 91 ? e18 + 2 : e18 === 40 ? e18 + 1 : e18)));
+function W(e) {
+    return x(R(F - 1, ee(e === 91 ? e + 2 : e === 40 ? e + 1 : e)));
 }
-function X(e19) {
-    return V(Z(U(e19)));
+function X(e) {
+    return V(Z(U(e)));
 }
-function Y(e20) {
+function Y(e) {
     while(G = P())if (G < 33) N();
     else break;
-    return T(e20) > 2 || T(G) > 3 ? "" : " ";
+    return T(e) > 2 || T(G) > 3 ? "" : " ";
 }
-function Z(e21) {
+function Z(e) {
     while(N())switch(T(G)){
         case 0:
-            S(ae(F - 1), e21);
+            S(ae(F - 1), e);
             break;
         case 2:
-            S(W(G), e21);
+            S(W(G), e);
             break;
         default:
-            S(d(G), e21);
+            S(d(G), e);
     }
-    return e21;
+    return e;
 }
-function _(e22, r12) {
-    while(--r12 && N())if (G < 48 || G > 102 || G > 57 && G < 65 || G > 70 && G < 97) break;
-    return R(e22, Q() + (r12 < 6 && P() == 32 && N() == 32));
+function _(e, r) {
+    while(--r && N())if (G < 48 || G > 102 || G > 57 && G < 65 || G > 70 && G < 97) break;
+    return R(e, Q() + (r < 6 && P() == 32 && N() == 32));
 }
-function ee(e23) {
+function ee(e) {
     while(N())switch(G){
-        case e23:
+        case e:
             return F;
         case 34:
         case 39:
-            if (e23 !== 34 && e23 !== 39) ee(G);
+            if (e !== 34 && e !== 39) ee(G);
             break;
         case 40:
-            if (e23 === 41) ee(e23);
+            if (e === 41) ee(e);
             break;
         case 92:
             N();
@@ -1326,144 +1249,144 @@ function ee(e23) {
     }
     return F;
 }
-function re(e24, r13) {
-    while(N())if (e24 + G === 57) break;
-    else if (e24 + G === 84 && P() === 47) break;
-    return "/*" + R(r13, F - 1) + "*" + d(e24 === 47 ? e24 : N());
+function re(e, r) {
+    while(N())if (e + G === 57) break;
+    else if (e + G === 84 && P() === 47) break;
+    return "/*" + R(r, F - 1) + "*" + d(e === 47 ? e : N());
 }
-function ae(e25) {
+function ae(e) {
     while(!T(P()))N();
-    return R(e25, F);
+    return R(e, F);
 }
-function ce(e26) {
+function ce(e) {
     return V(ne("", null, null, null, [
         ""
-    ], e26 = U(e26), 0, [
+    ], e = U(e), 0, [
         0
-    ], e26));
+    ], e));
 }
-function ne(e27, r14, a4, c2, n2, t2, s2, u1, i1) {
-    var f1 = 0;
-    var o1 = 0;
-    var l1 = s2;
-    var v1 = 0;
-    var h1 = 0;
-    var p1 = 0;
-    var b1 = 1;
-    var w1 = 1;
-    var $1 = 1;
-    var k1 = 0;
-    var g1 = "";
-    var m1 = n2;
-    var x1 = t2;
-    var y1 = c2;
-    var z1 = g1;
-    while(w1)switch(p1 = k1, k1 = N()){
+function ne(e, r, a, c, n, t, s, u, i) {
+    var f = 0;
+    var o = 0;
+    var l = s;
+    var v = 0;
+    var h = 0;
+    var p = 0;
+    var b = 1;
+    var w = 1;
+    var $ = 1;
+    var k = 0;
+    var g = "";
+    var m = n;
+    var x = t;
+    var y = c;
+    var z = g;
+    while(w)switch(p = k, k = N()){
         case 40:
-            if (p1 != 108 && z1.charCodeAt(l1 - 1) == 58) {
-                if (C(z1 += j(W(k1), "&", "&\f"), "&\f") != -1) $1 = -1;
+            if (p != 108 && z.charCodeAt(l - 1) == 58) {
+                if (C(z += j(W(k), "&", "&\f"), "&\f") != -1) $ = -1;
                 break;
             }
         case 34:
         case 39:
         case 91:
-            z1 += W(k1);
+            z += W(k);
             break;
         case 9:
         case 10:
         case 13:
         case 32:
-            z1 += Y(p1);
+            z += Y(p);
             break;
         case 92:
-            z1 += _(Q() - 1, 7);
+            z += _(Q() - 1, 7);
             continue;
         case 47:
             switch(P()){
                 case 42:
                 case 47:
-                    S(se(re(N(), Q()), r14, a4), i1);
+                    S(se(re(N(), Q()), r, a), i);
                     break;
                 default:
-                    z1 += "/";
+                    z += "/";
             }
             break;
-        case 123 * b1:
-            u1[f1++] = O(z1) * $1;
-        case 125 * b1:
+        case 123 * b:
+            u[f++] = O(z) * $;
+        case 125 * b:
         case 59:
         case 0:
-            switch(k1){
+            switch(k){
                 case 0:
                 case 125:
-                    w1 = 0;
-                case 59 + o1:
-                    if (h1 > 0 && O(z1) - l1) S(h1 > 32 ? ue(z1 + ";", c2, a4, l1 - 1) : ue(j(z1, " ", "") + ";", c2, a4, l1 - 2), i1);
+                    w = 0;
+                case 59 + o:
+                    if (h > 0 && O(z) - l) S(h > 32 ? ue(z + ";", c, a, l - 1) : ue(j(z, " ", "") + ";", c, a, l - 2), i);
                     break;
                 case 59:
-                    z1 += ";";
+                    z += ";";
                 default:
-                    S(y1 = te(z1, r14, a4, f1, o1, n2, u1, g1, m1 = [], x1 = [], l1), t2);
-                    if (k1 === 123) {
-                        if (o1 === 0) ne(z1, r14, y1, y1, m1, t2, l1, u1, x1);
-                        else switch(v1){
+                    S(y = te(z, r, a, f, o, n, u, g, m = [], x = [], l), t);
+                    if (k === 123) {
+                        if (o === 0) ne(z, r, y, y, m, t, l, u, x);
+                        else switch(v){
                             case 100:
                             case 109:
                             case 115:
-                                ne(e27, y1, y1, c2 && S(te(e27, y1, y1, 0, 0, n2, u1, g1, n2, m1 = [], l1), x1), n2, x1, l1, u1, c2 ? m1 : x1);
+                                ne(e, y, y, c && S(te(e, y, y, 0, 0, n, u, g, n, m = [], l), x), n, x, l, u, c ? m : x);
                                 break;
                             default:
-                                ne(z1, y1, y1, y1, [
+                                ne(z, y, y, y, [
                                     ""
-                                ], x1, 0, u1, x1);
+                                ], x, 0, u, x);
                         }
                     }
             }
-            f1 = o1 = h1 = 0, b1 = $1 = 1, g1 = z1 = "", l1 = s2;
+            f = o = h = 0, b = $ = 1, g = z = "", l = s;
             break;
         case 58:
-            l1 = 1 + O(z1), h1 = p1;
+            l = 1 + O(z), h = p;
         default:
-            if (b1 < 1) {
-                if (k1 == 123) --b1;
-                else if (k1 == 125 && (b1++) == 0 && L() == 125) continue;
+            if (b < 1) {
+                if (k == 123) --b;
+                else if (k == 125 && (b++) == 0 && L() == 125) continue;
             }
-            switch(z1 += d(k1), k1 * b1){
+            switch(z += d(k), k * b){
                 case 38:
-                    $1 = o1 > 0 ? 1 : (z1 += "\f", -1);
+                    $ = o > 0 ? 1 : (z += "\f", -1);
                     break;
                 case 44:
-                    u1[f1++] = (O(z1) - 1) * $1, $1 = 1;
+                    u[f++] = (O(z) - 1) * $, $ = 1;
                     break;
                 case 64:
-                    if (P() === 45) z1 += W(N());
-                    v1 = P(), o1 = l1 = O(g1 = z1 += ae(Q())), k1++;
+                    if (P() === 45) z += W(N());
+                    v = P(), o = l = O(g = z += ae(Q())), k++;
                     break;
                 case 45:
-                    if (p1 === 45 && O(z1) == 2) b1 = 0;
+                    if (p === 45 && O(z) == 2) b = 0;
             }
     }
-    return t2;
+    return t;
 }
-function te(e28, r15, a5, c3, t3, s3, u2, i2, f2, o2, l2) {
-    var v2 = t3 - 1;
-    var h2 = t3 === 0 ? s3 : [
+function te(e, r, a, c, t, s, u, i, f, o, l) {
+    var v = t - 1;
+    var h = t === 0 ? s : [
         ""
     ];
-    var p2 = M(h2);
-    for(var b2 = 0, w2 = 0, $2 = 0; b2 < c3; ++b2)for(var d1 = 0, g2 = A(e28, v2 + 1, v2 = k(w2 = u2[b2])), m2 = e28; d1 < p2; ++d1)if (m2 = x(w2 > 0 ? h2[d1] + " " + g2 : j(g2, /&\f/g, h2[d1]))) f2[$2++] = m2;
-    return I(e28, r15, a5, t3 === 0 ? n : i2, f2, o2, l2);
+    var p = M(h);
+    for(var b = 0, w = 0, $ = 0; b < c; ++b)for(var d = 0, g = A(e, v + 1, v = k(w = u[b])), m = e; d < p; ++d)if (m = x(w > 0 ? h[d] + " " + g : j(g, /&\f/g, h[d]))) f[$++] = m;
+    return I(e, r, a, t === 0 ? n : i, f, o, l);
 }
-function se(e29, r16, a6) {
-    return I(e29, r16, a6, c, d(K()), A(e29, 2, -2), 0);
+function se(e, r, a) {
+    return I(e, r, a, c, d(K()), A(e, 2, -2), 0);
 }
-function ue(e30, r17, a7, c4) {
-    return I(e30, r17, a7, t, A(e30, 0, c4), A(e30, c4 + 1, -1), c4);
+function ue(e, r, a, c) {
+    return I(e, r, a, t, A(e, 0, c), A(e, c + 1, -1), c);
 }
-function ie(c5, n3) {
-    switch(m(c5, n3)){
+function ie(c, n) {
+    switch(m(c, n)){
         case 5103:
-            return a + "print-" + c5 + c5;
+            return a + "print-" + c + c;
         case 5737:
         case 4201:
         case 3177:
@@ -1489,44 +1412,44 @@ function ie(c5, n3) {
         case 5365:
         case 5621:
         case 3829:
-            return a + c5 + c5;
+            return a + c + c;
         case 5349:
         case 4246:
         case 4810:
         case 6968:
         case 2756:
-            return a + c5 + r + c5 + e + c5 + c5;
+            return a + c + r + c + e + c + c;
         case 6828:
         case 4268:
-            return a + c5 + e + c5 + c5;
+            return a + c + e + c + c;
         case 6165:
-            return a + c5 + e + "flex-" + c5 + c5;
+            return a + c + e + "flex-" + c + c;
         case 5187:
-            return a + c5 + j(c5, /(\w+).+(:[^]+)/, a + "box-$1$2" + e + "flex-$1$2") + c5;
+            return a + c + j(c, /(\w+).+(:[^]+)/, a + "box-$1$2" + e + "flex-$1$2") + c;
         case 5443:
-            return a + c5 + e + "flex-item-" + j(c5, /flex-|-self/, "") + c5;
+            return a + c + e + "flex-item-" + j(c, /flex-|-self/, "") + c;
         case 4675:
-            return a + c5 + e + "flex-line-pack" + j(c5, /align-content|flex-|-self/, "") + c5;
+            return a + c + e + "flex-line-pack" + j(c, /align-content|flex-|-self/, "") + c;
         case 5548:
-            return a + c5 + e + j(c5, "shrink", "negative") + c5;
+            return a + c + e + j(c, "shrink", "negative") + c;
         case 5292:
-            return a + c5 + e + j(c5, "basis", "preferred-size") + c5;
+            return a + c + e + j(c, "basis", "preferred-size") + c;
         case 6060:
-            return a + "box-" + j(c5, "-grow", "") + a + c5 + e + j(c5, "grow", "positive") + c5;
+            return a + "box-" + j(c, "-grow", "") + a + c + e + j(c, "grow", "positive") + c;
         case 4554:
-            return a + j(c5, /([^-])(transform)/g, "$1" + a + "$2") + c5;
+            return a + j(c, /([^-])(transform)/g, "$1" + a + "$2") + c;
         case 6187:
-            return j(j(j(c5, /(zoom-|grab)/, a + "$1"), /(image-set)/, a + "$1"), c5, "") + c5;
+            return j(j(j(c, /(zoom-|grab)/, a + "$1"), /(image-set)/, a + "$1"), c, "") + c;
         case 5495:
         case 3959:
-            return j(c5, /(image-set\([^]*)/, a + "$1" + "$`$1");
+            return j(c, /(image-set\([^]*)/, a + "$1" + "$`$1");
         case 4968:
-            return j(j(c5, /(.+:)(flex-)?(.*)/, a + "box-pack:$3" + e + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a + c5 + c5;
+            return j(j(c, /(.+:)(flex-)?(.*)/, a + "box-pack:$3" + e + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a + c + c;
         case 4095:
         case 3583:
         case 4068:
         case 2532:
-            return j(c5, /(.+)-inline(.+)/, a + "$1$2") + c5;
+            return j(c, /(.+)-inline(.+)/, a + "$1$2") + c;
         case 8116:
         case 7059:
         case 5753:
@@ -1539,149 +1462,149 @@ function ie(c5, n3) {
         case 5789:
         case 5021:
         case 4765:
-            if (O(c5) - 1 - n3 > 6) switch(z(c5, n3 + 1)){
+            if (O(c) - 1 - n > 6) switch(z(c, n + 1)){
                 case 109:
-                    if (z(c5, n3 + 4) !== 45) break;
+                    if (z(c, n + 4) !== 45) break;
                 case 102:
-                    return j(c5, /(.+:)(.+)-([^]+)/, "$1" + a + "$2-$3" + "$1" + r + (z(c5, n3 + 3) == 108 ? "$3" : "$2-$3")) + c5;
+                    return j(c, /(.+:)(.+)-([^]+)/, "$1" + a + "$2-$3" + "$1" + r + (z(c, n + 3) == 108 ? "$3" : "$2-$3")) + c;
                 case 115:
-                    return ~C(c5, "stretch") ? ie(j(c5, "stretch", "fill-available"), n3) + c5 : c5;
+                    return ~C(c, "stretch") ? ie(j(c, "stretch", "fill-available"), n) + c : c;
             }
             break;
         case 4949:
-            if (z(c5, n3 + 1) !== 115) break;
+            if (z(c, n + 1) !== 115) break;
         case 6444:
-            switch(z(c5, O(c5) - 3 - (~C(c5, "!important") && 10))){
+            switch(z(c, O(c) - 3 - (~C(c, "!important") && 10))){
                 case 107:
-                    return j(c5, ":", ":" + a) + c5;
+                    return j(c, ":", ":" + a) + c;
                 case 101:
-                    return j(c5, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a + (z(c5, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a + "$2$3" + "$1" + e + "$2box$3") + c5;
+                    return j(c, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a + (z(c, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a + "$2$3" + "$1" + e + "$2box$3") + c;
             }
             break;
         case 5936:
-            switch(z(c5, n3 + 11)){
+            switch(z(c, n + 11)){
                 case 114:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "tb") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "tb") + c;
                 case 108:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "tb-rl") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "tb-rl") + c;
                 case 45:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "lr") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "lr") + c;
             }
-            return a + c5 + e + c5 + c5;
+            return a + c + e + c + c;
     }
-    return c5;
+    return c;
 }
-function fe(e31, r18) {
-    var a8 = "";
-    var c6 = M(e31);
-    for(var n4 = 0; n4 < c6; n4++)a8 += r18(e31[n4], n4, e31, r18) || "";
-    return a8;
+function fe(e, r) {
+    var a = "";
+    var c = M(e);
+    for(var n = 0; n < c; n++)a += r(e[n], n, e, r) || "";
+    return a;
 }
-function oe(e32, r, a9, s4) {
-    switch(e32.type){
+function oe(e, r, a, s) {
+    switch(e.type){
         case i:
         case t:
-            return e32.return = e32.return || e32.value;
+            return e.return = e.return || e.value;
         case c:
             return "";
         case p:
-            return e32.return = e32.value + "{" + fe(e32.children, s4) + "}";
+            return e.return = e.value + "{" + fe(e.children, s) + "}";
         case n:
-            e32.value = e32.props.join(",");
+            e.value = e.props.join(",");
     }
-    return O(a9 = fe(e32.children, s4)) ? e32.return = e32.value + "{" + a9 + "}" : "";
+    return O(a = fe(e.children, s)) ? e.return = e.value + "{" + a + "}" : "";
 }
-function le(e33) {
-    var r19 = M(e33);
-    return function(a10, c7, n5, t4) {
-        var s5 = "";
-        for(var u3 = 0; u3 < r19; u3++)s5 += e33[u3](a10, c7, n5, t4) || "";
-        return s5;
+function le(e) {
+    var r = M(e);
+    return function(a, c, n, t) {
+        var s = "";
+        for(var u = 0; u < r; u++)s += e[u](a, c, n, t) || "";
+        return s;
     };
 }
-function ve(e34) {
-    return function(r20) {
-        if (!r20.root) {
-            if (r20 = r20.return) e34(r20);
+function ve(e) {
+    return function(r) {
+        if (!r.root) {
+            if (r = r.return) e(r);
         }
     };
 }
-function he(c8, s, u, i3) {
-    if (c8.length > -1) {
-        if (!c8.return) switch(c8.type){
+function he(c, s, u, i) {
+    if (c.length > -1) {
+        if (!c.return) switch(c.type){
             case t:
-                c8.return = ie(c8.value, c8.length);
+                c.return = ie(c.value, c.length);
                 break;
             case p:
                 return fe([
-                    J(c8, {
-                        value: j(c8.value, "@", "@" + a)
+                    J(c, {
+                        value: j(c.value, "@", "@" + a)
                     })
-                ], i3);
+                ], i);
             case n:
-                if (c8.length) return q(c8.props, function(n6) {
-                    switch(y(n6, /(::plac\w+|:read-\w+)/)){
+                if (c.length) return q(c.props, function(n) {
+                    switch(y(n, /(::plac\w+|:read-\w+)/)){
                         case ":read-only":
                         case ":read-write":
                             return fe([
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(read-\w+)/, ":" + r + "$1")
+                                        j(n, /:(read-\w+)/, ":" + r + "$1")
                                     ]
                                 })
-                            ], i3);
+                            ], i);
                         case "::placeholder":
                             return fe([
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, ":" + a + "input-$1")
+                                        j(n, /:(plac\w+)/, ":" + a + "input-$1")
                                     ]
                                 }),
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, ":" + r + "$1")
+                                        j(n, /:(plac\w+)/, ":" + r + "$1")
                                     ]
                                 }),
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, e + "input-$1")
+                                        j(n, /:(plac\w+)/, e + "input-$1")
                                     ]
                                 })
-                            ], i3);
+                            ], i);
                     }
                     return "";
                 });
         }
     }
 }
-function pe(e35) {
-    switch(e35.type){
+function pe(e) {
+    switch(e.type){
         case n:
-            e35.props = e35.props.map(function(r21) {
-                return q(X(r21), function(r22, a11, c9) {
-                    switch(z(r22, 0)){
+            e.props = e.props.map(function(r) {
+                return q(X(r), function(r, a, c) {
+                    switch(z(r, 0)){
                         case 12:
-                            return A(r22, 1, O(r22));
+                            return A(r, 1, O(r));
                         case 0:
                         case 40:
                         case 43:
                         case 62:
                         case 126:
-                            return r22;
+                            return r;
                         case 58:
-                            if (c9[++a11] === "global") c9[a11] = "", c9[++a11] = "\f" + A(c9[a11], a11 = 1, -1);
+                            if (c[++a] === "global") c[a] = "", c[++a] = "\f" + A(c[a], a = 1, -1);
                         case 32:
-                            return a11 === 1 ? "" : r22;
+                            return a === 1 ? "" : r;
                         default:
-                            switch(a11){
+                            switch(a){
                                 case 0:
-                                    e35 = r22;
-                                    return M(c9) > 1 ? "" : r22;
-                                case a11 = M(c9) - 1:
+                                    e = r;
+                                    return M(c) > 1 ? "" : r;
+                                case a = M(c) - 1:
                                 case 2:
-                                    return a11 === 2 ? r22 + e35 + e35 : r22 + e35;
+                                    return a === 2 ? r + e + e : r + e;
                                 default:
-                                    return r22;
+                                    return r;
                             }
                     }
                 });
@@ -1720,8 +1643,7 @@ exports.default = memoize;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kS2E2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "serializeStyles", ()=>serializeStyles
-);
+parcelHelpers.export(exports, "serializeStyles", ()=>serializeStyles);
 var _hash = require("@emotion/hash");
 var _hashDefault = parcelHelpers.interopDefault(_hash);
 var _unitless = require("@emotion/unitless");
@@ -1736,16 +1658,16 @@ var isCustomProperty = function isCustomProperty(property) {
     return property.charCodeAt(1) === 45;
 };
 var isProcessableValue = function isProcessableValue(value) {
-    return value != null && typeof value !== 'boolean';
+    return value != null && typeof value !== "boolean";
 };
-var processStyleName = /* #__PURE__ */ _memoizeDefault.default(function(styleName) {
-    return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
+var processStyleName = /* #__PURE__ */ (0, _memoizeDefault.default)(function(styleName) {
+    return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, "-$&").toLowerCase();
 });
 var processStyleValue = function processStyleValue(key, value) {
     switch(key){
-        case 'animation':
-        case 'animationName':
-            if (typeof value === 'string') return value.replace(animationRegex, function(match, p1, p2) {
+        case "animation":
+        case "animationName":
+            if (typeof value === "string") return value.replace(animationRegex, function(match, p1, p2) {
                 cursor = {
                     name: p1,
                     styles: p2,
@@ -1754,44 +1676,44 @@ var processStyleValue = function processStyleValue(key, value) {
                 return p1;
             });
     }
-    if (_unitlessDefault.default[key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) return value + 'px';
+    if ((0, _unitlessDefault.default)[key] !== 1 && !isCustomProperty(key) && typeof value === "number" && value !== 0) return value + "px";
     return value;
 };
 var contentValuePattern = /(var|attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
 var contentValues = [
-    'normal',
-    'none',
-    'initial',
-    'inherit',
-    'unset'
+    "normal",
+    "none",
+    "initial",
+    "inherit",
+    "unset"
 ];
 var oldProcessStyleValue = processStyleValue;
 var msPattern = /^-ms-/;
 var hyphenPattern = /-(.)/g;
 var hyphenatedCache = {};
 processStyleValue = function processStyleValue(key, value) {
-    if (key === 'content') {
-        if (typeof value !== 'string' || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) throw new Error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
+    if (key === "content") {
+        if (typeof value !== "string" || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) throw new Error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
     }
     var processed = oldProcessStyleValue(key, value);
-    if (processed !== '' && !isCustomProperty(key) && key.indexOf('-') !== -1 && hyphenatedCache[key] === undefined) {
+    if (processed !== "" && !isCustomProperty(key) && key.indexOf("-") !== -1 && hyphenatedCache[key] === undefined) {
         hyphenatedCache[key] = true;
-        console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, 'ms-').replace(hyphenPattern, function(str, _char) {
+        console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, "ms-").replace(hyphenPattern, function(str, _char) {
             return _char.toUpperCase();
         }) + "?");
     }
     return processed;
 };
 function handleInterpolation(mergedProps, registered, interpolation) {
-    if (interpolation == null) return '';
+    if (interpolation == null) return "";
     if (interpolation.__emotion_styles !== undefined) {
-        if (interpolation.toString() === 'NO_COMPONENT_SELECTOR') throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
+        if (interpolation.toString() === "NO_COMPONENT_SELECTOR") throw new Error("Component selectors can only be used in conjunction with @emotion/babel-plugin.");
         return interpolation;
     }
     switch(typeof interpolation){
-        case 'boolean':
-            return '';
-        case 'object':
+        case "boolean":
+            return "";
+        case "object":
             if (interpolation.anim === 1) {
                 cursor = {
                     name: interpolation.name,
@@ -1817,7 +1739,7 @@ function handleInterpolation(mergedProps, registered, interpolation) {
                 return styles;
             }
             return createStringFromObject(mergedProps, registered, interpolation);
-        case 'function':
+        case "function":
             if (mergedProps !== undefined) {
                 var previousCursor = cursor;
                 var result = interpolation(mergedProps);
@@ -1825,16 +1747,16 @@ function handleInterpolation(mergedProps, registered, interpolation) {
                 return handleInterpolation(mergedProps, registered, result);
             } else console.error("Functions that are interpolated in css calls will be stringified.\nIf you want to have a css call based on props, create a function that returns a css call like this\nlet dynamicStyle = (props) => css`color: ${props.color}`\nIt can be called directly with props or interpolated in a styled call like this\nlet SomeComponent = styled('div')`${dynamicStyle}`");
             break;
-        case 'string':
+        case "string":
             var matched = [];
             var replaced = interpolation.replace(animationRegex, function(match, p1, p2) {
                 var fakeVarName = "animation" + matched.length;
-                matched.push("const " + fakeVarName + " = keyframes`" + p2.replace(/^@keyframes animation-\w+/, '') + "`");
+                matched.push("const " + fakeVarName + " = keyframes`" + p2.replace(/^@keyframes animation-\w+/, "") + "`");
                 return "${" + fakeVarName + "}";
             });
             if (matched.length) console.error("`keyframes` output got interpolated into plain string, please wrap it with `css`.\n\nInstead of doing this:\n\n" + [].concat(matched, [
                 "`" + replaced + "`"
-            ]).join('\n') + '\n\nYou should wrap it with `css` like this:\n\n' + ("css`" + replaced + "`"));
+            ]).join("\n") + "\n\nYou should wrap it with `css` like this:\n\n" + ("css`" + replaced + "`"));
             break;
     } // finalize string values (regular strings and functions interpolated into css calls)
     if (registered == null) return interpolation;
@@ -1842,26 +1764,26 @@ function handleInterpolation(mergedProps, registered, interpolation) {
     return cached !== undefined ? cached : interpolation;
 }
 function createStringFromObject(mergedProps, registered, obj) {
-    var string = '';
+    var string = "";
     if (Array.isArray(obj)) for(var i = 0; i < obj.length; i++)string += handleInterpolation(mergedProps, registered, obj[i]) + ";";
     else for(var _key in obj){
         var value = obj[_key];
-        if (typeof value !== 'object') {
+        if (typeof value !== "object") {
             if (registered != null && registered[value] !== undefined) string += _key + "{" + registered[value] + "}";
             else if (isProcessableValue(value)) string += processStyleName(_key) + ":" + processStyleValue(_key, value) + ";";
         } else {
-            if (_key === 'NO_COMPONENT_SELECTOR' && true) throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
-            if (Array.isArray(value) && typeof value[0] === 'string' && (registered == null || registered[value[0]] === undefined)) {
+            if (_key === "NO_COMPONENT_SELECTOR" && true) throw new Error("Component selectors can only be used in conjunction with @emotion/babel-plugin.");
+            if (Array.isArray(value) && typeof value[0] === "string" && (registered == null || registered[value[0]] === undefined)) {
                 for(var _i = 0; _i < value.length; _i++)if (isProcessableValue(value[_i])) string += processStyleName(_key) + ":" + processStyleValue(_key, value[_i]) + ";";
             } else {
                 var interpolated = handleInterpolation(mergedProps, registered, value);
                 switch(_key){
-                    case 'animation':
-                    case 'animationName':
+                    case "animation":
+                    case "animationName":
                         string += processStyleName(_key) + ":" + interpolated + ";";
                         break;
                     default:
-                        if (_key === 'undefined') console.error(UNDEFINED_AS_OBJECT_KEY_ERROR);
+                        if (_key === "undefined") console.error(UNDEFINED_AS_OBJECT_KEY_ERROR);
                         string += _key + "{" + interpolated + "}";
                 }
             }
@@ -1875,9 +1797,9 @@ sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
 // keyframes are stored on the SerializedStyles object as a linked list
 var cursor;
 var serializeStyles = function serializeStyles(args, registered, mergedProps) {
-    if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && args[0].styles !== undefined) return args[0];
+    if (args.length === 1 && typeof args[0] === "object" && args[0] !== null && args[0].styles !== undefined) return args[0];
     var stringMode = true;
-    var styles = '';
+    var styles = "";
     cursor = undefined;
     var strings = args[0];
     if (strings == null || strings.raw === undefined) {
@@ -1897,13 +1819,13 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
     var sourceMap;
     styles = styles.replace(sourceMapPattern, function(match) {
         sourceMap = match;
-        return '';
+        return "";
     });
     labelPattern.lastIndex = 0;
-    var identifierName = '';
-    var match1; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
-    while((match1 = labelPattern.exec(styles)) !== null)identifierName += '-' + match1[1];
-    var name = _hashDefault.default(styles) + identifierName;
+    var identifierName = "";
+    var match; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
+    while((match = labelPattern.exec(styles)) !== null)identifierName += "-" + match[1];
+    var name = (0, _hashDefault.default)(styles) + identifierName;
     // $FlowFixMe SerializedStyles type doesn't have toString property (and we don't want to add it)
     return {
         name: name,
@@ -2007,16 +1929,13 @@ exports.default = unitlessKeys;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6UI8e":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles
-);
-parcelHelpers.export(exports, "insertStyles", ()=>insertStyles
-);
-parcelHelpers.export(exports, "registerStyles", ()=>registerStyles
-);
+parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles);
+parcelHelpers.export(exports, "insertStyles", ()=>insertStyles);
+parcelHelpers.export(exports, "registerStyles", ()=>registerStyles);
 var isBrowser = true;
 function getRegisteredStyles(registered, registeredStyles, classNames) {
-    var rawClassName = '';
-    classNames.split(' ').forEach(function(className) {
+    var rawClassName = "";
+    classNames.split(" ").forEach(function(className) {
         if (registered[className] !== undefined) registeredStyles.push(registered[className] + ";");
         else rawClassName += className + " ";
     });
@@ -2039,9 +1958,9 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
     if (cache.inserted[serialized.name] === undefined) {
         var current = serialized;
         do {
-            var maybeStyles = cache.insert(serialized === current ? "." + className : '', current, cache.sheet, true);
+            var maybeStyles = cache.insert(serialized === current ? "." + className : "", current, cache.sheet, true);
             current = current.next;
-        }while (current !== undefined)
+        }while (current !== undefined);
     }
 };
 
@@ -2053,30 +1972,30 @@ var _cacheDefault = parcelHelpers.interopDefault(_cache);
 var _serialize = require("@emotion/serialize");
 var _utils = require("@emotion/utils");
 function insertWithoutScoping(cache, serialized) {
-    if (cache.inserted[serialized.name] === undefined) return cache.insert('', serialized, cache.sheet, true);
+    if (cache.inserted[serialized.name] === undefined) return cache.insert("", serialized, cache.sheet, true);
 }
 function merge(registered, css, className) {
     var registeredStyles = [];
-    var rawClassName = _utils.getRegisteredStyles(registered, registeredStyles, className);
+    var rawClassName = (0, _utils.getRegisteredStyles)(registered, registeredStyles, className);
     if (registeredStyles.length < 2) return className;
     return rawClassName + css(registeredStyles);
 }
 var createEmotion = function createEmotion(options) {
-    var cache = _cacheDefault.default(options); // $FlowFixMe
+    var cache = (0, _cacheDefault.default)(options); // $FlowFixMe
     cache.sheet.speedy = function(value) {
-        if (this.ctr !== 0) throw new Error('speedy must be changed before any rules are inserted');
+        if (this.ctr !== 0) throw new Error("speedy must be changed before any rules are inserted");
         this.isSpeedy = value;
     };
     cache.compat = true;
     var css = function css() {
         for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        var serialized = _serialize.serializeStyles(args, cache.registered, undefined);
-        _utils.insertStyles(cache, serialized, false);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered, undefined);
+        (0, _utils.insertStyles)(cache, serialized, false);
         return cache.key + "-" + serialized.name;
     };
     var keyframes = function keyframes() {
         for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
-        var serialized = _serialize.serializeStyles(args, cache.registered);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered);
         var animation = "animation-" + serialized.name;
         insertWithoutScoping(cache, {
             name: serialized.name,
@@ -2086,7 +2005,7 @@ var createEmotion = function createEmotion(options) {
     };
     var injectGlobal = function injectGlobal() {
         for(var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++)args[_key3] = arguments[_key3];
-        var serialized = _serialize.serializeStyles(args, cache.registered);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered);
         insertWithoutScoping(cache, serialized);
     };
     var cx = function cx() {
@@ -2111,25 +2030,25 @@ var createEmotion = function createEmotion(options) {
         // $FlowFixMe
         sheet: cache.sheet,
         cache: cache,
-        getRegisteredStyles: _utils.getRegisteredStyles.bind(null, cache.registered),
+        getRegisteredStyles: (0, _utils.getRegisteredStyles).bind(null, cache.registered),
         merge: merge.bind(null, cache.registered, css)
     };
 };
-var classnames = function classnames1(args) {
-    var cls = '';
+var classnames = function classnames(args) {
+    var cls = "";
     for(var i = 0; i < args.length; i++){
         var arg = args[i];
         if (arg == null) continue;
         var toAdd = void 0;
         switch(typeof arg){
-            case 'boolean':
+            case "boolean":
                 break;
-            case 'object':
-                if (Array.isArray(arg)) toAdd = classnames1(arg);
+            case "object":
+                if (Array.isArray(arg)) toAdd = classnames(arg);
                 else {
-                    toAdd = '';
+                    toAdd = "";
                     for(var k in arg)if (arg[k] && k) {
-                        toAdd && (toAdd += ' ');
+                        toAdd && (toAdd += " ");
                         toAdd += k;
                     }
                 }
@@ -2138,7 +2057,7 @@ var classnames = function classnames1(args) {
                 toAdd = arg;
         }
         if (toAdd) {
-            cls && (cls += ' ');
+            cls && (cls += " ");
             cls += toAdd;
         }
     }
@@ -2149,13 +2068,12 @@ exports.default = createEmotion;
 },{"@emotion/cache":"3Umtj","@emotion/serialize":"kS2E2","@emotion/utils":"6UI8e","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hhPA0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Switch", ()=>Switch
-);
+parcelHelpers.export(exports, "Switch", ()=>Switch);
 var _uhtml = require("uhtml");
 var _ui = require("../ui");
 var _switchStyle = require("./switch.style");
-class Switch extends _ui.StyledElement {
-    static Style = _switchStyle.SwitchStyle;
+class Switch extends (0, _ui.StyledElement) {
+    static Style = (0, _switchStyle.SwitchStyle);
     static tagStyle(style) {
         super.tagStyle(style);
     }
@@ -2170,15 +2088,15 @@ class Switch extends _ui.StyledElement {
         this.render();
     }
     render() {
-        let checkbox = this.querySelector('input[type="checkbox"]') || _uhtml.html`<input type="checkbox">`;
-        let label = this.querySelector('div[el="label"]') || _uhtml.html`
+        let checkbox = this.querySelector('input[type="checkbox"]') || (0, _uhtml.html)`<input type="checkbox">`;
+        let label = this.querySelector('div[el="label"]') || (0, _uhtml.html)`
                 <div el="label">
                     <span></span>
                     <span></span>
                 </div>
             `;
-        let pin = this.querySelector('div[el="pin"]') || _uhtml.html`<div el="pin"></div>`;
-        _uhtml.render(this, _uhtml.html`
+        let pin = this.querySelector('div[el="pin"]') || (0, _uhtml.html)`<div el="pin"></div>`;
+        (0, _uhtml.render)(this, (0, _uhtml.html)`
             ${checkbox}
             ${label}
             ${pin}
@@ -2189,16 +2107,11 @@ class Switch extends _ui.StyledElement {
 },{"uhtml":"if09d","../ui":"jSLlu","./switch.style":"hxl2V","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"if09d":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Hole", ()=>_rabbitJs.Hole
-);
-parcelHelpers.export(exports, "render", ()=>render
-);
-parcelHelpers.export(exports, "html", ()=>html
-);
-parcelHelpers.export(exports, "svg", ()=>svg
-);
-parcelHelpers.export(exports, "foreign", ()=>_uhandlers.foreign
-);
+parcelHelpers.export(exports, "Hole", ()=>(0, _rabbitJs.Hole));
+parcelHelpers.export(exports, "render", ()=>render);
+parcelHelpers.export(exports, "html", ()=>html);
+parcelHelpers.export(exports, "svg", ()=>svg);
+parcelHelpers.export(exports, "foreign", ()=>(0, _uhandlers.foreign));
 var _umap = require("umap");
 var _umapDefault = parcelHelpers.interopDefault(_umap);
 var _rabbitJs = require("./rabbit.js");
@@ -2208,19 +2121,17 @@ const { create , defineProperties  } = Object;
 // with a `for(ref[, id])` and a `node` tag too
 const tag = (type)=>{
     // both `html` and `svg` tags have their own cache
-    const keyed = _umapDefault.default(new WeakMap);
+    const keyed = (0, _umapDefault.default)(new WeakMap);
     // keyed operations always re-use the same cache and unroll
     // the template and its interpolations right away
-    const fixed = (cache1)=>(template, ...values)=>_rabbitJs.unroll(cache1, {
+    const fixed = (cache)=>(template, ...values)=>(0, _rabbitJs.unroll)(cache, {
                 type,
                 template,
                 values
-            })
-    ;
+            });
     return defineProperties(// non keyed operations are recognized as instance of Hole
     // during the "unroll", recursively resolved and updated
-    (template, ...values)=>new _rabbitJs.Hole(type, template, values)
-    , {
+    (template, ...values)=>new (0, _rabbitJs.Hole)(type, template, values), {
         for: {
             // keyed operations need a reference object, usually the parent node
             // which is showing keyed results, and optionally a unique id per each
@@ -2228,14 +2139,14 @@ const tag = (type)=>{
             // that usually carry a unique identifier
             value (ref, id) {
                 const memo = keyed.get(ref) || keyed.set(ref, create(null));
-                return memo[id] || (memo[id] = fixed(_rabbitJs.createCache()));
+                return memo[id] || (memo[id] = fixed((0, _rabbitJs.createCache)()));
             }
         },
         node: {
             // it is possible to create one-off content out of the box via node tag
             // this might return the single created node, or a fragment with all
             // nodes present at the root level and, of course, their child nodes
-            value: (template, ...values)=>_rabbitJs.unroll(_rabbitJs.createCache(), {
+            value: (template, ...values)=>(0, _rabbitJs.unroll)((0, _rabbitJs.createCache)(), {
                     type,
                     template,
                     values
@@ -2244,19 +2155,19 @@ const tag = (type)=>{
     });
 };
 // each rendered node gets its own cache
-const cache = _umapDefault.default(new WeakMap);
+const cache = (0, _umapDefault.default)(new WeakMap);
 // rendering means understanding what `html` or `svg` tags returned
 // and it relates a specific node to its own unique cache.
 // Each time the content to render changes, the node is cleaned up
 // and the new new content is appended, and if such content is a Hole
 // then it's "unrolled" to resolve all its inner nodes.
 const render = (where, what)=>{
-    const hole = typeof what === 'function' ? what() : what;
-    const info = cache.get(where) || cache.set(where, _rabbitJs.createCache());
-    const wire = hole instanceof _rabbitJs.Hole ? _rabbitJs.unroll(info, hole) : hole;
+    const hole = typeof what === "function" ? what() : what;
+    const info = cache.get(where) || cache.set(where, (0, _rabbitJs.createCache)());
+    const wire = hole instanceof (0, _rabbitJs.Hole) ? (0, _rabbitJs.unroll)(info, hole) : hole;
     if (wire !== info.wire) {
         info.wire = wire;
-        where.textContent = '';
+        where.textContent = "";
         // valueOf() simply returns the node itself, but in case it was a "wire"
         // it will eventually re-append all nodes to its fragment so that such
         // fragment can be re-appended many times in a meaningful way
@@ -2265,8 +2176,8 @@ const render = (where, what)=>{
     }
     return where;
 };
-const html = tag('html');
-const svg = tag('svg');
+const html = tag("html");
+const svg = tag("svg");
 
 },{"umap":"b3ep2","./rabbit.js":"4YYgA","uhandlers":"ceEOD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3ep2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2277,27 +2188,22 @@ exports.default = (_)=>({
         // so that using bind slows it down by 60%.
         // Firefox and Chrome are just fine in both cases,
         // so let's use the approach that works fast everywhere 👍
-        get: (key)=>_.get(key)
-        ,
+        get: (key)=>_.get(key),
         set: (key, value)=>(_.set(key, value), value)
-    })
-;
+    });
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4YYgA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createCache", ()=>createCache
-);
-parcelHelpers.export(exports, "unroll", ()=>unroll
-);
+parcelHelpers.export(exports, "createCache", ()=>createCache);
+parcelHelpers.export(exports, "unroll", ()=>unroll);
 /**
  * Holds all details wrappers needed to render the content further on.
  * @constructor
  * @param {string} type The hole type, either `html` or `svg`.
  * @param {string[]} template The template literals used to the define the content.
  * @param {Array} values Zero, one, or more interpolated values to render.
- */ parcelHelpers.export(exports, "Hole", ()=>Hole
-);
+ */ parcelHelpers.export(exports, "Hole", ()=>Hole);
 var _umap = require("umap");
 var _umapDefault = parcelHelpers.interopDefault(_umap);
 var _uparser = require("uparser");
@@ -2313,7 +2219,7 @@ const createPath = (node)=>{
     const path = [];
     let { parentNode  } = node;
     while(parentNode){
-        path.push(_uarray.indexOf.call(parentNode.childNodes, node));
+        path.push((0, _uarray.indexOf).call(parentNode.childNodes, node));
         node = parentNode;
         parentNode = node.parentNode;
     }
@@ -2326,12 +2232,12 @@ const createPath = (node)=>{
 // the update to that specific comment node, hence its parent.
 // style and textarea will have <!--isµX--> text content, and are handled
 // directly through text-only updates.
-const prefix = 'isµ';
+const prefix = "is\xb5";
 // Template Literals are unique per scope and static, meaning a template
 // should be parsed once, and once only, as it will always represent the same
 // content, within the exact same amount of updates each time.
 // This cache relates each template to its unique content and updates.
-const cache = _umapDefault.default(new WeakMap);
+const cache = (0, _umapDefault.default)(new WeakMap);
 // a RegExp that helps checking nodes that cannot contain comments
 const textOnly = /^(?:plaintext|script|style|textarea|title|xmp)$/i;
 const createCache = ()=>({
@@ -2345,8 +2251,7 @@ const createCache = ()=>({
         // if the template or type are different from the previous one
         // the entry gets re-created each time
         wire: null // each rendered node represent some wired content and
-    })
-;
+    });
 // the entry stored in the rendered node cache, and per each "hole"
 const createEntry = (type, template)=>{
     const { content , updates  } = mapUpdates(type, template);
@@ -2362,11 +2267,11 @@ const createEntry = (type, template)=>{
 // Each unique template becomes a fragment, cloned once per each other
 // operation based on the same template, i.e. data => html`<p>${data}</p>`
 const mapTemplate = (type, template)=>{
-    const text = _uparserDefault.default(template, prefix, type === 'svg');
-    const content = _nodeJs.createFragment(text, type);
+    const text = (0, _uparserDefault.default)(template, prefix, type === "svg");
+    const content = (0, _nodeJs.createFragment)(text, type);
     // once instrumented and reproduced as fragment, it's crawled
     // to find out where each update is in the fragment tree
-    const tw = _nodeJs.createWalker(content);
+    const tw = (0, _nodeJs.createWalker)(content);
     const nodes = [];
     const length = template.length - 1;
     let i = 0;
@@ -2385,7 +2290,7 @@ const mapTemplate = (type, template)=>{
         {
             if (node.data === search) {
                 nodes.push({
-                    type: 'node',
+                    type: "node",
                     path: createPath(node)
                 });
                 search = `${prefix}${++i}`;
@@ -2398,7 +2303,7 @@ const mapTemplate = (type, template)=>{
             // let svg = -1;
             while(node.hasAttribute(search)){
                 nodes.push({
-                    type: 'attr',
+                    type: "attr",
                     path: createPath(node),
                     name: node.getAttribute(search)
                 });
@@ -2408,9 +2313,9 @@ const mapTemplate = (type, template)=>{
             // if the node was a style, textarea, or others, check its content
             // and if it is <!--isµX--> then update tex-only this node
             if (textOnly.test(node.tagName) && node.textContent.trim() === `<!--${search}-->`) {
-                node.textContent = '';
+                node.textContent = "";
                 nodes.push({
-                    type: 'text',
+                    type: "text",
                     path: createPath(node)
                 });
                 search = `${prefix}${++i}`;
@@ -2433,7 +2338,7 @@ const mapUpdates = (type, template)=>{
     // clone deeply the fragment
     const fragment = document.importNode(content, true);
     // and relate an update handler per each node that needs one
-    const updates = nodes.map(_handlersJs.handlers, fragment);
+    const updates = nodes.map((0, _handlersJs.handlers), fragment);
     // return the fragment and all updates to use within its nodes
     return {
         content: fragment,
@@ -2458,7 +2363,7 @@ const unroll = (info, { type , template , values  })=>{
     // create a new persistent entity to use during diffing.
     // This is simply a DOM node, when the template has a single container,
     // as in `<p></p>`, or a "wire" in `<p></p><p></p>` and similar cases.
-    return wire || (entry.wire = _uwire.persistent(content));
+    return wire || (entry.wire = (0, _uwire.persistent)(content));
 };
 // the stack retains, per each interpolation value, the cache
 // related to each interpolation value, or null, if the render
@@ -2469,7 +2374,7 @@ const unrollValues = ({ stack  }, values, length)=>{
         // each Hole gets unrolled and re-assigned as value
         // so that domdiff will deal with a node/wire, not with a hole
         if (hole instanceof Hole) values[i] = unroll(stack[i] || (stack[i] = createCache()), hole);
-        else if (_uarray.isArray(hole)) unrollValues(stack[i] || (stack[i] = createCache()), hole, hole.length);
+        else if ((0, _uarray.isArray)(hole)) unrollValues(stack[i] || (stack[i] = createCache()), hole, hole.length);
         else stack[i] = null;
     }
     if (length < stack.length) stack.splice(length);
@@ -2489,42 +2394,34 @@ const node = /<[a-z][^>]+$/i;
 const notNode = />[^<>]*$/;
 const selfClosing = /<([a-z]+[a-z0-9:._-]*)([^>]*?)(\/>)/ig;
 const trimEnd = /\s+$/;
-const isNode = (template, i)=>0 < i-- && (node.test(template[i]) || !notNode.test(template[i]) && isNode(template, i))
-;
-const regular = (original, name, extra)=>empty.test(name) ? original : `<${name}${extra.replace(trimEnd, '')}></${name}>`
-;
+const isNode = (template, i)=>0 < i-- && (node.test(template[i]) || !notNode.test(template[i]) && isNode(template, i));
+const regular = (original, name, extra)=>empty.test(name) ? original : `<${name}${extra.replace(trimEnd, "")}></${name}>`;
 exports.default = (template, prefix, svg)=>{
     const text = [];
     const { length  } = template;
     for(let i = 1; i < length; i++){
         const chunk = template[i - 1];
-        text.push(attr.test(chunk) && isNode(template, i) ? chunk.replace(attr, (_, $1, $2)=>`${prefix}${i - 1}=${$2 || '"'}${$1}${$2 ? '' : '"'}`
-        ) : `${chunk}<!--${prefix}${i - 1}-->`);
+        text.push(attr.test(chunk) && isNode(template, i) ? chunk.replace(attr, (_, $1, $2)=>`${prefix}${i - 1}=${$2 || '"'}${$1}${$2 ? "" : '"'}`) : `${chunk}<!--${prefix}${i - 1}-->`);
     }
     text.push(template[length - 1]);
-    const output = text.join('').trim();
+    const output = text.join("").trim();
     return svg ? output : output.replace(selfClosing, regular);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7ftea":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isArray", ()=>isArray
-);
-parcelHelpers.export(exports, "indexOf", ()=>indexOf
-);
-parcelHelpers.export(exports, "slice", ()=>slice
-);
+parcelHelpers.export(exports, "isArray", ()=>isArray);
+parcelHelpers.export(exports, "indexOf", ()=>indexOf);
+parcelHelpers.export(exports, "slice", ()=>slice);
 const { isArray  } = Array;
 const { indexOf , slice  } = [];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eGHCa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "diffable", ()=>diffable
-);
-parcelHelpers.export(exports, "persistent", ()=>persistent
-);
+parcelHelpers.export(exports, "diffable", ()=>diffable);
+parcelHelpers.export(exports, "persistent", ()=>persistent);
 var _uarray = require("uarray");
 const ELEMENT_NODE = 1;
 const nodeType = 111;
@@ -2535,13 +2432,12 @@ const remove = ({ firstChild , lastChild  })=>{
     range.deleteContents();
     return firstChild;
 };
-const diffable = (node, operation)=>node.nodeType === nodeType ? 1 / operation < 0 ? operation ? remove(node) : node.lastChild : operation ? node.valueOf() : node.firstChild : node
-;
+const diffable = (node, operation)=>node.nodeType === nodeType ? 1 / operation < 0 ? operation ? remove(node) : node.lastChild : operation ? node.valueOf() : node.firstChild : node;
 const persistent = (fragment)=>{
     const { childNodes  } = fragment;
     const { length  } = childNodes;
     if (length < 2) return length ? childNodes[0] : fragment;
-    const nodes = _uarray.slice.call(childNodes, 0);
+    const nodes = (0, _uarray.slice).call(childNodes, 0);
     const firstChild = nodes[0];
     const lastChild = nodes[length - 1];
     return {
@@ -2566,18 +2462,16 @@ parcelHelpers.defineInteropFlag(exports);
 // the type is either node, attribute, or text, while
 // the path is how to retrieve the related node to update.
 // In the attribute case, the attribute name is also carried along.
-parcelHelpers.export(exports, "handlers", ()=>handlers
-);
+parcelHelpers.export(exports, "handlers", ()=>handlers);
 var _uarray = require("uarray");
 var _udomdiff = require("udomdiff");
 var _udomdiffDefault = parcelHelpers.interopDefault(_udomdiff);
 var _uhandlers = require("uhandlers");
 var _uwire = require("uwire");
 // from a generic path, retrieves the exact targeted node
-const reducePath = ({ childNodes  }, i)=>childNodes[i]
-;
+const reducePath = ({ childNodes  }, i)=>childNodes[i];
 // this helper avoid code bloat around handleAnything() callback
-const diff = (comment, oldNodes, newNodes)=>_udomdiffDefault.default(comment.parentNode, // TODO: there is a possible edge case where a node has been
+const diff = (comment, oldNodes, newNodes)=>(0, _udomdiffDefault.default)(comment.parentNode, // TODO: there is a possible edge case where a node has been
     //       removed manually, or it was a keyed one, attached
     //       to a shared reference between renders.
     //       In this case udomdiff might fail at removing such node
@@ -2592,8 +2486,7 @@ const diff = (comment, oldNodes, newNodes)=>_udomdiffDefault.default(comment.par
     //       and both lighterhtml and hyperHTML might fail with this
     //       very specific edge case, I might as well document this possible
     //       "diffing shenanigan" and call it a day.
-    oldNodes, newNodes, _uwire.diffable, comment)
-;
+    oldNodes, newNodes, (0, _uwire.diffable), comment);
 // if an interpolation represents a comment, the whole
 // diffing will be related to such comment.
 // This helper is in charge of understanding how the new
@@ -2603,12 +2496,12 @@ const handleAnything = (comment)=>{
     const anyContent = (newValue)=>{
         switch(typeof newValue){
             // primitives are handled as text content
-            case 'string':
-            case 'number':
-            case 'boolean':
+            case "string":
+            case "number":
+            case "boolean":
                 if (oldValue !== newValue) {
                     oldValue = newValue;
-                    if (!text) text = document.createTextNode('');
+                    if (!text) text = document.createTextNode("");
                     text.data = newValue;
                     nodes = diff(comment, nodes, [
                         text
@@ -2616,8 +2509,8 @@ const handleAnything = (comment)=>{
                 }
                 break;
             // null, and undefined are used to cleanup previous content
-            case 'object':
-            case 'undefined':
+            case "object":
+            case "undefined":
                 if (newValue == null) {
                     if (oldValue != newValue) {
                         oldValue = newValue;
@@ -2626,11 +2519,11 @@ const handleAnything = (comment)=>{
                     break;
                 }
                 // arrays and nodes have a special treatment
-                if (_uarray.isArray(newValue)) {
+                if ((0, _uarray.isArray)(newValue)) {
                     oldValue = newValue;
                     // arrays can be used to cleanup, if empty
                     if (newValue.length === 0) nodes = diff(comment, nodes, []);
-                    else if (typeof newValue[0] === 'object') nodes = diff(comment, nodes, newValue);
+                    else if (typeof newValue[0] === "object") nodes = diff(comment, nodes, newValue);
                     else anyContent(String(newValue));
                     break;
                 }
@@ -2639,14 +2532,14 @@ const handleAnything = (comment)=>{
                 // if the node is a fragment, it's appended once via its childNodes
                 // There is no `else` here, meaning if the content
                 // is not expected one, nothing happens, as easy as that.
-                if (oldValue !== newValue && 'ELEMENT_NODE' in newValue) {
+                if (oldValue !== newValue && "ELEMENT_NODE" in newValue) {
                     oldValue = newValue;
-                    nodes = diff(comment, nodes, newValue.nodeType === 11 ? _uarray.slice.call(newValue.childNodes) : [
+                    nodes = diff(comment, nodes, newValue.nodeType === 11 ? (0, _uarray.slice).call(newValue.childNodes) : [
                         newValue
                     ]);
                 }
                 break;
-            case 'function':
+            case "function":
                 anyContent(newValue(comment));
                 break;
         }
@@ -2665,27 +2558,27 @@ const handleAnything = (comment)=>{
 //  * generic=${...}  to handle an attribute just like an attribute
 const handleAttribute = (node, name /*, svg*/ )=>{
     switch(name[0]){
-        case '?':
-            return _uhandlers.boolean(node, name.slice(1), false);
-        case '.':
-            return _uhandlers.setter(node, name.slice(1));
-        case '@':
-            return _uhandlers.event(node, 'on' + name.slice(1));
-        case 'o':
-            if (name[1] === 'n') return _uhandlers.event(node, name);
+        case "?":
+            return (0, _uhandlers.boolean)(node, name.slice(1), false);
+        case ".":
+            return (0, _uhandlers.setter)(node, name.slice(1));
+        case "@":
+            return (0, _uhandlers.event)(node, "on" + name.slice(1));
+        case "o":
+            if (name[1] === "n") return (0, _uhandlers.event)(node, name);
     }
     switch(name){
-        case 'ref':
-            return _uhandlers.ref(node);
-        case 'aria':
-            return _uhandlers.aria(node);
+        case "ref":
+            return (0, _uhandlers.ref)(node);
+        case "aria":
+            return (0, _uhandlers.aria)(node);
     }
-    return _uhandlers.attribute(node, name /*, svg*/ );
+    return (0, _uhandlers.attribute)(node, name /*, svg*/ );
 };
 function handlers(options) {
     const { type , path  } = options;
     const node = path.reduceRight(reducePath, this);
-    return type === 'node' ? handleAnything(node) : type === 'attr' ? handleAttribute(node, options.name /*, options.svg*/ ) : _uhandlers.text(node);
+    return type === "node" ? handleAnything(node) : type === "attr" ? handleAttribute(node, options.name /*, options.svg*/ ) : (0, _uhandlers.text)(node);
 }
 
 },{"uarray":"7ftea","udomdiff":"9UVlK","uhandlers":"ceEOD","uwire":"eGHCa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9UVlK":[function(require,module,exports) {
@@ -2749,9 +2642,9 @@ parcelHelpers.defineInteropFlag(exports);
             // or asymmetric too
             // [1, 2, 3, 4, 5]
             // [1, 2, 3, 5, 6, 4]
-            const node = get(a[--aEnd], -1).nextSibling;
+            const node1 = get(a[--aEnd], -1).nextSibling;
             parentNode.insertBefore(get(b[bStart++], 1), get(a[aStart++], -1).nextSibling);
-            parentNode.insertBefore(get(b[--bEnd], 1), node);
+            parentNode.insertBefore(get(b[--bEnd], 1), node1);
             // mark the future index as identical (yeah, it's dirty, but cheap 👍)
             // The main reason to do this, is that when a[aEnd] will be reached,
             // the loop will likely be on the fast path, as identical to b[bEnd].
@@ -2776,10 +2669,10 @@ parcelHelpers.defineInteropFlag(exports);
                 const index = map.get(a[aStart]);
                 // if it's not already processed, look on demand for the next LCS
                 if (bStart < index && index < bEnd) {
-                    let i = aStart;
+                    let i1 = aStart;
                     // counts the amount of nodes that are the same in the future
                     let sequence = 1;
-                    while(++i < aEnd && i < bEnd && map.get(a[i]) === index + sequence)sequence++;
+                    while(++i1 < aEnd && i1 < bEnd && map.get(a[i1]) === index + sequence)sequence++;
                     // effort decision here: if the sequence is longer than replaces
                     // needed to reach such sequence, which would brings again this loop
                     // to the fast path, prepend the difference before a sequence,
@@ -2791,8 +2684,8 @@ parcelHelpers.defineInteropFlag(exports);
                     // this would place 7 before 1 and, from that time on, 1, 2, and 3
                     // will be processed at zero cost
                     if (sequence > index - bStart) {
-                        const node = get(a[aStart], 0);
-                        while(bStart < index)parentNode.insertBefore(get(b[bStart++], 1), node);
+                        const node2 = get(a[aStart], 0);
+                        while(bStart < index)parentNode.insertBefore(get(b[bStart++], 1), node2);
                     } else parentNode.replaceChild(get(b[bStart++], 1), get(a[aStart++], -1));
                 } else aStart++;
             } else parentNode.removeChild(get(a[aStart++], -1));
@@ -2804,47 +2697,34 @@ parcelHelpers.defineInteropFlag(exports);
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ceEOD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Foreign", ()=>Foreign
-);
-parcelHelpers.export(exports, "foreign", ()=>foreign
-);
-parcelHelpers.export(exports, "aria", ()=>aria
-);
-parcelHelpers.export(exports, "attribute", ()=>attribute
-);
-parcelHelpers.export(exports, "boolean", ()=>boolean
-);
-parcelHelpers.export(exports, "data", ()=>data
-);
-parcelHelpers.export(exports, "event", ()=>event
-);
-parcelHelpers.export(exports, "ref", ()=>ref
-);
-parcelHelpers.export(exports, "setter", ()=>setter
-);
-parcelHelpers.export(exports, "text", ()=>text
-);
+parcelHelpers.export(exports, "Foreign", ()=>Foreign);
+parcelHelpers.export(exports, "foreign", ()=>foreign);
+parcelHelpers.export(exports, "aria", ()=>aria);
+parcelHelpers.export(exports, "attribute", ()=>attribute);
+parcelHelpers.export(exports, "boolean", ()=>boolean);
+parcelHelpers.export(exports, "data", ()=>data);
+parcelHelpers.export(exports, "event", ()=>event);
+parcelHelpers.export(exports, "ref", ()=>ref);
+parcelHelpers.export(exports, "setter", ()=>setter);
+parcelHelpers.export(exports, "text", ()=>text);
 var _uarray = require("uarray");
 // flag for foreign checks (slower path, fast by default)
 let useForeign = false;
 class Foreign {
     constructor(handler, value){
         useForeign = true;
-        this._ = (...args)=>handler(...args, value)
-        ;
+        this._ = (...args)=>handler(...args, value);
     }
 }
-const foreign = (handler, value)=>new Foreign(handler, value)
-;
+const foreign = (handler, value)=>new Foreign(handler, value);
 const aria = (node)=>(values)=>{
         for(const key in values){
-            const name = key === 'role' ? key : `aria-${key}`;
+            const name = key === "role" ? key : `aria-${key}`;
             const value = values[key];
             if (value == null) node.removeAttribute(name);
             else node.setAttribute(name, value);
         }
-    }
-;
+    };
 const attribute = (node, name)=>{
     let oldValue, orphan = true;
     const attributeNode = document.createAttributeNS(null, name);
@@ -2876,24 +2756,22 @@ const boolean = (node, key, oldValue)=>(newValue)=>{
         if (oldValue !== !!newValue) {
             // when IE won't be around anymore ...
             // node.toggleAttribute(key, oldValue = !!newValue);
-            if (oldValue = !!newValue) node.setAttribute(key, '');
+            if (oldValue = !!newValue) node.setAttribute(key, "");
             else node.removeAttribute(key);
         }
-    }
-;
+    };
 const data = ({ dataset  })=>(values)=>{
         for(const key in values){
             const value = values[key];
             if (value == null) delete dataset[key];
             else dataset[key] = value;
         }
-    }
-;
+    };
 const event = (node, name)=>{
     let oldValue, lower, type = name.slice(2);
     if (!(name in node) && (lower = name.toLowerCase()) in node) type = lower.slice(2);
     return (newValue)=>{
-        const info = _uarray.isArray(newValue) ? newValue : [
+        const info = (0, _uarray.isArray)(newValue) ? newValue : [
             newValue,
             false
         ];
@@ -2908,21 +2786,20 @@ const ref = (node)=>{
     return (value)=>{
         if (oldValue !== value) {
             oldValue = value;
-            if (typeof value === 'function') value(node);
+            if (typeof value === "function") value(node);
             else value.current = node;
         }
     };
 };
-const setter = (node, key)=>key === 'dataset' ? data(node) : (value)=>{
+const setter = (node, key)=>key === "dataset" ? data(node) : (value)=>{
         node[key] = value;
-    }
-;
+    };
 const text = (node)=>{
     let oldValue;
     return (newValue)=>{
         if (oldValue != newValue) {
             oldValue = newValue;
-            node.textContent = newValue == null ? '' : newValue;
+            node.textContent = newValue == null ? "" : newValue;
         }
     };
 };
@@ -2930,27 +2807,23 @@ const text = (node)=>{
 },{"uarray":"7ftea","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9Th3F":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createFragment", ()=>createFragment
-);
-parcelHelpers.export(exports, "createWalker", ()=>createWalker
-);
+parcelHelpers.export(exports, "createFragment", ()=>createFragment);
+parcelHelpers.export(exports, "createWalker", ()=>createWalker);
 var _createContent = require("@ungap/create-content");
 var _createContentDefault = parcelHelpers.interopDefault(_createContent);
 // this "hack" tells the library if the browser is IE11 or old Edge
 const isImportNodeLengthWrong = document.importNode.length != 1;
-const createFragment = isImportNodeLengthWrong ? (text, type, normalize)=>document.importNode(_createContentDefault.default(text, type, normalize), true)
- : _createContentDefault.default;
-const createWalker = isImportNodeLengthWrong ? (fragment)=>document.createTreeWalker(fragment, 129, null, false)
- : (fragment)=>document.createTreeWalker(fragment, 129)
-;
+const createFragment = isImportNodeLengthWrong ? (text, type, normalize)=>document.importNode((0, _createContentDefault.default)(text, type, normalize), true) : (0, _createContentDefault.default);
+const createWalker = isImportNodeLengthWrong ? (fragment)=>document.createTreeWalker(fragment, 129, null, false) : (fragment)=>document.createTreeWalker(fragment, 129);
 
 },{"@ungap/create-content":"4xeIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xeIY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-/*! (c) Andrea Giammarchi - ISC */ var createContent = function(document) {
-    var FRAGMENT = 'fragment';
-    var TEMPLATE = 'template';
-    var HAS_CONTENT = 'content' in create(TEMPLATE);
+/*! (c) Andrea Giammarchi - ISC */ var createContent = function(document1) {
+    "use strict";
+    var FRAGMENT = "fragment";
+    var TEMPLATE = "template";
+    var HAS_CONTENT = "content" in create(TEMPLATE);
     var createHTML = HAS_CONTENT ? function(html) {
         var template = create(TEMPLATE);
         template.innerHTML = html;
@@ -2961,7 +2834,7 @@ parcelHelpers.defineInteropFlag(exports);
         var childNodes = null;
         if (/^[^\S]*?<(col(?:group)?|t(?:head|body|foot|r|d|h))/i.test(html)) {
             var selector = RegExp.$1;
-            template.innerHTML = '<table>' + html + '</table>';
+            template.innerHTML = "<table>" + html + "</table>";
             childNodes = template.querySelectorAll(selector);
         } else {
             template.innerHTML = html;
@@ -2971,22 +2844,22 @@ parcelHelpers.defineInteropFlag(exports);
         return content;
     };
     return function createContent(markup, type) {
-        return (type === 'svg' ? createSVG : createHTML)(markup);
+        return (type === "svg" ? createSVG : createHTML)(markup);
     };
     function append(root, childNodes) {
         var length = childNodes.length;
         while(length--)root.appendChild(childNodes[0]);
     }
     function create(element) {
-        return element === FRAGMENT ? document.createDocumentFragment() : document.createElementNS('http://www.w3.org/1999/xhtml', element);
+        return element === FRAGMENT ? document1.createDocumentFragment() : document1.createElementNS("http://www.w3.org/1999/xhtml", element);
     }
     // it could use createElementNS when hasNode is there
     // but this fallback is equally fast and easier to maintain
     // it is also battle tested already in all IE
     function createSVG(svg) {
         var content = create(FRAGMENT);
-        var template = create('div');
-        template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg + '</svg>';
+        var template = create("div");
+        template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg + "</svg>";
         append(content, template.firstChild.childNodes);
         return content;
     }
@@ -2996,19 +2869,17 @@ exports.default = createContent;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hxl2V":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SwitchStyleParam", ()=>SwitchStyleParam
-);
-parcelHelpers.export(exports, "SwitchStyle", ()=>SwitchStyle
-);
+parcelHelpers.export(exports, "SwitchStyleParam", ()=>SwitchStyleParam);
+parcelHelpers.export(exports, "SwitchStyle", ()=>SwitchStyle);
 var _style = require("../../style");
 var _ui = require("../ui");
 class SwitchStyleParam {
 }
-class SwitchStyle extends _ui.StyleClass {
+class SwitchStyle extends (0, _ui.StyleClass) {
     static default = {
-        pinColor: '#f6f5f4',
-        bgColor: '#deddda',
-        activeColor: 'blue'
+        pinColor: "#f6f5f4",
+        bgColor: "#deddda",
+        activeColor: "blue"
     };
     static css(style = {}) {
         style = {
@@ -3058,7 +2929,7 @@ class SwitchStyle extends _ui.StyleClass {
             width: 100%;
             height: 100%;
             border-radius: 0.2em;
-            ${_style.lift({
+            ${(0, _style.lift)({
             level: 1
         })}
             transition: .4s;
@@ -3085,26 +2956,26 @@ class SwitchStyle extends _ui.StyleClass {
         return css;
     }
     static _pinColor(style = {}) {
-        if (style.pinColor == undefined) return '';
+        if (style.pinColor == undefined) return "";
         return `
         div[el="pin"] {
-            ${_style.bgColor(style.pinColor)}
+            ${(0, _style.bgColor)(style.pinColor)}
         }
         `.trim();
     }
     static _bgColor(style = {}) {
-        if (style.bgColor == undefined) return '';
+        if (style.bgColor == undefined) return "";
         return `
         div[el="label"] {
-            ${_style.bgColor(style.bgColor)}
+            ${(0, _style.bgColor)(style.bgColor)}
         }
         `.trim();
     }
     static _activeColor(style = {}) {
-        if (style.activeColor == undefined) return '';
+        if (style.activeColor == undefined) return "";
         return `
         input[type="checkbox"]:checked ~ div[el="label"] {
-            ${_style.bgColor(style.activeColor)}
+            ${(0, _style.bgColor)(style.activeColor)}
         }
         `.trim();
     }
@@ -3113,18 +2984,12 @@ class SwitchStyle extends _ui.StyleClass {
 },{"../../style":"llAwq","../ui":"jSLlu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"llAwq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addStyle", ()=>_addStyle.addStyle
-);
-parcelHelpers.export(exports, "aspectRatio", ()=>_aspectRatio.aspectRatio
-);
-parcelHelpers.export(exports, "bgColor", ()=>_bgColor.bgColor
-);
-parcelHelpers.export(exports, "bgColorInt", ()=>_bgColorInt.bgColorInt
-);
-parcelHelpers.export(exports, "fontFluid", ()=>_fontFluid.fontFluid
-);
-parcelHelpers.export(exports, "lift", ()=>_lift.lift
-);
+parcelHelpers.export(exports, "addStyle", ()=>(0, _addStyle.addStyle));
+parcelHelpers.export(exports, "aspectRatio", ()=>(0, _aspectRatio.aspectRatio));
+parcelHelpers.export(exports, "bgColor", ()=>(0, _bgColor.bgColor));
+parcelHelpers.export(exports, "bgColorInt", ()=>(0, _bgColorInt.bgColorInt));
+parcelHelpers.export(exports, "fontFluid", ()=>(0, _fontFluid.fontFluid));
+parcelHelpers.export(exports, "lift", ()=>(0, _lift.lift));
 var _addStyle = require("./style/add-style");
 var _aspectRatio = require("./style/aspect-ratio");
 var _bgColor = require("./style/bg-color");
@@ -3135,16 +3000,14 @@ var _lift = require("./style/lift");
 },{"./style/add-style":"hWanl","./style/aspect-ratio":"91a2D","./style/bg-color":"dTLl0","./style/bg-color-int":"cvHRb","./style/font-fluid":"gzrsH","./style/lift":"ipD0B","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hWanl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addStyle", ()=>_css.injectGlobal
-);
+parcelHelpers.export(exports, "addStyle", ()=>(0, _css.injectGlobal));
 var _css = require("@emotion/css");
 
 },{"@emotion/css":"gyRZs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"91a2D":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "aspectRatio", ()=>aspectRatio
-);
-const aspectRatio = (ratio = '1/1')=>{
+parcelHelpers.export(exports, "aspectRatio", ()=>aspectRatio);
+const aspectRatio = (ratio = "1/1")=>{
     return `
     aspect-ratio: ${ratio};
     @supports not (aspect-ratio: ${ratio}) {
@@ -3166,11 +3029,10 @@ const aspectRatio = (ratio = '1/1')=>{
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dTLl0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "bgColor", ()=>bgColor
-);
-const Color = require('color');
-const bgColor = (color = 'blue')=>{
-    let fontColor = Color(color).isDark() ? 'white' : 'black';
+parcelHelpers.export(exports, "bgColor", ()=>bgColor);
+const Color = require("color");
+const bgColor = (color = "blue")=>{
+    let fontColor = Color(color).isDark() ? "white" : "black";
     return `
     background-color: ${color};
     color: ${fontColor};
@@ -3178,29 +3040,29 @@ const bgColor = (color = 'blue')=>{
 };
 
 },{"color":"gW2oi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gW2oi":[function(require,module,exports) {
-const colorString = require('color-string');
-const convert = require('color-convert');
+const colorString = require("color-string");
+const convert = require("color-convert");
 const skippedModels = [
     // To be honest, I don't really feel like keyword belongs in color convert, but eh.
-    'keyword',
+    "keyword",
     // Gray conflicts with some method names, and has its own method defined.
-    'gray',
+    "gray",
     // Shouldn't really be in color-convert either...
-    'hex', 
+    "hex", 
 ];
 const hashedModelKeys = {};
 for (const model of Object.keys(convert))hashedModelKeys[[
     ...convert[model].labels
-].sort().join('')] = model;
+].sort().join("")] = model;
 const limiters = {};
-function Color(object, model2) {
-    if (!(this instanceof Color)) return new Color(object, model2);
-    if (model2 && model2 in skippedModels) model2 = null;
-    if (model2 && !(model2 in convert)) throw new Error('Unknown model: ' + model2);
+function Color(object, model) {
+    if (!(this instanceof Color)) return new Color(object, model);
+    if (model && model in skippedModels) model = null;
+    if (model && !(model in convert)) throw new Error("Unknown model: " + model);
     let i;
     let channels;
     if (object == null) {
-        this.model = 'rgb';
+        this.model = "rgb";
         this.color = [
             0,
             0,
@@ -3213,22 +3075,22 @@ function Color(object, model2) {
             ...object.color
         ];
         this.valpha = object.valpha;
-    } else if (typeof object === 'string') {
+    } else if (typeof object === "string") {
         const result = colorString.get(object);
-        if (result === null) throw new Error('Unable to parse color from string: ' + object);
+        if (result === null) throw new Error("Unable to parse color from string: " + object);
         this.model = result.model;
         channels = convert[this.model].channels;
         this.color = result.value.slice(0, channels);
-        this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;
+        this.valpha = typeof result.value[channels] === "number" ? result.value[channels] : 1;
     } else if (object.length > 0) {
-        this.model = model2 || 'rgb';
+        this.model = model || "rgb";
         channels = convert[this.model].channels;
         const newArray = Array.prototype.slice.call(object, 0, channels);
         this.color = zeroArray(newArray, channels);
-        this.valpha = typeof object[channels] === 'number' ? object[channels] : 1;
-    } else if (typeof object === 'number') {
+        this.valpha = typeof object[channels] === "number" ? object[channels] : 1;
+    } else if (typeof object === "number") {
         // This is always RGB - can be converted later on.
-        this.model = 'rgb';
+        this.model = "rgb";
         this.color = [
             object >> 16 & 0xFF,
             object >> 8 & 0xFF,
@@ -3238,12 +3100,12 @@ function Color(object, model2) {
     } else {
         this.valpha = 1;
         const keys = Object.keys(object);
-        if ('alpha' in object) {
-            keys.splice(keys.indexOf('alpha'), 1);
-            this.valpha = typeof object.alpha === 'number' ? object.alpha : 0;
+        if ("alpha" in object) {
+            keys.splice(keys.indexOf("alpha"), 1);
+            this.valpha = typeof object.alpha === "number" ? object.alpha : 0;
         }
-        const hashedKeys = keys.sort().join('');
-        if (!(hashedKeys in hashedModelKeys)) throw new Error('Unable to parse color from object: ' + JSON.stringify(object));
+        const hashedKeys = keys.sort().join("");
+        if (!(hashedKeys in hashedModelKeys)) throw new Error("Unable to parse color from object: " + JSON.stringify(object));
         this.model = hashedModelKeys[hashedKeys];
         const { labels  } = convert[this.model];
         const color = [];
@@ -3270,7 +3132,7 @@ Color.prototype = {
     },
     string (places) {
         let self = this.model in colorString.to ? this : this.rgb();
-        self = self.round(typeof places === 'number' ? places : 1);
+        self = self.round(typeof places === "number" ? places : 1);
         const args = self.valpha === 1 ? self.color : [
             ...self.color,
             this.valpha
@@ -3278,7 +3140,7 @@ Color.prototype = {
         return colorString.to[self.model](args);
     },
     percentString (places) {
-        const self = this.rgb().round(typeof places === 'number' ? places : 1);
+        const self = this.rgb().round(typeof places === "number" ? places : 1);
         const args = self.valpha === 1 ? self.color : [
             ...self.color,
             this.valpha
@@ -3332,35 +3194,34 @@ Color.prototype = {
         return this.valpha;
     },
     // Rgb
-    red: getset('rgb', 0, maxfn(255)),
-    green: getset('rgb', 1, maxfn(255)),
-    blue: getset('rgb', 2, maxfn(255)),
+    red: getset("rgb", 0, maxfn(255)),
+    green: getset("rgb", 1, maxfn(255)),
+    blue: getset("rgb", 2, maxfn(255)),
     hue: getset([
-        'hsl',
-        'hsv',
-        'hsl',
-        'hwb',
-        'hcg'
-    ], 0, (value)=>(value % 360 + 360) % 360
-    ),
-    saturationl: getset('hsl', 1, maxfn(100)),
-    lightness: getset('hsl', 2, maxfn(100)),
-    saturationv: getset('hsv', 1, maxfn(100)),
-    value: getset('hsv', 2, maxfn(100)),
-    chroma: getset('hcg', 1, maxfn(100)),
-    gray: getset('hcg', 2, maxfn(100)),
-    white: getset('hwb', 1, maxfn(100)),
-    wblack: getset('hwb', 2, maxfn(100)),
-    cyan: getset('cmyk', 0, maxfn(100)),
-    magenta: getset('cmyk', 1, maxfn(100)),
-    yellow: getset('cmyk', 2, maxfn(100)),
-    black: getset('cmyk', 3, maxfn(100)),
-    x: getset('xyz', 0, maxfn(95.047)),
-    y: getset('xyz', 1, maxfn(100)),
-    z: getset('xyz', 2, maxfn(108.833)),
-    l: getset('lab', 0, maxfn(100)),
-    a: getset('lab', 1),
-    b: getset('lab', 2),
+        "hsl",
+        "hsv",
+        "hsl",
+        "hwb",
+        "hcg"
+    ], 0, (value)=>(value % 360 + 360) % 360),
+    saturationl: getset("hsl", 1, maxfn(100)),
+    lightness: getset("hsl", 2, maxfn(100)),
+    saturationv: getset("hsv", 1, maxfn(100)),
+    value: getset("hsv", 2, maxfn(100)),
+    chroma: getset("hcg", 1, maxfn(100)),
+    gray: getset("hcg", 2, maxfn(100)),
+    white: getset("hwb", 1, maxfn(100)),
+    wblack: getset("hwb", 2, maxfn(100)),
+    cyan: getset("cmyk", 0, maxfn(100)),
+    magenta: getset("cmyk", 1, maxfn(100)),
+    yellow: getset("cmyk", 2, maxfn(100)),
+    black: getset("cmyk", 3, maxfn(100)),
+    x: getset("xyz", 0, maxfn(95.047)),
+    y: getset("xyz", 1, maxfn(100)),
+    z: getset("xyz", 2, maxfn(108.833)),
+    l: getset("lab", 0, maxfn(100)),
+    a: getset("lab", 1),
+    b: getset("lab", 2),
     keyword (value) {
         if (value !== undefined) return new Color(value);
         return convert[this.model].keyword(this.color);
@@ -3373,7 +3234,7 @@ Color.prototype = {
         if (value !== undefined) return new Color(value);
         const rgbArray = this.rgb().round().color;
         let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
-        if (alphaHex.length === 1) alphaHex = '0' + alphaHex;
+        if (alphaHex.length === 1) alphaHex = "0" + alphaHex;
         return colorString.to.hex(rgbArray) + alphaHex;
     },
     rgbNumber () {
@@ -3400,8 +3261,8 @@ Color.prototype = {
     level (color2) {
         // https://www.w3.org/TR/WCAG/#contrast-enhanced
         const contrastRatio = this.contrast(color2);
-        if (contrastRatio >= 7) return 'AAA';
-        return contrastRatio >= 4.5 ? 'AA' : '';
+        if (contrastRatio >= 7) return "AAA";
+        return contrastRatio >= 4.5 ? "AA" : "";
     },
     isDark () {
         // YIQ equation from http://24ways.org/2010/calculating-color-contrast
@@ -3497,7 +3358,7 @@ for (const model1 of Object.keys(convert)){
     // 'static' construction methods
     Color[model1] = function(...args) {
         let color = args[0];
-        if (typeof color === 'number') color = zeroArray(args, channels);
+        if (typeof color === "number") color = zeroArray(args, channels);
         return new Color(color, model1);
     };
 }
@@ -3509,21 +3370,21 @@ function roundToPlace(places) {
         return roundTo(number, places);
     };
 }
-function getset(model3, channel, modifier) {
-    model3 = Array.isArray(model3) ? model3 : [
-        model3
+function getset(model, channel, modifier) {
+    model = Array.isArray(model) ? model : [
+        model
     ];
-    for (const m of model3)(limiters[m] || (limiters[m] = []))[channel] = modifier;
-    model3 = model3[0];
+    for (const m of model)(limiters[m] || (limiters[m] = []))[channel] = modifier;
+    model = model[0];
     return function(value) {
         let result;
         if (value !== undefined) {
             if (modifier) value = modifier(value);
-            result = this[model3]();
+            result = this[model]();
             result.color[channel] = value;
             return result;
         }
-        result = this[model3]().color[channel];
+        result = this[model]().color[channel];
         if (modifier) result = modifier(result);
         return result;
     };
@@ -3539,14 +3400,14 @@ function assertArray(value) {
     ];
 }
 function zeroArray(array, length) {
-    for(let i = 0; i < length; i++)if (typeof array[i] !== 'number') array[i] = 0;
+    for(let i = 0; i < length; i++)if (typeof array[i] !== "number") array[i] = 0;
     return array;
 }
 module.exports = Color;
 
 },{"color-string":"d9oJb","color-convert":"6uFtr"}],"d9oJb":[function(require,module,exports) {
-/* MIT license */ var colorNames = require('color-name');
-var swizzle = require('simple-swizzle');
+/* MIT license */ var colorNames = require("color-name");
+var swizzle = require("simple-swizzle");
 var hasOwnProperty = Object.hasOwnProperty;
 var reverseNames = Object.create(null);
 // create a list of reverse color names
@@ -3560,17 +3421,17 @@ cs.get = function(string) {
     var val;
     var model;
     switch(prefix){
-        case 'hsl':
+        case "hsl":
             val = cs.get.hsl(string);
-            model = 'hsl';
+            model = "hsl";
             break;
-        case 'hwb':
+        case "hwb":
             val = cs.get.hwb(string);
-            model = 'hwb';
+            model = "hwb";
             break;
         default:
             val = cs.get.rgb(string);
-            model = 'rgb';
+            model = "rgb";
             break;
     }
     if (!val) return null;
@@ -3622,7 +3483,7 @@ cs.get.rgb = function(string) {
             else rgb[3] = parseFloat(match[4]);
         }
     } else if (match = string.match(keyword)) {
-        if (match[1] === 'transparent') return [
+        if (match[1] === "transparent") return [
             0,
             0,
             0,
@@ -3677,30 +3538,30 @@ cs.get.hwb = function(string) {
 };
 cs.to.hex = function() {
     var rgba = swizzle(arguments);
-    return '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : '');
+    return "#" + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : "");
 };
 cs.to.rgb = function() {
     var rgba = swizzle(arguments);
-    return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')' : 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ")" : "rgba(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ", " + rgba[3] + ")";
 };
 cs.to.rgb.percent = function() {
     var rgba = swizzle(arguments);
     var r = Math.round(rgba[0] / 255 * 100);
     var g = Math.round(rgba[1] / 255 * 100);
     var b = Math.round(rgba[2] / 255 * 100);
-    return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)' : 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + r + "%, " + g + "%, " + b + "%)" : "rgba(" + r + "%, " + g + "%, " + b + "%, " + rgba[3] + ")";
 };
 cs.to.hsl = function() {
     var hsla = swizzle(arguments);
-    return hsla.length < 4 || hsla[3] === 1 ? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)' : 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
+    return hsla.length < 4 || hsla[3] === 1 ? "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)" : "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, " + hsla[3] + ")";
 };
 // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
 // (hwb have alpha optional & 1 is default value)
 cs.to.hwb = function() {
     var hwba = swizzle(arguments);
-    var a = '';
-    if (hwba.length >= 4 && hwba[3] !== 1) a = ', ' + hwba[3];
-    return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
+    var a = "";
+    if (hwba.length >= 4 && hwba[3] !== 1) a = ", " + hwba[3];
+    return "hwb(" + hwba[0] + ", " + hwba[1] + "%, " + hwba[2] + "%" + a + ")";
 };
 cs.to.keyword = function(rgb) {
     return reverseNames[rgb.slice(0, 3)];
@@ -3711,11 +3572,11 @@ function clamp(num, min, max) {
 }
 function hexDouble(num) {
     var str = Math.round(num).toString(16).toUpperCase();
-    return str.length < 2 ? '0' + str : str;
+    return str.length < 2 ? "0" + str : str;
 }
 
 },{"color-name":"8NNt4","simple-swizzle":"1jxJ4"}],"8NNt4":[function(require,module,exports) {
-'use strict';
+"use strict";
 module.exports = {
     "aliceblue": [
         240,
@@ -4460,8 +4321,8 @@ module.exports = {
 };
 
 },{}],"1jxJ4":[function(require,module,exports) {
-'use strict';
-var isArrayish = require('is-arrayish');
+"use strict";
+var isArrayish = require("is-arrayish");
 var concat = Array.prototype.concat;
 var slice = Array.prototype.slice;
 var swizzle = module.exports = function swizzle(args) {
@@ -4482,13 +4343,13 @@ swizzle.wrap = function(fn) {
 
 },{"is-arrayish":"ll30o"}],"ll30o":[function(require,module,exports) {
 module.exports = function isArrayish(obj) {
-    if (!obj || typeof obj === 'string') return false;
-    return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== 'String');
+    if (!obj || typeof obj === "string") return false;
+    return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== "String");
 };
 
 },{}],"6uFtr":[function(require,module,exports) {
-const conversions = require('./conversions');
-const route = require('./route');
+const conversions = require("./conversions");
+const route = require("./route");
 const convert = {};
 const models = Object.keys(conversions);
 function wrapRaw(fn) {
@@ -4499,7 +4360,7 @@ function wrapRaw(fn) {
         return fn(args);
     };
     // Preserve .conversion property if there is one
-    if ('conversion' in fn) wrappedFn.conversion = fn.conversion;
+    if ("conversion" in fn) wrappedFn.conversion = fn.conversion;
     return wrappedFn;
 }
 function wrapRounded(fn) {
@@ -4511,19 +4372,19 @@ function wrapRounded(fn) {
         // We're assuming the result is an array here.
         // see notice in conversions.js; don't use box types
         // in conversion functions.
-        if (typeof result === 'object') for(let len = result.length, i = 0; i < len; i++)result[i] = Math.round(result[i]);
+        if (typeof result === "object") for(let len = result.length, i = 0; i < len; i++)result[i] = Math.round(result[i]);
         return result;
     };
     // Preserve .conversion property if there is one
-    if ('conversion' in fn) wrappedFn.conversion = fn.conversion;
+    if ("conversion" in fn) wrappedFn.conversion = fn.conversion;
     return wrappedFn;
 }
 models.forEach((fromModel)=>{
     convert[fromModel] = {};
-    Object.defineProperty(convert[fromModel], 'channels', {
+    Object.defineProperty(convert[fromModel], "channels", {
         value: conversions[fromModel].channels
     });
-    Object.defineProperty(convert[fromModel], 'labels', {
+    Object.defineProperty(convert[fromModel], "labels", {
         value: conversions[fromModel].labels
     });
     const routes = route(fromModel);
@@ -4537,7 +4398,7 @@ models.forEach((fromModel)=>{
 module.exports = convert;
 
 },{"./conversions":"lE0pm","./route":"fuMRz"}],"lE0pm":[function(require,module,exports) {
-/* MIT license */ /* eslint-disable no-mixed-operators */ const cssKeywords = require('color-name');
+/* MIT license */ /* eslint-disable no-mixed-operators */ const cssKeywords = require("color-name");
 // NOTE: conversions should only return primitive values (i.e. arrays, or
 //       values that give correct `typeof` results).
 //       do not use box values types (i.e. Number(), String(), etc.)
@@ -4546,96 +4407,96 @@ for (const key of Object.keys(cssKeywords))reverseKeywords[cssKeywords[key]] = k
 const convert = {
     rgb: {
         channels: 3,
-        labels: 'rgb'
+        labels: "rgb"
     },
     hsl: {
         channels: 3,
-        labels: 'hsl'
+        labels: "hsl"
     },
     hsv: {
         channels: 3,
-        labels: 'hsv'
+        labels: "hsv"
     },
     hwb: {
         channels: 3,
-        labels: 'hwb'
+        labels: "hwb"
     },
     cmyk: {
         channels: 4,
-        labels: 'cmyk'
+        labels: "cmyk"
     },
     xyz: {
         channels: 3,
-        labels: 'xyz'
+        labels: "xyz"
     },
     lab: {
         channels: 3,
-        labels: 'lab'
+        labels: "lab"
     },
     lch: {
         channels: 3,
-        labels: 'lch'
+        labels: "lch"
     },
     hex: {
         channels: 1,
         labels: [
-            'hex'
+            "hex"
         ]
     },
     keyword: {
         channels: 1,
         labels: [
-            'keyword'
+            "keyword"
         ]
     },
     ansi16: {
         channels: 1,
         labels: [
-            'ansi16'
+            "ansi16"
         ]
     },
     ansi256: {
         channels: 1,
         labels: [
-            'ansi256'
+            "ansi256"
         ]
     },
     hcg: {
         channels: 3,
         labels: [
-            'h',
-            'c',
-            'g'
+            "h",
+            "c",
+            "g"
         ]
     },
     apple: {
         channels: 3,
         labels: [
-            'r16',
-            'g16',
-            'b16'
+            "r16",
+            "g16",
+            "b16"
         ]
     },
     gray: {
         channels: 1,
         labels: [
-            'gray'
+            "gray"
         ]
     }
 };
 module.exports = convert;
 // Hide .channels and .labels properties
 for (const model of Object.keys(convert)){
-    if (!('channels' in convert[model])) throw new Error('missing channels property: ' + model);
-    if (!('labels' in convert[model])) throw new Error('missing channel labels property: ' + model);
-    if (convert[model].labels.length !== convert[model].channels) throw new Error('channel and label counts mismatch: ' + model);
+    if (!("channels" in convert[model])) throw new Error("missing channels property: " + model);
+    if (!("labels" in convert[model])) throw new Error("missing channel labels property: " + model);
+    if (convert[model].labels.length !== convert[model].channels) throw new Error("channel and label counts mismatch: " + model);
     const { channels , labels  } = convert[model];
     delete convert[model].channels;
     delete convert[model].labels;
-    Object.defineProperty(convert[model], 'channels', {
+    Object.defineProperty(convert[model], "channels", {
         value: channels
     });
-    Object.defineProperty(convert[model], 'labels', {
+    Object.defineProperty(convert[model], "labels", {
         value: labels
     });
 }
@@ -5151,7 +5012,7 @@ convert.ansi256.rgb = function(args) {
 convert.rgb.hex = function(args) {
     const integer = ((Math.round(args[0]) & 0xFF) << 16) + ((Math.round(args[1]) & 0xFF) << 8) + (Math.round(args[2]) & 0xFF);
     const string = integer.toString(16).toUpperCase();
-    return '000000'.substring(string.length) + string;
+    return "000000".substring(string.length) + string;
 };
 convert.hex.rgb = function(args) {
     const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
@@ -5161,9 +5022,9 @@ convert.hex.rgb = function(args) {
         0
     ];
     let colorString = match[0];
-    if (match[0].length === 3) colorString = colorString.split('').map((char)=>{
+    if (match[0].length === 3) colorString = colorString.split("").map((char)=>{
         return char + char;
-    }).join('');
+    }).join("");
     const integer = parseInt(colorString, 16);
     const r = integer >> 16 & 0xFF;
     const g = integer >> 8 & 0xFF;
@@ -5380,7 +5241,7 @@ convert.gray.hex = function(gray) {
     const val = Math.round(gray[0] / 100 * 255) & 0xFF;
     const integer = (val << 16) + (val << 8) + val;
     const string = integer.toString(16).toUpperCase();
-    return '000000'.substring(string.length) + string;
+    return "000000".substring(string.length) + string;
 };
 convert.rgb.gray = function(rgb) {
     const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
@@ -5390,7 +5251,7 @@ convert.rgb.gray = function(rgb) {
 };
 
 },{"color-name":"e6EtS"}],"e6EtS":[function(require,module,exports) {
-'use strict';
+"use strict";
 module.exports = {
     "aliceblue": [
         240,
@@ -6135,7 +5996,7 @@ module.exports = {
 };
 
 },{}],"fuMRz":[function(require,module,exports) {
-const conversions = require('./conversions');
+const conversions = require("./conversions");
 /*
 	This function routes a model to all other models.
 
@@ -6215,15 +6076,14 @@ module.exports = function(fromModel) {
 },{"./conversions":"lE0pm"}],"cvHRb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "bgColorInt", ()=>bgColorInt
-);
+parcelHelpers.export(exports, "bgColorInt", ()=>bgColorInt);
 var _bgColor = require("./bg-color");
-const Color = require('color');
-const bgColorInt = ({ color ='blue' , hoverColor =null , activeColor =null  })=>{
+const Color = require("color");
+const bgColorInt = ({ color ="blue" , hoverColor =null , activeColor =null  })=>{
     if (!hoverColor) hoverColor = Color(color).lighten(0.2).saturate(0.2);
     if (!activeColor) activeColor = Color(color).darken(0.2).desaturate(0.2);
     return `
-    ${_bgColor.bgColor(color)}
+    ${(0, _bgColor.bgColor)(color)}
     &:hover {
         background-color: ${hoverColor};
     }
@@ -6236,8 +6096,7 @@ const bgColorInt = ({ color ='blue' , hoverColor =null , activeColor =null  })=>
 },{"./bg-color":"dTLl0","color":"gW2oi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gzrsH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "fontFluid", ()=>fontFluid
-);
+parcelHelpers.export(exports, "fontFluid", ()=>fontFluid);
 const fontFluid = ({ vwMin =300 , vwMax =1200 , fontSizeMin =16 , fontSizeMax =18  } = {})=>{
     let viewportRatio = `(100vw - ${vwMin}px) / (${vwMax} - ${vwMin})`;
     let fontScaleRatio = `(${fontSizeMax} - ${fontSizeMin}) * ${viewportRatio}`;
@@ -6257,9 +6116,8 @@ const fontFluid = ({ vwMin =300 , vwMax =1200 , fontSizeMin =16 , fontSizeMax =1
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ipD0B":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "lift", ()=>lift
-);
-const lift = ({ level =3 , shadowColor ='rgb(0, 0, 0, 50%)'  })=>{
+parcelHelpers.export(exports, "lift", ()=>lift);
+const lift = ({ level =3 , shadowColor ="rgb(0, 0, 0, 50%)"  })=>{
     if (level < 0 || level > 5) level = 0;
     const boxShadow = [
         `0 0 0 0 ${shadowColor}`,
@@ -6272,6 +6130,6 @@ const lift = ({ level =3 , shadowColor ='rgb(0, 0, 0, 50%)'  })=>{
     return `box-shadow: ${boxShadow[level]};`.trim();
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["bFRfe","7b7hZ"], "7b7hZ", "parcelRequirefd77")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["9i6dn","7b7hZ"], "7b7hZ", "parcelRequirefd77")
 
 //# sourceMappingURL=switch.js.map

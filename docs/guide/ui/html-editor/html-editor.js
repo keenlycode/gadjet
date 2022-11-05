@@ -142,88 +142,15 @@
       this[globalName] = mainExports;
     }
   }
-})({"5z2ih":[function(require,module,exports) {
+})({"fjlUi":[function(require,module,exports) {
 "use strict";
+var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 module.bundle.HMR_BUNDLE_ID = "1ed26b518e775c08";
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-    if (!it) {
-        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-            if (it) o = it;
-            var i = 0;
-            var F = function F() {};
-            return {
-                s: F,
-                n: function n() {
-                    if (i >= o.length) return {
-                        done: true
-                    };
-                    return {
-                        done: false,
-                        value: o[i++]
-                    };
-                },
-                e: function e(_e) {
-                    throw _e;
-                },
-                f: F
-            };
-        }
-        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    var normalCompletion = true, didErr = false, err;
-    return {
-        s: function s() {
-            it = it.call(o);
-        },
-        n: function n() {
-            var step = it.next();
-            normalCompletion = step.done;
-            return step;
-        },
-        e: function e(_e2) {
-            didErr = true;
-            err = _e2;
-        },
-        f: function f() {
-            try {
-                if (!normalCompletion && it.return != null) it.return();
-            } finally{
-                if (didErr) throw err;
-            }
-        }
-    };
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser */ /*::
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -253,6 +180,8 @@ interface ParcelModule {
 interface ExtensionContext {
   runtime: {|
     reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
   |};
 }
 declare var module: {bundle: ParcelRequire, ...};
@@ -262,7 +191,11 @@ declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
 declare var chrome: ExtensionContext;
 declare var browser: ExtensionContext;
-*/ var OVERLAY_ID = '__parcel__error__overlay__';
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
@@ -270,10 +203,10 @@ function Module(moduleName) {
         data: module.bundle.hotData,
         _acceptCallbacks: [],
         _disposeCallbacks: [],
-        accept: function accept(fn) {
+        accept: function(fn) {
             this._acceptCallbacks.push(fn || function() {});
         },
-        dispose: function dispose(fn) {
+        dispose: function(fn) {
             this._disposeCallbacks.push(fn);
         }
     };
@@ -282,62 +215,54 @@ function Module(moduleName) {
 module.bundle.Module = Module;
 var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
 }
 function getPort() {
     return HMR_PORT || location.port;
 } // eslint-disable-next-line no-redeclare
 var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
-    var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
-    ws.onmessage = function(event) {
+    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
+    var ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/"); // Web extension context
+    var extCtx = typeof chrome === "undefined" ? typeof browser === "undefined" ? null : browser : chrome; // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    } // $FlowFixMe
+    ws.onmessage = async function(event) {
         checkedAssets = {} /*: {|[string]: boolean|} */ ;
         acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
-        if (data.type === 'update') {
+        if (data.type === "update") {
             // Remove error overlay if there is one
-            if (typeof document !== 'undefined') removeErrorOverlay();
-            var assets = data.assets.filter(function(asset) {
-                return asset.envHash === HMR_ENV_HASH;
-            }); // Handle HMR Update
-            var handled = assets.every(function(asset) {
-                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH); // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
             });
             if (handled) {
-                console.clear();
-                assets.forEach(function(asset) {
-                    hmrApply(module.bundle.root, asset);
-                });
+                console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
                 for(var i = 0; i < assetsToAccept.length; i++){
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else if ('reload' in location) location.reload();
-            else {
-                // Web extension context
-                var ext = typeof chrome === 'undefined' ? typeof browser === 'undefined' ? null : browser : chrome;
-                if (ext && ext.runtime && ext.runtime.reload) ext.runtime.reload();
-            }
+            } else fullReload();
         }
-        if (data.type === 'error') {
+        if (data.type === "error") {
             // Log parcel errors to console
-            var _iterator = _createForOfIteratorHelper(data.diagnostics.ansi), _step;
-            try {
-                for(_iterator.s(); !(_step = _iterator.n()).done;){
-                    var ansiDiagnostic = _step.value;
-                    var stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                    console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
-                }
-            } catch (err) {
-                _iterator.e(err);
-            } finally{
-                _iterator.f();
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
             }
-            if (typeof document !== 'undefined') {
+            if (typeof document !== "undefined") {
                 // Render the fancy html overlay
                 removeErrorOverlay();
                 var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
@@ -349,37 +274,46 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         console.error(e.message);
     };
     ws.onclose = function() {
-        console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+        console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
     };
 }
 function removeErrorOverlay() {
     var overlay = document.getElementById(OVERLAY_ID);
     if (overlay) {
         overlay.remove();
-        console.log('[parcel] ✨ Error resolved');
+        console.log("[parcel] ✨ Error resolved");
     }
 }
 function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement('div');
+    var overlay = document.createElement("div");
     overlay.id = OVERLAY_ID;
-    var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    var _iterator2 = _createForOfIteratorHelper(diagnostics), _step2;
-    try {
-        for(_iterator2.s(); !(_step2 = _iterator2.n()).done;){
-            var diagnostic = _step2.value;
-            var stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
-            errorHTML += "\n      <div>\n        <div style=\"font-size: 18px; font-weight: bold; margin-top: 20px;\">\n          \uD83D\uDEA8 ".concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
-                return '<div>💡 ' + hint + '</div>';
-            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? "<div>\uD83D\uDCDD <a style=\"color: violet\" href=\"".concat(diagnostic.documentation, "\" target=\"_blank\">Learn more</a></div>") : '', "\n      </div>\n    ");
-        }
-    } catch (err) {
-        _iterator2.e(err);
-    } finally{
-        _iterator2.f();
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          🚨 ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>📝 <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
     }
-    errorHTML += '</div>';
+    errorHTML += "</div>";
     overlay.innerHTML = errorHTML;
     return overlay;
+}
+function fullReload() {
+    if ("reload" in location) location.reload();
+    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
 }
 function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
     var modules = bundle.modules;
@@ -402,7 +336,7 @@ function updateLink(link) {
         if (link.parentNode !== null) // $FlowFixMe
         link.parentNode.removeChild(link);
     };
-    newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now()); // $FlowFixMe
+    newLink.setAttribute("href", link.getAttribute("href").split("?")[0] + "?" + Date.now()); // $FlowFixMe
     link.parentNode.insertBefore(newLink, link.nextSibling);
 }
 var cssTimeout = null;
@@ -412,33 +346,105 @@ function reloadCSS() {
         var links = document.querySelectorAll('link[rel="stylesheet"]');
         for(var i = 0; i < links.length; i++){
             // $FlowFixMe[incompatible-type]
-            var href = links[i].getAttribute('href');
+            var href = links[i].getAttribute("href");
             var hostname = getHostname();
-            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
             var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
     }, 50);
 }
+function hmrDownload(asset) {
+    if (asset.type === "js") {
+        if (typeof document !== "undefined") {
+            let script = document.createElement("script");
+            script.src = asset.url + "?t=" + Date.now();
+            if (asset.outputFormat === "esmodule") script.type = "module";
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === "function") {
+            // Worker scripts
+            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + "?t=" + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension bugfix for Chromium
+                    // https://bugs.chromium.org/p/chromium/issues/detail?id=1255412#c12
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3) {
+                        if (typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                            extCtx.runtime.reload();
+                            return;
+                        }
+                        asset.url = extCtx.runtime.getURL("/__parcel_hmr_proxy__?url=" + encodeURIComponent(asset.url + "?t=" + Date.now()));
+                        return hmrDownload(asset);
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
 function hmrApply(bundle, asset) {
     var modules = bundle.modules;
     if (!modules) return;
-    if (asset.type === 'css') reloadCSS();
-    else if (asset.type === 'js') {
-        var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
         if (deps) {
             if (modules[asset.id]) {
                 // Remove dependencies that are removed and will become orphaned.
                 // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                var oldDeps = modules[asset.id][1];
-                for(var dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    var id = oldDeps[dep];
-                    var parents = getParents(module.bundle.root, id);
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
                     if (parents.length === 1) hmrDelete(module.bundle.root, id);
                 }
             }
-            var fn = new Function('require', 'module', 'exports', asset.output);
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+             // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
             modules[asset.id] = [
                 fn,
                 deps
@@ -446,43 +452,43 @@ function hmrApply(bundle, asset) {
         } else if (bundle.parent) hmrApply(bundle.parent, asset);
     }
 }
-function hmrDelete(bundle, id1) {
-    var modules = bundle.modules;
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
     if (!modules) return;
-    if (modules[id1]) {
+    if (modules[id]) {
         // Collect dependencies that will become orphaned when this module is deleted.
-        var deps = modules[id1][1];
-        var orphans = [];
-        for(var dep in deps){
-            var parents = getParents(module.bundle.root, deps[dep]);
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
             if (parents.length === 1) orphans.push(deps[dep]);
         } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
-        delete modules[id1];
-        delete bundle.cache[id1]; // Now delete the orphans.
-        orphans.forEach(function(id) {
+        delete modules[id];
+        delete bundle.cache[id]; // Now delete the orphans.
+        orphans.forEach((id)=>{
             hmrDelete(module.bundle.root, id);
         });
-    } else if (bundle.parent) hmrDelete(bundle.parent, id1);
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
 }
 function hmrAcceptCheck(bundle, id, depsByBundle) {
     if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
      // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    var parents = getParents(module.bundle.root, id);
-    var accepted = false;
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
     while(parents.length > 0){
-        var v = parents.shift();
-        var a = hmrAcceptCheckOne(v[0], v[1], null);
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
         if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
         accepted = true;
         else {
             // Otherwise, queue the parents in the next level upward.
-            var p = getParents(module.bundle.root, v[1]);
+            let p = getParents(module.bundle.root, v[1]);
             if (p.length === 0) {
                 // If there are no parents, then we've reached an entry without accepting. Reload.
                 accepted = false;
                 break;
             }
-            parents.push.apply(parents, _toConsumableArray(p));
+            parents.push(...p);
         }
     }
     return accepted;
@@ -528,17 +534,14 @@ function hmrAcceptRun(bundle, id) {
 },{}],"e43Bm":[function(require,module,exports) {
 var _ui = require("gadjet/src/ui/ui");
 var _htmlEditor = require("gadjet/src/ui/html-editor/html-editor");
-_ui.define('el-html-editor', _htmlEditor.HTMLEditor);
+(0, _ui.define)("el-html-editor", (0, _htmlEditor.HTMLEditor));
 
 },{"gadjet/src/ui/ui":"jSLlu","gadjet/src/ui/html-editor/html-editor":"hEgLK"}],"jSLlu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "define", ()=>define
-);
-parcelHelpers.export(exports, "StyleClass", ()=>StyleClass
-);
-parcelHelpers.export(exports, "StyledElement", ()=>StyledElement
-);
+parcelHelpers.export(exports, "define", ()=>define);
+parcelHelpers.export(exports, "StyleClass", ()=>StyleClass);
+parcelHelpers.export(exports, "StyledElement", ()=>StyledElement);
 var _css = require("@emotion/css");
 const define = (tagName, Class = StyledElement)=>{
     // Order of this function belows are very crucial.
@@ -549,10 +552,10 @@ const define = (tagName, Class = StyledElement)=>{
 };
 class StyleClass {
     static css(style = {}) {
-        return '';
+        return "";
     }
     static style(style = {}) {
-        return '';
+        return "";
     }
 }
 class StyledElement extends HTMLElement {
@@ -563,33 +566,33 @@ class StyledElement extends HTMLElement {
         customElements.define(tagName, this);
     }
     static initStyle(style) {
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName} {
             ${this.Style.css(style)}
         }`;
     }
     static tagStyle(style) {
         if (typeof style == "string") {
-            _css.injectGlobal`
+            (0, _css.injectGlobal)`
             ${this.tagName} {
                 ${style}
             }`;
             return;
         }
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName} {
             ${this.Style.style(style)}
         }`;
     }
     static classStyle(class_, style) {
         if (typeof style == "string") {
-            _css.injectGlobal`
+            (0, _css.injectGlobal)`
             ${this.tagName}.${class_} {
                 ${style}
             }`;
             return;
         }
-        _css.injectGlobal`
+        (0, _css.injectGlobal)`
         ${this.tagName}.${class_} {
             ${this.Style.style(style)}
         }`;
@@ -600,9 +603,9 @@ class StyledElement extends HTMLElement {
     }
     addStyle(style) {
         let className;
-        if (typeof style == 'string') className = _css.css`${style}`;
-        else if (style instanceof Object) className = _css.css`${this._class.Style.style(style)}`;
-        className = _css.cx(...this.classList, className);
+        if (typeof style == "string") className = (0, _css.css)`${style}`;
+        else if (style instanceof Object) className = (0, _css.css)`${this._class.Style.style(style)}`;
+        className = (0, _css.cx)(...this.classList, className);
         this.className = className;
     }
 }
@@ -610,33 +613,23 @@ class StyledElement extends HTMLElement {
 },{"@emotion/css":"gyRZs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gyRZs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "cache", ()=>cache
-);
-parcelHelpers.export(exports, "css", ()=>css
-);
-parcelHelpers.export(exports, "cx", ()=>cx
-);
-parcelHelpers.export(exports, "flush", ()=>flush
-);
-parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles
-);
-parcelHelpers.export(exports, "hydrate", ()=>hydrate
-);
-parcelHelpers.export(exports, "injectGlobal", ()=>injectGlobal
-);
-parcelHelpers.export(exports, "keyframes", ()=>keyframes
-);
-parcelHelpers.export(exports, "merge", ()=>merge
-);
-parcelHelpers.export(exports, "sheet", ()=>sheet
-);
+parcelHelpers.export(exports, "cache", ()=>cache);
+parcelHelpers.export(exports, "css", ()=>css);
+parcelHelpers.export(exports, "cx", ()=>cx);
+parcelHelpers.export(exports, "flush", ()=>flush);
+parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles);
+parcelHelpers.export(exports, "hydrate", ()=>hydrate);
+parcelHelpers.export(exports, "injectGlobal", ()=>injectGlobal);
+parcelHelpers.export(exports, "keyframes", ()=>keyframes);
+parcelHelpers.export(exports, "merge", ()=>merge);
+parcelHelpers.export(exports, "sheet", ()=>sheet);
 var _cache = require("@emotion/cache");
 var _serialize = require("@emotion/serialize");
 var _utils = require("@emotion/utils");
 var _emotionCssCreateInstanceEsmJs = require("../create-instance/dist/emotion-css-create-instance.esm.js");
 var _emotionCssCreateInstanceEsmJsDefault = parcelHelpers.interopDefault(_emotionCssCreateInstanceEsmJs);
-var _createEmotion = _emotionCssCreateInstanceEsmJsDefault.default({
-    key: 'css'
+var _createEmotion = (0, _emotionCssCreateInstanceEsmJsDefault.default)({
+    key: "css"
 }), flush = _createEmotion.flush, hydrate = _createEmotion.hydrate, cx = _createEmotion.cx, merge = _createEmotion.merge, getRegisteredStyles = _createEmotion.getRegisteredStyles, injectGlobal = _createEmotion.injectGlobal, keyframes = _createEmotion.keyframes, css = _createEmotion.css, sheet = _createEmotion.sheet, cache = _createEmotion.cache;
 
 },{"@emotion/cache":"3Umtj","@emotion/serialize":"kS2E2","@emotion/utils":"6UI8e","../create-instance/dist/emotion-css-create-instance.esm.js":"k89zX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Umtj":[function(require,module,exports) {
@@ -654,55 +647,55 @@ var identifierWithPointTracking = function identifierWithPointTracking(begin, po
     var character = 0;
     while(true){
         previous = character;
-        character = _stylis.peek(); // &\f
+        character = (0, _stylis.peek)(); // &\f
         if (previous === 38 && character === 12) points[index] = 1;
-        if (_stylis.token(character)) break;
-        _stylis.next();
+        if ((0, _stylis.token)(character)) break;
+        (0, _stylis.next)();
     }
-    return _stylis.slice(begin, _stylis.position);
+    return (0, _stylis.slice)(begin, (0, _stylis.position));
 };
 var toRules = function toRules(parsed, points) {
     // pretend we've started with a comma
     var index = -1;
     var character = 44;
-    do switch(_stylis.token(character)){
+    do switch((0, _stylis.token)(character)){
         case 0:
             // &\f
-            if (character === 38 && _stylis.peek() === 12) // this is not 100% correct, we don't account for literal sequences here - like for example quoted strings
+            if (character === 38 && (0, _stylis.peek)() === 12) // this is not 100% correct, we don't account for literal sequences here - like for example quoted strings
             // stylis inserts \f after & to know when & where it should replace this sequence with the context selector
             // and when it should just concatenate the outer and inner selectors
             // it's very unlikely for this sequence to actually appear in a different context, so we just leverage this fact here
             points[index] = 1;
-            parsed[index] += identifierWithPointTracking(_stylis.position - 1, points, index);
+            parsed[index] += identifierWithPointTracking((0, _stylis.position) - 1, points, index);
             break;
         case 2:
-            parsed[index] += _stylis.delimit(character);
+            parsed[index] += (0, _stylis.delimit)(character);
             break;
         case 4:
             // comma
             if (character === 44) {
                 // colon
-                parsed[++index] = _stylis.peek() === 58 ? '&\f' : '';
+                parsed[++index] = (0, _stylis.peek)() === 58 ? "&\f" : "";
                 points[index] = parsed[index].length;
                 break;
             }
         // fallthrough
         default:
-            parsed[index] += _stylis.from(character);
+            parsed[index] += (0, _stylis.from)(character);
     }
-    while (character = _stylis.next())
+    while (character = (0, _stylis.next)());
     return parsed;
 };
 var getRules = function getRules(value, points) {
-    return _stylis.dealloc(toRules(_stylis.alloc(value), points));
+    return (0, _stylis.dealloc)(toRules((0, _stylis.alloc)(value), points));
 }; // WeakSet would be more appropriate, but only WeakMap is supported in IE11
 var fixedElements = /* #__PURE__ */ new WeakMap();
 var compat = function compat(element) {
-    if (element.type !== 'rule' || !element.parent || // negative .length indicates that this rule has been already prefixed
+    if (element.type !== "rule" || !element.parent || // negative .length indicates that this rule has been already prefixed
     element.length < 1) return;
     var value = element.value, parent = element.parent;
     var isImplicitRule = element.column === parent.column && element.line === parent.line;
-    while(parent.type !== 'rule'){
+    while(parent.type !== "rule"){
         parent = parent.parent;
         if (!parent) return;
     } // short-circuit for the simplest case
@@ -717,28 +710,28 @@ var compat = function compat(element) {
     for(var i = 0, k = 0; i < rules.length; i++)for(var j = 0; j < parentRules.length; j++, k++)element.props[k] = points[i] ? rules[i].replace(/&\f/g, parentRules[j]) : parentRules[j] + " " + rules[i];
 };
 var removeLabel = function removeLabel(element) {
-    if (element.type === 'decl') {
+    if (element.type === "decl") {
         var value = element.value;
         if (value.charCodeAt(0) === 108 && value.charCodeAt(2) === 98) {
             // this ignores label
-            element["return"] = '';
-            element.value = '';
+            element["return"] = "";
+            element.value = "";
         }
     }
 };
-var ignoreFlag = 'emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason';
+var ignoreFlag = "emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason";
 var isIgnoringComment = function isIgnoringComment(element) {
-    return !!element && element.type === 'comm' && element.children.indexOf(ignoreFlag) > -1;
+    return !!element && element.type === "comm" && element.children.indexOf(ignoreFlag) > -1;
 };
 var createUnsafeSelectorsAlarm = function createUnsafeSelectorsAlarm(cache) {
     return function(element, index, children) {
-        if (element.type !== 'rule') return;
+        if (element.type !== "rule") return;
         var unsafePseudoClasses = element.value.match(/(:first|:nth|:nth-last)-child/g);
         if (unsafePseudoClasses && cache.compat !== true) {
             var prevElement = index > 0 ? children[index - 1] : null;
             if (prevElement && isIgnoringComment(last(prevElement.children))) return;
             unsafePseudoClasses.forEach(function(unsafePseudoClass) {
-                console.error("The pseudo class \"" + unsafePseudoClass + "\" is potentially unsafe when doing server-side rendering. Try changing it to \"" + unsafePseudoClass.split('-child')[0] + "-of-type\".");
+                console.error('The pseudo class "' + unsafePseudoClass + '" is potentially unsafe when doing server-side rendering. Try changing it to "' + unsafePseudoClass.split("-child")[0] + '-of-type".');
             });
         }
     };
@@ -755,11 +748,11 @@ var isPrependedWithRegularRules = function isPrependedWithRegularRules(index, ch
 // so they don't get handed to the `sheet` (or anything else)
 // as that could potentially lead to additional logs which in turn could be overhelming to the user
 var nullifyElement = function nullifyElement(element) {
-    element.type = '';
-    element.value = '';
-    element["return"] = '';
-    element.children = '';
-    element.props = '';
+    element.type = "";
+    element.value = "";
+    element["return"] = "";
+    element.children = "";
+    element.props = "";
 };
 var incorrectImportAlarm = function incorrectImportAlarm(element, index, children) {
     if (!isImportRule(element)) return;
@@ -772,12 +765,12 @@ var incorrectImportAlarm = function incorrectImportAlarm(element, index, childre
     }
 };
 var defaultStylisPlugins = [
-    _stylis.prefixer
+    (0, _stylis.prefixer)
 ];
 var createCache = function createCache(options) {
     var key = options.key;
     if (!key) throw new Error("You have to configure `key` for your cache. Please make sure it's unique (and not equal to 'css') as it's used for linking styles to your cache.\nIf multiple caches share the same key they might \"fight\" for each other's style elements.");
-    if (key === 'css') {
+    if (key === "css") {
         var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])"); // get SSRed styles out of the way of React's hydration
         // document.head is a safe place to move them to(though note document.head is not necessarily the last place they will be)
         // note this very very intentionally targets all style elements regardless of the key to ensure
@@ -789,22 +782,22 @@ var createCache = function createCache(options) {
             // Emotion 10 client-side inserted styles did not have data-s (but importantly did not have a space in their data-emotion attributes)
             // so checking for the space ensures that loading Emotion 11 after Emotion 10 has inserted some styles
             // will not result in the Emotion 10 styles being destroyed
-            var dataEmotionAttribute = node.getAttribute('data-emotion');
-            if (dataEmotionAttribute.indexOf(' ') === -1) return;
+            var dataEmotionAttribute = node.getAttribute("data-emotion");
+            if (dataEmotionAttribute.indexOf(" ") === -1) return;
             document.head.appendChild(node);
-            node.setAttribute('data-s', '');
+            node.setAttribute("data-s", "");
         });
     }
     var stylisPlugins = options.stylisPlugins || defaultStylisPlugins;
     // $FlowFixMe
-    if (/[^a-z-]/.test(key)) throw new Error("Emotion key must only contain lower case alphabetical characters and - but \"" + key + "\" was passed");
+    if (/[^a-z-]/.test(key)) throw new Error('Emotion key must only contain lower case alphabetical characters and - but "' + key + '" was passed');
     var inserted = {}; // $FlowFixMe
     var container;
     var nodesToHydrate = [];
     container = options.container || document.head;
     Array.prototype.forEach.call(// means that the style elements we're looking at are only Emotion 11 server-rendered style elements
-    document.querySelectorAll("style[data-emotion^=\"" + key + " \"]"), function(node) {
-        var attrib = node.getAttribute("data-emotion").split(' '); // $FlowFixMe
+    document.querySelectorAll('style[data-emotion^="' + key + ' "]'), function(node) {
+        var attrib = node.getAttribute("data-emotion").split(" "); // $FlowFixMe
         for(var i = 1; i < attrib.length; i++)inserted[attrib[i]] = true;
         nodesToHydrate.push(node);
     });
@@ -820,19 +813,19 @@ var createCache = function createCache(options) {
     }), incorrectImportAlarm);
     var currentSheet;
     var finalizingPlugins = [
-        _stylis.stringify,
+        (0, _stylis.stringify),
         function(element) {
             if (!element.root) {
                 if (element["return"]) currentSheet.insert(element["return"]);
-                else if (element.value && element.type !== _stylis.COMMENT) // insert empty rule in non-production environments
+                else if (element.value && element.type !== (0, _stylis.COMMENT)) // insert empty rule in non-production environments
                 // so @emotion/jest can grab `key` from the (JS)DOM for caches without any rules inserted yet
                 currentSheet.insert(element.value + "{}");
             }
         }
     ];
-    var serializer = _stylis.middleware(omnipresentPlugins.concat(stylisPlugins, finalizingPlugins));
+    var serializer = (0, _stylis.middleware)(omnipresentPlugins.concat(stylisPlugins, finalizingPlugins));
     var stylis = function stylis(styles) {
-        return _stylis.serialize(_stylis.compile(styles), serializer);
+        return (0, _stylis.serialize)((0, _stylis.compile)(styles), serializer);
     };
     _insert = function insert(selector, serialized, sheet, shouldCache) {
         currentSheet = sheet;
@@ -846,7 +839,7 @@ var createCache = function createCache(options) {
     };
     var cache = {
         key: key,
-        sheet: new _sheet.StyleSheet({
+        sheet: new (0, _sheet.StyleSheet)({
             key: key,
             container: container,
             nonce: options.nonce,
@@ -867,8 +860,7 @@ exports.default = createCache;
 },{"@emotion/sheet":"1BWeq","stylis":"bMCXt","@emotion/weak-memoize":"iicyL","@emotion/memoize":"WW7h8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1BWeq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "StyleSheet", ()=>StyleSheet
-);
+parcelHelpers.export(exports, "StyleSheet", ()=>StyleSheet);
 /*
 
 Based off glamor's StyleSheet, thanks Sunil ❤️
@@ -901,15 +893,15 @@ function sheetForTag(tag) {
     }
 }
 function createStyleElement(options) {
-    var tag = document.createElement('style');
-    tag.setAttribute('data-emotion', options.key);
-    if (options.nonce !== undefined) tag.setAttribute('nonce', options.nonce);
-    tag.appendChild(document.createTextNode(''));
-    tag.setAttribute('data-s', '');
+    var tag = document.createElement("style");
+    tag.setAttribute("data-emotion", options.key);
+    if (options.nonce !== undefined) tag.setAttribute("nonce", options.nonce);
+    tag.appendChild(document.createTextNode(""));
+    tag.setAttribute("data-s", "");
     return tag;
 }
 var StyleSheet = /*#__PURE__*/ function() {
-    function StyleSheet1(options) {
+    function StyleSheet(options) {
         var _this = this;
         this._insertTag = function(tag) {
             var before;
@@ -931,7 +923,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         this.insertionPoint = options.insertionPoint;
         this.before = null;
     }
-    var _proto = StyleSheet1.prototype;
+    var _proto = StyleSheet.prototype;
     _proto.hydrate = function hydrate(nodes) {
         nodes.forEach(this._insertTag);
     };
@@ -945,7 +937,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         if (isImportRule && this._alreadyInsertedOrderInsensitiveRule) // this would only cause problem in speedy mode
         // but we don't want enabling speedy to affect the observable behavior
         // so we report this error at all times
-        console.error("You're attempting to insert the following rule:\n" + rule + '\n\n`@import` rules must be before all other types of rules in a stylesheet but other rules have already been inserted. Please ensure that `@import` rules are before all other rules.');
+        console.error("You're attempting to insert the following rule:\n" + rule + "\n\n`@import` rules must be before all other types of rules in a stylesheet but other rules have already been inserted. Please ensure that `@import` rules are before all other rules.");
         this._alreadyInsertedOrderInsensitiveRule = this._alreadyInsertedOrderInsensitiveRule || !isImportRule;
         if (this.isSpeedy) {
             var sheet = sheetForTag(tag);
@@ -954,7 +946,7 @@ var StyleSheet = /*#__PURE__*/ function() {
                 // the big drawback is that the css won't be editable in devtools
                 sheet.insertRule(rule, sheet.cssRules.length);
             } catch (e) {
-                if (!/:(-moz-placeholder|-moz-focus-inner|-moz-focusring|-ms-input-placeholder|-moz-read-write|-moz-read-only|-ms-clear){/.test(rule)) console.error("There was a problem inserting the following rule: \"" + rule + "\"", e);
+                if (!/:(-moz-placeholder|-moz-focus-inner|-moz-focusring|-ms-input-placeholder|-moz-read-write|-moz-read-only|-ms-clear){/.test(rule)) console.error('There was a problem inserting the following rule: "' + rule + '"', e);
             }
         } else tag.appendChild(document.createTextNode(rule));
         this.ctr++;
@@ -968,7 +960,7 @@ var StyleSheet = /*#__PURE__*/ function() {
         this.ctr = 0;
         this._alreadyInsertedOrderInsensitiveRule = false;
     };
-    return StyleSheet1;
+    return StyleSheet;
 }();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
@@ -978,13 +970,13 @@ exports.interopDefault = function(a) {
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
+    Object.defineProperty(a, "__esModule", {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -1004,144 +996,75 @@ exports.export = function(dest, destName, get) {
 },{}],"bMCXt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CHARSET", ()=>f
-);
-parcelHelpers.export(exports, "COMMENT", ()=>c
-);
-parcelHelpers.export(exports, "COUNTER_STYLE", ()=>w
-);
-parcelHelpers.export(exports, "DECLARATION", ()=>t
-);
-parcelHelpers.export(exports, "DOCUMENT", ()=>v
-);
-parcelHelpers.export(exports, "FONT_FACE", ()=>b
-);
-parcelHelpers.export(exports, "FONT_FEATURE_VALUES", ()=>$
-);
-parcelHelpers.export(exports, "IMPORT", ()=>i
-);
-parcelHelpers.export(exports, "KEYFRAMES", ()=>p
-);
-parcelHelpers.export(exports, "MEDIA", ()=>u
-);
-parcelHelpers.export(exports, "MOZ", ()=>r
-);
-parcelHelpers.export(exports, "MS", ()=>e
-);
-parcelHelpers.export(exports, "NAMESPACE", ()=>h
-);
-parcelHelpers.export(exports, "PAGE", ()=>s
-);
-parcelHelpers.export(exports, "RULESET", ()=>n
-);
-parcelHelpers.export(exports, "SUPPORTS", ()=>l
-);
-parcelHelpers.export(exports, "VIEWPORT", ()=>o
-);
-parcelHelpers.export(exports, "WEBKIT", ()=>a
-);
-parcelHelpers.export(exports, "abs", ()=>k
-);
-parcelHelpers.export(exports, "alloc", ()=>U
-);
-parcelHelpers.export(exports, "append", ()=>S
-);
-parcelHelpers.export(exports, "assign", ()=>g
-);
-parcelHelpers.export(exports, "caret", ()=>Q
-);
-parcelHelpers.export(exports, "char", ()=>K
-);
-parcelHelpers.export(exports, "character", ()=>G
-);
-parcelHelpers.export(exports, "characters", ()=>H
-);
-parcelHelpers.export(exports, "charat", ()=>z
-);
-parcelHelpers.export(exports, "column", ()=>D
-);
-parcelHelpers.export(exports, "combine", ()=>q
-);
-parcelHelpers.export(exports, "comment", ()=>se
-);
-parcelHelpers.export(exports, "commenter", ()=>re
-);
-parcelHelpers.export(exports, "compile", ()=>ce
-);
-parcelHelpers.export(exports, "copy", ()=>J
-);
-parcelHelpers.export(exports, "dealloc", ()=>V
-);
-parcelHelpers.export(exports, "declaration", ()=>ue
-);
-parcelHelpers.export(exports, "delimit", ()=>W
-);
-parcelHelpers.export(exports, "delimiter", ()=>ee
-);
-parcelHelpers.export(exports, "escaping", ()=>_
-);
-parcelHelpers.export(exports, "from", ()=>d
-);
-parcelHelpers.export(exports, "hash", ()=>m
-);
-parcelHelpers.export(exports, "identifier", ()=>ae
-);
-parcelHelpers.export(exports, "indexof", ()=>C
-);
-parcelHelpers.export(exports, "length", ()=>E
-);
-parcelHelpers.export(exports, "line", ()=>B
-);
-parcelHelpers.export(exports, "match", ()=>y
-);
-parcelHelpers.export(exports, "middleware", ()=>le
-);
-parcelHelpers.export(exports, "namespace", ()=>pe
-);
-parcelHelpers.export(exports, "next", ()=>N
-);
-parcelHelpers.export(exports, "node", ()=>I
-);
-parcelHelpers.export(exports, "parse", ()=>ne
-);
-parcelHelpers.export(exports, "peek", ()=>P
-);
-parcelHelpers.export(exports, "position", ()=>F
-);
-parcelHelpers.export(exports, "prefix", ()=>ie
-);
-parcelHelpers.export(exports, "prefixer", ()=>he
-);
-parcelHelpers.export(exports, "prev", ()=>L
-);
-parcelHelpers.export(exports, "replace", ()=>j
-);
-parcelHelpers.export(exports, "ruleset", ()=>te
-);
-parcelHelpers.export(exports, "rulesheet", ()=>ve
-);
-parcelHelpers.export(exports, "serialize", ()=>fe
-);
-parcelHelpers.export(exports, "sizeof", ()=>M
-);
-parcelHelpers.export(exports, "slice", ()=>R
-);
-parcelHelpers.export(exports, "stringify", ()=>oe
-);
-parcelHelpers.export(exports, "strlen", ()=>O
-);
-parcelHelpers.export(exports, "substr", ()=>A
-);
-parcelHelpers.export(exports, "token", ()=>T
-);
-parcelHelpers.export(exports, "tokenize", ()=>X
-);
-parcelHelpers.export(exports, "tokenizer", ()=>Z
-);
-parcelHelpers.export(exports, "trim", ()=>x
-);
-parcelHelpers.export(exports, "whitespace", ()=>Y
-);
+parcelHelpers.export(exports, "CHARSET", ()=>f);
+parcelHelpers.export(exports, "COMMENT", ()=>c);
+parcelHelpers.export(exports, "COUNTER_STYLE", ()=>w);
+parcelHelpers.export(exports, "DECLARATION", ()=>t);
+parcelHelpers.export(exports, "DOCUMENT", ()=>v);
+parcelHelpers.export(exports, "FONT_FACE", ()=>b);
+parcelHelpers.export(exports, "FONT_FEATURE_VALUES", ()=>$);
+parcelHelpers.export(exports, "IMPORT", ()=>i);
+parcelHelpers.export(exports, "KEYFRAMES", ()=>p);
+parcelHelpers.export(exports, "MEDIA", ()=>u);
+parcelHelpers.export(exports, "MOZ", ()=>r);
+parcelHelpers.export(exports, "MS", ()=>e);
+parcelHelpers.export(exports, "NAMESPACE", ()=>h);
+parcelHelpers.export(exports, "PAGE", ()=>s);
+parcelHelpers.export(exports, "RULESET", ()=>n);
+parcelHelpers.export(exports, "SUPPORTS", ()=>l);
+parcelHelpers.export(exports, "VIEWPORT", ()=>o);
+parcelHelpers.export(exports, "WEBKIT", ()=>a);
+parcelHelpers.export(exports, "abs", ()=>k);
+parcelHelpers.export(exports, "alloc", ()=>U);
+parcelHelpers.export(exports, "append", ()=>S);
+parcelHelpers.export(exports, "assign", ()=>g);
+parcelHelpers.export(exports, "caret", ()=>Q);
+parcelHelpers.export(exports, "char", ()=>K);
+parcelHelpers.export(exports, "character", ()=>G);
+parcelHelpers.export(exports, "characters", ()=>H);
+parcelHelpers.export(exports, "charat", ()=>z);
+parcelHelpers.export(exports, "column", ()=>D);
+parcelHelpers.export(exports, "combine", ()=>q);
+parcelHelpers.export(exports, "comment", ()=>se);
+parcelHelpers.export(exports, "commenter", ()=>re);
+parcelHelpers.export(exports, "compile", ()=>ce);
+parcelHelpers.export(exports, "copy", ()=>J);
+parcelHelpers.export(exports, "dealloc", ()=>V);
+parcelHelpers.export(exports, "declaration", ()=>ue);
+parcelHelpers.export(exports, "delimit", ()=>W);
+parcelHelpers.export(exports, "delimiter", ()=>ee);
+parcelHelpers.export(exports, "escaping", ()=>_);
+parcelHelpers.export(exports, "from", ()=>d);
+parcelHelpers.export(exports, "hash", ()=>m);
+parcelHelpers.export(exports, "identifier", ()=>ae);
+parcelHelpers.export(exports, "indexof", ()=>C);
+parcelHelpers.export(exports, "length", ()=>E);
+parcelHelpers.export(exports, "line", ()=>B);
+parcelHelpers.export(exports, "match", ()=>y);
+parcelHelpers.export(exports, "middleware", ()=>le);
+parcelHelpers.export(exports, "namespace", ()=>pe);
+parcelHelpers.export(exports, "next", ()=>N);
+parcelHelpers.export(exports, "node", ()=>I);
+parcelHelpers.export(exports, "parse", ()=>ne);
+parcelHelpers.export(exports, "peek", ()=>P);
+parcelHelpers.export(exports, "position", ()=>F);
+parcelHelpers.export(exports, "prefix", ()=>ie);
+parcelHelpers.export(exports, "prefixer", ()=>he);
+parcelHelpers.export(exports, "prev", ()=>L);
+parcelHelpers.export(exports, "replace", ()=>j);
+parcelHelpers.export(exports, "ruleset", ()=>te);
+parcelHelpers.export(exports, "rulesheet", ()=>ve);
+parcelHelpers.export(exports, "serialize", ()=>fe);
+parcelHelpers.export(exports, "sizeof", ()=>M);
+parcelHelpers.export(exports, "slice", ()=>R);
+parcelHelpers.export(exports, "stringify", ()=>oe);
+parcelHelpers.export(exports, "strlen", ()=>O);
+parcelHelpers.export(exports, "substr", ()=>A);
+parcelHelpers.export(exports, "token", ()=>T);
+parcelHelpers.export(exports, "tokenize", ()=>X);
+parcelHelpers.export(exports, "tokenizer", ()=>Z);
+parcelHelpers.export(exports, "trim", ()=>x);
+parcelHelpers.export(exports, "whitespace", ()=>Y);
 var e = "-ms-";
 var r = "-moz-";
 var a = "-webkit-";
@@ -1163,38 +1086,38 @@ var $ = "@font-feature-values";
 var k = Math.abs;
 var d = String.fromCharCode;
 var g = Object.assign;
-function m(e1, r1) {
-    return (((r1 << 2 ^ z(e1, 0)) << 2 ^ z(e1, 1)) << 2 ^ z(e1, 2)) << 2 ^ z(e1, 3);
+function m(e, r) {
+    return (((r << 2 ^ z(e, 0)) << 2 ^ z(e, 1)) << 2 ^ z(e, 2)) << 2 ^ z(e, 3);
 }
-function x(e2) {
-    return e2.trim();
+function x(e) {
+    return e.trim();
 }
-function y(e3, r2) {
-    return (e3 = r2.exec(e3)) ? e3[0] : e3;
+function y(e, r) {
+    return (e = r.exec(e)) ? e[0] : e;
 }
-function j(e4, r3, a1) {
-    return e4.replace(r3, a1);
+function j(e, r, a) {
+    return e.replace(r, a);
 }
-function C(e5, r4) {
-    return e5.indexOf(r4);
+function C(e, r) {
+    return e.indexOf(r);
 }
-function z(e6, r5) {
-    return e6.charCodeAt(r5) | 0;
+function z(e, r) {
+    return e.charCodeAt(r) | 0;
 }
-function A(e7, r6, a2) {
-    return e7.slice(r6, a2);
+function A(e, r, a) {
+    return e.slice(r, a);
 }
-function O(e8) {
-    return e8.length;
+function O(e) {
+    return e.length;
 }
-function M(e9) {
-    return e9.length;
+function M(e) {
+    return e.length;
 }
-function S(e10, r7) {
-    return r7.push(e10), e10;
+function S(e, r) {
+    return r.push(e), e;
 }
-function q(e11, r8) {
-    return e11.map(r8).join("");
+function q(e, r) {
+    return e.map(r).join("");
 }
 var B = 1;
 var D = 1;
@@ -1202,24 +1125,24 @@ var E = 0;
 var F = 0;
 var G = 0;
 var H = "";
-function I(e12, r9, a3, c1, n1, t1, s1) {
+function I(e, r, a, c, n, t, s) {
     return {
-        value: e12,
-        root: r9,
-        parent: a3,
-        type: c1,
-        props: n1,
-        children: t1,
+        value: e,
+        root: r,
+        parent: a,
+        type: c,
+        props: n,
+        children: t,
         line: B,
         column: D,
-        length: s1,
+        length: s,
         return: ""
     };
 }
-function J(e13, r10) {
-    return g(I("", null, null, "", null, null, 0), e13, {
-        length: -e13.length
-    }, r10);
+function J(e, r) {
+    return g(I("", null, null, "", null, null, 0), e, {
+        length: -e.length
+    }, r);
 }
 function K() {
     return G;
@@ -1240,11 +1163,11 @@ function P() {
 function Q() {
     return F;
 }
-function R(e14, r11) {
-    return A(H, e14, r11);
+function R(e, r) {
+    return A(H, e, r);
 }
-function T(e15) {
-    switch(e15){
+function T(e) {
+    switch(e){
         case 0:
         case 9:
         case 10:
@@ -1275,50 +1198,50 @@ function T(e15) {
     }
     return 0;
 }
-function U(e16) {
-    return B = D = 1, E = O(H = e16), F = 0, [];
+function U(e) {
+    return B = D = 1, E = O(H = e), F = 0, [];
 }
-function V(e17) {
-    return H = "", e17;
+function V(e) {
+    return H = "", e;
 }
-function W(e18) {
-    return x(R(F - 1, ee(e18 === 91 ? e18 + 2 : e18 === 40 ? e18 + 1 : e18)));
+function W(e) {
+    return x(R(F - 1, ee(e === 91 ? e + 2 : e === 40 ? e + 1 : e)));
 }
-function X(e19) {
-    return V(Z(U(e19)));
+function X(e) {
+    return V(Z(U(e)));
 }
-function Y(e20) {
+function Y(e) {
     while(G = P())if (G < 33) N();
     else break;
-    return T(e20) > 2 || T(G) > 3 ? "" : " ";
+    return T(e) > 2 || T(G) > 3 ? "" : " ";
 }
-function Z(e21) {
+function Z(e) {
     while(N())switch(T(G)){
         case 0:
-            S(ae(F - 1), e21);
+            S(ae(F - 1), e);
             break;
         case 2:
-            S(W(G), e21);
+            S(W(G), e);
             break;
         default:
-            S(d(G), e21);
+            S(d(G), e);
     }
-    return e21;
+    return e;
 }
-function _(e22, r12) {
-    while(--r12 && N())if (G < 48 || G > 102 || G > 57 && G < 65 || G > 70 && G < 97) break;
-    return R(e22, Q() + (r12 < 6 && P() == 32 && N() == 32));
+function _(e, r) {
+    while(--r && N())if (G < 48 || G > 102 || G > 57 && G < 65 || G > 70 && G < 97) break;
+    return R(e, Q() + (r < 6 && P() == 32 && N() == 32));
 }
-function ee(e23) {
+function ee(e) {
     while(N())switch(G){
-        case e23:
+        case e:
             return F;
         case 34:
         case 39:
-            if (e23 !== 34 && e23 !== 39) ee(G);
+            if (e !== 34 && e !== 39) ee(G);
             break;
         case 40:
-            if (e23 === 41) ee(e23);
+            if (e === 41) ee(e);
             break;
         case 92:
             N();
@@ -1326,144 +1249,144 @@ function ee(e23) {
     }
     return F;
 }
-function re(e24, r13) {
-    while(N())if (e24 + G === 57) break;
-    else if (e24 + G === 84 && P() === 47) break;
-    return "/*" + R(r13, F - 1) + "*" + d(e24 === 47 ? e24 : N());
+function re(e, r) {
+    while(N())if (e + G === 57) break;
+    else if (e + G === 84 && P() === 47) break;
+    return "/*" + R(r, F - 1) + "*" + d(e === 47 ? e : N());
 }
-function ae(e25) {
+function ae(e) {
     while(!T(P()))N();
-    return R(e25, F);
+    return R(e, F);
 }
-function ce(e26) {
+function ce(e) {
     return V(ne("", null, null, null, [
         ""
-    ], e26 = U(e26), 0, [
+    ], e = U(e), 0, [
         0
-    ], e26));
+    ], e));
 }
-function ne(e27, r14, a4, c2, n2, t2, s2, u1, i1) {
-    var f1 = 0;
-    var o1 = 0;
-    var l1 = s2;
-    var v1 = 0;
-    var h1 = 0;
-    var p1 = 0;
-    var b1 = 1;
-    var w1 = 1;
-    var $1 = 1;
-    var k1 = 0;
-    var g1 = "";
-    var m1 = n2;
-    var x1 = t2;
-    var y1 = c2;
-    var z1 = g1;
-    while(w1)switch(p1 = k1, k1 = N()){
+function ne(e, r, a, c, n, t, s, u, i) {
+    var f = 0;
+    var o = 0;
+    var l = s;
+    var v = 0;
+    var h = 0;
+    var p = 0;
+    var b = 1;
+    var w = 1;
+    var $ = 1;
+    var k = 0;
+    var g = "";
+    var m = n;
+    var x = t;
+    var y = c;
+    var z = g;
+    while(w)switch(p = k, k = N()){
         case 40:
-            if (p1 != 108 && z1.charCodeAt(l1 - 1) == 58) {
-                if (C(z1 += j(W(k1), "&", "&\f"), "&\f") != -1) $1 = -1;
+            if (p != 108 && z.charCodeAt(l - 1) == 58) {
+                if (C(z += j(W(k), "&", "&\f"), "&\f") != -1) $ = -1;
                 break;
             }
         case 34:
         case 39:
         case 91:
-            z1 += W(k1);
+            z += W(k);
             break;
         case 9:
         case 10:
         case 13:
         case 32:
-            z1 += Y(p1);
+            z += Y(p);
             break;
         case 92:
-            z1 += _(Q() - 1, 7);
+            z += _(Q() - 1, 7);
             continue;
         case 47:
             switch(P()){
                 case 42:
                 case 47:
-                    S(se(re(N(), Q()), r14, a4), i1);
+                    S(se(re(N(), Q()), r, a), i);
                     break;
                 default:
-                    z1 += "/";
+                    z += "/";
             }
             break;
-        case 123 * b1:
-            u1[f1++] = O(z1) * $1;
-        case 125 * b1:
+        case 123 * b:
+            u[f++] = O(z) * $;
+        case 125 * b:
         case 59:
         case 0:
-            switch(k1){
+            switch(k){
                 case 0:
                 case 125:
-                    w1 = 0;
-                case 59 + o1:
-                    if (h1 > 0 && O(z1) - l1) S(h1 > 32 ? ue(z1 + ";", c2, a4, l1 - 1) : ue(j(z1, " ", "") + ";", c2, a4, l1 - 2), i1);
+                    w = 0;
+                case 59 + o:
+                    if (h > 0 && O(z) - l) S(h > 32 ? ue(z + ";", c, a, l - 1) : ue(j(z, " ", "") + ";", c, a, l - 2), i);
                     break;
                 case 59:
-                    z1 += ";";
+                    z += ";";
                 default:
-                    S(y1 = te(z1, r14, a4, f1, o1, n2, u1, g1, m1 = [], x1 = [], l1), t2);
-                    if (k1 === 123) {
-                        if (o1 === 0) ne(z1, r14, y1, y1, m1, t2, l1, u1, x1);
-                        else switch(v1){
+                    S(y = te(z, r, a, f, o, n, u, g, m = [], x = [], l), t);
+                    if (k === 123) {
+                        if (o === 0) ne(z, r, y, y, m, t, l, u, x);
+                        else switch(v){
                             case 100:
                             case 109:
                             case 115:
-                                ne(e27, y1, y1, c2 && S(te(e27, y1, y1, 0, 0, n2, u1, g1, n2, m1 = [], l1), x1), n2, x1, l1, u1, c2 ? m1 : x1);
+                                ne(e, y, y, c && S(te(e, y, y, 0, 0, n, u, g, n, m = [], l), x), n, x, l, u, c ? m : x);
                                 break;
                             default:
-                                ne(z1, y1, y1, y1, [
+                                ne(z, y, y, y, [
                                     ""
-                                ], x1, 0, u1, x1);
+                                ], x, 0, u, x);
                         }
                     }
             }
-            f1 = o1 = h1 = 0, b1 = $1 = 1, g1 = z1 = "", l1 = s2;
+            f = o = h = 0, b = $ = 1, g = z = "", l = s;
             break;
         case 58:
-            l1 = 1 + O(z1), h1 = p1;
+            l = 1 + O(z), h = p;
         default:
-            if (b1 < 1) {
-                if (k1 == 123) --b1;
-                else if (k1 == 125 && (b1++) == 0 && L() == 125) continue;
+            if (b < 1) {
+                if (k == 123) --b;
+                else if (k == 125 && (b++) == 0 && L() == 125) continue;
             }
-            switch(z1 += d(k1), k1 * b1){
+            switch(z += d(k), k * b){
                 case 38:
-                    $1 = o1 > 0 ? 1 : (z1 += "\f", -1);
+                    $ = o > 0 ? 1 : (z += "\f", -1);
                     break;
                 case 44:
-                    u1[f1++] = (O(z1) - 1) * $1, $1 = 1;
+                    u[f++] = (O(z) - 1) * $, $ = 1;
                     break;
                 case 64:
-                    if (P() === 45) z1 += W(N());
-                    v1 = P(), o1 = l1 = O(g1 = z1 += ae(Q())), k1++;
+                    if (P() === 45) z += W(N());
+                    v = P(), o = l = O(g = z += ae(Q())), k++;
                     break;
                 case 45:
-                    if (p1 === 45 && O(z1) == 2) b1 = 0;
+                    if (p === 45 && O(z) == 2) b = 0;
             }
     }
-    return t2;
+    return t;
 }
-function te(e28, r15, a5, c3, t3, s3, u2, i2, f2, o2, l2) {
-    var v2 = t3 - 1;
-    var h2 = t3 === 0 ? s3 : [
+function te(e, r, a, c, t, s, u, i, f, o, l) {
+    var v = t - 1;
+    var h = t === 0 ? s : [
         ""
     ];
-    var p2 = M(h2);
-    for(var b2 = 0, w2 = 0, $2 = 0; b2 < c3; ++b2)for(var d1 = 0, g2 = A(e28, v2 + 1, v2 = k(w2 = u2[b2])), m2 = e28; d1 < p2; ++d1)if (m2 = x(w2 > 0 ? h2[d1] + " " + g2 : j(g2, /&\f/g, h2[d1]))) f2[$2++] = m2;
-    return I(e28, r15, a5, t3 === 0 ? n : i2, f2, o2, l2);
+    var p = M(h);
+    for(var b = 0, w = 0, $ = 0; b < c; ++b)for(var d = 0, g = A(e, v + 1, v = k(w = u[b])), m = e; d < p; ++d)if (m = x(w > 0 ? h[d] + " " + g : j(g, /&\f/g, h[d]))) f[$++] = m;
+    return I(e, r, a, t === 0 ? n : i, f, o, l);
 }
-function se(e29, r16, a6) {
-    return I(e29, r16, a6, c, d(K()), A(e29, 2, -2), 0);
+function se(e, r, a) {
+    return I(e, r, a, c, d(K()), A(e, 2, -2), 0);
 }
-function ue(e30, r17, a7, c4) {
-    return I(e30, r17, a7, t, A(e30, 0, c4), A(e30, c4 + 1, -1), c4);
+function ue(e, r, a, c) {
+    return I(e, r, a, t, A(e, 0, c), A(e, c + 1, -1), c);
 }
-function ie(c5, n3) {
-    switch(m(c5, n3)){
+function ie(c, n) {
+    switch(m(c, n)){
         case 5103:
-            return a + "print-" + c5 + c5;
+            return a + "print-" + c + c;
         case 5737:
         case 4201:
         case 3177:
@@ -1489,44 +1412,44 @@ function ie(c5, n3) {
         case 5365:
         case 5621:
         case 3829:
-            return a + c5 + c5;
+            return a + c + c;
         case 5349:
         case 4246:
         case 4810:
         case 6968:
         case 2756:
-            return a + c5 + r + c5 + e + c5 + c5;
+            return a + c + r + c + e + c + c;
         case 6828:
         case 4268:
-            return a + c5 + e + c5 + c5;
+            return a + c + e + c + c;
         case 6165:
-            return a + c5 + e + "flex-" + c5 + c5;
+            return a + c + e + "flex-" + c + c;
         case 5187:
-            return a + c5 + j(c5, /(\w+).+(:[^]+)/, a + "box-$1$2" + e + "flex-$1$2") + c5;
+            return a + c + j(c, /(\w+).+(:[^]+)/, a + "box-$1$2" + e + "flex-$1$2") + c;
         case 5443:
-            return a + c5 + e + "flex-item-" + j(c5, /flex-|-self/, "") + c5;
+            return a + c + e + "flex-item-" + j(c, /flex-|-self/, "") + c;
         case 4675:
-            return a + c5 + e + "flex-line-pack" + j(c5, /align-content|flex-|-self/, "") + c5;
+            return a + c + e + "flex-line-pack" + j(c, /align-content|flex-|-self/, "") + c;
         case 5548:
-            return a + c5 + e + j(c5, "shrink", "negative") + c5;
+            return a + c + e + j(c, "shrink", "negative") + c;
         case 5292:
-            return a + c5 + e + j(c5, "basis", "preferred-size") + c5;
+            return a + c + e + j(c, "basis", "preferred-size") + c;
         case 6060:
-            return a + "box-" + j(c5, "-grow", "") + a + c5 + e + j(c5, "grow", "positive") + c5;
+            return a + "box-" + j(c, "-grow", "") + a + c + e + j(c, "grow", "positive") + c;
         case 4554:
-            return a + j(c5, /([^-])(transform)/g, "$1" + a + "$2") + c5;
+            return a + j(c, /([^-])(transform)/g, "$1" + a + "$2") + c;
         case 6187:
-            return j(j(j(c5, /(zoom-|grab)/, a + "$1"), /(image-set)/, a + "$1"), c5, "") + c5;
+            return j(j(j(c, /(zoom-|grab)/, a + "$1"), /(image-set)/, a + "$1"), c, "") + c;
         case 5495:
         case 3959:
-            return j(c5, /(image-set\([^]*)/, a + "$1" + "$`$1");
+            return j(c, /(image-set\([^]*)/, a + "$1" + "$`$1");
         case 4968:
-            return j(j(c5, /(.+:)(flex-)?(.*)/, a + "box-pack:$3" + e + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a + c5 + c5;
+            return j(j(c, /(.+:)(flex-)?(.*)/, a + "box-pack:$3" + e + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a + c + c;
         case 4095:
         case 3583:
         case 4068:
         case 2532:
-            return j(c5, /(.+)-inline(.+)/, a + "$1$2") + c5;
+            return j(c, /(.+)-inline(.+)/, a + "$1$2") + c;
         case 8116:
         case 7059:
         case 5753:
@@ -1539,149 +1462,149 @@ function ie(c5, n3) {
         case 5789:
         case 5021:
         case 4765:
-            if (O(c5) - 1 - n3 > 6) switch(z(c5, n3 + 1)){
+            if (O(c) - 1 - n > 6) switch(z(c, n + 1)){
                 case 109:
-                    if (z(c5, n3 + 4) !== 45) break;
+                    if (z(c, n + 4) !== 45) break;
                 case 102:
-                    return j(c5, /(.+:)(.+)-([^]+)/, "$1" + a + "$2-$3" + "$1" + r + (z(c5, n3 + 3) == 108 ? "$3" : "$2-$3")) + c5;
+                    return j(c, /(.+:)(.+)-([^]+)/, "$1" + a + "$2-$3" + "$1" + r + (z(c, n + 3) == 108 ? "$3" : "$2-$3")) + c;
                 case 115:
-                    return ~C(c5, "stretch") ? ie(j(c5, "stretch", "fill-available"), n3) + c5 : c5;
+                    return ~C(c, "stretch") ? ie(j(c, "stretch", "fill-available"), n) + c : c;
             }
             break;
         case 4949:
-            if (z(c5, n3 + 1) !== 115) break;
+            if (z(c, n + 1) !== 115) break;
         case 6444:
-            switch(z(c5, O(c5) - 3 - (~C(c5, "!important") && 10))){
+            switch(z(c, O(c) - 3 - (~C(c, "!important") && 10))){
                 case 107:
-                    return j(c5, ":", ":" + a) + c5;
+                    return j(c, ":", ":" + a) + c;
                 case 101:
-                    return j(c5, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a + (z(c5, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a + "$2$3" + "$1" + e + "$2box$3") + c5;
+                    return j(c, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a + (z(c, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a + "$2$3" + "$1" + e + "$2box$3") + c;
             }
             break;
         case 5936:
-            switch(z(c5, n3 + 11)){
+            switch(z(c, n + 11)){
                 case 114:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "tb") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "tb") + c;
                 case 108:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "tb-rl") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "tb-rl") + c;
                 case 45:
-                    return a + c5 + e + j(c5, /[svh]\w+-[tblr]{2}/, "lr") + c5;
+                    return a + c + e + j(c, /[svh]\w+-[tblr]{2}/, "lr") + c;
             }
-            return a + c5 + e + c5 + c5;
+            return a + c + e + c + c;
     }
-    return c5;
+    return c;
 }
-function fe(e31, r18) {
-    var a8 = "";
-    var c6 = M(e31);
-    for(var n4 = 0; n4 < c6; n4++)a8 += r18(e31[n4], n4, e31, r18) || "";
-    return a8;
+function fe(e, r) {
+    var a = "";
+    var c = M(e);
+    for(var n = 0; n < c; n++)a += r(e[n], n, e, r) || "";
+    return a;
 }
-function oe(e32, r, a9, s4) {
-    switch(e32.type){
+function oe(e, r, a, s) {
+    switch(e.type){
         case i:
         case t:
-            return e32.return = e32.return || e32.value;
+            return e.return = e.return || e.value;
         case c:
             return "";
         case p:
-            return e32.return = e32.value + "{" + fe(e32.children, s4) + "}";
+            return e.return = e.value + "{" + fe(e.children, s) + "}";
         case n:
-            e32.value = e32.props.join(",");
+            e.value = e.props.join(",");
     }
-    return O(a9 = fe(e32.children, s4)) ? e32.return = e32.value + "{" + a9 + "}" : "";
+    return O(a = fe(e.children, s)) ? e.return = e.value + "{" + a + "}" : "";
 }
-function le(e33) {
-    var r19 = M(e33);
-    return function(a10, c7, n5, t4) {
-        var s5 = "";
-        for(var u3 = 0; u3 < r19; u3++)s5 += e33[u3](a10, c7, n5, t4) || "";
-        return s5;
+function le(e) {
+    var r = M(e);
+    return function(a, c, n, t) {
+        var s = "";
+        for(var u = 0; u < r; u++)s += e[u](a, c, n, t) || "";
+        return s;
     };
 }
-function ve(e34) {
-    return function(r20) {
-        if (!r20.root) {
-            if (r20 = r20.return) e34(r20);
+function ve(e) {
+    return function(r) {
+        if (!r.root) {
+            if (r = r.return) e(r);
         }
     };
 }
-function he(c8, s, u, i3) {
-    if (c8.length > -1) {
-        if (!c8.return) switch(c8.type){
+function he(c, s, u, i) {
+    if (c.length > -1) {
+        if (!c.return) switch(c.type){
             case t:
-                c8.return = ie(c8.value, c8.length);
+                c.return = ie(c.value, c.length);
                 break;
             case p:
                 return fe([
-                    J(c8, {
-                        value: j(c8.value, "@", "@" + a)
+                    J(c, {
+                        value: j(c.value, "@", "@" + a)
                     })
-                ], i3);
+                ], i);
             case n:
-                if (c8.length) return q(c8.props, function(n6) {
-                    switch(y(n6, /(::plac\w+|:read-\w+)/)){
+                if (c.length) return q(c.props, function(n) {
+                    switch(y(n, /(::plac\w+|:read-\w+)/)){
                         case ":read-only":
                         case ":read-write":
                             return fe([
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(read-\w+)/, ":" + r + "$1")
+                                        j(n, /:(read-\w+)/, ":" + r + "$1")
                                     ]
                                 })
-                            ], i3);
+                            ], i);
                         case "::placeholder":
                             return fe([
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, ":" + a + "input-$1")
+                                        j(n, /:(plac\w+)/, ":" + a + "input-$1")
                                     ]
                                 }),
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, ":" + r + "$1")
+                                        j(n, /:(plac\w+)/, ":" + r + "$1")
                                     ]
                                 }),
-                                J(c8, {
+                                J(c, {
                                     props: [
-                                        j(n6, /:(plac\w+)/, e + "input-$1")
+                                        j(n, /:(plac\w+)/, e + "input-$1")
                                     ]
                                 })
-                            ], i3);
+                            ], i);
                     }
                     return "";
                 });
         }
     }
 }
-function pe(e35) {
-    switch(e35.type){
+function pe(e) {
+    switch(e.type){
         case n:
-            e35.props = e35.props.map(function(r21) {
-                return q(X(r21), function(r22, a11, c9) {
-                    switch(z(r22, 0)){
+            e.props = e.props.map(function(r) {
+                return q(X(r), function(r, a, c) {
+                    switch(z(r, 0)){
                         case 12:
-                            return A(r22, 1, O(r22));
+                            return A(r, 1, O(r));
                         case 0:
                         case 40:
                         case 43:
                         case 62:
                         case 126:
-                            return r22;
+                            return r;
                         case 58:
-                            if (c9[++a11] === "global") c9[a11] = "", c9[++a11] = "\f" + A(c9[a11], a11 = 1, -1);
+                            if (c[++a] === "global") c[a] = "", c[++a] = "\f" + A(c[a], a = 1, -1);
                         case 32:
-                            return a11 === 1 ? "" : r22;
+                            return a === 1 ? "" : r;
                         default:
-                            switch(a11){
+                            switch(a){
                                 case 0:
-                                    e35 = r22;
-                                    return M(c9) > 1 ? "" : r22;
-                                case a11 = M(c9) - 1:
+                                    e = r;
+                                    return M(c) > 1 ? "" : r;
+                                case a = M(c) - 1:
                                 case 2:
-                                    return a11 === 2 ? r22 + e35 + e35 : r22 + e35;
+                                    return a === 2 ? r + e + e : r + e;
                                 default:
-                                    return r22;
+                                    return r;
                             }
                     }
                 });
@@ -1720,8 +1643,7 @@ exports.default = memoize;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kS2E2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "serializeStyles", ()=>serializeStyles
-);
+parcelHelpers.export(exports, "serializeStyles", ()=>serializeStyles);
 var _hash = require("@emotion/hash");
 var _hashDefault = parcelHelpers.interopDefault(_hash);
 var _unitless = require("@emotion/unitless");
@@ -1736,16 +1658,16 @@ var isCustomProperty = function isCustomProperty(property) {
     return property.charCodeAt(1) === 45;
 };
 var isProcessableValue = function isProcessableValue(value) {
-    return value != null && typeof value !== 'boolean';
+    return value != null && typeof value !== "boolean";
 };
-var processStyleName = /* #__PURE__ */ _memoizeDefault.default(function(styleName) {
-    return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
+var processStyleName = /* #__PURE__ */ (0, _memoizeDefault.default)(function(styleName) {
+    return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, "-$&").toLowerCase();
 });
 var processStyleValue = function processStyleValue(key, value) {
     switch(key){
-        case 'animation':
-        case 'animationName':
-            if (typeof value === 'string') return value.replace(animationRegex, function(match, p1, p2) {
+        case "animation":
+        case "animationName":
+            if (typeof value === "string") return value.replace(animationRegex, function(match, p1, p2) {
                 cursor = {
                     name: p1,
                     styles: p2,
@@ -1754,44 +1676,44 @@ var processStyleValue = function processStyleValue(key, value) {
                 return p1;
             });
     }
-    if (_unitlessDefault.default[key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) return value + 'px';
+    if ((0, _unitlessDefault.default)[key] !== 1 && !isCustomProperty(key) && typeof value === "number" && value !== 0) return value + "px";
     return value;
 };
 var contentValuePattern = /(var|attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
 var contentValues = [
-    'normal',
-    'none',
-    'initial',
-    'inherit',
-    'unset'
+    "normal",
+    "none",
+    "initial",
+    "inherit",
+    "unset"
 ];
 var oldProcessStyleValue = processStyleValue;
 var msPattern = /^-ms-/;
 var hyphenPattern = /-(.)/g;
 var hyphenatedCache = {};
 processStyleValue = function processStyleValue(key, value) {
-    if (key === 'content') {
-        if (typeof value !== 'string' || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) throw new Error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
+    if (key === "content") {
+        if (typeof value !== "string" || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) throw new Error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
     }
     var processed = oldProcessStyleValue(key, value);
-    if (processed !== '' && !isCustomProperty(key) && key.indexOf('-') !== -1 && hyphenatedCache[key] === undefined) {
+    if (processed !== "" && !isCustomProperty(key) && key.indexOf("-") !== -1 && hyphenatedCache[key] === undefined) {
         hyphenatedCache[key] = true;
-        console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, 'ms-').replace(hyphenPattern, function(str, _char) {
+        console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, "ms-").replace(hyphenPattern, function(str, _char) {
             return _char.toUpperCase();
         }) + "?");
     }
     return processed;
 };
 function handleInterpolation(mergedProps, registered, interpolation) {
-    if (interpolation == null) return '';
+    if (interpolation == null) return "";
     if (interpolation.__emotion_styles !== undefined) {
-        if (interpolation.toString() === 'NO_COMPONENT_SELECTOR') throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
+        if (interpolation.toString() === "NO_COMPONENT_SELECTOR") throw new Error("Component selectors can only be used in conjunction with @emotion/babel-plugin.");
         return interpolation;
     }
     switch(typeof interpolation){
-        case 'boolean':
-            return '';
-        case 'object':
+        case "boolean":
+            return "";
+        case "object":
             if (interpolation.anim === 1) {
                 cursor = {
                     name: interpolation.name,
@@ -1817,7 +1739,7 @@ function handleInterpolation(mergedProps, registered, interpolation) {
                 return styles;
             }
             return createStringFromObject(mergedProps, registered, interpolation);
-        case 'function':
+        case "function":
             if (mergedProps !== undefined) {
                 var previousCursor = cursor;
                 var result = interpolation(mergedProps);
@@ -1825,16 +1747,16 @@ function handleInterpolation(mergedProps, registered, interpolation) {
                 return handleInterpolation(mergedProps, registered, result);
             } else console.error("Functions that are interpolated in css calls will be stringified.\nIf you want to have a css call based on props, create a function that returns a css call like this\nlet dynamicStyle = (props) => css`color: ${props.color}`\nIt can be called directly with props or interpolated in a styled call like this\nlet SomeComponent = styled('div')`${dynamicStyle}`");
             break;
-        case 'string':
+        case "string":
             var matched = [];
             var replaced = interpolation.replace(animationRegex, function(match, p1, p2) {
                 var fakeVarName = "animation" + matched.length;
-                matched.push("const " + fakeVarName + " = keyframes`" + p2.replace(/^@keyframes animation-\w+/, '') + "`");
+                matched.push("const " + fakeVarName + " = keyframes`" + p2.replace(/^@keyframes animation-\w+/, "") + "`");
                 return "${" + fakeVarName + "}";
             });
             if (matched.length) console.error("`keyframes` output got interpolated into plain string, please wrap it with `css`.\n\nInstead of doing this:\n\n" + [].concat(matched, [
                 "`" + replaced + "`"
-            ]).join('\n') + '\n\nYou should wrap it with `css` like this:\n\n' + ("css`" + replaced + "`"));
+            ]).join("\n") + "\n\nYou should wrap it with `css` like this:\n\n" + ("css`" + replaced + "`"));
             break;
     } // finalize string values (regular strings and functions interpolated into css calls)
     if (registered == null) return interpolation;
@@ -1842,26 +1764,26 @@ function handleInterpolation(mergedProps, registered, interpolation) {
     return cached !== undefined ? cached : interpolation;
 }
 function createStringFromObject(mergedProps, registered, obj) {
-    var string = '';
+    var string = "";
     if (Array.isArray(obj)) for(var i = 0; i < obj.length; i++)string += handleInterpolation(mergedProps, registered, obj[i]) + ";";
     else for(var _key in obj){
         var value = obj[_key];
-        if (typeof value !== 'object') {
+        if (typeof value !== "object") {
             if (registered != null && registered[value] !== undefined) string += _key + "{" + registered[value] + "}";
             else if (isProcessableValue(value)) string += processStyleName(_key) + ":" + processStyleValue(_key, value) + ";";
         } else {
-            if (_key === 'NO_COMPONENT_SELECTOR' && true) throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
-            if (Array.isArray(value) && typeof value[0] === 'string' && (registered == null || registered[value[0]] === undefined)) {
+            if (_key === "NO_COMPONENT_SELECTOR" && true) throw new Error("Component selectors can only be used in conjunction with @emotion/babel-plugin.");
+            if (Array.isArray(value) && typeof value[0] === "string" && (registered == null || registered[value[0]] === undefined)) {
                 for(var _i = 0; _i < value.length; _i++)if (isProcessableValue(value[_i])) string += processStyleName(_key) + ":" + processStyleValue(_key, value[_i]) + ";";
             } else {
                 var interpolated = handleInterpolation(mergedProps, registered, value);
                 switch(_key){
-                    case 'animation':
-                    case 'animationName':
+                    case "animation":
+                    case "animationName":
                         string += processStyleName(_key) + ":" + interpolated + ";";
                         break;
                     default:
-                        if (_key === 'undefined') console.error(UNDEFINED_AS_OBJECT_KEY_ERROR);
+                        if (_key === "undefined") console.error(UNDEFINED_AS_OBJECT_KEY_ERROR);
                         string += _key + "{" + interpolated + "}";
                 }
             }
@@ -1875,9 +1797,9 @@ sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
 // keyframes are stored on the SerializedStyles object as a linked list
 var cursor;
 var serializeStyles = function serializeStyles(args, registered, mergedProps) {
-    if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && args[0].styles !== undefined) return args[0];
+    if (args.length === 1 && typeof args[0] === "object" && args[0] !== null && args[0].styles !== undefined) return args[0];
     var stringMode = true;
-    var styles = '';
+    var styles = "";
     cursor = undefined;
     var strings = args[0];
     if (strings == null || strings.raw === undefined) {
@@ -1897,13 +1819,13 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
     var sourceMap;
     styles = styles.replace(sourceMapPattern, function(match) {
         sourceMap = match;
-        return '';
+        return "";
     });
     labelPattern.lastIndex = 0;
-    var identifierName = '';
-    var match1; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
-    while((match1 = labelPattern.exec(styles)) !== null)identifierName += '-' + match1[1];
-    var name = _hashDefault.default(styles) + identifierName;
+    var identifierName = "";
+    var match; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
+    while((match = labelPattern.exec(styles)) !== null)identifierName += "-" + match[1];
+    var name = (0, _hashDefault.default)(styles) + identifierName;
     // $FlowFixMe SerializedStyles type doesn't have toString property (and we don't want to add it)
     return {
         name: name,
@@ -2007,16 +1929,13 @@ exports.default = unitlessKeys;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6UI8e":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles
-);
-parcelHelpers.export(exports, "insertStyles", ()=>insertStyles
-);
-parcelHelpers.export(exports, "registerStyles", ()=>registerStyles
-);
+parcelHelpers.export(exports, "getRegisteredStyles", ()=>getRegisteredStyles);
+parcelHelpers.export(exports, "insertStyles", ()=>insertStyles);
+parcelHelpers.export(exports, "registerStyles", ()=>registerStyles);
 var isBrowser = true;
 function getRegisteredStyles(registered, registeredStyles, classNames) {
-    var rawClassName = '';
-    classNames.split(' ').forEach(function(className) {
+    var rawClassName = "";
+    classNames.split(" ").forEach(function(className) {
         if (registered[className] !== undefined) registeredStyles.push(registered[className] + ";");
         else rawClassName += className + " ";
     });
@@ -2039,9 +1958,9 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
     if (cache.inserted[serialized.name] === undefined) {
         var current = serialized;
         do {
-            var maybeStyles = cache.insert(serialized === current ? "." + className : '', current, cache.sheet, true);
+            var maybeStyles = cache.insert(serialized === current ? "." + className : "", current, cache.sheet, true);
             current = current.next;
-        }while (current !== undefined)
+        }while (current !== undefined);
     }
 };
 
@@ -2053,30 +1972,30 @@ var _cacheDefault = parcelHelpers.interopDefault(_cache);
 var _serialize = require("@emotion/serialize");
 var _utils = require("@emotion/utils");
 function insertWithoutScoping(cache, serialized) {
-    if (cache.inserted[serialized.name] === undefined) return cache.insert('', serialized, cache.sheet, true);
+    if (cache.inserted[serialized.name] === undefined) return cache.insert("", serialized, cache.sheet, true);
 }
 function merge(registered, css, className) {
     var registeredStyles = [];
-    var rawClassName = _utils.getRegisteredStyles(registered, registeredStyles, className);
+    var rawClassName = (0, _utils.getRegisteredStyles)(registered, registeredStyles, className);
     if (registeredStyles.length < 2) return className;
     return rawClassName + css(registeredStyles);
 }
 var createEmotion = function createEmotion(options) {
-    var cache = _cacheDefault.default(options); // $FlowFixMe
+    var cache = (0, _cacheDefault.default)(options); // $FlowFixMe
     cache.sheet.speedy = function(value) {
-        if (this.ctr !== 0) throw new Error('speedy must be changed before any rules are inserted');
+        if (this.ctr !== 0) throw new Error("speedy must be changed before any rules are inserted");
         this.isSpeedy = value;
     };
     cache.compat = true;
     var css = function css() {
         for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        var serialized = _serialize.serializeStyles(args, cache.registered, undefined);
-        _utils.insertStyles(cache, serialized, false);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered, undefined);
+        (0, _utils.insertStyles)(cache, serialized, false);
         return cache.key + "-" + serialized.name;
     };
     var keyframes = function keyframes() {
         for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
-        var serialized = _serialize.serializeStyles(args, cache.registered);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered);
         var animation = "animation-" + serialized.name;
         insertWithoutScoping(cache, {
             name: serialized.name,
@@ -2086,7 +2005,7 @@ var createEmotion = function createEmotion(options) {
     };
     var injectGlobal = function injectGlobal() {
         for(var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++)args[_key3] = arguments[_key3];
-        var serialized = _serialize.serializeStyles(args, cache.registered);
+        var serialized = (0, _serialize.serializeStyles)(args, cache.registered);
         insertWithoutScoping(cache, serialized);
     };
     var cx = function cx() {
@@ -2111,25 +2030,25 @@ var createEmotion = function createEmotion(options) {
         // $FlowFixMe
         sheet: cache.sheet,
         cache: cache,
-        getRegisteredStyles: _utils.getRegisteredStyles.bind(null, cache.registered),
+        getRegisteredStyles: (0, _utils.getRegisteredStyles).bind(null, cache.registered),
         merge: merge.bind(null, cache.registered, css)
     };
 };
-var classnames = function classnames1(args) {
-    var cls = '';
+var classnames = function classnames(args) {
+    var cls = "";
     for(var i = 0; i < args.length; i++){
         var arg = args[i];
         if (arg == null) continue;
         var toAdd = void 0;
         switch(typeof arg){
-            case 'boolean':
+            case "boolean":
                 break;
-            case 'object':
-                if (Array.isArray(arg)) toAdd = classnames1(arg);
+            case "object":
+                if (Array.isArray(arg)) toAdd = classnames(arg);
                 else {
-                    toAdd = '';
+                    toAdd = "";
                     for(var k in arg)if (arg[k] && k) {
-                        toAdd && (toAdd += ' ');
+                        toAdd && (toAdd += " ");
                         toAdd += k;
                     }
                 }
@@ -2138,7 +2057,7 @@ var classnames = function classnames1(args) {
                 toAdd = arg;
         }
         if (toAdd) {
-            cls && (cls += ' ');
+            cls && (cls += " ");
             cls += toAdd;
         }
     }
@@ -2149,8 +2068,7 @@ exports.default = createEmotion;
 },{"@emotion/cache":"3Umtj","@emotion/serialize":"kS2E2","@emotion/utils":"6UI8e","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hEgLK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HTMLEditor", ()=>HTMLEditor
-);
+parcelHelpers.export(exports, "HTMLEditor", ()=>HTMLEditor);
 var _core = require("@tiptap/core");
 var _starterKit = require("@tiptap/starter-kit");
 var _starterKitDefault = parcelHelpers.interopDefault(_starterKit);
@@ -2160,17 +2078,17 @@ var _htmlEditorStyle = require("./html-editor.style");
 var _inputRadioButton = require("../input/input-radio-button");
 var _boxArrow = require("../box-arrow/box-arrow");
 // This will prevent duplicate define with extended component.
-class HeadingMenuButton extends _inputRadioButton.InputRadioButton {
+class HeadingMenuButton extends (0, _inputRadioButton.InputRadioButton) {
 }
-class HeadingMenuButtonGroup extends _inputRadioButton.InputRadioButtonGroup {
+class HeadingMenuButtonGroup extends (0, _inputRadioButton.InputRadioButtonGroup) {
 }
-class FloatingMenu extends _boxArrow.BoxArrow {
+class FloatingMenu extends (0, _boxArrow.BoxArrow) {
 }
-class HeadingMenu extends _ui.StyledElement {
-    static Style = _htmlEditorStyle.HeadingMenuStyle;
+class HeadingMenu extends (0, _ui.StyledElement) {
+    static Style = (0, _htmlEditorStyle.HeadingMenuStyle);
     static onDefine(tagName) {
-        _ui.define(`${tagName}-button`, HeadingMenuButton);
-        _ui.define(`${tagName}-button-group`, HeadingMenuButtonGroup);
+        (0, _ui.define)(`${tagName}-button`, HeadingMenuButton);
+        (0, _ui.define)(`${tagName}-button-group`, HeadingMenuButtonGroup);
         super.onDefine(tagName);
     }
     static initStyle(style) {
@@ -2208,7 +2126,7 @@ class HeadingMenu extends _ui.StyledElement {
     }
     set editor(editor) {
         this._editor = editor;
-        this.addEventListener('click', (event)=>{
+        this.addEventListener("click", (event)=>{
             this.onClick(event);
         });
     }
@@ -2216,14 +2134,14 @@ class HeadingMenu extends _ui.StyledElement {
         return this._editor;
     }
     render() {
-        this.innerHTML = '';
+        this.innerHTML = "";
         let headingMenuButtonGroup = new HeadingMenuButtonGroup();
         this.append(headingMenuButtonGroup);
         for (let level of this.levels){
             let headingMenuButton = new HeadingMenuButton();
-            headingMenuButton.querySelector('input').setAttribute('name', 'heading');
-            headingMenuButton.querySelector('input').setAttribute('value', level.toString());
-            headingMenuButton.querySelector('button').innerHTML = `H${level}`;
+            headingMenuButton.querySelector("input").setAttribute("name", "heading");
+            headingMenuButton.querySelector("input").setAttribute("value", level.toString());
+            headingMenuButton.querySelector("button").innerHTML = `H${level}`;
             headingMenuButtonGroup.append(headingMenuButton);
         }
     }
@@ -2233,7 +2151,7 @@ class HeadingMenu extends _ui.StyledElement {
         this.editor.chain().focus().toggleHeading({
             level: level
         }).run();
-        if (!this.editor.isActive('heading', {
+        if (!this.editor.isActive("heading", {
             level: level
         })) input.checked = false;
     }
@@ -2247,30 +2165,30 @@ class HeadingMenu extends _ui.StyledElement {
         }, 50);
     }
     _updateActiveStatus() {
-        for (let input of this.querySelectorAll('input')){
+        for (let input of this.querySelectorAll("input")){
             let level = parseInt(input.value);
-            if (this.editor.isActive('heading', {
+            if (this.editor.isActive("heading", {
                 level: level
             })) input.checked = true;
             else input.checked = false;
         }
     }
 }
-class HTMLEditor extends _ui.StyledElement {
-    static Style = _htmlEditorStyle.HTMLEditorStyle;
+class HTMLEditor extends (0, _ui.StyledElement) {
+    static Style = (0, _htmlEditorStyle.HTMLEditorStyle);
     static onDefine(tagName) {
-        _ui.define(`${tagName}-float-menu`, FloatingMenu);
-        _ui.define(`${tagName}-heading-menu`, HeadingMenu);
+        (0, _ui.define)(`${tagName}-float-menu`, FloatingMenu);
+        (0, _ui.define)(`${tagName}-heading-menu`, HeadingMenu);
         super.onDefine(tagName);
     }
     static initStyle(style) {
         style = {
-            ..._htmlEditorStyle.HTMLEditorStyle.default,
+            ...(0, _htmlEditorStyle.HTMLEditorStyle).default,
             ...style
         };
         super.initStyle(style);
         FloatingMenu.tagStyle({
-            arrow: 'left',
+            arrow: "left",
             bgColor: style.menuColor
         });
         HeadingMenuButton.tagStyle({
@@ -2301,16 +2219,16 @@ class HTMLEditor extends _ui.StyledElement {
         this.render();
     }
     render() {
-        this.innerHTML = '';
+        this.innerHTML = "";
         this.headingMenu = new HeadingMenu();
         this.floatingMenu = new FloatingMenu();
         this.floatingMenu.append(this.headingMenu);
         this.append(this.floatingMenu);
-        this.editor = new _core.Editor({
+        this.editor = new (0, _core.Editor)({
             element: this,
             extensions: [
-                _starterKitDefault.default,
-                _extensionFloatingMenu.FloatingMenu.configure({
+                (0, _starterKitDefault.default),
+                (0, _extensionFloatingMenu.FloatingMenu).configure({
                     element: this.querySelector(FloatingMenu.tagName),
                     shouldShow: ({ editor , view , state , oldState  })=>{
                         const { selection  } = state;
@@ -2325,7 +2243,7 @@ class HTMLEditor extends _ui.StyledElement {
         });
         this.headingMenu.editor = this.editor;
         this.headingMenu.render();
-        this.editor.on('selectionUpdate', ()=>{
+        this.editor.on("selectionUpdate", ()=>{
             this.headingMenu.updateActiveStatus();
         });
         new MutationObserver(()=>{
@@ -2341,112 +2259,59 @@ class HTMLEditor extends _ui.StyledElement {
 },{"@tiptap/core":"61ldi","@tiptap/starter-kit":"anv4W","@tiptap/extension-floating-menu":"cvMRI","../ui":"jSLlu","./html-editor.style":"gWXL1","../input/input-radio-button":"gF8uX","../box-arrow/box-arrow":"66JnL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"61ldi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CommandManager", ()=>CommandManager
-);
-parcelHelpers.export(exports, "Editor", ()=>Editor
-);
-parcelHelpers.export(exports, "Extension", ()=>Extension
-);
-parcelHelpers.export(exports, "InputRule", ()=>InputRule
-);
-parcelHelpers.export(exports, "Mark", ()=>Mark
-);
-parcelHelpers.export(exports, "Node", ()=>Node
-);
-parcelHelpers.export(exports, "NodeView", ()=>NodeView
-);
-parcelHelpers.export(exports, "PasteRule", ()=>PasteRule
-);
-parcelHelpers.export(exports, "Tracker", ()=>Tracker
-);
-parcelHelpers.export(exports, "callOrReturn", ()=>callOrReturn
-);
-parcelHelpers.export(exports, "combineTransactionSteps", ()=>combineTransactionSteps
-);
-parcelHelpers.export(exports, "defaultBlockAt", ()=>defaultBlockAt
-);
-parcelHelpers.export(exports, "escapeForRegEx", ()=>escapeForRegEx
-);
-parcelHelpers.export(exports, "extensions", ()=>extensions
-);
-parcelHelpers.export(exports, "findChildren", ()=>findChildren
-);
-parcelHelpers.export(exports, "findChildrenInRange", ()=>findChildrenInRange
-);
-parcelHelpers.export(exports, "findParentNode", ()=>findParentNode
-);
-parcelHelpers.export(exports, "findParentNodeClosestToPos", ()=>findParentNodeClosestToPos
-);
-parcelHelpers.export(exports, "generateHTML", ()=>generateHTML
-);
-parcelHelpers.export(exports, "generateJSON", ()=>generateJSON
-);
-parcelHelpers.export(exports, "generateText", ()=>generateText
-);
-parcelHelpers.export(exports, "getAttributes", ()=>getAttributes
-);
-parcelHelpers.export(exports, "getChangedRanges", ()=>getChangedRanges
-);
-parcelHelpers.export(exports, "getDebugJSON", ()=>getDebugJSON
-);
-parcelHelpers.export(exports, "getExtensionField", ()=>getExtensionField
-);
-parcelHelpers.export(exports, "getHTMLFromFragment", ()=>getHTMLFromFragment
-);
-parcelHelpers.export(exports, "getMarkAttributes", ()=>getMarkAttributes
-);
-parcelHelpers.export(exports, "getMarkRange", ()=>getMarkRange
-);
-parcelHelpers.export(exports, "getMarkType", ()=>getMarkType
-);
-parcelHelpers.export(exports, "getMarksBetween", ()=>getMarksBetween
-);
-parcelHelpers.export(exports, "getNodeAttributes", ()=>getNodeAttributes
-);
-parcelHelpers.export(exports, "getNodeType", ()=>getNodeType
-);
-parcelHelpers.export(exports, "getSchema", ()=>getSchema
-);
-parcelHelpers.export(exports, "getText", ()=>getText
-);
-parcelHelpers.export(exports, "getTextBetween", ()=>getTextBetween
-);
-parcelHelpers.export(exports, "inputRulesPlugin", ()=>inputRulesPlugin
-);
-parcelHelpers.export(exports, "isActive", ()=>isActive
-);
-parcelHelpers.export(exports, "isList", ()=>isList
-);
-parcelHelpers.export(exports, "isMarkActive", ()=>isMarkActive
-);
-parcelHelpers.export(exports, "isNodeActive", ()=>isNodeActive
-);
-parcelHelpers.export(exports, "isNodeEmpty", ()=>isNodeEmpty
-);
-parcelHelpers.export(exports, "isNodeSelection", ()=>isNodeSelection
-);
-parcelHelpers.export(exports, "isTextSelection", ()=>isTextSelection
-);
-parcelHelpers.export(exports, "markInputRule", ()=>markInputRule
-);
-parcelHelpers.export(exports, "markPasteRule", ()=>markPasteRule
-);
-parcelHelpers.export(exports, "mergeAttributes", ()=>mergeAttributes
-);
-parcelHelpers.export(exports, "nodeInputRule", ()=>nodeInputRule
-);
-parcelHelpers.export(exports, "pasteRulesPlugin", ()=>pasteRulesPlugin
-);
-parcelHelpers.export(exports, "posToDOMRect", ()=>posToDOMRect
-);
-parcelHelpers.export(exports, "textInputRule", ()=>textInputRule
-);
-parcelHelpers.export(exports, "textPasteRule", ()=>textPasteRule
-);
-parcelHelpers.export(exports, "textblockTypeInputRule", ()=>textblockTypeInputRule
-);
-parcelHelpers.export(exports, "wrappingInputRule", ()=>wrappingInputRule
-);
+parcelHelpers.export(exports, "CommandManager", ()=>CommandManager);
+parcelHelpers.export(exports, "Editor", ()=>Editor);
+parcelHelpers.export(exports, "Extension", ()=>Extension);
+parcelHelpers.export(exports, "InputRule", ()=>InputRule);
+parcelHelpers.export(exports, "Mark", ()=>Mark);
+parcelHelpers.export(exports, "Node", ()=>Node);
+parcelHelpers.export(exports, "NodeView", ()=>NodeView);
+parcelHelpers.export(exports, "PasteRule", ()=>PasteRule);
+parcelHelpers.export(exports, "Tracker", ()=>Tracker);
+parcelHelpers.export(exports, "callOrReturn", ()=>callOrReturn);
+parcelHelpers.export(exports, "combineTransactionSteps", ()=>combineTransactionSteps);
+parcelHelpers.export(exports, "defaultBlockAt", ()=>defaultBlockAt);
+parcelHelpers.export(exports, "escapeForRegEx", ()=>escapeForRegEx);
+parcelHelpers.export(exports, "extensions", ()=>extensions);
+parcelHelpers.export(exports, "findChildren", ()=>findChildren);
+parcelHelpers.export(exports, "findChildrenInRange", ()=>findChildrenInRange);
+parcelHelpers.export(exports, "findParentNode", ()=>findParentNode);
+parcelHelpers.export(exports, "findParentNodeClosestToPos", ()=>findParentNodeClosestToPos);
+parcelHelpers.export(exports, "generateHTML", ()=>generateHTML);
+parcelHelpers.export(exports, "generateJSON", ()=>generateJSON);
+parcelHelpers.export(exports, "generateText", ()=>generateText);
+parcelHelpers.export(exports, "getAttributes", ()=>getAttributes);
+parcelHelpers.export(exports, "getChangedRanges", ()=>getChangedRanges);
+parcelHelpers.export(exports, "getDebugJSON", ()=>getDebugJSON);
+parcelHelpers.export(exports, "getExtensionField", ()=>getExtensionField);
+parcelHelpers.export(exports, "getHTMLFromFragment", ()=>getHTMLFromFragment);
+parcelHelpers.export(exports, "getMarkAttributes", ()=>getMarkAttributes);
+parcelHelpers.export(exports, "getMarkRange", ()=>getMarkRange);
+parcelHelpers.export(exports, "getMarkType", ()=>getMarkType);
+parcelHelpers.export(exports, "getMarksBetween", ()=>getMarksBetween);
+parcelHelpers.export(exports, "getNodeAttributes", ()=>getNodeAttributes);
+parcelHelpers.export(exports, "getNodeType", ()=>getNodeType);
+parcelHelpers.export(exports, "getSchema", ()=>getSchema);
+parcelHelpers.export(exports, "getText", ()=>getText);
+parcelHelpers.export(exports, "getTextBetween", ()=>getTextBetween);
+parcelHelpers.export(exports, "inputRulesPlugin", ()=>inputRulesPlugin);
+parcelHelpers.export(exports, "isActive", ()=>isActive);
+parcelHelpers.export(exports, "isList", ()=>isList);
+parcelHelpers.export(exports, "isMarkActive", ()=>isMarkActive);
+parcelHelpers.export(exports, "isNodeActive", ()=>isNodeActive);
+parcelHelpers.export(exports, "isNodeEmpty", ()=>isNodeEmpty);
+parcelHelpers.export(exports, "isNodeSelection", ()=>isNodeSelection);
+parcelHelpers.export(exports, "isTextSelection", ()=>isTextSelection);
+parcelHelpers.export(exports, "markInputRule", ()=>markInputRule);
+parcelHelpers.export(exports, "markPasteRule", ()=>markPasteRule);
+parcelHelpers.export(exports, "mergeAttributes", ()=>mergeAttributes);
+parcelHelpers.export(exports, "nodeInputRule", ()=>nodeInputRule);
+parcelHelpers.export(exports, "pasteRulesPlugin", ()=>pasteRulesPlugin);
+parcelHelpers.export(exports, "posToDOMRect", ()=>posToDOMRect);
+parcelHelpers.export(exports, "textInputRule", ()=>textInputRule);
+parcelHelpers.export(exports, "textPasteRule", ()=>textPasteRule);
+parcelHelpers.export(exports, "textblockTypeInputRule", ()=>textblockTypeInputRule);
+parcelHelpers.export(exports, "wrappingInputRule", ()=>wrappingInputRule);
 var _prosemirrorState = require("prosemirror-state");
 var _prosemirrorTransform = require("prosemirror-transform");
 var _prosemirrorCommands = require("prosemirror-commands");
@@ -2459,7 +2324,7 @@ function getType(value) {
     return Object.prototype.toString.call(value).slice(8, -1);
 }
 function isPlainObject(value) {
-    if (getType(value) !== 'Object') return false;
+    if (getType(value) !== "Object") return false;
     return value.constructor === Object && Object.getPrototypeOf(value) === Object.prototype;
 }
 function mergeDeep(target, source) {
@@ -2479,7 +2344,7 @@ function mergeDeep(target, source) {
     return output;
 }
 function isFunction(value) {
-    return typeof value === 'function';
+    return typeof value === "function";
 }
 /**
  * Optionally calls `value` as a function.
@@ -2496,7 +2361,7 @@ function isFunction(value) {
 }
 function getExtensionField(extension, field, context) {
     if (extension.config[field] === undefined && extension.parent) return getExtensionField(extension.parent, field, context);
-    if (typeof extension.config[field] === 'function') {
+    if (typeof extension.config[field] === "function") {
         const value = extension.config[field].bind({
             ...context,
             parent: extension.parent ? getExtensionField(extension.parent, field, context) : null
@@ -2507,8 +2372,8 @@ function getExtensionField(extension, field, context) {
 }
 class Extension {
     constructor(config = {}){
-        this.type = 'extension';
-        this.name = 'extension';
+        this.type = "extension";
+        this.name = "extension";
         this.parent = null;
         this.child = null;
         this.config = {
@@ -2523,10 +2388,10 @@ class Extension {
         if (config.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
         // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
-        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, "addOptions", {
             name: this.name
         }));
-        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+        this.storage = callOrReturn(getExtensionField(this, "addStorage", {
             name: this.name,
             options: this.options
         })) || {};
@@ -2539,7 +2404,7 @@ class Extension {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -2551,10 +2416,10 @@ class Extension {
         this.child = extension;
         extension.name = extendedConfig.name ? extendedConfig.name : extension.parent.name;
         if (extendedConfig.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
-        extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+        extension.options = callOrReturn(getExtensionField(extension, "addOptions", {
             name: extension.name
         }));
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -2563,8 +2428,8 @@ class Extension {
 }
 function getTextBetween(startNode, range, options) {
     const { from , to  } = range;
-    const { blockSeparator ='\n\n' , textSerializers ={} ,  } = options || {};
-    let text = '';
+    const { blockSeparator ="\n\n" , textSerializers ={} ,  } = options || {};
+    let text = "";
     let separated = true;
     startNode.nodesBetween(from, to, (node, pos, parent, index)=>{
         var _a;
@@ -2591,35 +2456,31 @@ function getTextBetween(startNode, range, options) {
     return text;
 }
 function getTextSeralizersFromSchema(schema) {
-    return Object.fromEntries(Object.entries(schema.nodes).filter(([, node])=>node.spec.toText
-    ).map(([name, node])=>[
+    return Object.fromEntries(Object.entries(schema.nodes).filter(([, node])=>node.spec.toText).map(([name, node])=>[
             name,
             node.spec.toText
-        ]
-    ));
+        ]));
 }
 const ClipboardTextSerializer = Extension.create({
-    name: 'clipboardTextSerializer',
+    name: "clipboardTextSerializer",
     addProseMirrorPlugins () {
         return [
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('clipboardTextSerializer'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("clipboardTextSerializer"),
                 props: {
                     clipboardTextSerializer: ()=>{
                         const { editor  } = this;
                         const { state , schema  } = editor;
                         const { doc , selection  } = state;
                         const { ranges  } = selection;
-                        const from = Math.min(...ranges.map((range)=>range.$from.pos
-                        ));
-                        const to = Math.max(...ranges.map((range)=>range.$to.pos
-                        ));
+                        const from = Math.min(...ranges.map((range)=>range.$from.pos));
+                        const to = Math.max(...ranges.map((range)=>range.$to.pos));
                         const textSerializers = getTextSeralizersFromSchema(schema);
-                        const range1 = {
+                        const range = {
                             from,
                             to
                         };
-                        return getTextBetween(doc, range1, {
+                        return getTextBetween(doc, range, {
                             textSerializers
                         });
                     }
@@ -2639,16 +2500,14 @@ const blur = ()=>({ editor , view  })=>{
             }
         });
         return true;
-    }
-;
+    };
 var blur$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     blur: blur
 });
 const clearContent = (emitUpdate = false)=>({ commands  })=>{
-        return commands.setContent('', emitUpdate);
-    }
-;
+        return commands.setContent("", emitUpdate);
+    };
 var clearContent$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     clearContent: clearContent
@@ -2665,7 +2524,7 @@ const clearNodes = ()=>({ state , tr , dispatch  })=>{
                 const $mappedTo = doc.resolve(mapping.map(pos + node.nodeSize));
                 const nodeRange = $mappedFrom.blockRange($mappedTo);
                 if (!nodeRange) return;
-                const targetLiftDepth = _prosemirrorTransform.liftTarget(nodeRange);
+                const targetLiftDepth = (0, _prosemirrorTransform.liftTarget)(nodeRange);
                 if (node.type.isTextblock) {
                     const { defaultType  } = $mappedFrom.parent.contentMatchAt($mappedFrom.index());
                     tr.setNodeMarkup(nodeRange.start, defaultType);
@@ -2674,30 +2533,27 @@ const clearNodes = ()=>({ state , tr , dispatch  })=>{
             });
         });
         return true;
-    }
-;
+    };
 var clearNodes$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     clearNodes: clearNodes
 });
 const command = (fn)=>(props)=>{
         return fn(props);
-    }
-;
+    };
 var command$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     command: command
 });
 const createParagraphNear = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.createParagraphNear(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.createParagraphNear)(state, dispatch);
+    };
 var createParagraphNear$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     createParagraphNear: createParagraphNear
 });
 function getNodeType(nameOrType, schema) {
-    if (typeof nameOrType === 'string') {
+    if (typeof nameOrType === "string") {
         if (!schema.nodes[nameOrType]) throw Error(`There is no node type named '${nameOrType}'. Maybe you forgot to add the extension?`);
         return schema.nodes[nameOrType];
     }
@@ -2718,8 +2574,7 @@ const deleteNode = (typeOrName)=>({ tr , state , dispatch  })=>{
             }
         }
         return false;
-    }
-;
+    };
 var deleteNode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     deleteNode: deleteNode
@@ -2728,45 +2583,41 @@ const deleteRange = (range)=>({ tr , dispatch  })=>{
         const { from , to  } = range;
         if (dispatch) tr.delete(from, to);
         return true;
-    }
-;
+    };
 var deleteRange$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     deleteRange: deleteRange
 });
 const deleteSelection = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.deleteSelection(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.deleteSelection)(state, dispatch);
+    };
 var deleteSelection$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     deleteSelection: deleteSelection
 });
 const enter = ()=>({ commands  })=>{
-        return commands.keyboardShortcut('Enter');
-    }
-;
+        return commands.keyboardShortcut("Enter");
+    };
 var enter$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     enter: enter
 });
 const exitCode = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.exitCode(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.exitCode)(state, dispatch);
+    };
 var exitCode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     exitCode: exitCode
 });
 function getMarkType(nameOrType, schema) {
-    if (typeof nameOrType === 'string') {
+    if (typeof nameOrType === "string") {
         if (!schema.marks[nameOrType]) throw Error(`There is no mark type named '${nameOrType}'. Maybe you forgot to add the extension?`);
         return schema.marks[nameOrType];
     }
     return nameOrType;
 }
 function isRegExp(value) {
-    return Object.prototype.toString.call(value) === '[object RegExp]';
+    return Object.prototype.toString.call(value) === "[object RegExp]";
 }
 /**
  * Check if object1 includes object2
@@ -2822,63 +2673,61 @@ const extendMarkRange = (typeOrName, attributes = {})=>({ tr , state , dispatch 
         if (dispatch) {
             const range = getMarkRange($from, type, attributes);
             if (range && range.from <= from && range.to >= to) {
-                const newSelection = _prosemirrorState.TextSelection.create(doc, range.from, range.to);
+                const newSelection = (0, _prosemirrorState.TextSelection).create(doc, range.from, range.to);
                 tr.setSelection(newSelection);
             }
         }
         return true;
-    }
-;
+    };
 var extendMarkRange$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     extendMarkRange: extendMarkRange
 });
 const first = (commands)=>(props)=>{
-        const items = typeof commands === 'function' ? commands(props) : commands;
+        const items = typeof commands === "function" ? commands(props) : commands;
         for(let i = 0; i < items.length; i += 1){
             if (items[i](props)) return true;
         }
         return false;
-    }
-;
+    };
 var first$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     first: first
 });
 function isClass(value) {
     var _a;
-    if (((_a = value.constructor) === null || _a === void 0 ? void 0 : _a.toString().substring(0, 5)) !== 'class') return false;
+    if (((_a = value.constructor) === null || _a === void 0 ? void 0 : _a.toString().substring(0, 5)) !== "class") return false;
     return true;
 }
 function isObject(value) {
-    return value && typeof value === 'object' && !Array.isArray(value) && !isClass(value);
+    return value && typeof value === "object" && !Array.isArray(value) && !isClass(value);
 }
 function isTextSelection(value) {
-    return isObject(value) && value instanceof _prosemirrorState.TextSelection;
+    return isObject(value) && value instanceof (0, _prosemirrorState.TextSelection);
 }
 function isiOS() {
     return [
-        'iPad Simulator',
-        'iPhone Simulator',
-        'iPod Simulator',
-        'iPad',
-        'iPhone',
-        'iPod', 
-    ].includes(navigator.platform) || navigator.userAgent.includes('Mac') && 'ontouchend' in document;
+        "iPad Simulator",
+        "iPhone Simulator",
+        "iPod Simulator",
+        "iPad",
+        "iPhone",
+        "iPod", 
+    ].includes(navigator.platform) || navigator.userAgent.includes("Mac") && "ontouchend" in document;
 }
 function minMax(value = 0, min = 0, max = 0) {
     return Math.min(Math.max(value, min), max);
 }
 function resolveFocusPosition(doc, position = null) {
     if (!position) return null;
-    const selectionAtStart = _prosemirrorState.Selection.atStart(doc);
-    const selectionAtEnd = _prosemirrorState.Selection.atEnd(doc);
-    if (position === 'start' || position === true) return selectionAtStart;
-    if (position === 'end') return selectionAtEnd;
+    const selectionAtStart = (0, _prosemirrorState.Selection).atStart(doc);
+    const selectionAtEnd = (0, _prosemirrorState.Selection).atEnd(doc);
+    if (position === "start" || position === true) return selectionAtStart;
+    if (position === "end") return selectionAtEnd;
     const minPos = selectionAtStart.from;
     const maxPos = selectionAtEnd.to;
-    if (position === 'all') return _prosemirrorState.TextSelection.create(doc, minMax(0, minPos, maxPos), minMax(doc.content.size, minPos, maxPos));
-    return _prosemirrorState.TextSelection.create(doc, minMax(position, minPos, maxPos), minMax(position, minPos, maxPos));
+    if (position === "all") return (0, _prosemirrorState.TextSelection).create(doc, minMax(0, minPos, maxPos), minMax(doc.content.size, minPos, maxPos));
+    return (0, _prosemirrorState.TextSelection).create(doc, minMax(position, minPos, maxPos), minMax(position, minPos, maxPos));
 }
 const focus = (position = null, options)=>({ editor , view , tr , dispatch ,  })=>{
         options = {
@@ -2914,8 +2763,7 @@ const focus = (position = null, options)=>({ editor , view , tr , dispatch ,  })
             delayedFocus();
         }
         return true;
-    }
-;
+    };
 var focus$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     focus: focus
@@ -2924,10 +2772,8 @@ const forEach = (items, fn)=>(props)=>{
         return items.every((item, index)=>fn(item, {
                 ...props,
                 index
-            })
-        );
-    }
-;
+            }));
+    };
 var forEach$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     forEach: forEach
@@ -2937,8 +2783,7 @@ const insertContent = (value, options)=>({ tr , commands  })=>{
             from: tr.selection.from,
             to: tr.selection.to
         }, value, options);
-    }
-;
+    };
 var insertContent$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     insertContent: insertContent
@@ -2946,7 +2791,7 @@ var insertContent$1 = /*#__PURE__*/ Object.freeze({
 function elementFromString(value) {
     // add a wrapper to preserve leading and trailing whitespace
     const wrappedValue = `<body>${value}</body>`;
-    return new window.DOMParser().parseFromString(wrappedValue, 'text/html').body;
+    return new window.DOMParser().parseFromString(wrappedValue, "text/html").body;
 }
 function createNodeFromContent(content, schema, options) {
     options = {
@@ -2954,35 +2799,34 @@ function createNodeFromContent(content, schema, options) {
         parseOptions: {},
         ...options
     };
-    if (typeof content === 'object' && content !== null) try {
-        if (Array.isArray(content)) return _prosemirrorModel.Fragment.fromArray(content.map((item)=>schema.nodeFromJSON(item)
-        ));
+    if (typeof content === "object" && content !== null) try {
+        if (Array.isArray(content)) return (0, _prosemirrorModel.Fragment).fromArray(content.map((item)=>schema.nodeFromJSON(item)));
         return schema.nodeFromJSON(content);
     } catch (error) {
-        console.warn('[tiptap warn]: Invalid content.', 'Passed value:', content, 'Error:', error);
-        return createNodeFromContent('', schema, options);
+        console.warn("[tiptap warn]: Invalid content.", "Passed value:", content, "Error:", error);
+        return createNodeFromContent("", schema, options);
     }
-    if (typeof content === 'string') {
-        const parser = _prosemirrorModel.DOMParser.fromSchema(schema);
+    if (typeof content === "string") {
+        const parser = (0, _prosemirrorModel.DOMParser).fromSchema(schema);
         return options.slice ? parser.parseSlice(elementFromString(content), options.parseOptions).content : parser.parse(elementFromString(content), options.parseOptions);
     }
-    return createNodeFromContent('', schema, options);
+    return createNodeFromContent("", schema, options);
 }
 // source: https://github.com/ProseMirror/prosemirror-state/blob/master/src/selection.js#L466
 function selectionToInsertionEnd(tr, startLen, bias) {
     const last = tr.steps.length - 1;
     if (last < startLen) return;
     const step = tr.steps[last];
-    if (!(step instanceof _prosemirrorTransform.ReplaceStep || step instanceof _prosemirrorTransform.ReplaceAroundStep)) return;
+    if (!(step instanceof (0, _prosemirrorTransform.ReplaceStep) || step instanceof (0, _prosemirrorTransform.ReplaceAroundStep))) return;
     const map = tr.mapping.maps[last];
     let end = 0;
     map.forEach((_from, _to, _newFrom, newTo)=>{
         if (end === 0) end = newTo;
     });
-    tr.setSelection(_prosemirrorState.Selection.near(tr.doc.resolve(end), bias));
+    tr.setSelection((0, _prosemirrorState.Selection).near(tr.doc.resolve(end), bias));
 }
 const isFragment = (nodeOrFragment)=>{
-    return nodeOrFragment.toString().startsWith('<');
+    return nodeOrFragment.toString().startsWith("<");
 };
 const insertContentAt = (position, value, options)=>({ tr , dispatch , editor  })=>{
         if (dispatch) {
@@ -2993,13 +2837,13 @@ const insertContentAt = (position, value, options)=>({ tr , dispatch , editor  }
             };
             const content = createNodeFromContent(value, editor.schema, {
                 parseOptions: {
-                    preserveWhitespace: 'full',
+                    preserveWhitespace: "full",
                     ...options.parseOptions
                 }
             });
             // don’t dispatch an empty fragment because this can lead to strange errors
-            if (content.toString() === '<>') return true;
-            let { from , to  } = typeof position === 'number' ? {
+            if (content.toString() === "<>") return true;
+            let { from , to  } = typeof position === "number" ? {
                 from: position,
                 to: position
             } : position;
@@ -3035,35 +2879,32 @@ const insertContentAt = (position, value, options)=>({ tr , dispatch , editor  }
             if (options.updateSelection) selectionToInsertionEnd(tr, tr.steps.length - 1, -1);
         }
         return true;
-    }
-;
+    };
 var insertContentAt$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     insertContentAt: insertContentAt
 });
 const joinBackward = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.joinBackward(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.joinBackward)(state, dispatch);
+    };
 var joinBackward$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     joinBackward: joinBackward
 });
 const joinForward = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.joinForward(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.joinForward)(state, dispatch);
+    };
 var joinForward$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     joinForward: joinForward
 });
 function isMacOS() {
-    return typeof navigator !== 'undefined' ? /Mac/.test(navigator.platform) : false;
+    return typeof navigator !== "undefined" ? /Mac/.test(navigator.platform) : false;
 }
 function normalizeKeyName(name) {
     const parts = name.split(/-(?!$)/);
     let result = parts[parts.length - 1];
-    if (result === 'Space') result = ' ';
+    if (result === "Space") result = " ";
     let alt;
     let ctrl;
     let shift;
@@ -3088,32 +2929,29 @@ function normalizeKeyName(name) {
 const keyboardShortcut = (name)=>({ editor , view , tr , dispatch ,  })=>{
         const keys = normalizeKeyName(name).split(/-(?!$)/);
         const key = keys.find((item)=>![
-                'Alt',
-                'Ctrl',
-                'Meta',
-                'Shift'
-            ].includes(item)
-        );
-        const event = new KeyboardEvent('keydown', {
-            key: key === 'Space' ? ' ' : key,
-            altKey: keys.includes('Alt'),
-            ctrlKey: keys.includes('Ctrl'),
-            metaKey: keys.includes('Meta'),
-            shiftKey: keys.includes('Shift'),
+                "Alt",
+                "Ctrl",
+                "Meta",
+                "Shift"
+            ].includes(item));
+        const event = new KeyboardEvent("keydown", {
+            key: key === "Space" ? " " : key,
+            altKey: keys.includes("Alt"),
+            ctrlKey: keys.includes("Ctrl"),
+            metaKey: keys.includes("Meta"),
+            shiftKey: keys.includes("Shift"),
             bubbles: true,
             cancelable: true
         });
         const capturedTransaction = editor.captureTransaction(()=>{
-            view.someProp('handleKeyDown', (f)=>f(view, event)
-            );
+            view.someProp("handleKeyDown", (f)=>f(view, event));
         });
         capturedTransaction === null || capturedTransaction === void 0 || capturedTransaction.steps.forEach((step)=>{
             const newStep = step.map(tr.mapping);
             if (newStep && dispatch) tr.maybeStep(newStep);
         });
         return true;
-    }
-;
+    };
 var keyboardShortcut$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     keyboardShortcut: keyboardShortcut
@@ -3138,52 +2976,46 @@ function isNodeActive(state, typeOrName, attributes = {}) {
         return type.name === nodeRange.node.type.name;
     }).filter((nodeRange)=>objectIncludes(nodeRange.node.attrs, attributes, {
             strict: false
-        })
-    );
+        }));
     if (empty) return !!matchedNodeRanges.length;
-    const range = matchedNodeRanges.reduce((sum, nodeRange)=>sum + nodeRange.to - nodeRange.from
-    , 0);
+    const range = matchedNodeRanges.reduce((sum, nodeRange)=>sum + nodeRange.to - nodeRange.from, 0);
     return range >= selectionRange;
 }
 const lift = (typeOrName, attributes = {})=>({ state , dispatch  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        const isActive1 = isNodeActive(state, type, attributes);
-        if (!isActive1) return false;
-        return _prosemirrorCommands.lift(state, dispatch);
-    }
-;
+        const isActive = isNodeActive(state, type, attributes);
+        if (!isActive) return false;
+        return (0, _prosemirrorCommands.lift)(state, dispatch);
+    };
 var lift$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     lift: lift
 });
 const liftEmptyBlock = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.liftEmptyBlock(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.liftEmptyBlock)(state, dispatch);
+    };
 var liftEmptyBlock$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     liftEmptyBlock: liftEmptyBlock
 });
 const liftListItem = (typeOrName)=>({ state , dispatch  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        return _prosemirrorSchemaList.liftListItem(type)(state, dispatch);
-    }
-;
+        return (0, _prosemirrorSchemaList.liftListItem)(type)(state, dispatch);
+    };
 var liftListItem$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     liftListItem: liftListItem
 });
 const newlineInCode = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.newlineInCode(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.newlineInCode)(state, dispatch);
+    };
 var newlineInCode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     newlineInCode: newlineInCode
 });
 function getSchemaTypeNameByName(name, schema) {
-    if (schema.nodes[name]) return 'node';
-    if (schema.marks[name]) return 'mark';
+    if (schema.nodes[name]) return "node";
+    if (schema.marks[name]) return "mark";
     return null;
 }
 /**
@@ -3191,7 +3023,7 @@ function getSchemaTypeNameByName(name, schema) {
  * @param obj Object
  * @param key Key to remove
  */ function deleteProps(obj, propOrProps) {
-    const props = typeof propOrProps === 'string' ? [
+    const props = typeof propOrProps === "string" ? [
         propOrProps
     ] : propOrProps;
     return Object.keys(obj).reduce((newObj, prop)=>{
@@ -3202,10 +3034,10 @@ function getSchemaTypeNameByName(name, schema) {
 const resetAttributes = (typeOrName, attributes)=>({ tr , state , dispatch  })=>{
         let nodeType = null;
         let markType = null;
-        const schemaType = getSchemaTypeNameByName(typeof typeOrName === 'string' ? typeOrName : typeOrName.name, state.schema);
+        const schemaType = getSchemaTypeNameByName(typeof typeOrName === "string" ? typeOrName : typeOrName.name, state.schema);
         if (!schemaType) return false;
-        if (schemaType === 'node') nodeType = getNodeType(typeOrName, state.schema);
-        if (schemaType === 'mark') markType = getMarkType(typeOrName, state.schema);
+        if (schemaType === "node") nodeType = getNodeType(typeOrName, state.schema);
+        if (schemaType === "mark") markType = getMarkType(typeOrName, state.schema);
         if (dispatch) tr.selection.ranges.forEach((range)=>{
             state.doc.nodesBetween(range.$from.pos, range.$to.pos, (node, pos)=>{
                 if (nodeType && nodeType === node.type) tr.setNodeMarkup(pos, undefined, deleteProps(node.attrs, attributes));
@@ -3215,8 +3047,7 @@ const resetAttributes = (typeOrName, attributes)=>({ tr , state , dispatch  })=>
             });
         });
         return true;
-    }
-;
+    };
 var resetAttributes$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     resetAttributes: resetAttributes
@@ -3224,8 +3055,7 @@ var resetAttributes$1 = /*#__PURE__*/ Object.freeze({
 const scrollIntoView = ()=>({ tr , dispatch  })=>{
         if (dispatch) tr.scrollIntoView();
         return true;
-    }
-;
+    };
 var scrollIntoView$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     scrollIntoView: scrollIntoView
@@ -3235,50 +3065,44 @@ const selectAll = ()=>({ tr , commands  })=>{
             from: 0,
             to: tr.doc.content.size
         });
-    }
-;
+    };
 var selectAll$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectAll: selectAll
 });
 const selectNodeBackward = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.selectNodeBackward(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.selectNodeBackward)(state, dispatch);
+    };
 var selectNodeBackward$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectNodeBackward: selectNodeBackward
 });
 const selectNodeForward = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.selectNodeForward(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.selectNodeForward)(state, dispatch);
+    };
 var selectNodeForward$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectNodeForward: selectNodeForward
 });
 const selectParentNode = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.selectParentNode(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.selectParentNode)(state, dispatch);
+    };
 var selectParentNode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectParentNode: selectParentNode
 });
 // @ts-ignore
 const selectTextblockEnd = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.selectTextblockEnd(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.selectTextblockEnd)(state, dispatch);
+    };
 var selectTextblockEnd$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectTextblockEnd: selectTextblockEnd
 });
 // @ts-ignore
 const selectTextblockStart = ()=>({ state , dispatch  })=>{
-        return _prosemirrorCommands.selectTextblockStart(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.selectTextblockStart)(state, dispatch);
+    };
 var selectTextblockStart$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     selectTextblockStart: selectTextblockStart
@@ -3291,12 +3115,11 @@ function createDocument(content, schema, parseOptions = {}) {
 }
 const setContent = (content, emitUpdate = false, parseOptions = {})=>({ tr , editor , dispatch  })=>{
         const { doc  } = tr;
-        const document = createDocument(content, editor.schema, parseOptions);
-        const selection = _prosemirrorState.TextSelection.create(doc, 0, doc.content.size);
-        if (dispatch) tr.setSelection(selection).replaceSelectionWith(document, false).setMeta('preventUpdate', !emitUpdate);
+        const document1 = createDocument(content, editor.schema, parseOptions);
+        const selection = (0, _prosemirrorState.TextSelection).create(doc, 0, doc.content.size);
+        if (dispatch) tr.setSelection(selection).replaceSelectionWith(document1, false).setMeta("preventUpdate", !emitUpdate);
         return true;
-    }
-;
+    };
 var setContent$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setContent: setContent
@@ -3311,8 +3134,7 @@ function getMarkAttributes(state, typeOrName) {
     } else state.doc.nodesBetween(from, to, (node)=>{
         marks.push(...node.marks);
     });
-    const mark = marks.find((markItem)=>markItem.type.name === type.name
-    );
+    const mark = marks.find((markItem)=>markItem.type.name === type.name);
     if (!mark) return {};
     return {
         ...mark.attrs
@@ -3335,8 +3157,7 @@ const setMark = (typeOrName, attributes = {})=>({ tr , state , dispatch  })=>{
                 state.doc.nodesBetween(from, to, (node, pos)=>{
                     const trimmedFrom = Math.max(pos, from);
                     const trimmedTo = Math.min(pos + node.nodeSize, to);
-                    const someHasMark = node.marks.find((mark)=>mark.type === type
-                    );
+                    const someHasMark = node.marks.find((mark)=>mark.type === type);
                     // if there is already a mark of this type
                     // we know that we have to merge its attributes
                     // otherwise we add a fresh new mark
@@ -3351,8 +3172,7 @@ const setMark = (typeOrName, attributes = {})=>({ tr , state , dispatch  })=>{
             });
         }
         return true;
-    }
-;
+    };
 var setMark$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setMark: setMark
@@ -3360,8 +3180,7 @@ var setMark$1 = /*#__PURE__*/ Object.freeze({
 const setMeta = (key, value)=>({ tr  })=>{
         tr.setMeta(key, value);
         return true;
-    }
-;
+    };
 var setMeta$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setMeta: setMeta
@@ -3375,14 +3194,13 @@ const setNode = (typeOrName, attributes = {})=>({ state , dispatch , chain  })=>
         }
         return chain()// try to convert node to default node if needed
         .command(({ commands  })=>{
-            const canSetBlock = _prosemirrorCommands.setBlockType(type, attributes)(state);
+            const canSetBlock = (0, _prosemirrorCommands.setBlockType)(type, attributes)(state);
             if (canSetBlock) return true;
             return commands.clearNodes();
         }).command(({ state: updatedState  })=>{
-            return _prosemirrorCommands.setBlockType(type, attributes)(updatedState, dispatch);
+            return (0, _prosemirrorCommands.setBlockType)(type, attributes)(updatedState, dispatch);
         }).run();
-    }
-;
+    };
 var setNode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setNode: setNode
@@ -3390,15 +3208,14 @@ var setNode$1 = /*#__PURE__*/ Object.freeze({
 const setNodeSelection = (position)=>({ tr , dispatch  })=>{
         if (dispatch) {
             const { doc  } = tr;
-            const minPos = _prosemirrorState.Selection.atStart(doc).from;
-            const maxPos = _prosemirrorState.Selection.atEnd(doc).to;
+            const minPos = (0, _prosemirrorState.Selection).atStart(doc).from;
+            const maxPos = (0, _prosemirrorState.Selection).atEnd(doc).to;
             const resolvedPos = minMax(position, minPos, maxPos);
-            const selection = _prosemirrorState.NodeSelection.create(doc, resolvedPos);
+            const selection = (0, _prosemirrorState.NodeSelection).create(doc, resolvedPos);
             tr.setSelection(selection);
         }
         return true;
-    }
-;
+    };
 var setNodeSelection$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setNodeSelection: setNodeSelection
@@ -3406,29 +3223,27 @@ var setNodeSelection$1 = /*#__PURE__*/ Object.freeze({
 const setTextSelection = (position)=>({ tr , dispatch  })=>{
         if (dispatch) {
             const { doc  } = tr;
-            const { from , to  } = typeof position === 'number' ? {
+            const { from , to  } = typeof position === "number" ? {
                 from: position,
                 to: position
             } : position;
-            const minPos = _prosemirrorState.TextSelection.atStart(doc).from;
-            const maxPos = _prosemirrorState.TextSelection.atEnd(doc).to;
+            const minPos = (0, _prosemirrorState.TextSelection).atStart(doc).from;
+            const maxPos = (0, _prosemirrorState.TextSelection).atEnd(doc).to;
             const resolvedFrom = minMax(from, minPos, maxPos);
             const resolvedEnd = minMax(to, minPos, maxPos);
-            const selection = _prosemirrorState.TextSelection.create(doc, resolvedFrom, resolvedEnd);
+            const selection = (0, _prosemirrorState.TextSelection).create(doc, resolvedFrom, resolvedEnd);
             tr.setSelection(selection);
         }
         return true;
-    }
-;
+    };
 var setTextSelection$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     setTextSelection: setTextSelection
 });
 const sinkListItem = (typeOrName)=>({ state , dispatch  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        return _prosemirrorSchemaList.sinkListItem(type)(state, dispatch);
-    }
-;
+        return (0, _prosemirrorSchemaList.sinkListItem)(type)(state, dispatch);
+    };
 var sinkListItem$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     sinkListItem: sinkListItem
@@ -3452,8 +3267,7 @@ function defaultBlockAt$1(match) {
 function ensureMarks(state, splittableMarks) {
     const marks = state.storedMarks || state.selection.$to.parentOffset && state.selection.$from.marks();
     if (marks) {
-        const filteredMarks = marks.filter((mark)=>splittableMarks === null || splittableMarks === void 0 ? void 0 : splittableMarks.includes(mark.type.name)
-        );
+        const filteredMarks = marks.filter((mark)=>splittableMarks === null || splittableMarks === void 0 ? void 0 : splittableMarks.includes(mark.type.name));
         state.tr.ensureMarks(filteredMarks);
     }
 }
@@ -3462,8 +3276,8 @@ const splitBlock = ({ keepMarks =true  } = {})=>({ tr , state , dispatch , edito
         const { $from , $to  } = selection;
         const extensionAttributes = editor.extensionManager.attributes;
         const newAttributes = getSplittedAttributes(extensionAttributes, $from.node().type.name, $from.node().attrs);
-        if (selection instanceof _prosemirrorState.NodeSelection && selection.node.isBlock) {
-            if (!$from.parentOffset || !_prosemirrorTransform.canSplit(doc, $from.pos)) return false;
+        if (selection instanceof (0, _prosemirrorState.NodeSelection) && selection.node.isBlock) {
+            if (!$from.parentOffset || !(0, _prosemirrorTransform.canSplit)(doc, $from.pos)) return false;
             if (dispatch) {
                 if (keepMarks) ensureMarks(state, editor.extensionManager.splittableMarks);
                 tr.split($from.pos).scrollIntoView();
@@ -3473,7 +3287,7 @@ const splitBlock = ({ keepMarks =true  } = {})=>({ tr , state , dispatch , edito
         if (!$from.parent.isBlock) return false;
         if (dispatch) {
             const atEnd = $to.parentOffset === $to.parent.content.size;
-            if (selection instanceof _prosemirrorState.TextSelection) tr.deleteSelection();
+            if (selection instanceof (0, _prosemirrorState.TextSelection)) tr.deleteSelection();
             const deflt = $from.depth === 0 ? undefined : defaultBlockAt$1($from.node(-1).contentMatchAt($from.indexAfter(-1)));
             let types = atEnd && deflt ? [
                 {
@@ -3481,8 +3295,8 @@ const splitBlock = ({ keepMarks =true  } = {})=>({ tr , state , dispatch , edito
                     attrs: newAttributes
                 }
             ] : undefined;
-            let can = _prosemirrorTransform.canSplit(tr.doc, tr.mapping.map($from.pos), 1, types);
-            if (!types && !can && _prosemirrorTransform.canSplit(tr.doc, tr.mapping.map($from.pos), 1, deflt ? [
+            let can = (0, _prosemirrorTransform.canSplit)(tr.doc, tr.mapping.map($from.pos), 1, types);
+            if (!types && !can && (0, _prosemirrorTransform.canSplit)(tr.doc, tr.mapping.map($from.pos), 1, deflt ? [
                 {
                     type: deflt
                 }
@@ -3498,8 +3312,8 @@ const splitBlock = ({ keepMarks =true  } = {})=>({ tr , state , dispatch , edito
             if (can) {
                 tr.split(tr.mapping.map($from.pos), 1, types);
                 if (deflt && !atEnd && !$from.parentOffset && $from.parent.type !== deflt) {
-                    const first1 = tr.mapping.map($from.before());
-                    const $first = tr.doc.resolve(first1);
+                    const first = tr.mapping.map($from.before());
+                    const $first = tr.doc.resolve(first);
                     if ($from.node(-1).canReplaceWith($first.index(), $first.index() + 1, deflt)) tr.setNodeMarkup(tr.mapping.map($from.before()), deflt);
                 }
             }
@@ -3507,8 +3321,7 @@ const splitBlock = ({ keepMarks =true  } = {})=>({ tr , state , dispatch , edito
             tr.scrollIntoView();
         }
         return true;
-    }
-;
+    };
 var splitBlock$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     splitBlock: splitBlock
@@ -3530,42 +3343,42 @@ const splitListItem = (typeOrName)=>({ tr , state , dispatch , editor ,  })=>{
             // command handle lifting.
             if ($from.depth === 2 || $from.node(-3).type !== type || $from.index(-2) !== $from.node(-2).childCount - 1) return false;
             if (dispatch) {
-                let wrap = _prosemirrorModel.Fragment.empty;
+                let wrap = (0, _prosemirrorModel.Fragment).empty;
                 // eslint-disable-next-line
                 const depthBefore = $from.index(-1) ? 1 : $from.index(-2) ? 2 : 3;
                 // Build a fragment containing empty versions of the structure
                 // from the outer list item to the parent node of the cursor
-                for(let d = $from.depth - depthBefore; d >= $from.depth - 3; d -= 1)wrap = _prosemirrorModel.Fragment.from($from.node(d).copy(wrap));
+                for(let d = $from.depth - depthBefore; d >= $from.depth - 3; d -= 1)wrap = (0, _prosemirrorModel.Fragment).from($from.node(d).copy(wrap));
                 // eslint-disable-next-line
                 const depthAfter = $from.indexAfter(-1) < $from.node(-2).childCount ? 1 : $from.indexAfter(-2) < $from.node(-3).childCount ? 2 : 3;
                 // Add a second list item with an empty default start node
                 const newNextTypeAttributes = getSplittedAttributes(extensionAttributes, $from.node().type.name, $from.node().attrs);
                 const nextType = ((_a = type.contentMatch.defaultType) === null || _a === void 0 ? void 0 : _a.createAndFill(newNextTypeAttributes)) || undefined;
-                wrap = wrap.append(_prosemirrorModel.Fragment.from(type.createAndFill(null, nextType) || undefined));
+                wrap = wrap.append((0, _prosemirrorModel.Fragment).from(type.createAndFill(null, nextType) || undefined));
                 const start = $from.before($from.depth - (depthBefore - 1));
-                tr.replace(start, $from.after(-depthAfter), new _prosemirrorModel.Slice(wrap, 4 - depthBefore, 0));
+                tr.replace(start, $from.after(-depthAfter), new (0, _prosemirrorModel.Slice)(wrap, 4 - depthBefore, 0));
                 let sel = -1;
                 tr.doc.nodesBetween(start, tr.doc.content.size, (n, pos)=>{
                     if (sel > -1) return false;
                     if (n.isTextblock && n.content.size === 0) sel = pos + 1;
                 });
-                if (sel > -1) tr.setSelection(_prosemirrorState.TextSelection.near(tr.doc.resolve(sel)));
+                if (sel > -1) tr.setSelection((0, _prosemirrorState.TextSelection).near(tr.doc.resolve(sel)));
                 tr.scrollIntoView();
             }
             return true;
         }
-        const nextType = $to.pos === $from.end() ? grandParent.contentMatchAt(0).defaultType : null;
+        const nextType1 = $to.pos === $from.end() ? grandParent.contentMatchAt(0).defaultType : null;
         const newTypeAttributes = getSplittedAttributes(extensionAttributes, grandParent.type.name, grandParent.attrs);
-        const newNextTypeAttributes = getSplittedAttributes(extensionAttributes, $from.node().type.name, $from.node().attrs);
+        const newNextTypeAttributes1 = getSplittedAttributes(extensionAttributes, $from.node().type.name, $from.node().attrs);
         tr.delete($from.pos, $to.pos);
-        const types = nextType ? [
+        const types = nextType1 ? [
             {
                 type,
                 attrs: newTypeAttributes
             },
             {
-                type: nextType,
-                attrs: newNextTypeAttributes
+                type: nextType1,
+                attrs: newNextTypeAttributes1
             }
         ] : [
             {
@@ -3573,11 +3386,10 @@ const splitListItem = (typeOrName)=>({ tr , state , dispatch , editor ,  })=>{
                 attrs: newTypeAttributes
             }
         ];
-        if (!_prosemirrorTransform.canSplit(tr.doc, $from.pos, 2)) return false;
+        if (!(0, _prosemirrorTransform.canSplit)(tr.doc, $from.pos, 2)) return false;
         if (dispatch) tr.split($from.pos, 2, types).scrollIntoView();
         return true;
-    }
-;
+    };
 var splitListItem$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     splitListItem: splitListItem
@@ -3594,91 +3406,78 @@ function findParentNodeClosestToPos($pos, predicate) {
     }
 }
 function findParentNode(predicate) {
-    return (selection)=>findParentNodeClosestToPos(selection.$from, predicate)
-    ;
+    return (selection)=>findParentNodeClosestToPos(selection.$from, predicate);
 }
-function splitExtensions(extensions1) {
-    const baseExtensions = extensions1.filter((extension)=>extension.type === 'extension'
-    );
-    const nodeExtensions = extensions1.filter((extension)=>extension.type === 'node'
-    );
-    const markExtensions = extensions1.filter((extension)=>extension.type === 'mark'
-    );
+function splitExtensions(extensions) {
+    const baseExtensions = extensions.filter((extension)=>extension.type === "extension");
+    const nodeExtensions = extensions.filter((extension)=>extension.type === "node");
+    const markExtensions = extensions.filter((extension)=>extension.type === "mark");
     return {
         baseExtensions,
         nodeExtensions,
         markExtensions
     };
 }
-function isList(name, extensions2) {
-    const { nodeExtensions  } = splitExtensions(extensions2);
-    const extension = nodeExtensions.find((item)=>item.name === name
-    );
+function isList(name, extensions) {
+    const { nodeExtensions  } = splitExtensions(extensions);
+    const extension = nodeExtensions.find((item)=>item.name === name);
     if (!extension) return false;
     const context = {
         name: extension.name,
         options: extension.options,
         storage: extension.storage
     };
-    const group = callOrReturn(getExtensionField(extension, 'group', context));
-    if (typeof group !== 'string') return false;
-    return group.split(' ').includes('list');
+    const group = callOrReturn(getExtensionField(extension, "group", context));
+    if (typeof group !== "string") return false;
+    return group.split(" ").includes("list");
 }
 const joinListBackwards = (tr, listType)=>{
-    const list = findParentNode((node)=>node.type === listType
-    )(tr.selection);
+    const list = findParentNode((node)=>node.type === listType)(tr.selection);
     if (!list) return true;
     const before = tr.doc.resolve(Math.max(0, list.pos - 1)).before(list.depth);
     if (before === undefined) return true;
     const nodeBefore = tr.doc.nodeAt(before);
-    const canJoinBackwards = list.node.type === (nodeBefore === null || nodeBefore === void 0 ? void 0 : nodeBefore.type) && _prosemirrorTransform.canJoin(tr.doc, list.pos);
+    const canJoinBackwards = list.node.type === (nodeBefore === null || nodeBefore === void 0 ? void 0 : nodeBefore.type) && (0, _prosemirrorTransform.canJoin)(tr.doc, list.pos);
     if (!canJoinBackwards) return true;
     tr.join(list.pos);
     return true;
 };
 const joinListForwards = (tr, listType)=>{
-    const list = findParentNode((node)=>node.type === listType
-    )(tr.selection);
+    const list = findParentNode((node)=>node.type === listType)(tr.selection);
     if (!list) return true;
     const after = tr.doc.resolve(list.start).after(list.depth);
     if (after === undefined) return true;
     const nodeAfter = tr.doc.nodeAt(after);
-    const canJoinForwards = list.node.type === (nodeAfter === null || nodeAfter === void 0 ? void 0 : nodeAfter.type) && _prosemirrorTransform.canJoin(tr.doc, after);
+    const canJoinForwards = list.node.type === (nodeAfter === null || nodeAfter === void 0 ? void 0 : nodeAfter.type) && (0, _prosemirrorTransform.canJoin)(tr.doc, after);
     if (!canJoinForwards) return true;
     tr.join(after);
     return true;
 };
 const toggleList = (listTypeOrName, itemTypeOrName)=>({ editor , tr , state , dispatch , chain , commands , can ,  })=>{
-        const { extensions: extensions3  } = editor.extensionManager;
+        const { extensions  } = editor.extensionManager;
         const listType = getNodeType(listTypeOrName, state.schema);
         const itemType = getNodeType(itemTypeOrName, state.schema);
         const { selection  } = state;
         const { $from , $to  } = selection;
         const range = $from.blockRange($to);
         if (!range) return false;
-        const parentList = findParentNode((node)=>isList(node.type.name, extensions3)
-        )(selection);
+        const parentList = findParentNode((node)=>isList(node.type.name, extensions))(selection);
         if (range.depth >= 1 && parentList && range.depth - parentList.depth <= 1) {
             // remove list
             if (parentList.node.type === listType) return commands.liftListItem(itemType);
             // change list type
-            if (isList(parentList.node.type.name, extensions3) && listType.validContent(parentList.node.content) && dispatch) return chain().command(()=>{
+            if (isList(parentList.node.type.name, extensions) && listType.validContent(parentList.node.content) && dispatch) return chain().command(()=>{
                 tr.setNodeMarkup(parentList.pos, listType);
                 return true;
-            }).command(()=>joinListBackwards(tr, listType)
-            ).command(()=>joinListForwards(tr, listType)
-            ).run();
+            }).command(()=>joinListBackwards(tr, listType)).command(()=>joinListForwards(tr, listType)).run();
         }
         return chain()// try to convert node to default node if needed
         .command(()=>{
             const canWrapInList = can().wrapInList(listType);
             if (canWrapInList) return true;
             return commands.clearNodes();
-        }).wrapInList(listType).command(()=>joinListBackwards(tr, listType)
-        ).command(()=>joinListForwards(tr, listType)
-        ).run();
-    }
-;
+        }).wrapInList(listType).command(()=>joinListBackwards(tr, listType)).command(()=>joinListForwards(tr, listType)).run();
+    };
 var toggleList$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     toggleList: toggleList
@@ -3691,8 +3490,7 @@ function isMarkActive(state, typeOrName, attributes = {}) {
         return type.name === mark.type.name;
     }).find((mark)=>objectIncludes(mark.attrs, attributes, {
             strict: false
-        })
-    );
+        }));
     let selectionRange = 0;
     const markRanges = [];
     ranges.forEach(({ $from , $to  })=>{
@@ -3708,8 +3506,7 @@ function isMarkActive(state, typeOrName, attributes = {}) {
                     mark,
                     from: relativeFrom,
                     to: relativeTo
-                })
-            ));
+                })));
         });
     });
     if (selectionRange === 0) return false;
@@ -3719,31 +3516,27 @@ function isMarkActive(state, typeOrName, attributes = {}) {
         return type.name === markRange.mark.type.name;
     }).filter((markRange)=>objectIncludes(markRange.mark.attrs, attributes, {
             strict: false
-        })
-    ).reduce((sum, markRange)=>sum + markRange.to - markRange.from
-    , 0);
+        })).reduce((sum, markRange)=>sum + markRange.to - markRange.from, 0);
     // calculate range of marks that excludes the searched mark
     // for example `code` doesn’t allow any other marks
     const excludedRange = markRanges.filter((markRange)=>{
         if (!type) return true;
         return markRange.mark.type !== type && markRange.mark.type.excludes(type);
-    }).reduce((sum, markRange)=>sum + markRange.to - markRange.from
-    , 0);
+    }).reduce((sum, markRange)=>sum + markRange.to - markRange.from, 0);
     // we only include the result of `excludedRange`
     // if there is a match at all
-    const range2 = matchedRange > 0 ? matchedRange + excludedRange : matchedRange;
-    return range2 >= selectionRange;
+    const range = matchedRange > 0 ? matchedRange + excludedRange : matchedRange;
+    return range >= selectionRange;
 }
 const toggleMark = (typeOrName, attributes = {}, options = {})=>({ state , commands  })=>{
         const { extendEmptyMarkRange =false  } = options;
         const type = getMarkType(typeOrName, state.schema);
-        const isActive2 = isMarkActive(state, type, attributes);
-        if (isActive2) return commands.unsetMark(type, {
+        const isActive = isMarkActive(state, type, attributes);
+        if (isActive) return commands.unsetMark(type, {
             extendEmptyMarkRange
         });
         return commands.setMark(type, attributes);
-    }
-;
+    };
 var toggleMark$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     toggleMark: toggleMark
@@ -3751,22 +3544,20 @@ var toggleMark$1 = /*#__PURE__*/ Object.freeze({
 const toggleNode = (typeOrName, toggleTypeOrName, attributes = {})=>({ state , commands  })=>{
         const type = getNodeType(typeOrName, state.schema);
         const toggleType = getNodeType(toggleTypeOrName, state.schema);
-        const isActive3 = isNodeActive(state, type, attributes);
-        if (isActive3) return commands.setNode(toggleType);
+        const isActive = isNodeActive(state, type, attributes);
+        if (isActive) return commands.setNode(toggleType);
         return commands.setNode(type, attributes);
-    }
-;
+    };
 var toggleNode$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     toggleNode: toggleNode
 });
 const toggleWrap = (typeOrName, attributes = {})=>({ state , commands  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        const isActive4 = isNodeActive(state, type, attributes);
-        if (isActive4) return commands.lift(type);
+        const isActive = isNodeActive(state, type, attributes);
+        if (isActive) return commands.lift(type);
         return commands.wrapIn(type, attributes);
-    }
-;
+    };
 var toggleWrap$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     toggleWrap: toggleWrap
@@ -3792,8 +3583,7 @@ const undoInputRule = ()=>({ state , dispatch  })=>{
             }
         }
         return false;
-    }
-;
+    };
 var undoInputRule$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     undoInputRule: undoInputRule
@@ -3806,8 +3596,7 @@ const unsetAllMarks = ()=>({ tr , dispatch  })=>{
             tr.removeMark(range.$from.pos, range.$to.pos);
         });
         return true;
-    }
-;
+    };
 var unsetAllMarks$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     unsetAllMarks: unsetAllMarks
@@ -3821,8 +3610,7 @@ const unsetMark = (typeOrName, options = {})=>({ tr , state , dispatch  })=>{
         if (!dispatch) return true;
         if (empty && extendEmptyMarkRange) {
             let { from , to  } = selection;
-            const attrs = (_a = $from.marks().find((mark)=>mark.type === type
-            )) === null || _a === void 0 ? void 0 : _a.attrs;
+            const attrs = (_a = $from.marks().find((mark)=>mark.type === type)) === null || _a === void 0 ? void 0 : _a.attrs;
             const range = getMarkRange($from, type, attrs);
             if (range) {
                 from = range.from;
@@ -3834,8 +3622,7 @@ const unsetMark = (typeOrName, options = {})=>({ tr , state , dispatch  })=>{
         });
         tr.removeStoredMark(type);
         return true;
-    }
-;
+    };
 var unsetMark$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     unsetMark: unsetMark
@@ -3843,10 +3630,10 @@ var unsetMark$1 = /*#__PURE__*/ Object.freeze({
 const updateAttributes = (typeOrName, attributes = {})=>({ tr , state , dispatch  })=>{
         let nodeType = null;
         let markType = null;
-        const schemaType = getSchemaTypeNameByName(typeof typeOrName === 'string' ? typeOrName : typeOrName.name, state.schema);
+        const schemaType = getSchemaTypeNameByName(typeof typeOrName === "string" ? typeOrName : typeOrName.name, state.schema);
         if (!schemaType) return false;
-        if (schemaType === 'node') nodeType = getNodeType(typeOrName, state.schema);
-        if (schemaType === 'mark') markType = getMarkType(typeOrName, state.schema);
+        if (schemaType === "node") nodeType = getNodeType(typeOrName, state.schema);
+        if (schemaType === "mark") markType = getMarkType(typeOrName, state.schema);
         if (dispatch) tr.selection.ranges.forEach((range)=>{
             const from = range.$from.pos;
             const to = range.$to.pos;
@@ -3868,32 +3655,29 @@ const updateAttributes = (typeOrName, attributes = {})=>({ tr , state , dispatch
             });
         });
         return true;
-    }
-;
+    };
 var updateAttributes$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     updateAttributes: updateAttributes
 });
 const wrapIn = (typeOrName, attributes = {})=>({ state , dispatch  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        return _prosemirrorCommands.wrapIn(type, attributes)(state, dispatch);
-    }
-;
+        return (0, _prosemirrorCommands.wrapIn)(type, attributes)(state, dispatch);
+    };
 var wrapIn$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     wrapIn: wrapIn
 });
 const wrapInList = (typeOrName, attributes = {})=>({ state , dispatch  })=>{
         const type = getNodeType(typeOrName, state.schema);
-        return _prosemirrorSchemaList.wrapInList(type, attributes)(state, dispatch);
-    }
-;
+        return (0, _prosemirrorSchemaList.wrapInList)(type, attributes)(state, dispatch);
+    };
 var wrapInList$1 = /*#__PURE__*/ Object.freeze({
     __proto__: null,
     wrapInList: wrapInList
 });
 const Commands = Extension.create({
-    name: 'commands',
+    name: "commands",
     addCommands () {
         return {
             ...blur$1,
@@ -3950,11 +3734,11 @@ const Commands = Extension.create({
     }
 });
 const Editable = Extension.create({
-    name: 'editable',
+    name: "editable",
     addProseMirrorPlugins () {
         return [
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('editable'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("editable"),
                 props: {
                     editable: ()=>this.editor.options.editable
                 }
@@ -3963,27 +3747,27 @@ const Editable = Extension.create({
     }
 });
 const FocusEvents = Extension.create({
-    name: 'focusEvents',
+    name: "focusEvents",
     addProseMirrorPlugins () {
         const { editor  } = this;
         return [
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('focusEvents'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("focusEvents"),
                 props: {
                     handleDOMEvents: {
                         focus: (view, event)=>{
                             editor.isFocused = true;
-                            const transaction = editor.state.tr.setMeta('focus', {
+                            const transaction = editor.state.tr.setMeta("focus", {
                                 event
-                            }).setMeta('addToHistory', false);
+                            }).setMeta("addToHistory", false);
                             view.dispatch(transaction);
                             return false;
                         },
                         blur: (view, event)=>{
                             editor.isFocused = false;
-                            const transaction = editor.state.tr.setMeta('blur', {
+                            const transaction = editor.state.tr.setMeta("blur", {
                                 event
-                            }).setMeta('addToHistory', false);
+                            }).setMeta("addToHistory", false);
                             view.dispatch(transaction);
                             return false;
                         }
@@ -4040,10 +3824,10 @@ class CommandManager {
         const { view  } = editor;
         const { tr  } = state;
         const props = this.buildProps(tr);
-        return Object.fromEntries(Object.entries(rawCommands).map(([name, command1])=>{
+        return Object.fromEntries(Object.entries(rawCommands).map(([name, command])=>{
             const method = (...args)=>{
-                const callback = command1(...args)(props);
-                if (!tr.getMeta('preventDispatch') && !this.hasCustomState) view.dispatch(tr);
+                const callback = command(...args)(props);
+                if (!tr.getMeta("preventDispatch") && !this.hasCustomState) view.dispatch(tr);
                 return callback;
             };
             return [
@@ -4053,12 +3837,10 @@ class CommandManager {
         }));
     }
     get chain() {
-        return ()=>this.createChain()
-        ;
+        return ()=>this.createChain();
     }
     get can() {
-        return ()=>this.createCan()
-        ;
+        return ()=>this.createCan();
     }
     createChain(startTr, shouldDispatch = true) {
         const { rawCommands , editor , state  } = this;
@@ -4066,16 +3848,15 @@ class CommandManager {
         const callbacks = [];
         const hasStartTransaction = !!startTr;
         const tr = startTr || state.tr;
-        const run1 = ()=>{
-            if (!hasStartTransaction && shouldDispatch && !tr.getMeta('preventDispatch') && !this.hasCustomState) view.dispatch(tr);
-            return callbacks.every((callback)=>callback === true
-            );
+        const run = ()=>{
+            if (!hasStartTransaction && shouldDispatch && !tr.getMeta("preventDispatch") && !this.hasCustomState) view.dispatch(tr);
+            return callbacks.every((callback)=>callback === true);
         };
         const chain = {
-            ...Object.fromEntries(Object.entries(rawCommands).map(([name, command2])=>{
+            ...Object.fromEntries(Object.entries(rawCommands).map(([name, command])=>{
                 const chainedCommand = (...args)=>{
                     const props = this.buildProps(tr, shouldDispatch);
-                    const callback = command2(...args)(props);
+                    const callback = command(...args)(props);
                     callbacks.push(callback);
                     return chain;
                 };
@@ -4084,7 +3865,7 @@ class CommandManager {
                     chainedCommand
                 ];
             })),
-            run: run1
+            run
         };
         return chain;
     }
@@ -4093,10 +3874,10 @@ class CommandManager {
         const dispatch = undefined;
         const tr = startTr || state.tr;
         const props = this.buildProps(tr, dispatch);
-        const formattedCommands = Object.fromEntries(Object.entries(rawCommands).map(([name, command3])=>{
+        const formattedCommands = Object.fromEntries(Object.entries(rawCommands).map(([name, command])=>{
             return [
                 name,
-                (...args)=>command3(...args)({
+                (...args)=>command(...args)({
                         ...props,
                         dispatch
                     })
@@ -4119,17 +3900,14 @@ class CommandManager {
                 state,
                 transaction: tr
             }),
-            dispatch: shouldDispatch ? ()=>undefined
-             : undefined,
-            chain: ()=>this.createChain(tr)
-            ,
-            can: ()=>this.createCan(tr)
-            ,
+            dispatch: shouldDispatch ? ()=>undefined : undefined,
+            chain: ()=>this.createChain(tr),
+            can: ()=>this.createCan(tr),
             get commands () {
-                return Object.fromEntries(Object.entries(rawCommands).map(([name, command4])=>{
+                return Object.fromEntries(Object.entries(rawCommands).map(([name, command])=>{
                     return [
                         name,
-                        (...args)=>command4(...args)(props)
+                        (...args)=>command(...args)(props)
                     ];
                 }));
             }
@@ -4138,77 +3916,57 @@ class CommandManager {
     }
 }
 const Keymap = Extension.create({
-    name: 'keymap',
+    name: "keymap",
     addKeyboardShortcuts () {
         const handleBackspace = ()=>this.editor.commands.first(({ commands  })=>[
-                    ()=>commands.undoInputRule()
-                    ,
+                    ()=>commands.undoInputRule(),
                     // maybe convert first text block node to default node
                     ()=>commands.command(({ tr  })=>{
                             const { selection , doc  } = tr;
                             const { empty , $anchor  } = selection;
                             const { pos , parent  } = $anchor;
-                            const isAtStart = _prosemirrorState.Selection.atStart(doc).from === pos;
+                            const isAtStart = (0, _prosemirrorState.Selection).atStart(doc).from === pos;
                             if (!empty || !isAtStart || !parent.type.isTextblock || parent.textContent.length) return false;
                             return commands.clearNodes();
-                        })
-                    ,
-                    ()=>commands.deleteSelection()
-                    ,
-                    ()=>commands.joinBackward()
-                    ,
-                    ()=>commands.selectNodeBackward()
-                    , 
-                ]
-            )
-        ;
+                        }),
+                    ()=>commands.deleteSelection(),
+                    ()=>commands.joinBackward(),
+                    ()=>commands.selectNodeBackward(), 
+                ]);
         const handleDelete = ()=>this.editor.commands.first(({ commands  })=>[
-                    ()=>commands.deleteSelection()
-                    ,
-                    ()=>commands.joinForward()
-                    ,
-                    ()=>commands.selectNodeForward()
-                    , 
-                ]
-            )
-        ;
+                    ()=>commands.deleteSelection(),
+                    ()=>commands.joinForward(),
+                    ()=>commands.selectNodeForward(), 
+                ]);
         const handleEnter = ()=>this.editor.commands.first(({ commands  })=>[
-                    ()=>commands.newlineInCode()
-                    ,
-                    ()=>commands.createParagraphNear()
-                    ,
-                    ()=>commands.liftEmptyBlock()
-                    ,
-                    ()=>commands.splitBlock()
-                    , 
-                ]
-            )
-        ;
+                    ()=>commands.newlineInCode(),
+                    ()=>commands.createParagraphNear(),
+                    ()=>commands.liftEmptyBlock(),
+                    ()=>commands.splitBlock(), 
+                ]);
         const baseKeymap = {
             Enter: handleEnter,
-            'Mod-Enter': ()=>this.editor.commands.exitCode()
-            ,
+            "Mod-Enter": ()=>this.editor.commands.exitCode(),
             Backspace: handleBackspace,
-            'Mod-Backspace': handleBackspace,
-            'Shift-Backspace': handleBackspace,
+            "Mod-Backspace": handleBackspace,
+            "Shift-Backspace": handleBackspace,
             Delete: handleDelete,
-            'Mod-Delete': handleDelete,
-            'Mod-a': ()=>this.editor.commands.selectAll()
+            "Mod-Delete": handleDelete,
+            "Mod-a": ()=>this.editor.commands.selectAll()
         };
         const pcKeymap = {
             ...baseKeymap
         };
         const macKeymap = {
             ...baseKeymap,
-            'Ctrl-h': handleBackspace,
-            'Alt-Backspace': handleBackspace,
-            'Ctrl-d': handleDelete,
-            'Ctrl-Alt-Backspace': handleDelete,
-            'Alt-Delete': handleDelete,
-            'Alt-d': handleDelete,
-            'Ctrl-a': ()=>this.editor.commands.selectTextblockStart()
-            ,
-            'Ctrl-e': ()=>this.editor.commands.selectTextblockEnd()
+            "Ctrl-h": handleBackspace,
+            "Alt-Backspace": handleBackspace,
+            "Ctrl-d": handleDelete,
+            "Ctrl-Alt-Backspace": handleDelete,
+            "Alt-Delete": handleDelete,
+            "Alt-d": handleDelete,
+            "Ctrl-a": ()=>this.editor.commands.selectTextblockStart(),
+            "Ctrl-e": ()=>this.editor.commands.selectTextblockEnd()
         };
         if (isiOS() || isMacOS()) return macKeymap;
         return pcKeymap;
@@ -4220,17 +3978,16 @@ const Keymap = Extension.create({
             // to a paragraph if necessary.
             // This is an alternative to ProseMirror's `AllSelection`, which doesn’t work well
             // with many other commands.
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('clearDocument'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("clearDocument"),
                 appendTransaction: (transactions, oldState, newState)=>{
-                    const docChanges = transactions.some((transaction)=>transaction.docChanged
-                    ) && !oldState.doc.eq(newState.doc);
+                    const docChanges = transactions.some((transaction)=>transaction.docChanged) && !oldState.doc.eq(newState.doc);
                     if (!docChanges) return;
                     const { empty , from , to  } = oldState.selection;
-                    const allFrom = _prosemirrorState.Selection.atStart(oldState.doc).from;
-                    const allEnd = _prosemirrorState.Selection.atEnd(oldState.doc).to;
+                    const allFrom = (0, _prosemirrorState.Selection).atStart(oldState.doc).from;
+                    const allEnd = (0, _prosemirrorState.Selection).atEnd(oldState.doc).to;
                     const allWasSelected = from === allFrom && to === allEnd;
-                    const isEmpty = newState.doc.textBetween(0, newState.doc.content.size, ' ', ' ').length === 0;
+                    const isEmpty = newState.doc.textBetween(0, newState.doc.content.size, " ", " ").length === 0;
                     if (empty || !allWasSelected || !isEmpty) return;
                     const tr = newState.tr;
                     const state = createChainableState({
@@ -4250,15 +4007,15 @@ const Keymap = Extension.create({
     }
 });
 const Tabindex = Extension.create({
-    name: 'tabindex',
+    name: "tabindex",
     addProseMirrorPlugins () {
         return [
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('tabindex'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("tabindex"),
                 props: {
                     attributes: ()=>{
                         if (this.editor.isEditable) return {
-                            tabindex: '0'
+                            tabindex: "0"
                         };
                     }
                 }
@@ -4282,30 +4039,29 @@ function getNodeAttributes(state, typeOrName) {
     state.doc.nodesBetween(from, to, (node)=>{
         nodes.push(node);
     });
-    const node1 = nodes.reverse().find((nodeItem)=>nodeItem.type.name === type.name
-    );
-    if (!node1) return {};
+    const node = nodes.reverse().find((nodeItem)=>nodeItem.type.name === type.name);
+    if (!node) return {};
     return {
-        ...node1.attrs
+        ...node.attrs
     };
 }
 function getAttributes(state, typeOrName) {
-    const schemaType = getSchemaTypeNameByName(typeof typeOrName === 'string' ? typeOrName : typeOrName.name, state.schema);
-    if (schemaType === 'node') return getNodeAttributes(state, typeOrName);
-    if (schemaType === 'mark') return getMarkAttributes(state, typeOrName);
+    const schemaType = getSchemaTypeNameByName(typeof typeOrName === "string" ? typeOrName : typeOrName.name, state.schema);
+    if (schemaType === "node") return getNodeAttributes(state, typeOrName);
+    if (schemaType === "mark") return getMarkAttributes(state, typeOrName);
     return {};
 }
 function isActive(state, name, attributes = {}) {
     if (!name) return isNodeActive(state, null, attributes) || isMarkActive(state, null, attributes);
     const schemaType = getSchemaTypeNameByName(name, state.schema);
-    if (schemaType === 'node') return isNodeActive(state, name, attributes);
-    if (schemaType === 'mark') return isMarkActive(state, name, attributes);
+    if (schemaType === "node") return isNodeActive(state, name, attributes);
+    if (schemaType === "mark") return isMarkActive(state, name, attributes);
     return false;
 }
 function getHTMLFromFragment(fragment, schema) {
-    const documentFragment = _prosemirrorModel.DOMSerializer.fromSchema(schema).serializeFragment(fragment);
+    const documentFragment = (0, _prosemirrorModel.DOMSerializer).fromSchema(schema).serializeFragment(fragment);
     const temporaryDocument = document.implementation.createHTMLDocument();
-    const container = temporaryDocument.createElement('div');
+    const container = temporaryDocument.createElement("div");
     container.appendChild(documentFragment);
     return container.innerHTML;
 }
@@ -4322,13 +4078,13 @@ function isNodeEmpty(node) {
     const content = node.toJSON();
     return JSON.stringify(defaultContent) === JSON.stringify(content);
 }
-function createStyleTag(style1) {
-    const tipTapStyleTag = document.querySelector('style[data-tiptap-style]');
+function createStyleTag(style) {
+    const tipTapStyleTag = document.querySelector("style[data-tiptap-style]");
     if (tipTapStyleTag !== null) return tipTapStyleTag;
-    const styleNode = document.createElement('style');
-    styleNode.setAttribute('data-tiptap-style', '');
-    styleNode.innerHTML = style1;
-    document.getElementsByTagName('head')[0].appendChild(styleNode);
+    const styleNode = document.createElement("style");
+    styleNode.setAttribute("data-tiptap-style", "");
+    styleNode.innerHTML = style;
+    document.getElementsByTagName("head")[0].appendChild(styleNode);
     return styleNode;
 }
 class InputRule {
@@ -4359,11 +4115,10 @@ function run$1(config) {
     if (view.composing) return false;
     const $from = view.state.doc.resolve(from);
     if (// check for code node
-    $from.parent.type.spec.code || !!((_a = $from.nodeBefore || $from.nodeAfter) === null || _a === void 0 ? void 0 : _a.marks.find((mark)=>mark.type.spec.code
-    ))) return false;
+    $from.parent.type.spec.code || !!((_a = $from.nodeBefore || $from.nodeAfter) === null || _a === void 0 ? void 0 : _a.marks.find((mark)=>mark.type.spec.code))) return false;
     let matched = false;
     const maxMatch = 500;
-    const textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - maxMatch), $from.parentOffset, undefined, ' ') + text;
+    const textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - maxMatch), $from.parentOffset, undefined, " ") + text;
     rules.forEach((rule)=>{
         if (matched) return;
         const match = inputRuleMatcherHandler(textBefore, rule.find);
@@ -4410,7 +4165,7 @@ function run$1(config) {
  * action.
  */ function inputRulesPlugin(props) {
     const { editor , rules  } = props;
-    const plugin = new _prosemirrorState.Plugin({
+    const plugin = new (0, _prosemirrorState.Plugin)({
         state: {
             init () {
                 return null;
@@ -4440,7 +4195,7 @@ function run$1(config) {
                             editor,
                             from: $cursor.pos,
                             to: $cursor.pos,
-                            text: '',
+                            text: "",
                             rules,
                             plugin
                         });
@@ -4451,13 +4206,13 @@ function run$1(config) {
             // add support for input rules to trigger on enter
             // this is useful for example for code blocks
             handleKeyDown (view, event) {
-                if (event.key !== 'Enter') return false;
+                if (event.key !== "Enter") return false;
                 const { $cursor  } = view.state.selection;
                 if ($cursor) return run$1({
                     editor,
                     from: $cursor.pos,
                     to: $cursor.pos,
-                    text: '\n',
+                    text: "\n",
                     rules,
                     plugin
                 });
@@ -4470,7 +4225,7 @@ function run$1(config) {
     return plugin;
 }
 function isNumber(value) {
-    return typeof value === 'number';
+    return typeof value === "number";
 }
 class PasteRule {
     constructor(config){
@@ -4508,7 +4263,7 @@ function run(config) {
         if (!node.isTextblock || node.type.spec.code) return;
         const resolvedFrom = Math.max(from, pos);
         const resolvedTo = Math.min(to, pos + node.content.size);
-        const textToMatch = node.textBetween(resolvedFrom - pos, resolvedTo - pos, undefined, '\ufffc');
+        const textToMatch = node.textBetween(resolvedFrom - pos, resolvedTo - pos, undefined, "￼");
         const matches = pasteRuleMatcherHandler(textToMatch, rule.find);
         matches.forEach((match)=>{
             if (match.index === undefined) return;
@@ -4529,8 +4284,7 @@ function run(config) {
             handlers.push(handler);
         });
     });
-    const success = handlers.every((handler)=>handler !== null
-    );
+    const success = handlers.every((handler)=>handler !== null);
     return success;
 }
 /**
@@ -4543,17 +4297,17 @@ function run(config) {
     let isPastedFromProseMirror = false;
     let isDroppedFromProseMirror = false;
     const plugins = rules.map((rule)=>{
-        return new _prosemirrorState.Plugin({
+        return new (0, _prosemirrorState.Plugin)({
             // we register a global drag handler to track the current drag source element
             view (view) {
                 const handleDragstart = (event)=>{
                     var _a;
                     dragSourceElement = ((_a = view.dom.parentElement) === null || _a === void 0 ? void 0 : _a.contains(event.target)) ? view.dom.parentElement : null;
                 };
-                window.addEventListener('dragstart', handleDragstart);
+                window.addEventListener("dragstart", handleDragstart);
                 return {
                     destroy () {
-                        window.removeEventListener('dragstart', handleDragstart);
+                        window.removeEventListener("dragstart", handleDragstart);
                     }
                 };
             },
@@ -4565,16 +4319,16 @@ function run(config) {
                     },
                     paste: (view, event)=>{
                         var _a;
-                        const html = (_a = event.clipboardData) === null || _a === void 0 ? void 0 : _a.getData('text/html');
-                        isPastedFromProseMirror = !!(html === null || html === void 0 ? void 0 : html.includes('data-pm-slice'));
+                        const html = (_a = event.clipboardData) === null || _a === void 0 ? void 0 : _a.getData("text/html");
+                        isPastedFromProseMirror = !!(html === null || html === void 0 ? void 0 : html.includes("data-pm-slice"));
                         return false;
                     }
                 }
             },
             appendTransaction: (transactions, oldState, state)=>{
                 const transaction = transactions[0];
-                const isPaste = transaction.getMeta('uiEvent') === 'paste' && !isPastedFromProseMirror;
-                const isDrop = transaction.getMeta('uiEvent') === 'drop' && !isDroppedFromProseMirror;
+                const isPaste = transaction.getMeta("uiEvent") === "paste" && !isPastedFromProseMirror;
+                const isDrop = transaction.getMeta("uiEvent") === "drop" && !isDroppedFromProseMirror;
                 if (!isPaste && !isDrop) return;
                 // stop if there is no changed range
                 const from = oldState.doc.content.findDiffStart(state.doc.content);
@@ -4605,9 +4359,9 @@ function run(config) {
 /**
  * Get a list of all extension attributes defined in `addAttribute` and `addGlobalAttribute`.
  * @param extensions List of extensions
- */ function getAttributesFromExtensions(extensions4) {
+ */ function getAttributesFromExtensions(extensions) {
     const extensionAttributes = [];
-    const { nodeExtensions , markExtensions  } = splitExtensions(extensions4);
+    const { nodeExtensions , markExtensions  } = splitExtensions(extensions);
     const nodeAndMarkExtensions = [
         ...nodeExtensions,
         ...markExtensions
@@ -4619,13 +4373,13 @@ function run(config) {
         parseHTML: null,
         keepOnSplit: true
     };
-    extensions4.forEach((extension)=>{
+    extensions.forEach((extension)=>{
         const context = {
             name: extension.name,
             options: extension.options,
             storage: extension.storage
         };
-        const addGlobalAttributes = getExtensionField(extension, 'addGlobalAttributes', context);
+        const addGlobalAttributes = getExtensionField(extension, "addGlobalAttributes", context);
         if (!addGlobalAttributes) return;
         // TODO: remove `as GlobalAttributes`
         const globalAttributes = addGlobalAttributes();
@@ -4650,7 +4404,7 @@ function run(config) {
             options: extension.options,
             storage: extension.storage
         };
-        const addAttributes = getExtensionField(extension, 'addAttributes', context);
+        const addAttributes = getExtensionField(extension, "addAttributes", context);
         if (!addAttributes) return;
         // TODO: remove `as Attributes`
         const attributes = addAttributes();
@@ -4668,8 +4422,7 @@ function run(config) {
     return extensionAttributes;
 }
 function mergeAttributes(...objects) {
-    return objects.filter((item)=>!!item
-    ).reduce((items, item)=>{
+    return objects.filter((item)=>!!item).reduce((items, item)=>{
         const mergedAttributes = {
             ...items
         };
@@ -4679,37 +4432,35 @@ function mergeAttributes(...objects) {
                 mergedAttributes[key] = value;
                 return;
             }
-            if (key === 'class') mergedAttributes[key] = [
+            if (key === "class") mergedAttributes[key] = [
                 mergedAttributes[key],
                 value
-            ].join(' ');
-            else if (key === 'style') mergedAttributes[key] = [
+            ].join(" ");
+            else if (key === "style") mergedAttributes[key] = [
                 mergedAttributes[key],
                 value
-            ].join('; ');
+            ].join("; ");
             else mergedAttributes[key] = value;
         });
         return mergedAttributes;
     }, {});
 }
 function getRenderedAttributes(nodeOrMark, extensionAttributes) {
-    return extensionAttributes.filter((item)=>item.attribute.rendered
-    ).map((item)=>{
+    return extensionAttributes.filter((item)=>item.attribute.rendered).map((item)=>{
         if (!item.attribute.renderHTML) return {
             [item.name]: nodeOrMark.attrs[item.name]
         };
         return item.attribute.renderHTML(nodeOrMark.attrs) || {};
-    }).reduce((attributes, attribute)=>mergeAttributes(attributes, attribute)
-    , {});
+    }).reduce((attributes, attribute)=>mergeAttributes(attributes, attribute), {});
 }
 function isEmptyObject(value = {}) {
     return Object.keys(value).length === 0 && value.constructor === Object;
 }
 function fromString(value) {
-    if (typeof value !== 'string') return value;
+    if (typeof value !== "string") return value;
     if (value.match(/^[+-]?(?:\d*\.)?\d+$/)) return Number(value);
-    if (value === 'true') return true;
-    if (value === 'false') return false;
+    if (value === "true") return true;
+    if (value === "false") return false;
     return value;
 }
 /**
@@ -4741,26 +4492,24 @@ function fromString(value) {
 }
 function cleanUpSchemaItem(data) {
     return Object.fromEntries(Object.entries(data).filter(([key, value])=>{
-        if (key === 'attrs' && isEmptyObject(value)) return false;
+        if (key === "attrs" && isEmptyObject(value)) return false;
         return value !== null && value !== undefined;
     }));
 }
-function getSchemaByResolvedExtensions(extensions5) {
-    var _a1;
-    const allAttributes = getAttributesFromExtensions(extensions5);
-    const { nodeExtensions , markExtensions  } = splitExtensions(extensions5);
-    const topNode = (_a1 = nodeExtensions.find((extension)=>getExtensionField(extension, 'topNode')
-    )) === null || _a1 === void 0 ? void 0 : _a1.name;
+function getSchemaByResolvedExtensions(extensions) {
+    var _a;
+    const allAttributes = getAttributesFromExtensions(extensions);
+    const { nodeExtensions , markExtensions  } = splitExtensions(extensions);
+    const topNode = (_a = nodeExtensions.find((extension)=>getExtensionField(extension, "topNode"))) === null || _a === void 0 ? void 0 : _a.name;
     const nodes = Object.fromEntries(nodeExtensions.map((extension)=>{
-        const extensionAttributes = allAttributes.filter((attribute)=>attribute.type === extension.name
-        );
+        const extensionAttributes = allAttributes.filter((attribute)=>attribute.type === extension.name);
         const context = {
             name: extension.name,
             options: extension.options,
             storage: extension.storage
         };
-        const extraNodeFields = extensions5.reduce((fields, e)=>{
-            const extendNodeSchema = getExtensionField(e, 'extendNodeSchema', context);
+        const extraNodeFields = extensions.reduce((fields, e)=>{
+            const extendNodeSchema = getExtensionField(e, "extendNodeSchema", context);
             return {
                 ...fields,
                 ...extendNodeSchema ? extendNodeSchema(extension) : {}
@@ -4768,16 +4517,16 @@ function getSchemaByResolvedExtensions(extensions5) {
         }, {});
         const schema = cleanUpSchemaItem({
             ...extraNodeFields,
-            content: callOrReturn(getExtensionField(extension, 'content', context)),
-            marks: callOrReturn(getExtensionField(extension, 'marks', context)),
-            group: callOrReturn(getExtensionField(extension, 'group', context)),
-            inline: callOrReturn(getExtensionField(extension, 'inline', context)),
-            atom: callOrReturn(getExtensionField(extension, 'atom', context)),
-            selectable: callOrReturn(getExtensionField(extension, 'selectable', context)),
-            draggable: callOrReturn(getExtensionField(extension, 'draggable', context)),
-            code: callOrReturn(getExtensionField(extension, 'code', context)),
-            defining: callOrReturn(getExtensionField(extension, 'defining', context)),
-            isolating: callOrReturn(getExtensionField(extension, 'isolating', context)),
+            content: callOrReturn(getExtensionField(extension, "content", context)),
+            marks: callOrReturn(getExtensionField(extension, "marks", context)),
+            group: callOrReturn(getExtensionField(extension, "group", context)),
+            inline: callOrReturn(getExtensionField(extension, "inline", context)),
+            atom: callOrReturn(getExtensionField(extension, "atom", context)),
+            selectable: callOrReturn(getExtensionField(extension, "selectable", context)),
+            draggable: callOrReturn(getExtensionField(extension, "draggable", context)),
+            code: callOrReturn(getExtensionField(extension, "code", context)),
+            defining: callOrReturn(getExtensionField(extension, "defining", context)),
+            isolating: callOrReturn(getExtensionField(extension, "isolating", context)),
             attrs: Object.fromEntries(extensionAttributes.map((extensionAttribute)=>{
                 var _a;
                 return [
@@ -4788,16 +4537,14 @@ function getSchemaByResolvedExtensions(extensions5) {
                 ];
             }))
         });
-        const parseHTML = callOrReturn(getExtensionField(extension, 'parseHTML', context));
-        if (parseHTML) schema.parseDOM = parseHTML.map((parseRule)=>injectExtensionAttributesToParseRule(parseRule, extensionAttributes)
-        );
-        const renderHTML = getExtensionField(extension, 'renderHTML', context);
+        const parseHTML = callOrReturn(getExtensionField(extension, "parseHTML", context));
+        if (parseHTML) schema.parseDOM = parseHTML.map((parseRule)=>injectExtensionAttributesToParseRule(parseRule, extensionAttributes));
+        const renderHTML = getExtensionField(extension, "renderHTML", context);
         if (renderHTML) schema.toDOM = (node)=>renderHTML({
                 node,
                 HTMLAttributes: getRenderedAttributes(node, extensionAttributes)
-            })
-        ;
-        const renderText = getExtensionField(extension, 'renderText', context);
+            });
+        const renderText = getExtensionField(extension, "renderText", context);
         if (renderText) schema.toText = renderText;
         return [
             extension.name,
@@ -4805,15 +4552,14 @@ function getSchemaByResolvedExtensions(extensions5) {
         ];
     }));
     const marks = Object.fromEntries(markExtensions.map((extension)=>{
-        const extensionAttributes = allAttributes.filter((attribute)=>attribute.type === extension.name
-        );
+        const extensionAttributes = allAttributes.filter((attribute)=>attribute.type === extension.name);
         const context = {
             name: extension.name,
             options: extension.options,
             storage: extension.storage
         };
-        const extraMarkFields = extensions5.reduce((fields, e)=>{
-            const extendMarkSchema = getExtensionField(e, 'extendMarkSchema', context);
+        const extraMarkFields = extensions.reduce((fields, e)=>{
+            const extendMarkSchema = getExtensionField(e, "extendMarkSchema", context);
             return {
                 ...fields,
                 ...extendMarkSchema ? extendMarkSchema(extension) : {}
@@ -4821,11 +4567,11 @@ function getSchemaByResolvedExtensions(extensions5) {
         }, {});
         const schema = cleanUpSchemaItem({
             ...extraMarkFields,
-            inclusive: callOrReturn(getExtensionField(extension, 'inclusive', context)),
-            excludes: callOrReturn(getExtensionField(extension, 'excludes', context)),
-            group: callOrReturn(getExtensionField(extension, 'group', context)),
-            spanning: callOrReturn(getExtensionField(extension, 'spanning', context)),
-            code: callOrReturn(getExtensionField(extension, 'code', context)),
+            inclusive: callOrReturn(getExtensionField(extension, "inclusive", context)),
+            excludes: callOrReturn(getExtensionField(extension, "excludes", context)),
+            group: callOrReturn(getExtensionField(extension, "group", context)),
+            spanning: callOrReturn(getExtensionField(extension, "spanning", context)),
+            code: callOrReturn(getExtensionField(extension, "code", context)),
             attrs: Object.fromEntries(extensionAttributes.map((extensionAttribute)=>{
                 var _a;
                 return [
@@ -4836,21 +4582,19 @@ function getSchemaByResolvedExtensions(extensions5) {
                 ];
             }))
         });
-        const parseHTML = callOrReturn(getExtensionField(extension, 'parseHTML', context));
-        if (parseHTML) schema.parseDOM = parseHTML.map((parseRule)=>injectExtensionAttributesToParseRule(parseRule, extensionAttributes)
-        );
-        const renderHTML = getExtensionField(extension, 'renderHTML', context);
+        const parseHTML = callOrReturn(getExtensionField(extension, "parseHTML", context));
+        if (parseHTML) schema.parseDOM = parseHTML.map((parseRule)=>injectExtensionAttributesToParseRule(parseRule, extensionAttributes));
+        const renderHTML = getExtensionField(extension, "renderHTML", context);
         if (renderHTML) schema.toDOM = (mark)=>renderHTML({
                 mark,
                 HTMLAttributes: getRenderedAttributes(mark, extensionAttributes)
-            })
-        ;
+            });
         return [
             extension.name,
             schema
         ];
     }));
-    return new _prosemirrorModel.Schema({
+    return new (0, _prosemirrorModel.Schema)({
         topNode,
         nodes,
         marks
@@ -4861,23 +4605,22 @@ function getSchemaTypeByName(name, schema) {
 }
 function isExtensionRulesEnabled(extension, enabled) {
     if (Array.isArray(enabled)) return enabled.some((enabledExtension)=>{
-        const name = typeof enabledExtension === 'string' ? enabledExtension : enabledExtension.name;
+        const name = typeof enabledExtension === "string" ? enabledExtension : enabledExtension.name;
         return name === extension.name;
     });
     return enabled;
 }
 function findDuplicates(items) {
-    const filtered = items.filter((el, index)=>items.indexOf(el) !== index
-    );
+    const filtered = items.filter((el, index)=>items.indexOf(el) !== index);
     return [
         ...new Set(filtered)
     ];
 }
 class ExtensionManager {
-    constructor(extensions6, editor){
+    constructor(extensions, editor){
         this.splittableMarks = [];
         this.editor = editor;
-        this.extensions = ExtensionManager.resolve(extensions6);
+        this.extensions = ExtensionManager.resolve(extensions);
         this.schema = getSchemaByResolvedExtensions(this.extensions);
         this.extensions.forEach((extension)=>{
             var _a;
@@ -4890,44 +4633,42 @@ class ExtensionManager {
                 editor: this.editor,
                 type: getSchemaTypeByName(extension.name, this.schema)
             };
-            if (extension.type === 'mark') {
-                const keepOnSplit = (_a = callOrReturn(getExtensionField(extension, 'keepOnSplit', context))) !== null && _a !== void 0 ? _a : true;
+            if (extension.type === "mark") {
+                const keepOnSplit = (_a = callOrReturn(getExtensionField(extension, "keepOnSplit", context))) !== null && _a !== void 0 ? _a : true;
                 if (keepOnSplit) this.splittableMarks.push(extension.name);
             }
-            const onBeforeCreate = getExtensionField(extension, 'onBeforeCreate', context);
-            if (onBeforeCreate) this.editor.on('beforeCreate', onBeforeCreate);
-            const onCreate = getExtensionField(extension, 'onCreate', context);
-            if (onCreate) this.editor.on('create', onCreate);
-            const onUpdate = getExtensionField(extension, 'onUpdate', context);
-            if (onUpdate) this.editor.on('update', onUpdate);
-            const onSelectionUpdate = getExtensionField(extension, 'onSelectionUpdate', context);
-            if (onSelectionUpdate) this.editor.on('selectionUpdate', onSelectionUpdate);
-            const onTransaction = getExtensionField(extension, 'onTransaction', context);
-            if (onTransaction) this.editor.on('transaction', onTransaction);
-            const onFocus = getExtensionField(extension, 'onFocus', context);
-            if (onFocus) this.editor.on('focus', onFocus);
-            const onBlur = getExtensionField(extension, 'onBlur', context);
-            if (onBlur) this.editor.on('blur', onBlur);
-            const onDestroy = getExtensionField(extension, 'onDestroy', context);
-            if (onDestroy) this.editor.on('destroy', onDestroy);
+            const onBeforeCreate = getExtensionField(extension, "onBeforeCreate", context);
+            if (onBeforeCreate) this.editor.on("beforeCreate", onBeforeCreate);
+            const onCreate = getExtensionField(extension, "onCreate", context);
+            if (onCreate) this.editor.on("create", onCreate);
+            const onUpdate = getExtensionField(extension, "onUpdate", context);
+            if (onUpdate) this.editor.on("update", onUpdate);
+            const onSelectionUpdate = getExtensionField(extension, "onSelectionUpdate", context);
+            if (onSelectionUpdate) this.editor.on("selectionUpdate", onSelectionUpdate);
+            const onTransaction = getExtensionField(extension, "onTransaction", context);
+            if (onTransaction) this.editor.on("transaction", onTransaction);
+            const onFocus = getExtensionField(extension, "onFocus", context);
+            if (onFocus) this.editor.on("focus", onFocus);
+            const onBlur = getExtensionField(extension, "onBlur", context);
+            if (onBlur) this.editor.on("blur", onBlur);
+            const onDestroy = getExtensionField(extension, "onDestroy", context);
+            if (onDestroy) this.editor.on("destroy", onDestroy);
         });
     }
-    static resolve(extensions7) {
-        const resolvedExtensions = ExtensionManager.sort(ExtensionManager.flatten(extensions7));
-        const duplicatedNames = findDuplicates(resolvedExtensions.map((extension)=>extension.name
-        ));
-        if (duplicatedNames.length) console.warn(`[tiptap warn]: Duplicate extension names found: [${duplicatedNames.map((item)=>`'${item}'`
-        ).join(', ')}]. This can lead to issues.`);
+    static resolve(extensions) {
+        const resolvedExtensions = ExtensionManager.sort(ExtensionManager.flatten(extensions));
+        const duplicatedNames = findDuplicates(resolvedExtensions.map((extension)=>extension.name));
+        if (duplicatedNames.length) console.warn(`[tiptap warn]: Duplicate extension names found: [${duplicatedNames.map((item)=>`'${item}'`).join(", ")}]. This can lead to issues.`);
         return resolvedExtensions;
     }
-    static flatten(extensions8) {
-        return extensions8.map((extension)=>{
+    static flatten(extensions) {
+        return extensions.map((extension)=>{
             const context = {
                 name: extension.name,
                 options: extension.options,
                 storage: extension.storage
             };
-            const addExtensions = getExtensionField(extension, 'addExtensions', context);
+            const addExtensions = getExtensionField(extension, "addExtensions", context);
             if (addExtensions) return [
                 extension,
                 ...this.flatten(addExtensions()), 
@@ -4936,11 +4677,11 @@ class ExtensionManager {
         })// `Infinity` will break TypeScript so we set a number that is probably high enough
         .flat(10);
     }
-    static sort(extensions9) {
+    static sort(extensions) {
         const defaultPriority = 100;
-        return extensions9.sort((a, b)=>{
-            const priorityA = getExtensionField(a, 'priority') || defaultPriority;
-            const priorityB = getExtensionField(b, 'priority') || defaultPriority;
+        return extensions.sort((a, b)=>{
+            const priorityA = getExtensionField(a, "priority") || defaultPriority;
+            const priorityB = getExtensionField(b, "priority") || defaultPriority;
             if (priorityA > priorityB) return -1;
             if (priorityA < priorityB) return 1;
             return 0;
@@ -4955,7 +4696,7 @@ class ExtensionManager {
                 editor: this.editor,
                 type: getSchemaTypeByName(extension.name, this.schema)
             };
-            const addCommands = getExtensionField(extension, 'addCommands', context);
+            const addCommands = getExtensionField(extension, "addCommands", context);
             if (!addCommands) return commands;
             return {
                 ...commands,
@@ -4970,12 +4711,12 @@ class ExtensionManager {
         // so it feels more natural to run plugins at the end of an array first.
         // That’s why we have to reverse the `extensions` array and sort again
         // based on the `priority` option.
-        const extensions10 = ExtensionManager.sort([
+        const extensions = ExtensionManager.sort([
             ...this.extensions
         ].reverse());
         const inputRules = [];
         const pasteRules = [];
-        const allPlugins = extensions10.map((extension)=>{
+        const allPlugins = extensions.map((extension)=>{
             const context = {
                 name: extension.name,
                 options: extension.options,
@@ -4984,7 +4725,7 @@ class ExtensionManager {
                 type: getSchemaTypeByName(extension.name, this.schema)
             };
             const plugins = [];
-            const addKeyboardShortcuts = getExtensionField(extension, 'addKeyboardShortcuts', context);
+            const addKeyboardShortcuts = getExtensionField(extension, "addKeyboardShortcuts", context);
             if (addKeyboardShortcuts) {
                 const bindings = Object.fromEntries(Object.entries(addKeyboardShortcuts()).map(([shortcut, method])=>{
                     return [
@@ -4994,14 +4735,14 @@ class ExtensionManager {
                             })
                     ];
                 }));
-                const keyMapPlugin = _prosemirrorKeymap.keymap(bindings);
+                const keyMapPlugin = (0, _prosemirrorKeymap.keymap)(bindings);
                 plugins.push(keyMapPlugin);
             }
-            const addInputRules = getExtensionField(extension, 'addInputRules', context);
+            const addInputRules = getExtensionField(extension, "addInputRules", context);
             if (isExtensionRulesEnabled(extension, editor.options.enableInputRules) && addInputRules) inputRules.push(...addInputRules());
-            const addPasteRules = getExtensionField(extension, 'addPasteRules', context);
+            const addPasteRules = getExtensionField(extension, "addPasteRules", context);
             if (isExtensionRulesEnabled(extension, editor.options.enablePasteRules) && addPasteRules) pasteRules.push(...addPasteRules());
-            const addProseMirrorPlugins = getExtensionField(extension, 'addProseMirrorPlugins', context);
+            const addProseMirrorPlugins = getExtensionField(extension, "addProseMirrorPlugins", context);
             if (addProseMirrorPlugins) {
                 const proseMirrorPlugins = addProseMirrorPlugins();
                 plugins.push(...proseMirrorPlugins);
@@ -5026,10 +4767,8 @@ class ExtensionManager {
     get nodeViews() {
         const { editor  } = this;
         const { nodeExtensions  } = splitExtensions(this.extensions);
-        return Object.fromEntries(nodeExtensions.filter((extension)=>!!getExtensionField(extension, 'addNodeView')
-        ).map((extension)=>{
-            const extensionAttributes = this.attributes.filter((attribute)=>attribute.type === extension.name
-            );
+        return Object.fromEntries(nodeExtensions.filter((extension)=>!!getExtensionField(extension, "addNodeView")).map((extension)=>{
+            const extensionAttributes = this.attributes.filter((attribute)=>attribute.type === extension.name);
             const context = {
                 name: extension.name,
                 options: extension.options,
@@ -5037,7 +4776,7 @@ class ExtensionManager {
                 editor,
                 type: getNodeType(extension.name, this.schema)
             };
-            const addNodeView = getExtensionField(extension, 'addNodeView', context);
+            const addNodeView = getExtensionField(extension, "addNodeView", context);
             if (!addNodeView) return [];
             const nodeview = (node, view, getPos, decorations)=>{
                 const HTMLAttributes = getRenderedAttributes(node, extensionAttributes);
@@ -5068,15 +4807,13 @@ class EventEmitter {
     }
     emit(event, ...args) {
         const callbacks = this.callbacks[event];
-        if (callbacks) callbacks.forEach((callback)=>callback.apply(this, args)
-        );
+        if (callbacks) callbacks.forEach((callback)=>callback.apply(this, args));
         return this;
     }
     off(event, fn) {
         const callbacks = this.callbacks[event];
         if (callbacks) {
-            if (fn) this.callbacks[event] = callbacks.filter((callback)=>callback !== fn
-            );
+            if (fn) this.callbacks[event] = callbacks.filter((callback)=>callback !== fn);
             else delete this.callbacks[event];
         }
         return this;
@@ -5166,8 +4903,8 @@ class Editor extends EventEmitter {
         this.isFocused = false;
         this.extensionStorage = {};
         this.options = {
-            element: document.createElement('div'),
-            content: '',
+            element: document.createElement("div"),
+            content: "",
             injectCSS: true,
             extensions: [],
             autofocus: false,
@@ -5177,20 +4914,13 @@ class Editor extends EventEmitter {
             enableInputRules: true,
             enablePasteRules: true,
             enableCoreExtensions: true,
-            onBeforeCreate: ()=>null
-            ,
-            onCreate: ()=>null
-            ,
-            onUpdate: ()=>null
-            ,
-            onSelectionUpdate: ()=>null
-            ,
-            onTransaction: ()=>null
-            ,
-            onFocus: ()=>null
-            ,
-            onBlur: ()=>null
-            ,
+            onBeforeCreate: ()=>null,
+            onCreate: ()=>null,
+            onUpdate: ()=>null,
+            onSelectionUpdate: ()=>null,
+            onTransaction: ()=>null,
+            onFocus: ()=>null,
+            onBlur: ()=>null,
             onDestroy: ()=>null
         };
         this.isCapturingTransaction = false;
@@ -5199,23 +4929,23 @@ class Editor extends EventEmitter {
         this.createExtensionManager();
         this.createCommandManager();
         this.createSchema();
-        this.on('beforeCreate', this.options.onBeforeCreate);
-        this.emit('beforeCreate', {
+        this.on("beforeCreate", this.options.onBeforeCreate);
+        this.emit("beforeCreate", {
             editor: this
         });
         this.createView();
         this.injectCSS();
-        this.on('create', this.options.onCreate);
-        this.on('update', this.options.onUpdate);
-        this.on('selectionUpdate', this.options.onSelectionUpdate);
-        this.on('transaction', this.options.onTransaction);
-        this.on('focus', this.options.onFocus);
-        this.on('blur', this.options.onBlur);
-        this.on('destroy', this.options.onDestroy);
+        this.on("create", this.options.onCreate);
+        this.on("update", this.options.onUpdate);
+        this.on("selectionUpdate", this.options.onSelectionUpdate);
+        this.on("transaction", this.options.onTransaction);
+        this.on("focus", this.options.onFocus);
+        this.on("blur", this.options.onBlur);
+        this.on("destroy", this.options.onDestroy);
         window.setTimeout(()=>{
             if (this.isDestroyed) return;
             this.commands.focus(this.options.autofocus);
-            this.emit('create', {
+            this.emit("create", {
                 editor: this
             });
         }, 0);
@@ -5299,11 +5029,10 @@ class Editor extends EventEmitter {
      * @param nameOrPluginKey The plugins name
      */ unregisterPlugin(nameOrPluginKey) {
         if (this.isDestroyed) return;
-        const name = typeof nameOrPluginKey === 'string' ? `${nameOrPluginKey}$` : nameOrPluginKey.key;
+        const name = typeof nameOrPluginKey === "string" ? `${nameOrPluginKey}$` : nameOrPluginKey.key;
         const state = this.state.reconfigure({
             // @ts-ignore
-            plugins: this.state.plugins.filter((plugin)=>!plugin.key.startsWith(name)
-            )
+            plugins: this.state.plugins.filter((plugin)=>!plugin.key.startsWith(name))
         });
         this.view.updateState(state);
     }
@@ -5316,9 +5045,9 @@ class Editor extends EventEmitter {
             ...this.options.extensions
         ].filter((extension)=>{
             return [
-                'extension',
-                'node',
-                'mark'
+                "extension",
+                "node",
+                "mark"
             ].includes(extension === null || extension === void 0 ? void 0 : extension.type);
         });
         this.extensionManager = new ExtensionManager(allExtensions, this);
@@ -5340,10 +5069,10 @@ class Editor extends EventEmitter {
      */ createView() {
         const doc = createDocument(this.options.content, this.schema, this.options.parseOptions);
         const selection = resolveFocusPosition(doc, this.options.autofocus);
-        this.view = new _prosemirrorView.EditorView(this.options.element, {
+        this.view = new (0, _prosemirrorView.EditorView)(this.options.element, {
             ...this.options.editorProps,
             dispatchTransaction: this.dispatchTransaction.bind(this),
-            state: _prosemirrorState.EditorState.create({
+            state: (0, _prosemirrorState.EditorState).create({
                 doc,
                 selection
             })
@@ -5394,28 +5123,28 @@ class Editor extends EventEmitter {
         const state = this.state.apply(transaction);
         const selectionHasChanged = !this.state.selection.eq(state.selection);
         this.view.updateState(state);
-        this.emit('transaction', {
+        this.emit("transaction", {
             editor: this,
             transaction
         });
-        if (selectionHasChanged) this.emit('selectionUpdate', {
+        if (selectionHasChanged) this.emit("selectionUpdate", {
             editor: this,
             transaction
         });
-        const focus1 = transaction.getMeta('focus');
-        const blur1 = transaction.getMeta('blur');
-        if (focus1) this.emit('focus', {
+        const focus = transaction.getMeta("focus");
+        const blur = transaction.getMeta("blur");
+        if (focus) this.emit("focus", {
             editor: this,
-            event: focus1.event,
+            event: focus.event,
             transaction
         });
-        if (blur1) this.emit('blur', {
+        if (blur) this.emit("blur", {
             editor: this,
-            event: blur1.event,
+            event: blur.event,
             transaction
         });
-        if (!transaction.docChanged || transaction.getMeta('preventUpdate')) return;
-        this.emit('update', {
+        if (!transaction.docChanged || transaction.getMeta("preventUpdate")) return;
+        this.emit("update", {
             editor: this,
             transaction
         });
@@ -5426,8 +5155,8 @@ class Editor extends EventEmitter {
         return getAttributes(this.state, nameOrType);
     }
     isActive(nameOrAttributes, attributesOrUndefined) {
-        const name = typeof nameOrAttributes === 'string' ? nameOrAttributes : null;
-        const attributes = typeof nameOrAttributes === 'string' ? attributesOrUndefined : nameOrAttributes;
+        const name = typeof nameOrAttributes === "string" ? nameOrAttributes : null;
+        const attributes = typeof nameOrAttributes === "string" ? attributesOrUndefined : nameOrAttributes;
         return isActive(this.state, name, attributes);
     }
     /**
@@ -5443,7 +5172,7 @@ class Editor extends EventEmitter {
     /**
      * Get the document as text.
      */ getText(options) {
-        const { blockSeparator ='\n\n' , textSerializers ={} ,  } = options || {};
+        const { blockSeparator ="\n\n" , textSerializers ={} ,  } = options || {};
         return getText(this.state.doc, {
             blockSeparator,
             textSerializers: {
@@ -5468,7 +5197,7 @@ class Editor extends EventEmitter {
     /**
      * Destroy the editor.
      */ destroy() {
-        this.emit('destroy');
+        this.emit("destroy");
         if (this.view) this.view.destroy();
         this.removeAllListeners();
     }
@@ -5482,8 +5211,8 @@ class Editor extends EventEmitter {
 }
 class Node {
     constructor(config = {}){
-        this.type = 'node';
-        this.name = 'node';
+        this.type = "node";
+        this.name = "node";
         this.parent = null;
         this.child = null;
         this.config = {
@@ -5498,10 +5227,10 @@ class Node {
         if (config.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
         // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
-        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, "addOptions", {
             name: this.name
         }));
-        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+        this.storage = callOrReturn(getExtensionField(this, "addStorage", {
             name: this.name,
             options: this.options
         })) || {};
@@ -5514,7 +5243,7 @@ class Node {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -5526,10 +5255,10 @@ class Node {
         this.child = extension;
         extension.name = extendedConfig.name ? extendedConfig.name : extension.parent.name;
         if (extendedConfig.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
-        extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+        extension.options = callOrReturn(getExtensionField(extension, "addOptions", {
             name: extension.name
         }));
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -5538,8 +5267,8 @@ class Node {
 }
 class Mark {
     constructor(config = {}){
-        this.type = 'mark';
-        this.name = 'mark';
+        this.type = "mark";
+        this.name = "mark";
         this.parent = null;
         this.child = null;
         this.config = {
@@ -5554,10 +5283,10 @@ class Mark {
         if (config.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
         // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
-        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+        if (this.config.addOptions) this.options = callOrReturn(getExtensionField(this, "addOptions", {
             name: this.name
         }));
-        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+        this.storage = callOrReturn(getExtensionField(this, "addStorage", {
             name: this.name,
             options: this.options
         })) || {};
@@ -5570,7 +5299,7 @@ class Mark {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -5582,10 +5311,10 @@ class Mark {
         this.child = extension;
         extension.name = extendedConfig.name ? extendedConfig.name : extension.parent.name;
         if (extendedConfig.defaultOptions) console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
-        extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+        extension.options = callOrReturn(getExtensionField(extension, "addOptions", {
             name: extension.name
         }));
-        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+        extension.storage = callOrReturn(getExtensionField(extension, "addStorage", {
             name: extension.name,
             options: extension.options
         }));
@@ -5624,7 +5353,7 @@ class NodeView {
         const target = event.target;
         // get the drag handle element
         // `closest` is not available for text nodes so we may have to use its parent
-        const dragHandle = target.nodeType === 3 ? (_a = target.parentElement) === null || _a === void 0 ? void 0 : _a.closest('[data-drag-handle]') : target.closest('[data-drag-handle]');
+        const dragHandle = target.nodeType === 3 ? (_a = target.parentElement) === null || _a === void 0 ? void 0 : _a.closest("[data-drag-handle]") : target.closest("[data-drag-handle]");
         if (!this.dom || ((_b = this.contentDOM) === null || _b === void 0 ? void 0 : _b.contains(target)) || !dragHandle) return;
         let x = 0;
         let y = 0;
@@ -5638,38 +5367,38 @@ class NodeView {
         (_c = event.dataTransfer) === null || _c === void 0 || _c.setDragImage(this.dom, x, y);
         // we need to tell ProseMirror that we want to move the whole node
         // so we create a NodeSelection
-        const selection = _prosemirrorState.NodeSelection.create(view.state.doc, this.getPos());
+        const selection = (0, _prosemirrorState.NodeSelection).create(view.state.doc, this.getPos());
         const transaction = view.state.tr.setSelection(selection);
         view.dispatch(transaction);
     }
     stopEvent(event) {
         var _a;
         if (!this.dom) return false;
-        if (typeof this.options.stopEvent === 'function') return this.options.stopEvent({
+        if (typeof this.options.stopEvent === "function") return this.options.stopEvent({
             event
         });
         const target = event.target;
         const isInElement = this.dom.contains(target) && !((_a = this.contentDOM) === null || _a === void 0 ? void 0 : _a.contains(target));
         // any event from child nodes should be handled by ProseMirror
         if (!isInElement) return false;
-        const isDropEvent = event.type === 'drop';
+        const isDropEvent = event.type === "drop";
         const isInput = [
-            'INPUT',
-            'BUTTON',
-            'SELECT',
-            'TEXTAREA'
+            "INPUT",
+            "BUTTON",
+            "SELECT",
+            "TEXTAREA"
         ].includes(target.tagName) || target.isContentEditable;
         // any input event within node views should be ignored by ProseMirror
         if (isInput && !isDropEvent) return true;
         const { isEditable  } = this.editor;
         const { isDragging  } = this;
         const isDraggable = !!this.node.type.spec.draggable;
-        const isSelectable = _prosemirrorState.NodeSelection.isSelectable(this.node);
-        const isCopyEvent = event.type === 'copy';
-        const isPasteEvent = event.type === 'paste';
-        const isCutEvent = event.type === 'cut';
-        const isClickEvent = event.type === 'mousedown';
-        const isDragEvent = event.type.startsWith('drag');
+        const isSelectable = (0, _prosemirrorState.NodeSelection).isSelectable(this.node);
+        const isCopyEvent = event.type === "copy";
+        const isPasteEvent = event.type === "paste";
+        const isCutEvent = event.type === "cut";
+        const isClickEvent = event.type === "mousedown";
+        const isDragEvent = event.type.startsWith("drag");
         // ProseMirror tries to drag selectable nodes
         // even if `draggable` is set to `false`
         // this fix prevents that
@@ -5680,16 +5409,16 @@ class NodeView {
         }
         // we have to store that dragging started
         if (isDraggable && isEditable && !isDragging && isClickEvent) {
-            const dragHandle = target.closest('[data-drag-handle]');
+            const dragHandle = target.closest("[data-drag-handle]");
             const isValidDragHandle = dragHandle && (this.dom === dragHandle || this.dom.contains(dragHandle));
             if (isValidDragHandle) {
                 this.isDragging = true;
-                document.addEventListener('dragend', ()=>{
+                document.addEventListener("dragend", ()=>{
                     this.isDragging = false;
                 }, {
                     once: true
                 });
-                document.addEventListener('mouseup', ()=>{
+                document.addEventListener("mouseup", ()=>{
                     this.isDragging = false;
                 }, {
                     once: true
@@ -5702,31 +5431,30 @@ class NodeView {
     }
     ignoreMutation(mutation) {
         if (!this.dom || !this.contentDOM) return true;
-        if (typeof this.options.ignoreMutation === 'function') return this.options.ignoreMutation({
+        if (typeof this.options.ignoreMutation === "function") return this.options.ignoreMutation({
             mutation
         });
         // a leaf/atom node is like a black box for ProseMirror
         // and should be fully handled by the node view
         if (this.node.isLeaf || this.node.isAtom) return true;
         // ProseMirror should handle any selections
-        if (mutation.type === 'selection') return false;
+        if (mutation.type === "selection") return false;
         // try to prevent a bug on iOS that will break node views on enter
         // this is because ProseMirror can’t preventDispatch on enter
         // this will lead to a re-render of the node view on enter
         // see: https://github.com/ueberdosis/tiptap/issues/1214
-        if (this.dom.contains(mutation.target) && mutation.type === 'childList' && isiOS() && this.editor.isFocused) {
+        if (this.dom.contains(mutation.target) && mutation.type === "childList" && isiOS() && this.editor.isFocused) {
             const changedNodes = [
                 ...Array.from(mutation.addedNodes),
                 ...Array.from(mutation.removedNodes), 
             ];
             // we’ll check if every changed node is contentEditable
             // to make sure it’s probably mutated by ProseMirror
-            if (changedNodes.every((node)=>node.isContentEditable
-            )) return false;
+            if (changedNodes.every((node)=>node.isContentEditable)) return false;
         }
         // we will allow mutation contentDOM with attributes
         // so we can for example adding classes within our node view
-        if (this.contentDOM === mutation.target && mutation.type === 'attributes') return true;
+        if (this.contentDOM === mutation.target && mutation.type === "attributes") return true;
         // ProseMirror should handle any changes within contentDOM
         if (this.contentDOM.contains(mutation.target)) return false;
         return true;
@@ -5810,8 +5538,7 @@ function getMarksBetween(from, to, doc) {
                 from: pos,
                 to: pos + node.nodeSize,
                 mark
-            })
-        ));
+            })));
     });
     return marks;
 }
@@ -5835,10 +5562,8 @@ function getMarksBetween(from, to, doc) {
                 const excludedMarks = getMarksBetween(range.from, range.to, state.doc).filter((item)=>{
                     // @ts-ignore
                     const excluded = item.mark.type.excluded;
-                    return excluded.find((type)=>type === config.type && type !== item.mark.type
-                    );
-                }).filter((item)=>item.to > textStart
-                );
+                    return excluded.find((type)=>type === config.type && type !== item.mark.type);
+                }).filter((item)=>item.to > textStart);
                 if (excludedMarks.length) return null;
                 if (textEnd < range.to) tr.delete(textEnd, range.to);
                 if (textStart > range.from) tr.delete(range.from + startSpaces, textStart);
@@ -5910,11 +5635,11 @@ function getMarksBetween(from, to, doc) {
             const tr = state.tr.delete(range.from, range.to);
             const $start = tr.doc.resolve(range.from);
             const blockRange = $start.blockRange();
-            const wrapping = blockRange && _prosemirrorTransform.findWrapping(blockRange, config.type, attributes);
+            const wrapping = blockRange && (0, _prosemirrorTransform.findWrapping)(blockRange, config.type, attributes);
             if (!wrapping) return null;
             tr.wrap(blockRange, wrapping);
             const before = tr.doc.resolve(range.from - 1).nodeBefore;
-            if (before && before.type === config.type && _prosemirrorTransform.canJoin(tr.doc, range.from - 1) && (!config.joinPredicate || config.joinPredicate(match, before))) tr.join(range.from - 1);
+            if (before && before.type === config.type && (0, _prosemirrorTransform.canJoin)(tr.doc, range.from - 1) && (!config.joinPredicate || config.joinPredicate(match, before))) tr.join(range.from - 1);
         }
     });
 }
@@ -5938,10 +5663,8 @@ function getMarksBetween(from, to, doc) {
                 const excludedMarks = getMarksBetween(range.from, range.to, state.doc).filter((item)=>{
                     // @ts-ignore
                     const excluded = item.mark.type.excluded;
-                    return excluded.find((type)=>type === config.type && type !== item.mark.type
-                    );
-                }).filter((item)=>item.to > textStart
-                );
+                    return excluded.find((type)=>type === config.type && type !== item.mark.type);
+                }).filter((item)=>item.to > textStart);
                 if (excludedMarks.length) return null;
                 if (textEnd < range.to) tr.delete(textEnd, range.to);
                 if (textStart > range.from) tr.delete(range.from + startSpaces, textStart);
@@ -5978,12 +5701,12 @@ function getMarksBetween(from, to, doc) {
 }
 // source: https://stackoverflow.com/a/6969486
 function escapeForRegEx(string) {
-    return string.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return string.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
 /**
  * Returns a new `Transform` based on all steps of the passed transactions.
  */ function combineTransactionSteps(oldDoc, transactions) {
-    const transform = new _prosemirrorTransform.Transform(oldDoc);
+    const transform = new (0, _prosemirrorTransform.Transform)(oldDoc);
     transactions.forEach((transaction)=>{
         transaction.steps.forEach((step)=>{
             transform.step(step);
@@ -6029,24 +5752,24 @@ function findChildren(node, predicate) {
     });
     return nodesWithPos;
 }
-function getSchema(extensions11) {
-    const resolvedExtensions = ExtensionManager.resolve(extensions11);
+function getSchema(extensions) {
+    const resolvedExtensions = ExtensionManager.resolve(extensions);
     return getSchemaByResolvedExtensions(resolvedExtensions);
 }
-function generateHTML(doc, extensions12) {
-    const schema = getSchema(extensions12);
-    const contentNode = _prosemirrorModel.Node.fromJSON(schema, doc);
+function generateHTML(doc, extensions) {
+    const schema = getSchema(extensions);
+    const contentNode = (0, _prosemirrorModel.Node).fromJSON(schema, doc);
     return getHTMLFromFragment(contentNode.content, schema);
 }
-function generateJSON(html, extensions13) {
-    const schema = getSchema(extensions13);
+function generateJSON(html, extensions) {
+    const schema = getSchema(extensions);
     const dom = elementFromString(html);
-    return _prosemirrorModel.DOMParser.fromSchema(schema).parse(dom).toJSON();
+    return (0, _prosemirrorModel.DOMParser).fromSchema(schema).parse(dom).toJSON();
 }
-function generateText(doc, extensions14, options) {
-    const { blockSeparator ='\n\n' , textSerializers ={} ,  } = options || {};
-    const schema = getSchema(extensions14);
-    const contentNode = _prosemirrorModel.Node.fromJSON(schema, doc);
+function generateText(doc, extensions, options) {
+    const { blockSeparator ="\n\n" , textSerializers ={} ,  } = options || {};
+    const schema = getSchema(extensions);
+    const contentNode = (0, _prosemirrorModel.Node).fromJSON(schema, doc);
     return getText(contentNode, {
         blockSeparator,
         textSerializers: {
@@ -6071,8 +5794,7 @@ function generateText(doc, extensions14, options) {
  */ function simplifyChangedRanges(changes) {
     const uniqueChanges = removeDuplicates(changes);
     return uniqueChanges.length === 1 ? uniqueChanges : uniqueChanges.filter((change, index)=>{
-        const rest = uniqueChanges.filter((_, i)=>i !== index
-        );
+        const rest = uniqueChanges.filter((_, i)=>i !== index);
         return !rest.some((otherChange)=>{
             return change.oldRange.from >= otherChange.oldRange.from && change.oldRange.to <= otherChange.oldRange.to && change.newRange.from >= otherChange.newRange.from && change.newRange.to <= otherChange.newRange.to;
         });
@@ -6138,25 +5860,25 @@ function getDebugJSON(node, startOffset = 0) {
     const attrs = {
         ...node.attrs
     };
-    const output1 = {
+    const output = {
         type: node.type.name,
         from,
         to
     };
-    if (Object.keys(attrs).length) output1.attrs = attrs;
-    if (marks.length) output1.marks = marks;
+    if (Object.keys(attrs).length) output.attrs = attrs;
+    if (marks.length) output.marks = marks;
     if (node.content.childCount) {
-        output1.content = [];
+        output.content = [];
         node.forEach((child, offset)=>{
             var _a;
-            (_a = output1.content) === null || _a === void 0 || _a.push(getDebugJSON(child, startOffset + offset + increment));
+            (_a = output.content) === null || _a === void 0 || _a.push(getDebugJSON(child, startOffset + offset + increment));
         });
     }
-    if (node.text) output1.text = node.text;
-    return output1;
+    if (node.text) output.text = node.text;
+    return output;
 }
 function isNodeSelection(value) {
-    return isObject(value) && value instanceof _prosemirrorState.NodeSelection;
+    return isObject(value) && value instanceof (0, _prosemirrorState.NodeSelection);
 }
 function posToDOMRect(view, from, to) {
     const minPos = 0;
@@ -6192,24 +5914,15 @@ function posToDOMRect(view, from, to) {
 },{"prosemirror-state":"jYSWR","prosemirror-transform":"bTHhB","prosemirror-commands":"kTHnK","prosemirror-model":"eeCSD","prosemirror-schema-list":"gjxYt","prosemirror-view":"9u8cM","prosemirror-keymap":"fN5KY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jYSWR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "AllSelection", ()=>AllSelection
-);
-parcelHelpers.export(exports, "EditorState", ()=>EditorState
-);
-parcelHelpers.export(exports, "NodeSelection", ()=>NodeSelection
-);
-parcelHelpers.export(exports, "Plugin", ()=>Plugin
-);
-parcelHelpers.export(exports, "PluginKey", ()=>PluginKey
-);
-parcelHelpers.export(exports, "Selection", ()=>Selection
-);
-parcelHelpers.export(exports, "SelectionRange", ()=>SelectionRange
-);
-parcelHelpers.export(exports, "TextSelection", ()=>TextSelection
-);
-parcelHelpers.export(exports, "Transaction", ()=>Transaction
-);
+parcelHelpers.export(exports, "AllSelection", ()=>AllSelection);
+parcelHelpers.export(exports, "EditorState", ()=>EditorState);
+parcelHelpers.export(exports, "NodeSelection", ()=>NodeSelection);
+parcelHelpers.export(exports, "Plugin", ()=>Plugin);
+parcelHelpers.export(exports, "PluginKey", ()=>PluginKey);
+parcelHelpers.export(exports, "Selection", ()=>Selection);
+parcelHelpers.export(exports, "SelectionRange", ()=>SelectionRange);
+parcelHelpers.export(exports, "TextSelection", ()=>TextSelection);
+parcelHelpers.export(exports, "Transaction", ()=>Transaction);
 var _prosemirrorModel = require("prosemirror-model");
 var _prosemirrorTransform = require("prosemirror-transform");
 var classesById = Object.create(null);
@@ -6306,7 +6019,7 @@ Selection.prototype.content = function content() {
 // Replace the selection with a slice or, if no slice is given,
 // delete the selection. Will append to the given transaction.
 Selection.prototype.replace = function replace(tr, content) {
-    if (content === void 0) content = _prosemirrorModel.Slice.empty;
+    if (content === void 0) content = (0, _prosemirrorModel.Slice).empty;
     // Put the new selection at the position after the inserted
     // content. When that ended in an inline node, search backwards,
     // to get the position after that node. If not, search forward.
@@ -6321,7 +6034,7 @@ Selection.prototype.replace = function replace(tr, content) {
         var $from = ref.$from;
         var $to = ref.$to;
         var mapping = tr.mapping.slice(mapFrom);
-        tr.replaceRange(mapping.map($from.pos), mapping.map($to.pos), i$1 ? _prosemirrorModel.Slice.empty : content);
+        tr.replaceRange(mapping.map($from.pos), mapping.map($to.pos), i$1 ? (0, _prosemirrorModel.Slice).empty : content);
         if (i$1 == 0) selectionToInsertionEnd(tr, mapFrom, (lastNode ? lastNode.isInline : lastParent && lastParent.isTextblock) ? -1 : 1);
     }
 };
@@ -6447,15 +6160,15 @@ var SelectionRange = function SelectionRange($from, $to) {
 // a head (the moving side) and anchor (immobile side), both of which
 // point into textblock nodes. It can be empty (a regular cursor
 // position).
-var TextSelection = /*@__PURE__*/ function(Selection1) {
-    function TextSelection1($anchor, $head) {
+var TextSelection = /*@__PURE__*/ function(Selection) {
+    function TextSelection($anchor, $head) {
         if ($head === void 0) $head = $anchor;
-        Selection1.call(this, $anchor, $head);
+        Selection.call(this, $anchor, $head);
     }
-    if (Selection1) TextSelection1.__proto__ = Selection1;
-    TextSelection1.prototype = Object.create(Selection1 && Selection1.prototype);
-    TextSelection1.prototype.constructor = TextSelection1;
-    var prototypeAccessors$11 = {
+    if (Selection) TextSelection.__proto__ = Selection;
+    TextSelection.prototype = Object.create(Selection && Selection.prototype);
+    TextSelection.prototype.constructor = TextSelection;
+    var prototypeAccessors$1 = {
         $cursor: {
             configurable: true
         }
@@ -6463,43 +6176,43 @@ var TextSelection = /*@__PURE__*/ function(Selection1) {
     // :: ?ResolvedPos
     // Returns a resolved position if this is a cursor selection (an
     // empty text selection), and null otherwise.
-    prototypeAccessors$11.$cursor.get = function() {
+    prototypeAccessors$1.$cursor.get = function() {
         return this.$anchor.pos == this.$head.pos ? this.$head : null;
     };
-    TextSelection1.prototype.map = function map(doc, mapping) {
+    TextSelection.prototype.map = function map(doc, mapping) {
         var $head = doc.resolve(mapping.map(this.head));
-        if (!$head.parent.inlineContent) return Selection1.near($head);
+        if (!$head.parent.inlineContent) return Selection.near($head);
         var $anchor = doc.resolve(mapping.map(this.anchor));
-        return new TextSelection1($anchor.parent.inlineContent ? $anchor : $head, $head);
+        return new TextSelection($anchor.parent.inlineContent ? $anchor : $head, $head);
     };
-    TextSelection1.prototype.replace = function replace(tr, content) {
-        if (content === void 0) content = _prosemirrorModel.Slice.empty;
-        Selection1.prototype.replace.call(this, tr, content);
-        if (content == _prosemirrorModel.Slice.empty) {
+    TextSelection.prototype.replace = function replace(tr, content) {
+        if (content === void 0) content = (0, _prosemirrorModel.Slice).empty;
+        Selection.prototype.replace.call(this, tr, content);
+        if (content == (0, _prosemirrorModel.Slice).empty) {
             var marks = this.$from.marksAcross(this.$to);
             if (marks) tr.ensureMarks(marks);
         }
     };
-    TextSelection1.prototype.eq = function eq(other) {
-        return other instanceof TextSelection1 && other.anchor == this.anchor && other.head == this.head;
+    TextSelection.prototype.eq = function eq(other) {
+        return other instanceof TextSelection && other.anchor == this.anchor && other.head == this.head;
     };
-    TextSelection1.prototype.getBookmark = function getBookmark() {
+    TextSelection.prototype.getBookmark = function getBookmark() {
         return new TextBookmark(this.anchor, this.head);
     };
-    TextSelection1.prototype.toJSON = function toJSON() {
+    TextSelection.prototype.toJSON = function toJSON() {
         return {
             type: "text",
             anchor: this.anchor,
             head: this.head
         };
     };
-    TextSelection1.fromJSON = function fromJSON(doc, json) {
+    TextSelection.fromJSON = function fromJSON(doc, json) {
         if (typeof json.anchor != "number" || typeof json.head != "number") throw new RangeError("Invalid input for TextSelection.fromJSON");
-        return new TextSelection1(doc.resolve(json.anchor), doc.resolve(json.head));
+        return new TextSelection(doc.resolve(json.anchor), doc.resolve(json.head));
     };
     // :: (Node, number, ?number) → TextSelection
     // Create a text selection from non-resolved positions.
-    TextSelection1.create = function create(doc, anchor, head) {
+    TextSelection.create = function create(doc, anchor, head) {
         if (head === void 0) head = anchor;
         var $anchor = doc.resolve(anchor);
         return new this($anchor, head == anchor ? $anchor : doc.resolve(head));
@@ -6511,25 +6224,25 @@ var TextSelection = /*@__PURE__*/ function(Selection1) {
     // or backwards (negative number) first. Will fall back to calling
     // [`Selection.near`](#state.Selection^near) when the document
     // doesn't contain a valid text position.
-    TextSelection1.between = function between($anchor, $head, bias) {
+    TextSelection.between = function between($anchor, $head, bias) {
         var dPos = $anchor.pos - $head.pos;
         if (!bias || dPos) bias = dPos >= 0 ? 1 : -1;
         if (!$head.parent.inlineContent) {
-            var found = Selection1.findFrom($head, bias, true) || Selection1.findFrom($head, -bias, true);
+            var found = Selection.findFrom($head, bias, true) || Selection.findFrom($head, -bias, true);
             if (found) $head = found.$head;
-            else return Selection1.near($head, bias);
+            else return Selection.near($head, bias);
         }
         if (!$anchor.parent.inlineContent) {
             if (dPos == 0) $anchor = $head;
             else {
-                $anchor = (Selection1.findFrom($anchor, -bias, true) || Selection1.findFrom($anchor, bias, true)).$anchor;
+                $anchor = (Selection.findFrom($anchor, -bias, true) || Selection.findFrom($anchor, bias, true)).$anchor;
                 if ($anchor.pos < $head.pos != dPos < 0) $anchor = $head;
             }
         }
-        return new TextSelection1($anchor, $head);
+        return new TextSelection($anchor, $head);
     };
-    Object.defineProperties(TextSelection1.prototype, prototypeAccessors$11);
-    return TextSelection1;
+    Object.defineProperties(TextSelection.prototype, prototypeAccessors$1);
+    return TextSelection;
 }(Selection);
 Selection.jsonID("text", TextSelection);
 var TextBookmark = function TextBookmark(anchor, head) {
@@ -6547,56 +6260,56 @@ TextBookmark.prototype.resolve = function resolve(doc) {
 // the target of a node selection. In such a selection, `from` and
 // `to` point directly before and after the selected node, `anchor`
 // equals `from`, and `head` equals `to`..
-var NodeSelection = /*@__PURE__*/ function(Selection2) {
-    function NodeSelection1($pos) {
+var NodeSelection = /*@__PURE__*/ function(Selection) {
+    function NodeSelection($pos) {
         var node = $pos.nodeAfter;
         var $end = $pos.node(0).resolve($pos.pos + node.nodeSize);
-        Selection2.call(this, $pos, $end);
+        Selection.call(this, $pos, $end);
         // :: Node The selected node.
         this.node = node;
     }
-    if (Selection2) NodeSelection1.__proto__ = Selection2;
-    NodeSelection1.prototype = Object.create(Selection2 && Selection2.prototype);
-    NodeSelection1.prototype.constructor = NodeSelection1;
-    NodeSelection1.prototype.map = function map(doc, mapping) {
+    if (Selection) NodeSelection.__proto__ = Selection;
+    NodeSelection.prototype = Object.create(Selection && Selection.prototype);
+    NodeSelection.prototype.constructor = NodeSelection;
+    NodeSelection.prototype.map = function map(doc, mapping) {
         var ref = mapping.mapResult(this.anchor);
         var deleted = ref.deleted;
         var pos = ref.pos;
         var $pos = doc.resolve(pos);
-        if (deleted) return Selection2.near($pos);
-        return new NodeSelection1($pos);
+        if (deleted) return Selection.near($pos);
+        return new NodeSelection($pos);
     };
-    NodeSelection1.prototype.content = function content() {
-        return new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(this.node), 0, 0);
+    NodeSelection.prototype.content = function content() {
+        return new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(this.node), 0, 0);
     };
-    NodeSelection1.prototype.eq = function eq(other) {
-        return other instanceof NodeSelection1 && other.anchor == this.anchor;
+    NodeSelection.prototype.eq = function eq(other) {
+        return other instanceof NodeSelection && other.anchor == this.anchor;
     };
-    NodeSelection1.prototype.toJSON = function toJSON() {
+    NodeSelection.prototype.toJSON = function toJSON() {
         return {
             type: "node",
             anchor: this.anchor
         };
     };
-    NodeSelection1.prototype.getBookmark = function getBookmark() {
+    NodeSelection.prototype.getBookmark = function getBookmark() {
         return new NodeBookmark(this.anchor);
     };
-    NodeSelection1.fromJSON = function fromJSON(doc, json) {
+    NodeSelection.fromJSON = function fromJSON(doc, json) {
         if (typeof json.anchor != "number") throw new RangeError("Invalid input for NodeSelection.fromJSON");
-        return new NodeSelection1(doc.resolve(json.anchor));
+        return new NodeSelection(doc.resolve(json.anchor));
     };
     // :: (Node, number) → NodeSelection
     // Create a node selection from non-resolved positions.
-    NodeSelection1.create = function create(doc, from) {
+    NodeSelection.create = function create(doc, from) {
         return new this(doc.resolve(from));
     };
     // :: (Node) → bool
     // Determines whether the given node may be selected as a node
     // selection.
-    NodeSelection1.isSelectable = function isSelectable(node) {
+    NodeSelection.isSelectable = function isSelectable(node) {
         return !node.isText && node.type.spec.selectable !== false;
     };
-    return NodeSelection1;
+    return NodeSelection;
 }(Selection);
 NodeSelection.prototype.visible = false;
 Selection.jsonID("node", NodeSelection);
@@ -6618,39 +6331,39 @@ NodeBookmark.prototype.resolve = function resolve(doc) {
 // (which can not necessarily be expressed with a text selection, when
 // there are for example leaf block nodes at the start or end of the
 // document).
-var AllSelection = /*@__PURE__*/ function(Selection3) {
-    function AllSelection1(doc) {
-        Selection3.call(this, doc.resolve(0), doc.resolve(doc.content.size));
+var AllSelection = /*@__PURE__*/ function(Selection) {
+    function AllSelection(doc) {
+        Selection.call(this, doc.resolve(0), doc.resolve(doc.content.size));
     }
-    if (Selection3) AllSelection1.__proto__ = Selection3;
-    AllSelection1.prototype = Object.create(Selection3 && Selection3.prototype);
-    AllSelection1.prototype.constructor = AllSelection1;
-    AllSelection1.prototype.replace = function replace(tr, content) {
-        if (content === void 0) content = _prosemirrorModel.Slice.empty;
-        if (content == _prosemirrorModel.Slice.empty) {
+    if (Selection) AllSelection.__proto__ = Selection;
+    AllSelection.prototype = Object.create(Selection && Selection.prototype);
+    AllSelection.prototype.constructor = AllSelection;
+    AllSelection.prototype.replace = function replace(tr, content) {
+        if (content === void 0) content = (0, _prosemirrorModel.Slice).empty;
+        if (content == (0, _prosemirrorModel.Slice).empty) {
             tr.delete(0, tr.doc.content.size);
-            var sel = Selection3.atStart(tr.doc);
+            var sel = Selection.atStart(tr.doc);
             if (!sel.eq(tr.selection)) tr.setSelection(sel);
-        } else Selection3.prototype.replace.call(this, tr, content);
+        } else Selection.prototype.replace.call(this, tr, content);
     };
-    AllSelection1.prototype.toJSON = function toJSON() {
+    AllSelection.prototype.toJSON = function toJSON() {
         return {
             type: "all"
         };
     };
-    AllSelection1.fromJSON = function fromJSON(doc) {
-        return new AllSelection1(doc);
+    AllSelection.fromJSON = function fromJSON(doc) {
+        return new AllSelection(doc);
     };
-    AllSelection1.prototype.map = function map(doc) {
-        return new AllSelection1(doc);
+    AllSelection.prototype.map = function map(doc) {
+        return new AllSelection(doc);
     };
-    AllSelection1.prototype.eq = function eq(other) {
-        return other instanceof AllSelection1;
+    AllSelection.prototype.eq = function eq(other) {
+        return other instanceof AllSelection;
     };
-    AllSelection1.prototype.getBookmark = function getBookmark() {
+    AllSelection.prototype.getBookmark = function getBookmark() {
         return AllBookmark;
     };
-    return AllSelection1;
+    return AllSelection;
 }(Selection);
 Selection.jsonID("all", AllSelection);
 var AllBookmark = {
@@ -6680,7 +6393,7 @@ function selectionToInsertionEnd(tr, startLen, bias) {
     var last = tr.steps.length - 1;
     if (last < startLen) return;
     var step = tr.steps[last];
-    if (!(step instanceof _prosemirrorTransform.ReplaceStep || step instanceof _prosemirrorTransform.ReplaceAroundStep)) return;
+    if (!(step instanceof (0, _prosemirrorTransform.ReplaceStep) || step instanceof (0, _prosemirrorTransform.ReplaceAroundStep))) return;
     var map = tr.mapping.maps[last], end;
     map.forEach(function(_from, _to, _newFrom, newTo) {
         if (end == null) end = newTo;
@@ -6706,7 +6419,7 @@ var UPDATED_SEL = 1, UPDATED_MARKS = 2, UPDATED_SCROLL = 4;
 // selection transactions directly caused by mouse or touch input, and
 // a `"uiEvent"` property of that may be `"paste"`, `"cut"`, or `"drop"`.
 var Transaction = /*@__PURE__*/ function(Transform) {
-    function Transaction1(state) {
+    function Transaction(state) {
         Transform.call(this, state.doc);
         // :: number
         // The timestamp associated with this transaction, in the same
@@ -6724,10 +6437,10 @@ var Transaction = /*@__PURE__*/ function(Transform) {
         // Object used to store metadata properties for the transaction.
         this.meta = Object.create(null);
     }
-    if (Transform) Transaction1.__proto__ = Transform;
-    Transaction1.prototype = Object.create(Transform && Transform.prototype);
-    Transaction1.prototype.constructor = Transaction1;
-    var prototypeAccessors1 = {
+    if (Transform) Transaction.__proto__ = Transform;
+    Transaction.prototype = Object.create(Transform && Transform.prototype);
+    Transaction.prototype.constructor = Transaction;
+    var prototypeAccessors = {
         selection: {
             configurable: true
         },
@@ -6749,7 +6462,7 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     // selection [mapped](#state.Selection.map) through the steps in the
     // transaction, but can be overwritten with
     // [`setSelection`](#state.Transaction.setSelection).
-    prototypeAccessors1.selection.get = function() {
+    prototypeAccessors.selection.get = function() {
         if (this.curSelectionFor < this.steps.length) {
             this.curSelection = this.curSelection.map(this.doc, this.mapping.slice(this.curSelectionFor));
             this.curSelectionFor = this.steps.length;
@@ -6759,7 +6472,7 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     // :: (Selection) → Transaction
     // Update the transaction's current selection. Will determine the
     // selection that the editor gets when the transaction is applied.
-    Transaction1.prototype.setSelection = function setSelection(selection) {
+    Transaction.prototype.setSelection = function setSelection(selection) {
         if (selection.$from.doc != this.doc) throw new RangeError("Selection passed to setSelection must point at the current document");
         this.curSelection = selection;
         this.curSelectionFor = this.steps.length;
@@ -6769,12 +6482,12 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     };
     // :: bool
     // Whether the selection was explicitly updated by this transaction.
-    prototypeAccessors1.selectionSet.get = function() {
+    prototypeAccessors.selectionSet.get = function() {
         return (this.updated & UPDATED_SEL) > 0;
     };
     // :: (?[Mark]) → Transaction
     // Set the current stored marks.
-    Transaction1.prototype.setStoredMarks = function setStoredMarks(marks) {
+    Transaction.prototype.setStoredMarks = function setStoredMarks(marks) {
         this.storedMarks = marks;
         this.updated |= UPDATED_MARKS;
         return this;
@@ -6783,39 +6496,39 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     // Make sure the current stored marks or, if that is null, the marks
     // at the selection, match the given set of marks. Does nothing if
     // this is already the case.
-    Transaction1.prototype.ensureMarks = function ensureMarks(marks) {
-        if (!_prosemirrorModel.Mark.sameSet(this.storedMarks || this.selection.$from.marks(), marks)) this.setStoredMarks(marks);
+    Transaction.prototype.ensureMarks = function ensureMarks(marks) {
+        if (!(0, _prosemirrorModel.Mark).sameSet(this.storedMarks || this.selection.$from.marks(), marks)) this.setStoredMarks(marks);
         return this;
     };
     // :: (Mark) → Transaction
     // Add a mark to the set of stored marks.
-    Transaction1.prototype.addStoredMark = function addStoredMark(mark) {
+    Transaction.prototype.addStoredMark = function addStoredMark(mark) {
         return this.ensureMarks(mark.addToSet(this.storedMarks || this.selection.$head.marks()));
     };
     // :: (union<Mark, MarkType>) → Transaction
     // Remove a mark or mark type from the set of stored marks.
-    Transaction1.prototype.removeStoredMark = function removeStoredMark(mark) {
+    Transaction.prototype.removeStoredMark = function removeStoredMark(mark) {
         return this.ensureMarks(mark.removeFromSet(this.storedMarks || this.selection.$head.marks()));
     };
     // :: bool
     // Whether the stored marks were explicitly set for this transaction.
-    prototypeAccessors1.storedMarksSet.get = function() {
+    prototypeAccessors.storedMarksSet.get = function() {
         return (this.updated & UPDATED_MARKS) > 0;
     };
-    Transaction1.prototype.addStep = function addStep(step, doc) {
+    Transaction.prototype.addStep = function addStep(step, doc) {
         Transform.prototype.addStep.call(this, step, doc);
         this.updated = this.updated & ~UPDATED_MARKS;
         this.storedMarks = null;
     };
     // :: (number) → Transaction
     // Update the timestamp for the transaction.
-    Transaction1.prototype.setTime = function setTime(time) {
+    Transaction.prototype.setTime = function setTime(time) {
         this.time = time;
         return this;
     };
     // :: (Slice) → Transaction
     // Replace the current selection with the given slice.
-    Transaction1.prototype.replaceSelection = function replaceSelection(slice) {
+    Transaction.prototype.replaceSelection = function replaceSelection(slice) {
         this.selection.replace(this, slice);
         return this;
     };
@@ -6823,22 +6536,22 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     // Replace the selection with the given node. When `inheritMarks` is
     // true and the content is inline, it inherits the marks from the
     // place where it is inserted.
-    Transaction1.prototype.replaceSelectionWith = function replaceSelectionWith(node, inheritMarks) {
+    Transaction.prototype.replaceSelectionWith = function replaceSelectionWith(node, inheritMarks) {
         var selection = this.selection;
-        if (inheritMarks !== false) node = node.mark(this.storedMarks || (selection.empty ? selection.$from.marks() : selection.$from.marksAcross(selection.$to) || _prosemirrorModel.Mark.none));
+        if (inheritMarks !== false) node = node.mark(this.storedMarks || (selection.empty ? selection.$from.marks() : selection.$from.marksAcross(selection.$to) || (0, _prosemirrorModel.Mark).none));
         selection.replaceWith(this, node);
         return this;
     };
     // :: () → Transaction
     // Delete the selection.
-    Transaction1.prototype.deleteSelection = function deleteSelection() {
+    Transaction.prototype.deleteSelection = function deleteSelection() {
         this.selection.replace(this);
         return this;
     };
     // :: (string, from: ?number, to: ?number) → Transaction
     // Replace the given range, or the selection if no range is given,
     // with a text node containing the given string.
-    Transaction1.prototype.insertText = function insertText(text, from, to) {
+    Transaction.prototype.insertText = function insertText(text, from, to) {
         if (to === void 0) to = from;
         var schema = this.doc.type.schema;
         if (from == null) {
@@ -6859,35 +6572,35 @@ var Transaction = /*@__PURE__*/ function(Transform) {
     // :: (union<string, Plugin, PluginKey>, any) → Transaction
     // Store a metadata property in this transaction, keyed either by
     // name or by plugin.
-    Transaction1.prototype.setMeta = function setMeta(key, value) {
+    Transaction.prototype.setMeta = function setMeta(key, value) {
         this.meta[typeof key == "string" ? key : key.key] = value;
         return this;
     };
     // :: (union<string, Plugin, PluginKey>) → any
     // Retrieve a metadata property for a given name or plugin.
-    Transaction1.prototype.getMeta = function getMeta(key) {
+    Transaction.prototype.getMeta = function getMeta(key) {
         return this.meta[typeof key == "string" ? key : key.key];
     };
     // :: bool
     // Returns true if this transaction doesn't contain any metadata,
     // and can thus safely be extended.
-    prototypeAccessors1.isGeneric.get = function() {
+    prototypeAccessors.isGeneric.get = function() {
         for(var _ in this.meta)return false;
         return true;
     };
     // :: () → Transaction
     // Indicate that the editor should scroll the selection into view
     // when updated to the state produced by this transaction.
-    Transaction1.prototype.scrollIntoView = function scrollIntoView() {
+    Transaction.prototype.scrollIntoView = function scrollIntoView() {
         this.updated |= UPDATED_SCROLL;
         return this;
     };
-    prototypeAccessors1.scrolledIntoView.get = function() {
+    prototypeAccessors.scrolledIntoView.get = function() {
         return (this.updated & UPDATED_SCROLL) > 0;
     };
-    Object.defineProperties(Transaction1.prototype, prototypeAccessors1);
-    return Transaction1;
-}(_prosemirrorTransform.Transform);
+    Object.defineProperties(Transaction.prototype, prototypeAccessors);
+    return Transaction;
+}((0, _prosemirrorTransform.Transform));
 function bind(f, self) {
     return !self || !f ? f : f.bind(self);
 }
@@ -7125,7 +6838,7 @@ EditorState.prototype.toJSON = function toJSON(pluginFields) {
     if (this.storedMarks) result.storedMarks = this.storedMarks.map(function(m) {
         return m.toJSON();
     });
-    if (pluginFields && typeof pluginFields == 'object') for(var prop in pluginFields){
+    if (pluginFields && typeof pluginFields == "object") for(var prop in pluginFields){
         if (prop == "doc" || prop == "selection") throw new RangeError("The JSON fields `doc` and `selection` are reserved");
         var plugin = pluginFields[prop], state = plugin.spec.state;
         if (state && state.toJSON) result[prop] = state.toJSON.call(plugin, this[plugin.key]);
@@ -7152,7 +6865,7 @@ EditorState.fromJSON = function fromJSON(config, json, pluginFields) {
     var $config = new Configuration(config.schema, config.plugins);
     var instance = new EditorState($config);
     $config.fields.forEach(function(field) {
-        if (field.name == "doc") instance.doc = _prosemirrorModel.Node.fromJSON(config.schema, json.doc);
+        if (field.name == "doc") instance.doc = (0, _prosemirrorModel.Node).fromJSON(config.schema, json.doc);
         else if (field.name == "selection") instance.selection = Selection.fromJSON(instance.doc, json.selection);
         else if (field.name == "storedMarks") {
             if (json.storedMarks) instance.storedMarks = json.storedMarks.map(config.schema.markFromJSON);
@@ -7315,32 +7028,19 @@ PluginKey.prototype.getState = function getState(state) {
 },{"prosemirror-model":"eeCSD","prosemirror-transform":"bTHhB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eeCSD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ContentMatch", ()=>ContentMatch
-);
-parcelHelpers.export(exports, "DOMParser", ()=>DOMParser
-);
-parcelHelpers.export(exports, "DOMSerializer", ()=>DOMSerializer
-);
-parcelHelpers.export(exports, "Fragment", ()=>Fragment
-);
-parcelHelpers.export(exports, "Mark", ()=>Mark
-);
-parcelHelpers.export(exports, "MarkType", ()=>MarkType
-);
-parcelHelpers.export(exports, "Node", ()=>Node
-);
-parcelHelpers.export(exports, "NodeRange", ()=>NodeRange
-);
-parcelHelpers.export(exports, "NodeType", ()=>NodeType
-);
-parcelHelpers.export(exports, "ReplaceError", ()=>ReplaceError
-);
-parcelHelpers.export(exports, "ResolvedPos", ()=>ResolvedPos
-);
-parcelHelpers.export(exports, "Schema", ()=>Schema
-);
-parcelHelpers.export(exports, "Slice", ()=>Slice
-);
+parcelHelpers.export(exports, "ContentMatch", ()=>ContentMatch);
+parcelHelpers.export(exports, "DOMParser", ()=>DOMParser);
+parcelHelpers.export(exports, "DOMSerializer", ()=>DOMSerializer);
+parcelHelpers.export(exports, "Fragment", ()=>Fragment);
+parcelHelpers.export(exports, "Mark", ()=>Mark);
+parcelHelpers.export(exports, "MarkType", ()=>MarkType);
+parcelHelpers.export(exports, "Node", ()=>Node);
+parcelHelpers.export(exports, "NodeRange", ()=>NodeRange);
+parcelHelpers.export(exports, "NodeType", ()=>NodeType);
+parcelHelpers.export(exports, "ReplaceError", ()=>ReplaceError);
+parcelHelpers.export(exports, "ResolvedPos", ()=>ResolvedPos);
+parcelHelpers.export(exports, "Schema", ()=>Schema);
+parcelHelpers.export(exports, "Slice", ()=>Slice);
 var _orderedmap = require("orderedmap");
 var _orderedmapDefault = parcelHelpers.interopDefault(_orderedmap);
 function findDiffStart(a, b, pos) {
@@ -7454,7 +7154,7 @@ Fragment.prototype.textBetween = function textBetween(from, to, blockSeparator, 
             text += node.text.slice(Math.max(from, pos) - pos, to - pos);
             separated = !blockSeparator;
         } else if (node.isLeaf && leafText) {
-            text += typeof leafText === 'function' ? leafText(node) : leafText;
+            text += typeof leafText === "function" ? leafText(node) : leafText;
             separated = !blockSeparator;
         } else if (!separated && node.isBlock) {
             text += blockSeparator;
@@ -7508,10 +7208,10 @@ Fragment.prototype.cutByIndex = function cutByIndex(from, to) {
 Fragment.prototype.replaceChild = function replaceChild(index, node) {
     var current = this.content[index];
     if (current == node) return this;
-    var copy1 = this.content.slice();
+    var copy = this.content.slice();
     var size = this.size + node.nodeSize - current.nodeSize;
-    copy1[index] = node;
-    return new Fragment(copy1, size);
+    copy[index] = node;
+    return new Fragment(copy, size);
 };
 // : (Node) → Fragment
 // Create a new fragment by prepending the given node to this
@@ -7555,9 +7255,9 @@ prototypeAccessors.childCount.get = function() {
 // Get the child node at the given index. Raise an error when the
 // index is out of range.
 Fragment.prototype.child = function child(index) {
-    var found1 = this.content[index];
-    if (!found1) throw new RangeError("Index " + index + " out of range for " + this);
-    return found1;
+    var found = this.content[index];
+    if (!found) throw new RangeError("Index " + index + " out of range for " + this);
+    return found;
 };
 // :: (number) → ?Node
 // Get the child node at the given index, if it exists.
@@ -7717,25 +7417,25 @@ var Mark = function Mark(type, attrs) {
 // [exclusive](#model.MarkSpec.excludes) with this mark are present,
 // those are replaced by this one.
 Mark.prototype.addToSet = function addToSet(set) {
-    var copy2, placed = false;
+    var copy, placed = false;
     for(var i = 0; i < set.length; i++){
         var other = set[i];
         if (this.eq(other)) return set;
         if (this.type.excludes(other.type)) {
-            if (!copy2) copy2 = set.slice(0, i);
+            if (!copy) copy = set.slice(0, i);
         } else if (other.type.excludes(this.type)) return set;
         else {
             if (!placed && other.type.rank > this.type.rank) {
-                if (!copy2) copy2 = set.slice(0, i);
-                copy2.push(this);
+                if (!copy) copy = set.slice(0, i);
+                copy.push(this);
                 placed = true;
             }
-            if (copy2) copy2.push(other);
+            if (copy) copy.push(other);
         }
     }
-    if (!copy2) copy2 = set.slice();
-    if (!placed) copy2.push(this);
-    return copy2;
+    if (!copy) copy = set.slice();
+    if (!placed) copy.push(this);
+    return copy;
 };
 // :: ([Mark]) → [Mark]
 // Remove this mark from the given set, returning a new set. If this
@@ -7797,11 +7497,11 @@ Mark.setFrom = function setFrom(marks) {
     if (marks instanceof Mark) return [
         marks
     ];
-    var copy3 = marks.slice();
-    copy3.sort(function(a, b) {
+    var copy = marks.slice();
+    copy.sort(function(a, b) {
         return a.type.rank - b.type.rank;
     });
-    return copy3;
+    return copy;
 };
 // :: [Mark] The empty set of marks.
 Mark.none = [];
@@ -8223,11 +7923,11 @@ ResolvedPos.prototype.toString = function toString() {
     for(var i = 1; i <= this.depth; i++)str += (str ? "/" : "") + this.node(i).type.name + "_" + this.index(i - 1);
     return str + ":" + this.parentOffset;
 };
-ResolvedPos.resolve = function resolve(doc1, pos) {
-    if (!(pos >= 0 && pos <= doc1.content.size)) throw new RangeError("Position " + pos + " out of range");
+ResolvedPos.resolve = function resolve(doc, pos) {
+    if (!(pos >= 0 && pos <= doc.content.size)) throw new RangeError("Position " + pos + " out of range");
     var path = [];
     var start = 0, parentOffset = pos;
-    for(var node = doc1;;){
+    for(var node = doc;;){
         var ref = node.content.findIndex(parentOffset);
         var index = ref.index;
         var offset = ref.offset;
@@ -8241,12 +7941,12 @@ ResolvedPos.resolve = function resolve(doc1, pos) {
     }
     return new ResolvedPos(pos, path, parentOffset);
 };
-ResolvedPos.resolveCached = function resolveCached(doc2, pos) {
+ResolvedPos.resolveCached = function resolveCached(doc, pos) {
     for(var i = 0; i < resolveCache.length; i++){
         var cached = resolveCache[i];
-        if (cached.pos == pos && cached.doc == doc2) return cached;
+        if (cached.pos == pos && cached.doc == doc) return cached;
     }
-    var result = resolveCache[resolveCachePos] = ResolvedPos.resolve(doc2, pos);
+    var result = resolveCache[resolveCachePos] = ResolvedPos.resolve(doc, pos);
     resolveCachePos = (resolveCachePos + 1) % resolveCacheSize;
     return result;
 };
@@ -8577,12 +8277,12 @@ Node.prototype.resolveNoCache = function resolveNoCache(pos) {
 // Test whether a given mark or mark type occurs in this document
 // between the two given positions.
 Node.prototype.rangeHasMark = function rangeHasMark(from, to, type) {
-    var found2 = false;
+    var found = false;
     if (to > from) this.nodesBetween(from, to, function(node) {
-        if (type.isInSet(node.marks)) found2 = true;
-        return !found2;
+        if (type.isInSet(node.marks)) found = true;
+        return !found;
     });
-    return found2;
+    return found;
 };
 // :: bool
 // True when this is a block (non-inline node)
@@ -8682,9 +8382,9 @@ Node.prototype.canAppend = function canAppend(other) {
 // schema, and raise error when they do not.
 Node.prototype.check = function check() {
     if (!this.type.validContent(this.content)) throw new RangeError("Invalid content for node " + this.type.name + ": " + this.content.toString().slice(0, 50));
-    var copy4 = Mark.none;
-    for(var i = 0; i < this.marks.length; i++)copy4 = this.marks[i].addToSet(copy4);
-    if (!Mark.sameSet(copy4, this.marks)) throw new RangeError("Invalid collection of marks for node " + this.type.name + ": " + this.marks.map(function(m) {
+    var copy = Mark.none;
+    for(var i = 0; i < this.marks.length; i++)copy = this.marks[i].addToSet(copy);
+    if (!Mark.sameSet(copy, this.marks)) throw new RangeError("Invalid collection of marks for node " + this.type.name + ": " + this.marks.map(function(m) {
         return m.type.name;
     }));
     this.content.forEach(function(node) {
@@ -8724,16 +8424,16 @@ Node.fromJSON = function fromJSON(schema, json) {
     return schema.nodeType(json.type).create(json.attrs, content, marks);
 };
 Object.defineProperties(Node.prototype, prototypeAccessors$3);
-var TextNode = /*@__PURE__*/ function(Node1) {
-    function TextNode1(type, attrs, content, marks) {
-        Node1.call(this, type, attrs, null, marks);
+var TextNode = /*@__PURE__*/ function(Node) {
+    function TextNode(type, attrs, content, marks) {
+        Node.call(this, type, attrs, null, marks);
         if (!content) throw new RangeError("Empty text nodes are not allowed");
         this.text = content;
     }
-    if (Node1) TextNode1.__proto__ = Node1;
-    TextNode1.prototype = Object.create(Node1 && Node1.prototype);
-    TextNode1.prototype.constructor = TextNode1;
-    var prototypeAccessors$11 = {
+    if (Node) TextNode.__proto__ = Node;
+    TextNode.prototype = Object.create(Node && Node.prototype);
+    TextNode.prototype.constructor = TextNode;
+    var prototypeAccessors$1 = {
         textContent: {
             configurable: true
         },
@@ -8741,42 +8441,42 @@ var TextNode = /*@__PURE__*/ function(Node1) {
             configurable: true
         }
     };
-    TextNode1.prototype.toString = function toString() {
+    TextNode.prototype.toString = function toString() {
         if (this.type.spec.toDebugString) return this.type.spec.toDebugString(this);
         return wrapMarks(this.marks, JSON.stringify(this.text));
     };
-    prototypeAccessors$11.textContent.get = function() {
+    prototypeAccessors$1.textContent.get = function() {
         return this.text;
     };
-    TextNode1.prototype.textBetween = function textBetween(from, to) {
+    TextNode.prototype.textBetween = function textBetween(from, to) {
         return this.text.slice(from, to);
     };
-    prototypeAccessors$11.nodeSize.get = function() {
+    prototypeAccessors$1.nodeSize.get = function() {
         return this.text.length;
     };
-    TextNode1.prototype.mark = function mark(marks) {
-        return marks == this.marks ? this : new TextNode1(this.type, this.attrs, this.text, marks);
+    TextNode.prototype.mark = function mark(marks) {
+        return marks == this.marks ? this : new TextNode(this.type, this.attrs, this.text, marks);
     };
-    TextNode1.prototype.withText = function withText(text) {
+    TextNode.prototype.withText = function withText(text) {
         if (text == this.text) return this;
-        return new TextNode1(this.type, this.attrs, text, this.marks);
+        return new TextNode(this.type, this.attrs, text, this.marks);
     };
-    TextNode1.prototype.cut = function cut(from, to) {
+    TextNode.prototype.cut = function cut(from, to) {
         if (from === void 0) from = 0;
         if (to === void 0) to = this.text.length;
         if (from == 0 && to == this.text.length) return this;
         return this.withText(this.text.slice(from, to));
     };
-    TextNode1.prototype.eq = function eq(other) {
+    TextNode.prototype.eq = function eq(other) {
         return this.sameMarkup(other) && this.text == other.text;
     };
-    TextNode1.prototype.toJSON = function toJSON() {
-        var base = Node1.prototype.toJSON.call(this);
+    TextNode.prototype.toJSON = function toJSON() {
+        var base = Node.prototype.toJSON.call(this);
         base.text = this.text;
         return base;
     };
-    Object.defineProperties(TextNode1.prototype, prototypeAccessors$11);
-    return TextNode1;
+    Object.defineProperties(TextNode.prototype, prototypeAccessors$1);
+    return TextNode;
 }(Node);
 function wrapMarks(marks, str) {
     for(var i = marks.length - 1; i >= 0; i--)str = marks[i].type.name + "(" + str + ")";
@@ -8873,8 +8573,8 @@ ContentMatch.prototype.fillBefore = function fillBefore(after, toEnd, startIndex
             var type = match.next[i], next = match.next[i + 1];
             if (!(type.isText || type.hasRequiredAttrs()) && seen.indexOf(next) == -1) {
                 seen.push(next);
-                var found3 = search(next, types.concat(type));
-                if (found3) return found3;
+                var found = search(next, types.concat(type));
+                if (found) return found;
             }
         }
     }
@@ -8980,7 +8680,7 @@ Object.defineProperties(TokenStream.prototype, prototypeAccessors$1$2);
 function parseExpr(stream) {
     var exprs = [];
     do exprs.push(parseExprSeq(stream));
-    while (stream.eat("|"))
+    while (stream.eat("|"));
     return exprs.length == 1 ? exprs[0] : {
         type: "choice",
         exprs: exprs
@@ -8989,7 +8689,7 @@ function parseExpr(stream) {
 function parseExprSeq(stream) {
     var exprs = [];
     do exprs.push(parseExprSubscript(stream));
-    while (stream.next && stream.next != ")" && stream.next != "|")
+    while (stream.next && stream.next != ")" && stream.next != "|");
     return exprs.length == 1 ? exprs[0] : {
         type: "seq",
         exprs: exprs
@@ -9081,21 +8781,21 @@ function parseExprAtom(stream) {
 // Note that unlike typical NFAs, the edge ordering in this one is
 // significant, in that it is used to contruct filler content when
 // necessary.
-function nfa(expr1) {
-    var nfa1 = [
+function nfa(expr) {
+    var nfa = [
         []
     ];
-    connect(compile(expr1, 0), node());
-    return nfa1;
+    connect(compile(expr, 0), node());
+    return nfa;
     function node() {
-        return nfa1.push([]) - 1;
+        return nfa.push([]) - 1;
     }
-    function edge1(from, to, term) {
+    function edge(from, to, term) {
         var edge = {
             term: term,
             to: to
         };
-        nfa1[from].push(edge);
+        nfa[from].push(edge);
         return edge;
     }
     function connect(edges, to) {
@@ -9103,60 +8803,60 @@ function nfa(expr1) {
             return edge.to = to;
         });
     }
-    function compile(expr2, from) {
-        if (expr2.type == "choice") {
-            return expr2.exprs.reduce(function(out, expr) {
+    function compile(expr, from) {
+        if (expr.type == "choice") {
+            return expr.exprs.reduce(function(out, expr) {
                 return out.concat(compile(expr, from));
             }, []);
-        } else if (expr2.type == "seq") {
+        } else if (expr.type == "seq") {
             for(var i = 0;; i++){
-                var next = compile(expr2.exprs[i], from);
-                if (i == expr2.exprs.length - 1) {
+                var next = compile(expr.exprs[i], from);
+                if (i == expr.exprs.length - 1) {
                     return next;
                 }
                 connect(next, from = node());
             }
-        } else if (expr2.type == "star") {
+        } else if (expr.type == "star") {
             var loop = node();
-            edge1(from, loop);
-            connect(compile(expr2.expr, loop), loop);
+            edge(from, loop);
+            connect(compile(expr.expr, loop), loop);
             return [
-                edge1(loop)
+                edge(loop)
             ];
-        } else if (expr2.type == "plus") {
+        } else if (expr.type == "plus") {
             var loop$1 = node();
-            connect(compile(expr2.expr, from), loop$1);
-            connect(compile(expr2.expr, loop$1), loop$1);
+            connect(compile(expr.expr, from), loop$1);
+            connect(compile(expr.expr, loop$1), loop$1);
             return [
-                edge1(loop$1)
+                edge(loop$1)
             ];
-        } else if (expr2.type == "opt") {
+        } else if (expr.type == "opt") {
             return [
-                edge1(from)
-            ].concat(compile(expr2.expr, from));
-        } else if (expr2.type == "range") {
+                edge(from)
+            ].concat(compile(expr.expr, from));
+        } else if (expr.type == "range") {
             var cur = from;
-            for(var i$1 = 0; i$1 < expr2.min; i$1++){
+            for(var i$1 = 0; i$1 < expr.min; i$1++){
                 var next$1 = node();
-                connect(compile(expr2.expr, cur), next$1);
+                connect(compile(expr.expr, cur), next$1);
                 cur = next$1;
             }
-            if (expr2.max == -1) {
-                connect(compile(expr2.expr, cur), cur);
+            if (expr.max == -1) {
+                connect(compile(expr.expr, cur), cur);
             } else {
-                for(var i$2 = expr2.min; i$2 < expr2.max; i$2++){
+                for(var i$2 = expr.min; i$2 < expr.max; i$2++){
                     var next$2 = node();
-                    edge1(cur, next$2);
-                    connect(compile(expr2.expr, cur), next$2);
+                    edge(cur, next$2);
+                    connect(compile(expr.expr, cur), next$2);
                     cur = next$2;
                 }
             }
             return [
-                edge1(cur)
+                edge(cur)
             ];
-        } else if (expr2.type == "name") {
+        } else if (expr.type == "name") {
             return [
-                edge1(from, null, expr2.value)
+                edge(from, null, expr.value)
             ];
         }
     }
@@ -9167,12 +8867,12 @@ function cmp(a, b) {
 // Get the set of nodes reachable by null edges from `node`. Omit
 // nodes with only a single null-out-edge, since they may lead to
 // needless duplicated nodes.
-function nullFrom(nfa2, node1) {
+function nullFrom(nfa, node) {
     var result = [];
-    scan(node1);
+    scan(node);
     return result.sort(cmp);
     function scan(node) {
-        var edges = nfa2[node];
+        var edges = nfa[node];
         if (edges.length == 1 && !edges[0].term) {
             return scan(edges[0].to);
         }
@@ -9191,20 +8891,20 @@ function nullFrom(nfa2, node1) {
 // Compiles an NFA as produced by `nfa` into a DFA, modeled as a set
 // of state objects (`ContentMatch` instances) with transitions
 // between them.
-function dfa(nfa3) {
+function dfa(nfa) {
     var labeled = Object.create(null);
-    return explore(nullFrom(nfa3, 0));
+    return explore(nullFrom(nfa, 0));
     function explore(states) {
         var out = [];
-        states.forEach(function(node2) {
-            nfa3[node2].forEach(function(ref) {
+        states.forEach(function(node) {
+            nfa[node].forEach(function(ref) {
                 var term = ref.term;
                 var to = ref.to;
                 if (!term) {
                     return;
                 }
                 var known = out.indexOf(term), set = known > -1 && out[known + 1];
-                nullFrom(nfa3, to).forEach(function(node) {
+                nullFrom(nfa, to).forEach(function(node) {
                     if (!set) {
                         out.push(term, set = []);
                     }
@@ -9214,7 +8914,7 @@ function dfa(nfa3) {
                 });
             });
         });
-        var state = labeled[states.join(",")] = new ContentMatch(states.indexOf(nfa3.length - 1) > -1);
+        var state = labeled[states.join(",")] = new ContentMatch(states.indexOf(nfa.length - 1) > -1);
         for(var i = 0; i < out.length; i += 2){
             var states$1 = out[i + 1].sort(cmp);
             state.next.push(out[i], labeled[states$1.join(",")] || explore(states$1));
@@ -9428,13 +9128,13 @@ NodeType.prototype.allowsMarks = function allowsMarks(marks) {
 // Removes the marks that are not allowed in this node from the given set.
 NodeType.prototype.allowedMarks = function allowedMarks(marks) {
     if (this.markSet == null) return marks;
-    var copy5;
+    var copy;
     for(var i = 0; i < marks.length; i++){
         if (!this.allowsMarkType(marks[i].type)) {
-            if (!copy5) copy5 = marks.slice(0, i);
-        } else if (copy5) copy5.push(marks[i]);
+            if (!copy) copy = marks.slice(0, i);
+        } else if (copy) copy.push(marks[i]);
     }
-    return !copy5 ? marks : copy5.length ? copy5 : Mark.empty;
+    return !copy ? marks : copy.length ? copy : Mark.empty;
 };
 NodeType.compile = function compile(nodes, schema) {
     var result = Object.create(null);
@@ -9702,8 +9402,8 @@ var Schema = function Schema(spec) {
     // (not raw objects).
     this.spec = {};
     for(var prop in spec)this.spec[prop] = spec[prop];
-    this.spec.nodes = _orderedmapDefault.default.from(spec.nodes);
-    this.spec.marks = _orderedmapDefault.default.from(spec.marks);
+    this.spec.nodes = (0, _orderedmapDefault.default).from(spec.nodes);
+    this.spec.marks = (0, _orderedmapDefault.default).from(spec.marks);
     // :: Object<NodeType>
     // An object mapping the schema's node names to node type objects.
     this.nodes = NodeType.compile(this.spec.nodes, this);
@@ -9774,22 +9474,22 @@ Schema.prototype.markFromJSON = function markFromJSON(json) {
     return Mark.fromJSON(this, json);
 };
 Schema.prototype.nodeType = function nodeType(name) {
-    var found4 = this.nodes[name];
-    if (!found4) throw new RangeError("Unknown node type: " + name);
-    return found4;
+    var found = this.nodes[name];
+    if (!found) throw new RangeError("Unknown node type: " + name);
+    return found;
 };
 function gatherMarks(schema, marks) {
-    var found5 = [];
+    var found = [];
     for(var i = 0; i < marks.length; i++){
         var name = marks[i], mark = schema.marks[name], ok = mark;
-        if (mark) found5.push(mark);
+        if (mark) found.push(mark);
         else for(var prop in schema.marks){
             var mark$1 = schema.marks[prop];
-            if (name == "_" || mark$1.spec.group && mark$1.spec.group.split(" ").indexOf(name) > -1) found5.push(ok = mark$1);
+            if (name == "_" || mark$1.spec.group && mark$1.spec.group.split(" ").indexOf(name) > -1) found.push(ok = mark$1);
         }
         if (!ok) throw new SyntaxError("Unknown mark type: '" + marks[i] + "'");
     }
-    return found5;
+    return found;
 }
 // ParseOptions:: interface
 // These are the options recognized by the
@@ -10024,7 +9724,7 @@ DOMParser.schemaRules = function schemaRules(schema) {
             rule.mark = name;
         });
     };
-    for(var name1 in schema.marks)loop(name1);
+    for(var name in schema.marks)loop(name);
     var loop$1 = function(name) {
         var rules$1 = schema.nodes[name$1].spec.parseDOM;
         if (rules$1) rules$1.forEach(function(rule) {
@@ -10215,7 +9915,7 @@ ParseContext.prototype.addTextNode = function addTextNode(dom) {
             if (/^[ \t\r\n\u000c]/.test(value) && this.open == this.nodes.length - 1) {
                 var nodeBefore = top.content[top.content.length - 1];
                 var domNodeBefore = dom.previousSibling;
-                if (!nodeBefore || domNodeBefore && domNodeBefore.nodeName == 'BR' || nodeBefore.isText && /[ \t\r\n\u000c]$/.test(nodeBefore.text)) value = value.slice(1);
+                if (!nodeBefore || domNodeBefore && domNodeBefore.nodeName == "BR" || nodeBefore.isText && /[ \t\r\n\u000c]$/.test(nodeBefore.text)) value = value.slice(1);
             }
         } else if (!(top.options & OPT_PRESERVE_WS_FULL)) value = value.replace(/\r?\n|\r/g, " ");
         else value = value.replace(/\r\n?/g, "\n");
@@ -10331,11 +10031,11 @@ ParseContext.prototype.findPlace = function findPlace(node) {
     var route, sync;
     for(var depth = this.open; depth >= 0; depth--){
         var cx = this.nodes[depth];
-        var found6 = cx.findWrapping(node);
-        if (found6 && (!route || route.length > found6.length)) {
-            route = found6;
+        var found = cx.findWrapping(node);
+        if (found && (!route || route.length > found.length)) {
+            route = found;
             sync = cx;
-            if (!found6.length) break;
+            if (!found.length) break;
         }
         if (cx.solid) break;
     }
@@ -10476,15 +10176,15 @@ ParseContext.prototype.textblockFromContext = function textblockFromContext() {
     }
 };
 ParseContext.prototype.addPendingMark = function addPendingMark(mark) {
-    var found7 = findSameMarkInSet(mark, this.top.pendingMarks);
-    if (found7) this.top.stashMarks.push(found7);
+    var found = findSameMarkInSet(mark, this.top.pendingMarks);
+    if (found) this.top.stashMarks.push(found);
     this.top.pendingMarks = mark.addToSet(this.top.pendingMarks);
 };
 ParseContext.prototype.removePendingMark = function removePendingMark(mark, upto) {
     for(var depth = this.open; depth >= 0; depth--){
         var level = this.nodes[depth];
-        var found8 = level.pendingMarks.lastIndexOf(mark);
-        if (found8 > -1) level.pendingMarks = mark.removeFromSet(level.pendingMarks);
+        var found = level.pendingMarks.lastIndexOf(mark);
+        if (found > -1) level.pendingMarks = mark.removeFromSet(level.pendingMarks);
         else {
             level.activeMarks = mark.removeFromSet(level.activeMarks);
             var stashMark = level.popFromStashMark(mark);
@@ -10519,9 +10219,9 @@ function parseStyles(style) {
     return result;
 }
 function copy(obj) {
-    var copy6 = {};
-    for(var prop in obj)copy6[prop] = obj[prop];
-    return copy6;
+    var copy = {};
+    for(var prop in obj)copy[prop] = obj[prop];
+    return copy;
 }
 // Used when finding a mark at the top level of a fragment parse.
 // Checks whether it would be reasonable to apply a given mark type to
@@ -10545,8 +10245,8 @@ function markMayApply(markType, nodeType) {
             v: true
         };
     };
-    for(var name2 in nodes){
-        var returned = loop(name2);
+    for(var name in nodes){
+        var returned = loop(name);
         if (returned) return returned.v;
     }
 }
@@ -10663,10 +10363,10 @@ DOMSerializer.prototype.serializeMark = function serializeMark(mark, inline, opt
 // Render an [output spec](#model.DOMOutputSpec) to a DOM node. If
 // the spec has a hole (zero) in it, `contentDOM` will point at the
 // node with the hole.
-DOMSerializer.renderSpec = function renderSpec(doc3, structure, xmlNS) {
+DOMSerializer.renderSpec = function renderSpec(doc, structure, xmlNS) {
     if (xmlNS === void 0) xmlNS = null;
     if (typeof structure == "string") return {
-        dom: doc3.createTextNode(structure)
+        dom: doc.createTextNode(structure)
     };
     if (structure.nodeType != null) return {
         dom: structure
@@ -10677,7 +10377,7 @@ DOMSerializer.renderSpec = function renderSpec(doc3, structure, xmlNS) {
         xmlNS = tagName.slice(0, space);
         tagName = tagName.slice(space + 1);
     }
-    var contentDOM = null, dom = xmlNS ? doc3.createElementNS(xmlNS, tagName) : doc3.createElement(tagName);
+    var contentDOM = null, dom = xmlNS ? doc.createElementNS(xmlNS, tagName) : doc.createElement(tagName);
     var attrs = structure[1], start = 1;
     if (attrs && typeof attrs == "object" && attrs.nodeType == null && !Array.isArray(attrs)) {
         start = 2;
@@ -10696,7 +10396,7 @@ DOMSerializer.renderSpec = function renderSpec(doc3, structure, xmlNS) {
                 contentDOM: dom
             };
         } else {
-            var ref = DOMSerializer.renderSpec(doc3, child, xmlNS);
+            var ref = DOMSerializer.renderSpec(doc, child, xmlNS);
             var inner = ref.dom;
             var innerContent = ref.contentDOM;
             dom.appendChild(inner);
@@ -10865,44 +10565,25 @@ exports.default = OrderedMap;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bTHhB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "AddMarkStep", ()=>AddMarkStep
-);
-parcelHelpers.export(exports, "MapResult", ()=>MapResult
-);
-parcelHelpers.export(exports, "Mapping", ()=>Mapping
-);
-parcelHelpers.export(exports, "RemoveMarkStep", ()=>RemoveMarkStep
-);
-parcelHelpers.export(exports, "ReplaceAroundStep", ()=>ReplaceAroundStep
-);
-parcelHelpers.export(exports, "ReplaceStep", ()=>ReplaceStep
-);
-parcelHelpers.export(exports, "Step", ()=>Step
-);
-parcelHelpers.export(exports, "StepMap", ()=>StepMap
-);
-parcelHelpers.export(exports, "StepResult", ()=>StepResult
-);
-parcelHelpers.export(exports, "Transform", ()=>Transform
-);
-parcelHelpers.export(exports, "TransformError", ()=>TransformError
-);
-parcelHelpers.export(exports, "canJoin", ()=>canJoin
-);
-parcelHelpers.export(exports, "canSplit", ()=>canSplit
-);
-parcelHelpers.export(exports, "dropPoint", ()=>dropPoint
-);
-parcelHelpers.export(exports, "findWrapping", ()=>findWrapping
-);
-parcelHelpers.export(exports, "insertPoint", ()=>insertPoint
-);
-parcelHelpers.export(exports, "joinPoint", ()=>joinPoint
-);
-parcelHelpers.export(exports, "liftTarget", ()=>liftTarget
-);
-parcelHelpers.export(exports, "replaceStep", ()=>replaceStep
-);
+parcelHelpers.export(exports, "AddMarkStep", ()=>AddMarkStep);
+parcelHelpers.export(exports, "MapResult", ()=>MapResult);
+parcelHelpers.export(exports, "Mapping", ()=>Mapping);
+parcelHelpers.export(exports, "RemoveMarkStep", ()=>RemoveMarkStep);
+parcelHelpers.export(exports, "ReplaceAroundStep", ()=>ReplaceAroundStep);
+parcelHelpers.export(exports, "ReplaceStep", ()=>ReplaceStep);
+parcelHelpers.export(exports, "Step", ()=>Step);
+parcelHelpers.export(exports, "StepMap", ()=>StepMap);
+parcelHelpers.export(exports, "StepResult", ()=>StepResult);
+parcelHelpers.export(exports, "Transform", ()=>Transform);
+parcelHelpers.export(exports, "TransformError", ()=>TransformError);
+parcelHelpers.export(exports, "canJoin", ()=>canJoin);
+parcelHelpers.export(exports, "canSplit", ()=>canSplit);
+parcelHelpers.export(exports, "dropPoint", ()=>dropPoint);
+parcelHelpers.export(exports, "findWrapping", ()=>findWrapping);
+parcelHelpers.export(exports, "insertPoint", ()=>insertPoint);
+parcelHelpers.export(exports, "joinPoint", ()=>joinPoint);
+parcelHelpers.export(exports, "liftTarget", ()=>liftTarget);
+parcelHelpers.export(exports, "replaceStep", ()=>replaceStep);
 var _prosemirrorModel = require("prosemirror-model");
 // Mappable:: interface
 // There are several things that positions can be mapped through.
@@ -10958,9 +10639,9 @@ var MapResult = function MapResult(pos, deleted, recover) {
 // can be used to find the correspondence between positions in the
 // pre-step version of a document and the same position in the
 // post-step version.
-var StepMap = function StepMap1(ranges, inverted) {
+var StepMap = function StepMap(ranges, inverted) {
     if (inverted === void 0) inverted = false;
-    if (!ranges.length && StepMap1.empty) return StepMap1.empty;
+    if (!ranges.length && StepMap.empty) return StepMap.empty;
     this.ranges = ranges;
     this.inverted = inverted;
 };
@@ -11321,14 +11002,14 @@ StepResult.fromReplace = function fromReplace(doc, from, to, slice) {
     try {
         return StepResult.ok(doc.replace(from, to, slice));
     } catch (e) {
-        if (e instanceof _prosemirrorModel.ReplaceError) return StepResult.fail(e.message);
+        if (e instanceof (0, _prosemirrorModel.ReplaceError)) return StepResult.fail(e.message);
         throw e;
     }
 };
 // ::- Replace a part of the document with a slice of new content.
-var ReplaceStep = /*@__PURE__*/ function(Step1) {
-    function ReplaceStep1(from, to, slice, structure) {
-        Step1.call(this);
+var ReplaceStep = /*@__PURE__*/ function(Step) {
+    function ReplaceStep(from, to, slice, structure) {
+        Step.call(this);
         // :: number
         // The start position of the replaced range.
         this.from = from;
@@ -11340,39 +11021,39 @@ var ReplaceStep = /*@__PURE__*/ function(Step1) {
         this.slice = slice;
         this.structure = !!structure;
     }
-    if (Step1) ReplaceStep1.__proto__ = Step1;
-    ReplaceStep1.prototype = Object.create(Step1 && Step1.prototype);
-    ReplaceStep1.prototype.constructor = ReplaceStep1;
-    ReplaceStep1.prototype.apply = function apply(doc) {
+    if (Step) ReplaceStep.__proto__ = Step;
+    ReplaceStep.prototype = Object.create(Step && Step.prototype);
+    ReplaceStep.prototype.constructor = ReplaceStep;
+    ReplaceStep.prototype.apply = function apply(doc) {
         if (this.structure && contentBetween(doc, this.from, this.to)) return StepResult.fail("Structure replace would overwrite content");
         return StepResult.fromReplace(doc, this.from, this.to, this.slice);
     };
-    ReplaceStep1.prototype.getMap = function getMap() {
+    ReplaceStep.prototype.getMap = function getMap() {
         return new StepMap([
             this.from,
             this.to - this.from,
             this.slice.size
         ]);
     };
-    ReplaceStep1.prototype.invert = function invert(doc) {
-        return new ReplaceStep1(this.from, this.from + this.slice.size, doc.slice(this.from, this.to));
+    ReplaceStep.prototype.invert = function invert(doc) {
+        return new ReplaceStep(this.from, this.from + this.slice.size, doc.slice(this.from, this.to));
     };
-    ReplaceStep1.prototype.map = function map(mapping) {
+    ReplaceStep.prototype.map = function map(mapping) {
         var from = mapping.mapResult(this.from, 1), to = mapping.mapResult(this.to, -1);
         if (from.deleted && to.deleted) return null;
-        return new ReplaceStep1(from.pos, Math.max(from.pos, to.pos), this.slice);
+        return new ReplaceStep(from.pos, Math.max(from.pos, to.pos), this.slice);
     };
-    ReplaceStep1.prototype.merge = function merge(other) {
-        if (!(other instanceof ReplaceStep1) || other.structure || this.structure) return null;
+    ReplaceStep.prototype.merge = function merge(other) {
+        if (!(other instanceof ReplaceStep) || other.structure || this.structure) return null;
         if (this.from + this.slice.size == other.from && !this.slice.openEnd && !other.slice.openStart) {
-            var slice = this.slice.size + other.slice.size == 0 ? _prosemirrorModel.Slice.empty : new _prosemirrorModel.Slice(this.slice.content.append(other.slice.content), this.slice.openStart, other.slice.openEnd);
-            return new ReplaceStep1(this.from, this.to + (other.to - other.from), slice, this.structure);
+            var slice = this.slice.size + other.slice.size == 0 ? (0, _prosemirrorModel.Slice).empty : new (0, _prosemirrorModel.Slice)(this.slice.content.append(other.slice.content), this.slice.openStart, other.slice.openEnd);
+            return new ReplaceStep(this.from, this.to + (other.to - other.from), slice, this.structure);
         } else if (other.to == this.from && !this.slice.openStart && !other.slice.openEnd) {
-            var slice$1 = this.slice.size + other.slice.size == 0 ? _prosemirrorModel.Slice.empty : new _prosemirrorModel.Slice(other.slice.content.append(this.slice.content), other.slice.openStart, this.slice.openEnd);
-            return new ReplaceStep1(other.from, this.to, slice$1, this.structure);
+            var slice$1 = this.slice.size + other.slice.size == 0 ? (0, _prosemirrorModel.Slice).empty : new (0, _prosemirrorModel.Slice)(other.slice.content.append(this.slice.content), other.slice.openStart, this.slice.openEnd);
+            return new ReplaceStep(other.from, this.to, slice$1, this.structure);
         } else return null;
     };
-    ReplaceStep1.prototype.toJSON = function toJSON() {
+    ReplaceStep.prototype.toJSON = function toJSON() {
         var json = {
             stepType: "replace",
             from: this.from,
@@ -11382,19 +11063,19 @@ var ReplaceStep = /*@__PURE__*/ function(Step1) {
         if (this.structure) json.structure = true;
         return json;
     };
-    ReplaceStep1.fromJSON = function fromJSON(schema, json) {
+    ReplaceStep.fromJSON = function fromJSON(schema, json) {
         if (typeof json.from != "number" || typeof json.to != "number") throw new RangeError("Invalid input for ReplaceStep.fromJSON");
-        return new ReplaceStep1(json.from, json.to, _prosemirrorModel.Slice.fromJSON(schema, json.slice), !!json.structure);
+        return new ReplaceStep(json.from, json.to, (0, _prosemirrorModel.Slice).fromJSON(schema, json.slice), !!json.structure);
     };
-    return ReplaceStep1;
+    return ReplaceStep;
 }(Step);
 Step.jsonID("replace", ReplaceStep);
 // ::- Replace a part of the document with a slice of content, but
 // preserve a range of the replaced content by moving it into the
 // slice.
-var ReplaceAroundStep = /*@__PURE__*/ function(Step2) {
-    function ReplaceAroundStep1(from, to, gapFrom, gapTo, slice, insert, structure) {
-        Step2.call(this);
+var ReplaceAroundStep = /*@__PURE__*/ function(Step) {
+    function ReplaceAroundStep(from, to, gapFrom, gapTo, slice, insert, structure) {
+        Step.call(this);
         // :: number
         // The start position of the replaced range.
         this.from = from;
@@ -11416,10 +11097,10 @@ var ReplaceAroundStep = /*@__PURE__*/ function(Step2) {
         this.insert = insert;
         this.structure = !!structure;
     }
-    if (Step2) ReplaceAroundStep1.__proto__ = Step2;
-    ReplaceAroundStep1.prototype = Object.create(Step2 && Step2.prototype);
-    ReplaceAroundStep1.prototype.constructor = ReplaceAroundStep1;
-    ReplaceAroundStep1.prototype.apply = function apply(doc) {
+    if (Step) ReplaceAroundStep.__proto__ = Step;
+    ReplaceAroundStep.prototype = Object.create(Step && Step.prototype);
+    ReplaceAroundStep.prototype.constructor = ReplaceAroundStep;
+    ReplaceAroundStep.prototype.apply = function apply(doc) {
         if (this.structure && (contentBetween(doc, this.from, this.gapFrom) || contentBetween(doc, this.gapTo, this.to))) return StepResult.fail("Structure gap-replace would overwrite content");
         var gap = doc.slice(this.gapFrom, this.gapTo);
         if (gap.openStart || gap.openEnd) return StepResult.fail("Gap is not a flat range");
@@ -11427,7 +11108,7 @@ var ReplaceAroundStep = /*@__PURE__*/ function(Step2) {
         if (!inserted) return StepResult.fail("Content does not fit in gap");
         return StepResult.fromReplace(doc, this.from, this.to, inserted);
     };
-    ReplaceAroundStep1.prototype.getMap = function getMap() {
+    ReplaceAroundStep.prototype.getMap = function getMap() {
         return new StepMap([
             this.from,
             this.gapFrom - this.from,
@@ -11437,17 +11118,17 @@ var ReplaceAroundStep = /*@__PURE__*/ function(Step2) {
             this.slice.size - this.insert
         ]);
     };
-    ReplaceAroundStep1.prototype.invert = function invert(doc) {
+    ReplaceAroundStep.prototype.invert = function invert(doc) {
         var gap = this.gapTo - this.gapFrom;
-        return new ReplaceAroundStep1(this.from, this.from + this.slice.size + gap, this.from + this.insert, this.from + this.insert + gap, doc.slice(this.from, this.to).removeBetween(this.gapFrom - this.from, this.gapTo - this.from), this.gapFrom - this.from, this.structure);
+        return new ReplaceAroundStep(this.from, this.from + this.slice.size + gap, this.from + this.insert, this.from + this.insert + gap, doc.slice(this.from, this.to).removeBetween(this.gapFrom - this.from, this.gapTo - this.from), this.gapFrom - this.from, this.structure);
     };
-    ReplaceAroundStep1.prototype.map = function map(mapping) {
+    ReplaceAroundStep.prototype.map = function map(mapping) {
         var from = mapping.mapResult(this.from, 1), to = mapping.mapResult(this.to, -1);
         var gapFrom = mapping.map(this.gapFrom, -1), gapTo = mapping.map(this.gapTo, 1);
         if (from.deleted && to.deleted || gapFrom < from.pos || gapTo > to.pos) return null;
-        return new ReplaceAroundStep1(from.pos, to.pos, gapFrom, gapTo, this.slice, this.insert, this.structure);
+        return new ReplaceAroundStep(from.pos, to.pos, gapFrom, gapTo, this.slice, this.insert, this.structure);
     };
-    ReplaceAroundStep1.prototype.toJSON = function toJSON() {
+    ReplaceAroundStep.prototype.toJSON = function toJSON() {
         var json = {
             stepType: "replaceAround",
             from: this.from,
@@ -11460,11 +11141,11 @@ var ReplaceAroundStep = /*@__PURE__*/ function(Step2) {
         if (this.structure) json.structure = true;
         return json;
     };
-    ReplaceAroundStep1.fromJSON = function fromJSON(schema, json) {
+    ReplaceAroundStep.fromJSON = function fromJSON(schema, json) {
         if (typeof json.from != "number" || typeof json.to != "number" || typeof json.gapFrom != "number" || typeof json.gapTo != "number" || typeof json.insert != "number") throw new RangeError("Invalid input for ReplaceAroundStep.fromJSON");
-        return new ReplaceAroundStep1(json.from, json.to, json.gapFrom, json.gapTo, _prosemirrorModel.Slice.fromJSON(schema, json.slice), json.insert, !!json.structure);
+        return new ReplaceAroundStep(json.from, json.to, json.gapFrom, json.gapTo, (0, _prosemirrorModel.Slice).fromJSON(schema, json.slice), json.insert, !!json.structure);
     };
-    return ReplaceAroundStep1;
+    return ReplaceAroundStep;
 }(Step);
 Step.jsonID("replaceAround", ReplaceAroundStep);
 function contentBetween(doc, from, to) {
@@ -11512,19 +11193,19 @@ Transform.prototype.lift = function(range, target) {
     var depth = range.depth;
     var gapStart = $from.before(depth + 1), gapEnd = $to.after(depth + 1);
     var start = gapStart, end = gapEnd;
-    var before = _prosemirrorModel.Fragment.empty, openStart = 0;
+    var before = (0, _prosemirrorModel.Fragment).empty, openStart = 0;
     for(var d = depth, splitting = false; d > target; d--)if (splitting || $from.index(d) > 0) {
         splitting = true;
-        before = _prosemirrorModel.Fragment.from($from.node(d).copy(before));
+        before = (0, _prosemirrorModel.Fragment).from($from.node(d).copy(before));
         openStart++;
     } else start--;
-    var after = _prosemirrorModel.Fragment.empty, openEnd = 0;
+    var after = (0, _prosemirrorModel.Fragment).empty, openEnd = 0;
     for(var d$1 = depth, splitting$1 = false; d$1 > target; d$1--)if (splitting$1 || $to.after(d$1 + 1) < $to.end(d$1)) {
         splitting$1 = true;
-        after = _prosemirrorModel.Fragment.from($to.node(d$1).copy(after));
+        after = (0, _prosemirrorModel.Fragment).from($to.node(d$1).copy(after));
         openEnd++;
     } else end++;
-    return this.step(new ReplaceAroundStep(start, end, gapStart, gapEnd, new _prosemirrorModel.Slice(before.append(after), openStart, openEnd), before.size - openStart, true));
+    return this.step(new ReplaceAroundStep(start, end, gapStart, gapEnd, new (0, _prosemirrorModel.Slice)(before.append(after), openStart, openEnd), before.size - openStart, true));
 };
 // :: (NodeRange, NodeType, ?Object, ?NodeRange) → ?[{type: NodeType, attrs: ?Object}]
 // Try to find a valid way to wrap the content in the given range in a
@@ -11576,16 +11257,16 @@ function findWrappingInside(range, type) {
 // The wrappers are assumed to be valid in this position, and should
 // probably be computed with [`findWrapping`](#transform.findWrapping).
 Transform.prototype.wrap = function(range, wrappers) {
-    var content = _prosemirrorModel.Fragment.empty;
+    var content = (0, _prosemirrorModel.Fragment).empty;
     for(var i = wrappers.length - 1; i >= 0; i--){
         if (content.size) {
             var match = wrappers[i].type.contentMatch.matchFragment(content);
             if (!match || !match.validEnd) throw new RangeError("Wrapper type given to Transform.wrap does not form valid content of its parent wrapper");
         }
-        content = _prosemirrorModel.Fragment.from(wrappers[i].type.create(wrappers[i].attrs, content));
+        content = (0, _prosemirrorModel.Fragment).from(wrappers[i].type.create(wrappers[i].attrs, content));
     }
     var start = range.start, end = range.end;
-    return this.step(new ReplaceAroundStep(start, end, start, end, new _prosemirrorModel.Slice(content, 0, 0), wrappers.length, true));
+    return this.step(new ReplaceAroundStep(start, end, start, end, new (0, _prosemirrorModel.Slice)(content, 0, 0), wrappers.length, true));
 };
 // :: (number, ?number, NodeType, ?Object) → this
 // Set the type of all textblocks (partly) between `from` and `to` to
@@ -11601,7 +11282,7 @@ Transform.prototype.setBlockType = function(from, to, type, attrs) {
             this$1.clearIncompatible(this$1.mapping.slice(mapFrom).map(pos, 1), type);
             var mapping = this$1.mapping.slice(mapFrom);
             var startM = mapping.map(pos, 1), endM = mapping.map(pos + node.nodeSize, 1);
-            this$1.step(new ReplaceAroundStep(startM, endM, startM + 1, endM - 1, new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(type.create(attrs, null, node.marks)), 0, 0), 1, true));
+            this$1.step(new ReplaceAroundStep(startM, endM, startM + 1, endM - 1, new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(type.create(attrs, null, node.marks)), 0, 0), 1, true));
             return false;
         }
     });
@@ -11621,7 +11302,7 @@ Transform.prototype.setNodeMarkup = function(pos, type, attrs, marks) {
     var newNode = type.create(attrs, null, marks || node.marks);
     if (node.isLeaf) return this.replaceWith(pos, pos + node.nodeSize, newNode);
     if (!type.validContent(node.content)) throw new RangeError("Invalid content for node type " + type.name);
-    return this.step(new ReplaceAroundStep(pos, pos + node.nodeSize, pos + 1, pos + node.nodeSize - 1, new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(newNode), 0, 0), 1, true));
+    return this.step(new ReplaceAroundStep(pos, pos + node.nodeSize, pos + 1, pos + node.nodeSize - 1, new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(newNode), 0, 0), 1, true));
 };
 // :: (Node, number, number, ?[?{type: NodeType, attrs: ?Object}]) → bool
 // Check whether splitting at the given position is allowed.
@@ -11650,13 +11331,13 @@ function canSplit(doc, pos, depth, typesAfter) {
 // use after the split.
 Transform.prototype.split = function(pos, depth, typesAfter) {
     if (depth === void 0) depth = 1;
-    var $pos = this.doc.resolve(pos), before = _prosemirrorModel.Fragment.empty, after = _prosemirrorModel.Fragment.empty;
+    var $pos = this.doc.resolve(pos), before = (0, _prosemirrorModel.Fragment).empty, after = (0, _prosemirrorModel.Fragment).empty;
     for(var d = $pos.depth, e = $pos.depth - depth, i = depth - 1; d > e; d--, i--){
-        before = _prosemirrorModel.Fragment.from($pos.node(d).copy(before));
+        before = (0, _prosemirrorModel.Fragment).from($pos.node(d).copy(before));
         var typeAfter = typesAfter && typesAfter[i];
-        after = _prosemirrorModel.Fragment.from(typeAfter ? typeAfter.type.create(typeAfter.attrs, after) : $pos.node(d).copy(after));
+        after = (0, _prosemirrorModel.Fragment).from(typeAfter ? typeAfter.type.create(typeAfter.attrs, after) : $pos.node(d).copy(after));
     }
-    return this.step(new ReplaceStep(pos, pos, new _prosemirrorModel.Slice(before.append(after), depth, depth), true));
+    return this.step(new ReplaceStep(pos, pos, new (0, _prosemirrorModel.Slice)(before.append(after), depth, depth), true));
 };
 // :: (Node, number) → bool
 // Test whether the blocks before and after a given position can be
@@ -11698,7 +11379,7 @@ function joinPoint(doc, pos, dir) {
 // last and first siblings are also joined, and so on.
 Transform.prototype.join = function(pos, depth) {
     if (depth === void 0) depth = 1;
-    var step = new ReplaceStep(pos - depth, pos + depth, _prosemirrorModel.Slice.empty, true);
+    var step = new ReplaceStep(pos - depth, pos + depth, (0, _prosemirrorModel.Slice).empty, true);
     return this.step(step);
 };
 // :: (Node, number, NodeType) → ?number
@@ -11751,12 +11432,12 @@ function mapFragment(fragment, f, parent) {
         if (child.isInline) child = f(child, parent, i);
         mapped.push(child);
     }
-    return _prosemirrorModel.Fragment.fromArray(mapped);
+    return (0, _prosemirrorModel.Fragment).fromArray(mapped);
 }
 // ::- Add a mark to all inline content between two positions.
-var AddMarkStep = /*@__PURE__*/ function(Step3) {
-    function AddMarkStep1(from, to, mark) {
-        Step3.call(this);
+var AddMarkStep = /*@__PURE__*/ function(Step) {
+    function AddMarkStep(from, to, mark) {
+        Step.call(this);
         // :: number
         // The start of the marked range.
         this.from = from;
@@ -11767,31 +11448,31 @@ var AddMarkStep = /*@__PURE__*/ function(Step3) {
         // The mark to add.
         this.mark = mark;
     }
-    if (Step3) AddMarkStep1.__proto__ = Step3;
-    AddMarkStep1.prototype = Object.create(Step3 && Step3.prototype);
-    AddMarkStep1.prototype.constructor = AddMarkStep1;
-    AddMarkStep1.prototype.apply = function apply(doc) {
+    if (Step) AddMarkStep.__proto__ = Step;
+    AddMarkStep.prototype = Object.create(Step && Step.prototype);
+    AddMarkStep.prototype.constructor = AddMarkStep;
+    AddMarkStep.prototype.apply = function apply(doc) {
         var this$1 = this;
         var oldSlice = doc.slice(this.from, this.to), $from = doc.resolve(this.from);
-        var parent1 = $from.node($from.sharedDepth(this.to));
-        var slice = new _prosemirrorModel.Slice(mapFragment(oldSlice.content, function(node, parent) {
+        var parent = $from.node($from.sharedDepth(this.to));
+        var slice = new (0, _prosemirrorModel.Slice)(mapFragment(oldSlice.content, function(node, parent) {
             if (!node.isAtom || !parent.type.allowsMarkType(this$1.mark.type)) return node;
             return node.mark(this$1.mark.addToSet(node.marks));
-        }, parent1), oldSlice.openStart, oldSlice.openEnd);
+        }, parent), oldSlice.openStart, oldSlice.openEnd);
         return StepResult.fromReplace(doc, this.from, this.to, slice);
     };
-    AddMarkStep1.prototype.invert = function invert() {
+    AddMarkStep.prototype.invert = function invert() {
         return new RemoveMarkStep(this.from, this.to, this.mark);
     };
-    AddMarkStep1.prototype.map = function map(mapping) {
+    AddMarkStep.prototype.map = function map(mapping) {
         var from = mapping.mapResult(this.from, 1), to = mapping.mapResult(this.to, -1);
         if (from.deleted && to.deleted || from.pos >= to.pos) return null;
-        return new AddMarkStep1(from.pos, to.pos, this.mark);
+        return new AddMarkStep(from.pos, to.pos, this.mark);
     };
-    AddMarkStep1.prototype.merge = function merge(other) {
-        if (other instanceof AddMarkStep1 && other.mark.eq(this.mark) && this.from <= other.to && this.to >= other.from) return new AddMarkStep1(Math.min(this.from, other.from), Math.max(this.to, other.to), this.mark);
+    AddMarkStep.prototype.merge = function merge(other) {
+        if (other instanceof AddMarkStep && other.mark.eq(this.mark) && this.from <= other.to && this.to >= other.from) return new AddMarkStep(Math.min(this.from, other.from), Math.max(this.to, other.to), this.mark);
     };
-    AddMarkStep1.prototype.toJSON = function toJSON() {
+    AddMarkStep.prototype.toJSON = function toJSON() {
         return {
             stepType: "addMark",
             mark: this.mark.toJSON(),
@@ -11799,17 +11480,17 @@ var AddMarkStep = /*@__PURE__*/ function(Step3) {
             to: this.to
         };
     };
-    AddMarkStep1.fromJSON = function fromJSON(schema, json) {
+    AddMarkStep.fromJSON = function fromJSON(schema, json) {
         if (typeof json.from != "number" || typeof json.to != "number") throw new RangeError("Invalid input for AddMarkStep.fromJSON");
-        return new AddMarkStep1(json.from, json.to, schema.markFromJSON(json.mark));
+        return new AddMarkStep(json.from, json.to, schema.markFromJSON(json.mark));
     };
-    return AddMarkStep1;
+    return AddMarkStep;
 }(Step);
 Step.jsonID("addMark", AddMarkStep);
 // ::- Remove a mark from all inline content between two positions.
-var RemoveMarkStep = /*@__PURE__*/ function(Step4) {
-    function RemoveMarkStep1(from, to, mark) {
-        Step4.call(this);
+var RemoveMarkStep = /*@__PURE__*/ function(Step) {
+    function RemoveMarkStep(from, to, mark) {
+        Step.call(this);
         // :: number
         // The start of the unmarked range.
         this.from = from;
@@ -11820,29 +11501,29 @@ var RemoveMarkStep = /*@__PURE__*/ function(Step4) {
         // The mark to remove.
         this.mark = mark;
     }
-    if (Step4) RemoveMarkStep1.__proto__ = Step4;
-    RemoveMarkStep1.prototype = Object.create(Step4 && Step4.prototype);
-    RemoveMarkStep1.prototype.constructor = RemoveMarkStep1;
-    RemoveMarkStep1.prototype.apply = function apply(doc) {
+    if (Step) RemoveMarkStep.__proto__ = Step;
+    RemoveMarkStep.prototype = Object.create(Step && Step.prototype);
+    RemoveMarkStep.prototype.constructor = RemoveMarkStep;
+    RemoveMarkStep.prototype.apply = function apply(doc) {
         var this$1 = this;
         var oldSlice = doc.slice(this.from, this.to);
-        var slice = new _prosemirrorModel.Slice(mapFragment(oldSlice.content, function(node) {
+        var slice = new (0, _prosemirrorModel.Slice)(mapFragment(oldSlice.content, function(node) {
             return node.mark(this$1.mark.removeFromSet(node.marks));
         }), oldSlice.openStart, oldSlice.openEnd);
         return StepResult.fromReplace(doc, this.from, this.to, slice);
     };
-    RemoveMarkStep1.prototype.invert = function invert() {
+    RemoveMarkStep.prototype.invert = function invert() {
         return new AddMarkStep(this.from, this.to, this.mark);
     };
-    RemoveMarkStep1.prototype.map = function map(mapping) {
+    RemoveMarkStep.prototype.map = function map(mapping) {
         var from = mapping.mapResult(this.from, 1), to = mapping.mapResult(this.to, -1);
         if (from.deleted && to.deleted || from.pos >= to.pos) return null;
-        return new RemoveMarkStep1(from.pos, to.pos, this.mark);
+        return new RemoveMarkStep(from.pos, to.pos, this.mark);
     };
-    RemoveMarkStep1.prototype.merge = function merge(other) {
-        if (other instanceof RemoveMarkStep1 && other.mark.eq(this.mark) && this.from <= other.to && this.to >= other.from) return new RemoveMarkStep1(Math.min(this.from, other.from), Math.max(this.to, other.to), this.mark);
+    RemoveMarkStep.prototype.merge = function merge(other) {
+        if (other instanceof RemoveMarkStep && other.mark.eq(this.mark) && this.from <= other.to && this.to >= other.from) return new RemoveMarkStep(Math.min(this.from, other.from), Math.max(this.to, other.to), this.mark);
     };
-    RemoveMarkStep1.prototype.toJSON = function toJSON() {
+    RemoveMarkStep.prototype.toJSON = function toJSON() {
         return {
             stepType: "removeMark",
             mark: this.mark.toJSON(),
@@ -11850,11 +11531,11 @@ var RemoveMarkStep = /*@__PURE__*/ function(Step4) {
             to: this.to
         };
     };
-    RemoveMarkStep1.fromJSON = function fromJSON(schema, json) {
+    RemoveMarkStep.fromJSON = function fromJSON(schema, json) {
         if (typeof json.from != "number" || typeof json.to != "number") throw new RangeError("Invalid input for RemoveMarkStep.fromJSON");
-        return new RemoveMarkStep1(json.from, json.to, schema.markFromJSON(json.mark));
+        return new RemoveMarkStep(json.from, json.to, schema.markFromJSON(json.mark));
     };
-    return RemoveMarkStep1;
+    return RemoveMarkStep;
 }(Step);
 Step.jsonID("removeMark", RemoveMarkStep);
 // :: (number, number, Mark) → this
@@ -11897,7 +11578,7 @@ Transform.prototype.removeMark = function(from, to, mark) {
         if (!node.isInline) return;
         step++;
         var toRemove = null;
-        if (mark instanceof _prosemirrorModel.MarkType) {
+        if (mark instanceof (0, _prosemirrorModel.MarkType)) {
             var set = node.marks, found;
             while(found = mark.isInSet(set)){
                 (toRemove || (toRemove = [])).push(found);
@@ -11945,7 +11626,7 @@ Transform.prototype.clearIncompatible = function(pos, parentType, match) {
     for(var i = 0; i < node.childCount; i++){
         var child = node.child(i), end = cur + child.nodeSize;
         var allowed = match.matchType(child.type, child.attrs);
-        if (!allowed) delSteps.push(new ReplaceStep(cur, end, _prosemirrorModel.Slice.empty));
+        if (!allowed) delSteps.push(new ReplaceStep(cur, end, (0, _prosemirrorModel.Slice).empty));
         else {
             match = allowed;
             for(var j = 0; j < child.marks.length; j++)if (!parentType.allowsMarkType(child.marks[j].type)) this.step(new RemoveMarkStep(cur, end, child.marks[j]));
@@ -11953,8 +11634,8 @@ Transform.prototype.clearIncompatible = function(pos, parentType, match) {
         cur = end;
     }
     if (!match.validEnd) {
-        var fill = match.fillBefore(_prosemirrorModel.Fragment.empty, true);
-        this.replace(cur, cur, new _prosemirrorModel.Slice(fill, 0, 0));
+        var fill = match.fillBefore((0, _prosemirrorModel.Fragment).empty, true);
+        this.replace(cur, cur, new (0, _prosemirrorModel.Slice)(fill, 0, 0));
     }
     for(var i$1 = delSteps.length - 1; i$1 >= 0; i$1--)this.step(delSteps[i$1]);
     return this;
@@ -11966,7 +11647,7 @@ Transform.prototype.clearIncompatible = function(pos, parentType, match) {
 // would be a no-op (an empty slice over an empty range).
 function replaceStep(doc, from, to, slice) {
     if (to === void 0) to = from;
-    if (slice === void 0) slice = _prosemirrorModel.Slice.empty;
+    if (slice === void 0) slice = (0, _prosemirrorModel.Slice).empty;
     if (from == to && !slice.size) return null;
     var $from = doc.resolve(from), $to = doc.resolve(to);
     // Optimization -- avoid work if it's obvious that it's not needed.
@@ -11978,7 +11659,7 @@ function replaceStep(doc, from, to, slice) {
 // given `slice`.
 Transform.prototype.replace = function(from, to, slice) {
     if (to === void 0) to = from;
-    if (slice === void 0) slice = _prosemirrorModel.Slice.empty;
+    if (slice === void 0) slice = (0, _prosemirrorModel.Slice).empty;
     var step = replaceStep(this.doc, from, to, slice);
     if (step) this.step(step);
     return this;
@@ -11987,12 +11668,12 @@ Transform.prototype.replace = function(from, to, slice) {
 // Replace the given range with the given content, which may be a
 // fragment, node, or array of nodes.
 Transform.prototype.replaceWith = function(from, to, content) {
-    return this.replace(from, to, new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(content), 0, 0));
+    return this.replace(from, to, new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(content), 0, 0));
 };
 // :: (number, number) → this
 // Delete the content between the given positions.
 Transform.prototype.delete = function(from, to) {
-    return this.replace(from, to, _prosemirrorModel.Slice.empty);
+    return this.replace(from, to, (0, _prosemirrorModel.Slice).empty);
 };
 // :: (number, union<Fragment, Node, [Node]>) → this
 // Insert the given content at the given position.
@@ -12034,8 +11715,8 @@ var Fitter = function Fitter($from, $to, slice) {
             match: node.contentMatchAt($from.indexAfter(i))
         });
     }
-    this.placed = _prosemirrorModel.Fragment.empty;
-    for(var i$1 = $from.depth; i$1 > 0; i$1--)this.placed = _prosemirrorModel.Fragment.from($from.node(i$1).copy(this.placed));
+    this.placed = (0, _prosemirrorModel.Fragment).empty;
+    for(var i$1 = $from.depth; i$1 > 0; i$1--)this.placed = (0, _prosemirrorModel.Fragment).from($from.node(i$1).copy(this.placed));
 };
 var prototypeAccessors$1 = {
     depth: {
@@ -12069,7 +11750,7 @@ Fitter.prototype.fit = function fit() {
         openStart--;
         openEnd--;
     }
-    var slice = new _prosemirrorModel.Slice(content, openStart, openEnd);
+    var slice = new (0, _prosemirrorModel.Slice)(content, openStart, openEnd);
     if (moveInline > -1) return new ReplaceAroundStep($from.pos, moveInline, this.$to.pos, this.$to.end(), slice, placedSize);
     if (slice.size || $from.pos != this.$to.pos) return new ReplaceStep($from.pos, $to.pos, slice);
 };
@@ -12094,7 +11775,7 @@ Fitter.prototype.findFittable = function findFittable() {
             // In pass 1, if the next node matches, or there is no next
             // node but the parents look compatible, we've found a
             // place.
-            if (pass == 1 && (first ? match.matchType(first.type) || (inject = match.fillBefore(_prosemirrorModel.Fragment.from(first), false)) : type.compatibleContent(parent.type))) return {
+            if (pass == 1 && (first ? match.matchType(first.type) || (inject = match.fillBefore((0, _prosemirrorModel.Fragment).from(first), false)) : type.compatibleContent(parent.type))) return {
                 sliceDepth: sliceDepth,
                 frontierDepth: frontierDepth,
                 parent: parent,
@@ -12119,7 +11800,7 @@ Fitter.prototype.openMore = function openMore() {
     var openEnd = ref.openEnd;
     var inner = contentAt(content, openStart);
     if (!inner.childCount || inner.firstChild.isLeaf) return false;
-    this.unplaced = new _prosemirrorModel.Slice(content, openStart + 1, Math.max(openEnd, inner.size + openStart >= content.size - openEnd ? openStart + 1 : 0));
+    this.unplaced = new (0, _prosemirrorModel.Slice)(content, openStart + 1, Math.max(openEnd, inner.size + openStart >= content.size - openEnd ? openStart + 1 : 0));
     return true;
 };
 Fitter.prototype.dropNode = function dropNode() {
@@ -12130,8 +11811,8 @@ Fitter.prototype.dropNode = function dropNode() {
     var inner = contentAt(content, openStart);
     if (inner.childCount <= 1 && openStart > 0) {
         var openAtEnd = content.size - openStart <= openStart + inner.size;
-        this.unplaced = new _prosemirrorModel.Slice(dropFromFragment(content, openStart - 1, 1), openStart - 1, openAtEnd ? openStart - 1 : openEnd);
-    } else this.unplaced = new _prosemirrorModel.Slice(dropFromFragment(content, openStart, 1), openStart, openEnd);
+        this.unplaced = new (0, _prosemirrorModel.Slice)(dropFromFragment(content, openStart - 1, 1), openStart - 1, openAtEnd ? openStart - 1 : openEnd);
+    } else this.unplaced = new (0, _prosemirrorModel.Slice)(dropFromFragment(content, openStart, 1), openStart, openEnd);
 };
 // : ({sliceDepth: number, frontierDepth: number, parent: ?Node, wrap: ?[NodeType], inject: ?Fragment})
 // Move content from the unplaced slice at `sliceDepth` to the
@@ -12172,7 +11853,7 @@ Fitter.prototype.placeNodes = function placeNodes(ref) {
     }
     var toEnd = taken == fragment.childCount;
     if (!toEnd) openEndCount = -1;
-    this.placed = addToFragment(this.placed, frontierDepth, _prosemirrorModel.Fragment.from(add));
+    this.placed = addToFragment(this.placed, frontierDepth, (0, _prosemirrorModel.Fragment).from(add));
     this.frontier[frontierDepth].match = match;
     // If the parent types match, and the entire node was moved, and
     // it's not open, close this frontier node right away.
@@ -12189,7 +11870,7 @@ Fitter.prototype.placeNodes = function placeNodes(ref) {
     // Update `this.unplaced`. Drop the entire node from which we
     // placed it we got to its end, otherwise just drop the placed
     // nodes.
-    this.unplaced = !toEnd ? new _prosemirrorModel.Slice(dropFromFragment(slice.content, sliceDepth, taken), slice.openStart, slice.openEnd) : sliceDepth == 0 ? _prosemirrorModel.Slice.empty : new _prosemirrorModel.Slice(dropFromFragment(slice.content, sliceDepth - 1, 1), sliceDepth - 1, openEndCount < 0 ? slice.openEnd : sliceDepth - 1);
+    this.unplaced = !toEnd ? new (0, _prosemirrorModel.Slice)(dropFromFragment(slice.content, sliceDepth, taken), slice.openStart, slice.openEnd) : sliceDepth == 0 ? (0, _prosemirrorModel.Slice).empty : new (0, _prosemirrorModel.Slice)(dropFromFragment(slice.content, sliceDepth - 1, 1), sliceDepth - 1, openEndCount < 0 ? slice.openEnd : sliceDepth - 1);
 };
 Fitter.prototype.mustMoveInline = function mustMoveInline() {
     if (!this.$to.parent.isTextblock) return -1;
@@ -12238,7 +11919,7 @@ Fitter.prototype.close = function close($to) {
 Fitter.prototype.openFrontierNode = function openFrontierNode(type, attrs, content) {
     var top = this.frontier[this.depth];
     top.match = top.match.matchType(type);
-    this.placed = addToFragment(this.placed, this.depth, _prosemirrorModel.Fragment.from(type.create(attrs, content)));
+    this.placed = addToFragment(this.placed, this.depth, (0, _prosemirrorModel.Fragment).from(type.create(attrs, content)));
     this.frontier.push({
         type: type,
         match: type.contentMatch
@@ -12246,7 +11927,7 @@ Fitter.prototype.openFrontierNode = function openFrontierNode(type, attrs, conte
 };
 Fitter.prototype.closeFrontierNode = function closeFrontierNode() {
     var open = this.frontier.pop();
-    var add = open.match.fillBefore(_prosemirrorModel.Fragment.empty, true);
+    var add = open.match.fillBefore((0, _prosemirrorModel.Fragment).empty, true);
     if (add.childCount) this.placed = addToFragment(this.placed, this.frontier.length, add);
 };
 Object.defineProperties(Fitter.prototype, prototypeAccessors$1);
@@ -12268,7 +11949,7 @@ function closeNodeStart(node, openStart, openEnd) {
     if (openStart > 1) frag = frag.replaceChild(0, closeNodeStart(frag.firstChild, openStart - 1, frag.childCount == 1 ? openEnd - 1 : 0));
     if (openStart > 0) {
         frag = node.type.contentMatch.fillBefore(frag).append(frag);
-        if (openEnd <= 0) frag = frag.append(node.type.contentMatch.matchFragment(frag).fillBefore(_prosemirrorModel.Fragment.empty, true));
+        if (openEnd <= 0) frag = frag.append(node.type.contentMatch.matchFragment(frag).fillBefore((0, _prosemirrorModel.Fragment).empty, true));
     }
     return node.copy(frag);
 }
@@ -12354,7 +12035,7 @@ Transform.prototype.replaceRange = function(from, to, slice) {
                 targetDepth = -targetDepth;
             }
             var parent = $from.node(targetDepth - 1), index = $from.index(targetDepth - 1);
-            if (parent.canReplaceWith(index, index, insert.type, insert.marks)) return this.replace($from.before(targetDepth), expand ? $to.after(targetDepth) : to, new _prosemirrorModel.Slice(closeFragment(slice.content, 0, slice.openStart, openDepth), openDepth, slice.openEnd));
+            if (parent.canReplaceWith(index, index, insert.type, insert.marks)) return this.replace($from.before(targetDepth), expand ? $to.after(targetDepth) : to, new (0, _prosemirrorModel.Slice)(closeFragment(slice.content, 0, slice.openStart, openDepth), openDepth, slice.openEnd));
         }
     }
     var startSteps = this.steps.length;
@@ -12376,7 +12057,7 @@ function closeFragment(fragment, depth, oldOpen, newOpen, parent) {
     if (depth > newOpen) {
         var match = parent.contentMatchAt(0);
         var start = match.fillBefore(fragment).append(fragment);
-        fragment = start.append(match.matchFragment(start).fillBefore(_prosemirrorModel.Fragment.empty, true));
+        fragment = start.append(match.matchFragment(start).fillBefore((0, _prosemirrorModel.Fragment).empty, true));
     }
     return fragment;
 }
@@ -12393,7 +12074,7 @@ Transform.prototype.replaceRangeWith = function(from, to, node) {
         var point = insertPoint(this.doc, from, node.type);
         if (point != null) from = to = point;
     }
-    return this.replaceRange(from, to, new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(node), 0, 0));
+    return this.replaceRange(from, to, new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(node), 0, 0));
 };
 // :: (number, number) → this
 // Delete the given range, expanding it to cover fully covered
@@ -12427,58 +12108,32 @@ function coveredDepths($from, $to) {
 },{"prosemirror-model":"eeCSD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kTHnK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "autoJoin", ()=>autoJoin
-);
-parcelHelpers.export(exports, "baseKeymap", ()=>baseKeymap
-);
-parcelHelpers.export(exports, "chainCommands", ()=>chainCommands
-);
-parcelHelpers.export(exports, "createParagraphNear", ()=>createParagraphNear
-);
-parcelHelpers.export(exports, "deleteSelection", ()=>deleteSelection
-);
-parcelHelpers.export(exports, "exitCode", ()=>exitCode
-);
-parcelHelpers.export(exports, "joinBackward", ()=>joinBackward
-);
-parcelHelpers.export(exports, "joinDown", ()=>joinDown
-);
-parcelHelpers.export(exports, "joinForward", ()=>joinForward
-);
-parcelHelpers.export(exports, "joinUp", ()=>joinUp
-);
-parcelHelpers.export(exports, "lift", ()=>lift
-);
-parcelHelpers.export(exports, "liftEmptyBlock", ()=>liftEmptyBlock
-);
-parcelHelpers.export(exports, "macBaseKeymap", ()=>macBaseKeymap
-);
-parcelHelpers.export(exports, "newlineInCode", ()=>newlineInCode
-);
-parcelHelpers.export(exports, "pcBaseKeymap", ()=>pcBaseKeymap
-);
-parcelHelpers.export(exports, "selectAll", ()=>selectAll
-);
-parcelHelpers.export(exports, "selectNodeBackward", ()=>selectNodeBackward
-);
-parcelHelpers.export(exports, "selectNodeForward", ()=>selectNodeForward
-);
-parcelHelpers.export(exports, "selectParentNode", ()=>selectParentNode
-);
-parcelHelpers.export(exports, "selectTextblockEnd", ()=>selectTextblockEnd
-);
-parcelHelpers.export(exports, "selectTextblockStart", ()=>selectTextblockStart
-);
-parcelHelpers.export(exports, "setBlockType", ()=>setBlockType
-);
-parcelHelpers.export(exports, "splitBlock", ()=>splitBlock
-);
-parcelHelpers.export(exports, "splitBlockKeepMarks", ()=>splitBlockKeepMarks
-);
-parcelHelpers.export(exports, "toggleMark", ()=>toggleMark
-);
-parcelHelpers.export(exports, "wrapIn", ()=>wrapIn
-);
+parcelHelpers.export(exports, "autoJoin", ()=>autoJoin);
+parcelHelpers.export(exports, "baseKeymap", ()=>baseKeymap);
+parcelHelpers.export(exports, "chainCommands", ()=>chainCommands);
+parcelHelpers.export(exports, "createParagraphNear", ()=>createParagraphNear);
+parcelHelpers.export(exports, "deleteSelection", ()=>deleteSelection);
+parcelHelpers.export(exports, "exitCode", ()=>exitCode);
+parcelHelpers.export(exports, "joinBackward", ()=>joinBackward);
+parcelHelpers.export(exports, "joinDown", ()=>joinDown);
+parcelHelpers.export(exports, "joinForward", ()=>joinForward);
+parcelHelpers.export(exports, "joinUp", ()=>joinUp);
+parcelHelpers.export(exports, "lift", ()=>lift);
+parcelHelpers.export(exports, "liftEmptyBlock", ()=>liftEmptyBlock);
+parcelHelpers.export(exports, "macBaseKeymap", ()=>macBaseKeymap);
+parcelHelpers.export(exports, "newlineInCode", ()=>newlineInCode);
+parcelHelpers.export(exports, "pcBaseKeymap", ()=>pcBaseKeymap);
+parcelHelpers.export(exports, "selectAll", ()=>selectAll);
+parcelHelpers.export(exports, "selectNodeBackward", ()=>selectNodeBackward);
+parcelHelpers.export(exports, "selectNodeForward", ()=>selectNodeForward);
+parcelHelpers.export(exports, "selectParentNode", ()=>selectParentNode);
+parcelHelpers.export(exports, "selectTextblockEnd", ()=>selectTextblockEnd);
+parcelHelpers.export(exports, "selectTextblockStart", ()=>selectTextblockStart);
+parcelHelpers.export(exports, "setBlockType", ()=>setBlockType);
+parcelHelpers.export(exports, "splitBlock", ()=>splitBlock);
+parcelHelpers.export(exports, "splitBlockKeepMarks", ()=>splitBlockKeepMarks);
+parcelHelpers.export(exports, "toggleMark", ()=>toggleMark);
+parcelHelpers.export(exports, "wrapIn", ()=>wrapIn);
 var _prosemirrorTransform = require("prosemirror-transform");
 var _prosemirrorModel = require("prosemirror-model");
 var _prosemirrorState = require("prosemirror-state");
@@ -12504,7 +12159,7 @@ function joinBackward(state, dispatch, view) {
     var $cut = findCutBefore($cursor);
     // If there is no node before this, try to lift
     if (!$cut) {
-        var range = $cursor.blockRange(), target = range && _prosemirrorTransform.liftTarget(range);
+        var range = $cursor.blockRange(), target = range && (0, _prosemirrorTransform.liftTarget)(range);
         if (target == null) return false;
         if (dispatch) dispatch(state.tr.lift(range, target).scrollIntoView());
         return true;
@@ -12514,12 +12169,12 @@ function joinBackward(state, dispatch, view) {
     if (!before.type.spec.isolating && deleteBarrier(state, $cut, dispatch)) return true;
     // If the node below has no content and the node above is
     // selectable, delete the node below and select the one above.
-    if ($cursor.parent.content.size == 0 && (textblockAt(before, "end") || _prosemirrorState.NodeSelection.isSelectable(before))) {
-        var delStep = _prosemirrorTransform.replaceStep(state.doc, $cursor.before(), $cursor.after(), _prosemirrorModel.Slice.empty);
+    if ($cursor.parent.content.size == 0 && (textblockAt(before, "end") || (0, _prosemirrorState.NodeSelection).isSelectable(before))) {
+        var delStep = (0, _prosemirrorTransform.replaceStep)(state.doc, $cursor.before(), $cursor.after(), (0, _prosemirrorModel.Slice).empty);
         if (delStep.slice.size < delStep.to - delStep.from) {
             if (dispatch) {
                 var tr = state.tr.step(delStep);
-                tr.setSelection(textblockAt(before, "end") ? _prosemirrorState.Selection.findFrom(tr.doc.resolve(tr.mapping.map($cut.pos, -1)), -1) : _prosemirrorState.NodeSelection.create(tr.doc, $cut.pos - before.nodeSize));
+                tr.setSelection(textblockAt(before, "end") ? (0, _prosemirrorState.Selection).findFrom(tr.doc.resolve(tr.mapping.map($cut.pos, -1)), -1) : (0, _prosemirrorState.NodeSelection).create(tr.doc, $cut.pos - before.nodeSize));
                 dispatch(tr.scrollIntoView());
             }
             return true;
@@ -12557,8 +12212,8 @@ function selectNodeBackward(state, dispatch, view) {
         $cut = findCutBefore($head);
     }
     var node = $cut && $cut.nodeBefore;
-    if (!node || !_prosemirrorState.NodeSelection.isSelectable(node)) return false;
-    if (dispatch) dispatch(state.tr.setSelection(_prosemirrorState.NodeSelection.create(state.doc, $cut.pos - node.nodeSize)).scrollIntoView());
+    if (!node || !(0, _prosemirrorState.NodeSelection).isSelectable(node)) return false;
+    if (dispatch) dispatch(state.tr.setSelection((0, _prosemirrorState.NodeSelection).create(state.doc, $cut.pos - node.nodeSize)).scrollIntoView());
     return true;
 }
 function findCutBefore($pos) {
@@ -12586,12 +12241,12 @@ function joinForward(state, dispatch, view) {
     if (deleteBarrier(state, $cut, dispatch)) return true;
     // If the node above has no content and the node below is
     // selectable, delete the node above and select the one below.
-    if ($cursor.parent.content.size == 0 && (textblockAt(after, "start") || _prosemirrorState.NodeSelection.isSelectable(after))) {
-        var delStep = _prosemirrorTransform.replaceStep(state.doc, $cursor.before(), $cursor.after(), _prosemirrorModel.Slice.empty);
+    if ($cursor.parent.content.size == 0 && (textblockAt(after, "start") || (0, _prosemirrorState.NodeSelection).isSelectable(after))) {
+        var delStep = (0, _prosemirrorTransform.replaceStep)(state.doc, $cursor.before(), $cursor.after(), (0, _prosemirrorModel.Slice).empty);
         if (delStep.slice.size < delStep.to - delStep.from) {
             if (dispatch) {
                 var tr = state.tr.step(delStep);
-                tr.setSelection(textblockAt(after, "start") ? _prosemirrorState.Selection.findFrom(tr.doc.resolve(tr.mapping.map($cut.pos)), 1) : _prosemirrorState.NodeSelection.create(tr.doc, tr.mapping.map($cut.pos)));
+                tr.setSelection(textblockAt(after, "start") ? (0, _prosemirrorState.Selection).findFrom(tr.doc.resolve(tr.mapping.map($cut.pos)), 1) : (0, _prosemirrorState.NodeSelection).create(tr.doc, tr.mapping.map($cut.pos)));
                 dispatch(tr.scrollIntoView());
             }
             return true;
@@ -12622,8 +12277,8 @@ function selectNodeForward(state, dispatch, view) {
         $cut = findCutAfter($head);
     }
     var node = $cut && $cut.nodeAfter;
-    if (!node || !_prosemirrorState.NodeSelection.isSelectable(node)) return false;
-    if (dispatch) dispatch(state.tr.setSelection(_prosemirrorState.NodeSelection.create(state.doc, $cut.pos)).scrollIntoView());
+    if (!node || !(0, _prosemirrorState.NodeSelection).isSelectable(node)) return false;
+    if (dispatch) dispatch(state.tr.setSelection((0, _prosemirrorState.NodeSelection).create(state.doc, $cut.pos)).scrollIntoView());
     return true;
 }
 function findCutAfter($pos) {
@@ -12639,17 +12294,17 @@ function findCutAfter($pos) {
 // closest ancestor block of the selection that can be joined, with
 // the sibling above it.
 function joinUp(state, dispatch) {
-    var sel = state.selection, nodeSel = sel instanceof _prosemirrorState.NodeSelection, point;
+    var sel = state.selection, nodeSel = sel instanceof (0, _prosemirrorState.NodeSelection), point;
     if (nodeSel) {
-        if (sel.node.isTextblock || !_prosemirrorTransform.canJoin(state.doc, sel.from)) return false;
+        if (sel.node.isTextblock || !(0, _prosemirrorTransform.canJoin)(state.doc, sel.from)) return false;
         point = sel.from;
     } else {
-        point = _prosemirrorTransform.joinPoint(state.doc, sel.from, -1);
+        point = (0, _prosemirrorTransform.joinPoint)(state.doc, sel.from, -1);
         if (point == null) return false;
     }
     if (dispatch) {
         var tr = state.tr.join(point);
-        if (nodeSel) tr.setSelection(_prosemirrorState.NodeSelection.create(tr.doc, point - state.doc.resolve(point).nodeBefore.nodeSize));
+        if (nodeSel) tr.setSelection((0, _prosemirrorState.NodeSelection).create(tr.doc, point - state.doc.resolve(point).nodeBefore.nodeSize));
         dispatch(tr.scrollIntoView());
     }
     return true;
@@ -12659,11 +12314,11 @@ function joinUp(state, dispatch) {
 // that can be joined, with the sibling after it.
 function joinDown(state, dispatch) {
     var sel = state.selection, point;
-    if (sel instanceof _prosemirrorState.NodeSelection) {
-        if (sel.node.isTextblock || !_prosemirrorTransform.canJoin(state.doc, sel.to)) return false;
+    if (sel instanceof (0, _prosemirrorState.NodeSelection)) {
+        if (sel.node.isTextblock || !(0, _prosemirrorTransform.canJoin)(state.doc, sel.to)) return false;
         point = sel.to;
     } else {
-        point = _prosemirrorTransform.joinPoint(state.doc, sel.to, 1);
+        point = (0, _prosemirrorTransform.joinPoint)(state.doc, sel.to, 1);
         if (point == null) return false;
     }
     if (dispatch) dispatch(state.tr.join(point).scrollIntoView());
@@ -12676,7 +12331,7 @@ function lift(state, dispatch) {
     var ref = state.selection;
     var $from = ref.$from;
     var $to = ref.$to;
-    var range = $from.blockRange($to), target = range && _prosemirrorTransform.liftTarget(range);
+    var range = $from.blockRange($to), target = range && (0, _prosemirrorTransform.liftTarget)(range);
     if (target == null) return false;
     if (dispatch) dispatch(state.tr.lift(range, target).scrollIntoView());
     return true;
@@ -12714,7 +12369,7 @@ function exitCode(state, dispatch) {
     if (!above.canReplaceWith(after, after, type)) return false;
     if (dispatch) {
         var pos = $head.after(), tr = state.tr.replaceWith(pos, pos, type.createAndFill());
-        tr.setSelection(_prosemirrorState.Selection.near(tr.doc.resolve(pos), 1));
+        tr.setSelection((0, _prosemirrorState.Selection).near(tr.doc.resolve(pos), 1));
         dispatch(tr.scrollIntoView());
     }
     return true;
@@ -12726,13 +12381,13 @@ function createParagraphNear(state, dispatch) {
     var sel = state.selection;
     var $from = sel.$from;
     var $to = sel.$to;
-    if (sel instanceof _prosemirrorState.AllSelection || $from.parent.inlineContent || $to.parent.inlineContent) return false;
+    if (sel instanceof (0, _prosemirrorState.AllSelection) || $from.parent.inlineContent || $to.parent.inlineContent) return false;
     var type = defaultBlockAt($to.parent.contentMatchAt($to.indexAfter()));
     if (!type || !type.isTextblock) return false;
     if (dispatch) {
         var side = (!$from.parentOffset && $to.index() < $to.parent.childCount ? $from : $to).pos;
         var tr = state.tr.insert(side, type.createAndFill());
-        tr.setSelection(_prosemirrorState.TextSelection.create(tr.doc, side + 1));
+        tr.setSelection((0, _prosemirrorState.TextSelection).create(tr.doc, side + 1));
         dispatch(tr.scrollIntoView());
     }
     return true;
@@ -12746,12 +12401,12 @@ function liftEmptyBlock(state, dispatch) {
     if (!$cursor || $cursor.parent.content.size) return false;
     if ($cursor.depth > 1 && $cursor.after() != $cursor.end(-1)) {
         var before = $cursor.before();
-        if (_prosemirrorTransform.canSplit(state.doc, before)) {
+        if ((0, _prosemirrorTransform.canSplit)(state.doc, before)) {
             if (dispatch) dispatch(state.tr.split(before).scrollIntoView());
             return true;
         }
     }
-    var range = $cursor.blockRange(), target = range && _prosemirrorTransform.liftTarget(range);
+    var range = $cursor.blockRange(), target = range && (0, _prosemirrorTransform.liftTarget)(range);
     if (target == null) return false;
     if (dispatch) dispatch(state.tr.lift(range, target).scrollIntoView());
     return true;
@@ -12763,8 +12418,8 @@ function splitBlock(state, dispatch) {
     var ref = state.selection;
     var $from = ref.$from;
     var $to = ref.$to;
-    if (state.selection instanceof _prosemirrorState.NodeSelection && state.selection.node.isBlock) {
-        if (!$from.parentOffset || !_prosemirrorTransform.canSplit(state.doc, $from.pos)) return false;
+    if (state.selection instanceof (0, _prosemirrorState.NodeSelection) && state.selection.node.isBlock) {
+        if (!$from.parentOffset || !(0, _prosemirrorTransform.canSplit)(state.doc, $from.pos)) return false;
         if (dispatch) dispatch(state.tr.split($from.pos).scrollIntoView());
         return true;
     }
@@ -12772,15 +12427,15 @@ function splitBlock(state, dispatch) {
     if (dispatch) {
         var atEnd = $to.parentOffset == $to.parent.content.size;
         var tr = state.tr;
-        if (state.selection instanceof _prosemirrorState.TextSelection || state.selection instanceof _prosemirrorState.AllSelection) tr.deleteSelection();
+        if (state.selection instanceof (0, _prosemirrorState.TextSelection) || state.selection instanceof (0, _prosemirrorState.AllSelection)) tr.deleteSelection();
         var deflt = $from.depth == 0 ? null : defaultBlockAt($from.node(-1).contentMatchAt($from.indexAfter(-1)));
         var types = atEnd && deflt ? [
             {
                 type: deflt
             }
         ] : null;
-        var can = _prosemirrorTransform.canSplit(tr.doc, tr.mapping.map($from.pos), 1, types);
-        if (!types && !can && _prosemirrorTransform.canSplit(tr.doc, tr.mapping.map($from.pos), 1, deflt && [
+        var can = (0, _prosemirrorTransform.canSplit)(tr.doc, tr.mapping.map($from.pos), 1, types);
+        if (!types && !can && (0, _prosemirrorTransform.canSplit)(tr.doc, tr.mapping.map($from.pos), 1, deflt && [
             {
                 type: deflt
             }
@@ -12824,13 +12479,13 @@ function selectParentNode(state, dispatch) {
     var same = $from.sharedDepth(to);
     if (same == 0) return false;
     pos = $from.before(same);
-    if (dispatch) dispatch(state.tr.setSelection(_prosemirrorState.NodeSelection.create(state.doc, pos)));
+    if (dispatch) dispatch(state.tr.setSelection((0, _prosemirrorState.NodeSelection).create(state.doc, pos)));
     return true;
 }
 // :: (EditorState, ?(tr: Transaction)) → bool
 // Select the whole document.
 function selectAll(state, dispatch) {
-    if (dispatch) dispatch(state.tr.setSelection(new _prosemirrorState.AllSelection(state.doc)));
+    if (dispatch) dispatch(state.tr.setSelection(new (0, _prosemirrorState.AllSelection)(state.doc)));
     return true;
 }
 function joinMaybeClear(state, $pos, dispatch) {
@@ -12840,7 +12495,7 @@ function joinMaybeClear(state, $pos, dispatch) {
         if (dispatch) dispatch(state.tr.delete($pos.pos - before.nodeSize, $pos.pos).scrollIntoView());
         return true;
     }
-    if (!$pos.parent.canReplace(index, index + 1) || !(after.isTextblock || _prosemirrorTransform.canJoin(state.doc, $pos.pos))) return false;
+    if (!$pos.parent.canReplace(index, index + 1) || !(after.isTextblock || (0, _prosemirrorTransform.canJoin)(state.doc, $pos.pos))) return false;
     if (dispatch) dispatch(state.tr.clearIncompatible($pos.pos, before.type, before.contentMatchAt(before.childCount)).join($pos.pos).scrollIntoView());
     return true;
 }
@@ -12851,18 +12506,18 @@ function deleteBarrier(state, $cut, dispatch) {
     var canDelAfter = $cut.parent.canReplace($cut.index(), $cut.index() + 1);
     if (canDelAfter && (conn = (match = before.contentMatchAt(before.childCount)).findWrapping(after.type)) && match.matchType(conn[0] || after.type).validEnd) {
         if (dispatch) {
-            var end = $cut.pos + after.nodeSize, wrap = _prosemirrorModel.Fragment.empty;
-            for(var i = conn.length - 1; i >= 0; i--)wrap = _prosemirrorModel.Fragment.from(conn[i].create(null, wrap));
-            wrap = _prosemirrorModel.Fragment.from(before.copy(wrap));
-            var tr = state.tr.step(new _prosemirrorTransform.ReplaceAroundStep($cut.pos - 1, end, $cut.pos, end, new _prosemirrorModel.Slice(wrap, 1, 0), conn.length, true));
+            var end = $cut.pos + after.nodeSize, wrap = (0, _prosemirrorModel.Fragment).empty;
+            for(var i = conn.length - 1; i >= 0; i--)wrap = (0, _prosemirrorModel.Fragment).from(conn[i].create(null, wrap));
+            wrap = (0, _prosemirrorModel.Fragment).from(before.copy(wrap));
+            var tr = state.tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)($cut.pos - 1, end, $cut.pos, end, new (0, _prosemirrorModel.Slice)(wrap, 1, 0), conn.length, true));
             var joinAt = end + 2 * conn.length;
-            if (_prosemirrorTransform.canJoin(tr.doc, joinAt)) tr.join(joinAt);
+            if ((0, _prosemirrorTransform.canJoin)(tr.doc, joinAt)) tr.join(joinAt);
             dispatch(tr.scrollIntoView());
         }
         return true;
     }
-    var selAfter = _prosemirrorState.Selection.findFrom($cut, 1);
-    var range = selAfter && selAfter.$from.blockRange(selAfter.$to), target = range && _prosemirrorTransform.liftTarget(range);
+    var selAfter = (0, _prosemirrorState.Selection).findFrom($cut, 1);
+    var range = selAfter && selAfter.$from.blockRange(selAfter.$to), target = range && (0, _prosemirrorTransform.liftTarget)(range);
     if (target != null && target >= $cut.depth) {
         if (dispatch) dispatch(state.tr.lift(range, target).scrollIntoView());
         return true;
@@ -12878,9 +12533,9 @@ function deleteBarrier(state, $cut, dispatch) {
         for(; !afterText.isTextblock; afterText = afterText.firstChild)afterDepth++;
         if (at.canReplace(at.childCount, at.childCount, afterText.content)) {
             if (dispatch) {
-                var end$1 = _prosemirrorModel.Fragment.empty;
-                for(var i$1 = wrap$1.length - 1; i$1 >= 0; i$1--)end$1 = _prosemirrorModel.Fragment.from(wrap$1[i$1].copy(end$1));
-                var tr$1 = state.tr.step(new _prosemirrorTransform.ReplaceAroundStep($cut.pos - wrap$1.length, $cut.pos + after.nodeSize, $cut.pos + afterDepth, $cut.pos + after.nodeSize - afterDepth, new _prosemirrorModel.Slice(end$1, wrap$1.length, 0), 0, true));
+                var end$1 = (0, _prosemirrorModel.Fragment).empty;
+                for(var i$1 = wrap$1.length - 1; i$1 >= 0; i$1--)end$1 = (0, _prosemirrorModel.Fragment).from(wrap$1[i$1].copy(end$1));
+                var tr$1 = state.tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)($cut.pos - wrap$1.length, $cut.pos + after.nodeSize, $cut.pos + afterDepth, $cut.pos + after.nodeSize - afterDepth, new (0, _prosemirrorModel.Slice)(end$1, wrap$1.length, 0), 0, true));
                 dispatch(tr$1.scrollIntoView());
             }
             return true;
@@ -12897,7 +12552,7 @@ function selectTextblockSide(side) {
             depth--;
         }
         if (!$pos.node(depth).isTextblock) return false;
-        if (dispatch) dispatch(state.tr.setSelection(_prosemirrorState.TextSelection.create(state.doc, side < 0 ? $pos.start(depth) : $pos.end(depth))));
+        if (dispatch) dispatch(state.tr.setSelection((0, _prosemirrorState.TextSelection).create(state.doc, side < 0 ? $pos.start(depth) : $pos.end(depth))));
         return true;
     };
 }
@@ -12916,7 +12571,7 @@ function wrapIn(nodeType, attrs) {
         var ref = state.selection;
         var $from = ref.$from;
         var $to = ref.$to;
-        var range = $from.blockRange($to), wrapping = range && _prosemirrorTransform.findWrapping(range, nodeType, attrs);
+        var range = $from.blockRange($to), wrapping = range && (0, _prosemirrorTransform.findWrapping)(range, nodeType, attrs);
         if (!wrapping) return false;
         if (dispatch) dispatch(state.tr.wrap(range, wrapping).scrollIntoView());
         return true;
@@ -12959,8 +12614,8 @@ function markApplies(doc, ranges, type) {
             v: true
         };
     };
-    for(var i1 = 0; i1 < ranges.length; i1++){
-        var returned = loop(i1);
+    for(var i = 0; i < ranges.length; i++){
+        var returned = loop(i);
         if (returned) return returned.v;
     }
     return false;
@@ -13029,9 +12684,9 @@ function wrapDispatchForJoin(dispatch, isJoinable) {
         // by checking all node boundaries in their parent nodes.
         var joinable = [];
         for(var i$1 = 0; i$1 < ranges.length; i$1 += 2){
-            var from1 = ranges[i$1], to1 = ranges[i$1 + 1];
-            var $from = tr.doc.resolve(from1), depth = $from.sharedDepth(to1), parent = $from.node(depth);
-            for(var index = $from.indexAfter(depth), pos = $from.after(depth + 1); pos <= to1; ++index){
+            var from = ranges[i$1], to = ranges[i$1 + 1];
+            var $from = tr.doc.resolve(from), depth = $from.sharedDepth(to), parent = $from.node(depth);
+            for(var index = $from.indexAfter(depth), pos = $from.after(depth + 1); pos <= to; ++index){
                 var after = parent.maybeChild(index);
                 if (!after) break;
                 if (index && joinable.indexOf(pos) == -1) {
@@ -13045,7 +12700,7 @@ function wrapDispatchForJoin(dispatch, isJoinable) {
         joinable.sort(function(a, b) {
             return a - b;
         });
-        for(var i$2 = joinable.length - 1; i$2 >= 0; i$2--)if (_prosemirrorTransform.canJoin(tr.doc, joinable[i$2])) tr.join(joinable[i$2]);
+        for(var i$2 = joinable.length - 1; i$2 >= 0; i$2--)if ((0, _prosemirrorTransform.canJoin)(tr.doc, joinable[i$2])) tr.join(joinable[i$2]);
         dispatch(tr);
     };
 }
@@ -13130,22 +12785,14 @@ var baseKeymap = mac ? macBaseKeymap : pcBaseKeymap;
 },{"prosemirror-transform":"bTHhB","prosemirror-model":"eeCSD","prosemirror-state":"jYSWR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gjxYt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addListNodes", ()=>addListNodes
-);
-parcelHelpers.export(exports, "bulletList", ()=>bulletList
-);
-parcelHelpers.export(exports, "liftListItem", ()=>liftListItem
-);
-parcelHelpers.export(exports, "listItem", ()=>listItem
-);
-parcelHelpers.export(exports, "orderedList", ()=>orderedList
-);
-parcelHelpers.export(exports, "sinkListItem", ()=>sinkListItem
-);
-parcelHelpers.export(exports, "splitListItem", ()=>splitListItem
-);
-parcelHelpers.export(exports, "wrapInList", ()=>wrapInList
-);
+parcelHelpers.export(exports, "addListNodes", ()=>addListNodes);
+parcelHelpers.export(exports, "bulletList", ()=>bulletList);
+parcelHelpers.export(exports, "liftListItem", ()=>liftListItem);
+parcelHelpers.export(exports, "listItem", ()=>listItem);
+parcelHelpers.export(exports, "orderedList", ()=>orderedList);
+parcelHelpers.export(exports, "sinkListItem", ()=>sinkListItem);
+parcelHelpers.export(exports, "splitListItem", ()=>splitListItem);
+parcelHelpers.export(exports, "wrapInList", ()=>wrapInList);
 var _prosemirrorTransform = require("prosemirror-transform");
 var _prosemirrorModel = require("prosemirror-model");
 var olDOM = [
@@ -13265,26 +12912,26 @@ function wrapInList(listType, attrs) {
             // Don't do anything if this is the top of the list
             if ($from.index(range.depth - 1) == 0) return false;
             var $insert = state.doc.resolve(range.start - 2);
-            outerRange = new _prosemirrorModel.NodeRange($insert, $insert, range.depth);
-            if (range.endIndex < range.parent.childCount) range = new _prosemirrorModel.NodeRange($from, state.doc.resolve($to.end(range.depth)), range.depth);
+            outerRange = new (0, _prosemirrorModel.NodeRange)($insert, $insert, range.depth);
+            if (range.endIndex < range.parent.childCount) range = new (0, _prosemirrorModel.NodeRange)($from, state.doc.resolve($to.end(range.depth)), range.depth);
             doJoin = true;
         }
-        var wrap = _prosemirrorTransform.findWrapping(outerRange, listType, attrs, range);
+        var wrap = (0, _prosemirrorTransform.findWrapping)(outerRange, listType, attrs, range);
         if (!wrap) return false;
         if (dispatch) dispatch(doWrapInList(state.tr, range, wrap, doJoin, listType).scrollIntoView());
         return true;
     };
 }
 function doWrapInList(tr, range, wrappers, joinBefore, listType) {
-    var content = _prosemirrorModel.Fragment.empty;
-    for(var i = wrappers.length - 1; i >= 0; i--)content = _prosemirrorModel.Fragment.from(wrappers[i].type.create(wrappers[i].attrs, content));
-    tr.step(new _prosemirrorTransform.ReplaceAroundStep(range.start - (joinBefore ? 2 : 0), range.end, range.start, range.end, new _prosemirrorModel.Slice(content, 0, 0), wrappers.length, true));
+    var content = (0, _prosemirrorModel.Fragment).empty;
+    for(var i = wrappers.length - 1; i >= 0; i--)content = (0, _prosemirrorModel.Fragment).from(wrappers[i].type.create(wrappers[i].attrs, content));
+    tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)(range.start - (joinBefore ? 2 : 0), range.end, range.start, range.end, new (0, _prosemirrorModel.Slice)(content, 0, 0), wrappers.length, true));
     var found = 0;
     for(var i$1 = 0; i$1 < wrappers.length; i$1++)if (wrappers[i$1].type == listType) found = i$1 + 1;
     var splitDepth = wrappers.length - found;
     var splitPos = range.start + wrappers.length - (joinBefore ? 2 : 0), parent = range.parent;
     for(var i$2 = range.startIndex, e = range.endIndex, first = true; i$2 < e; i$2++, first = false){
-        if (!first && _prosemirrorTransform.canSplit(tr.doc, splitPos, splitDepth)) {
+        if (!first && (0, _prosemirrorTransform.canSplit)(tr.doc, splitPos, splitDepth)) {
             tr.split(splitPos, splitDepth);
             splitPos += 2 * splitDepth;
         }
@@ -13300,8 +12947,8 @@ function splitListItem(itemType) {
         var ref = state.selection;
         var $from = ref.$from;
         var $to = ref.$to;
-        var node1 = ref.node;
-        if (node1 && node1.isBlock || $from.depth < 2 || !$from.sameParent($to)) return false;
+        var node = ref.node;
+        if (node && node.isBlock || $from.depth < 2 || !$from.sameParent($to)) return false;
         var grandParent = $from.node(-1);
         if (grandParent.type != itemType) return false;
         if ($from.parent.content.size == 0 && $from.node(-1).childCount == $from.indexAfter(-1)) {
@@ -13310,16 +12957,16 @@ function splitListItem(itemType) {
             // command handle lifting.
             if ($from.depth == 2 || $from.node(-3).type != itemType || $from.index(-2) != $from.node(-2).childCount - 1) return false;
             if (dispatch) {
-                var wrap = _prosemirrorModel.Fragment.empty;
+                var wrap = (0, _prosemirrorModel.Fragment).empty;
                 var depthBefore = $from.index(-1) ? 1 : $from.index(-2) ? 2 : 3;
                 // Build a fragment containing empty versions of the structure
                 // from the outer list item to the parent node of the cursor
-                for(var d = $from.depth - depthBefore; d >= $from.depth - 3; d--)wrap = _prosemirrorModel.Fragment.from($from.node(d).copy(wrap));
+                for(var d = $from.depth - depthBefore; d >= $from.depth - 3; d--)wrap = (0, _prosemirrorModel.Fragment).from($from.node(d).copy(wrap));
                 var depthAfter = $from.indexAfter(-1) < $from.node(-2).childCount ? 1 : $from.indexAfter(-2) < $from.node(-3).childCount ? 2 : 3;
                 // Add a second list item with an empty default start node
-                wrap = wrap.append(_prosemirrorModel.Fragment.from(itemType.createAndFill()));
+                wrap = wrap.append((0, _prosemirrorModel.Fragment).from(itemType.createAndFill()));
                 var start = $from.before($from.depth - (depthBefore - 1));
-                var tr$1 = state.tr.replace(start, $from.after(-depthAfter), new _prosemirrorModel.Slice(wrap, 4 - depthBefore, 0));
+                var tr$1 = state.tr.replace(start, $from.after(-depthAfter), new (0, _prosemirrorModel.Slice)(wrap, 4 - depthBefore, 0));
                 var sel = -1;
                 tr$1.doc.nodesBetween(start, tr$1.doc.content.size, function(node, pos) {
                     if (sel > -1) return false;
@@ -13338,7 +12985,7 @@ function splitListItem(itemType) {
                 type: nextType
             }
         ];
-        if (!_prosemirrorTransform.canSplit(tr.doc, $from.pos, 2, types)) return false;
+        if (!(0, _prosemirrorTransform.canSplit)(tr.doc, $from.pos, 2, types)) return false;
         if (dispatch) dispatch(tr.split($from.pos, 2, types).scrollIntoView());
         return true;
     };
@@ -13365,10 +13012,10 @@ function liftToOuterList(state, dispatch, itemType, range) {
     if (end < endOfList) {
         // There are siblings after the lifted items, which must become
         // children of the last item
-        tr.step(new _prosemirrorTransform.ReplaceAroundStep(end - 1, endOfList, end, endOfList, new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(itemType.create(null, range.parent.copy())), 1, 0), 1, true));
-        range = new _prosemirrorModel.NodeRange(tr.doc.resolve(range.$from.pos), tr.doc.resolve(endOfList), range.depth);
+        tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)(end - 1, endOfList, end, endOfList, new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(itemType.create(null, range.parent.copy())), 1, 0), 1, true));
+        range = new (0, _prosemirrorModel.NodeRange)(tr.doc.resolve(range.$from.pos), tr.doc.resolve(endOfList), range.depth);
     }
-    dispatch(tr.lift(range, _prosemirrorTransform.liftTarget(range)).scrollIntoView());
+    dispatch(tr.lift(range, (0, _prosemirrorTransform.liftTarget)(range)).scrollIntoView());
     return true;
 }
 function liftOutOfList(state, dispatch, range) {
@@ -13382,12 +13029,12 @@ function liftOutOfList(state, dispatch, range) {
     if (tr.mapping.map(range.end) != range.start + $start.nodeAfter.nodeSize) return false;
     var atStart = range.startIndex == 0, atEnd = range.endIndex == list.childCount;
     var parent = $start.node(-1), indexBefore = $start.index(-1);
-    if (!parent.canReplace(indexBefore + (atStart ? 0 : 1), indexBefore + 1, item.content.append(atEnd ? _prosemirrorModel.Fragment.empty : _prosemirrorModel.Fragment.from(list)))) return false;
+    if (!parent.canReplace(indexBefore + (atStart ? 0 : 1), indexBefore + 1, item.content.append(atEnd ? (0, _prosemirrorModel.Fragment).empty : (0, _prosemirrorModel.Fragment).from(list)))) return false;
     var start = $start.pos, end = start + item.nodeSize;
     // Strip off the surrounding list. At the sides where we're not at
     // the end of the list, the existing list is closed. At sides where
     // this is the end, it is overwritten to its end.
-    tr.step(new _prosemirrorTransform.ReplaceAroundStep(start - (atStart ? 1 : 0), end + (atEnd ? 1 : 0), start + 1, end - 1, new _prosemirrorModel.Slice((atStart ? _prosemirrorModel.Fragment.empty : _prosemirrorModel.Fragment.from(list.copy(_prosemirrorModel.Fragment.empty))).append(atEnd ? _prosemirrorModel.Fragment.empty : _prosemirrorModel.Fragment.from(list.copy(_prosemirrorModel.Fragment.empty))), atStart ? 0 : 1, atEnd ? 0 : 1), atStart ? 0 : 1));
+    tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)(start - (atStart ? 1 : 0), end + (atEnd ? 1 : 0), start + 1, end - 1, new (0, _prosemirrorModel.Slice)((atStart ? (0, _prosemirrorModel.Fragment).empty : (0, _prosemirrorModel.Fragment).from(list.copy((0, _prosemirrorModel.Fragment).empty))).append(atEnd ? (0, _prosemirrorModel.Fragment).empty : (0, _prosemirrorModel.Fragment).from(list.copy((0, _prosemirrorModel.Fragment).empty))), atStart ? 0 : 1, atEnd ? 0 : 1), atStart ? 0 : 1));
     dispatch(tr.scrollIntoView());
     return true;
 }
@@ -13409,10 +13056,10 @@ function sinkListItem(itemType) {
         if (nodeBefore.type != itemType) return false;
         if (dispatch) {
             var nestedBefore = nodeBefore.lastChild && nodeBefore.lastChild.type == parent.type;
-            var inner = _prosemirrorModel.Fragment.from(nestedBefore ? itemType.create() : null);
-            var slice = new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(itemType.create(null, _prosemirrorModel.Fragment.from(parent.type.create(null, inner)))), nestedBefore ? 3 : 1, 0);
+            var inner = (0, _prosemirrorModel.Fragment).from(nestedBefore ? itemType.create() : null);
+            var slice = new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(itemType.create(null, (0, _prosemirrorModel.Fragment).from(parent.type.create(null, inner)))), nestedBefore ? 3 : 1, 0);
             var before = range.start, after = range.end;
-            dispatch(state.tr.step(new _prosemirrorTransform.ReplaceAroundStep(before - (nestedBefore ? 3 : 1), after, before, after, slice, 1, true)).scrollIntoView());
+            dispatch(state.tr.step(new (0, _prosemirrorTransform.ReplaceAroundStep)(before - (nestedBefore ? 3 : 1), after, before, after, slice, 1, true)).scrollIntoView());
         }
         return true;
     };
@@ -13618,18 +13265,12 @@ parcelHelpers.defineInteropFlag(exports);
 //   state that has the transaction
 //   [applied](#state.EditorState.apply). The callback will be bound to have
 //   the view instance as its `this` binding.
-parcelHelpers.export(exports, "Decoration", ()=>Decoration
-);
-parcelHelpers.export(exports, "DecorationSet", ()=>DecorationSet
-);
-parcelHelpers.export(exports, "EditorView", ()=>EditorView
-);
-parcelHelpers.export(exports, "__endComposition", ()=>endComposition
-);
-parcelHelpers.export(exports, "__parseFromClipboard", ()=>parseFromClipboard
-);
-parcelHelpers.export(exports, "__serializeForClipboard", ()=>serializeForClipboard
-);
+parcelHelpers.export(exports, "Decoration", ()=>Decoration);
+parcelHelpers.export(exports, "DecorationSet", ()=>DecorationSet);
+parcelHelpers.export(exports, "EditorView", ()=>EditorView);
+parcelHelpers.export(exports, "__endComposition", ()=>endComposition);
+parcelHelpers.export(exports, "__parseFromClipboard", ()=>parseFromClipboard);
+parcelHelpers.export(exports, "__serializeForClipboard", ()=>serializeForClipboard);
 var _prosemirrorState = require("prosemirror-state");
 var _prosemirrorModel = require("prosemirror-model");
 var _prosemirrorTransform = require("prosemirror-transform");
@@ -14174,12 +13815,12 @@ function endOfTextblockHorizontal(view, state, dir) {
         var oldBidiLevel = sel.caretBidiLevel; // Only for Firefox
         sel.modify("move", dir, "character");
         var parentDOM = $head.depth ? view.docView.domAfterPos($head.before()) : view.dom;
-        var result1 = !parentDOM.contains(sel.focusNode.nodeType == 1 ? sel.focusNode : sel.focusNode.parentNode) || oldNode == sel.focusNode && oldOff == sel.focusOffset;
+        var result = !parentDOM.contains(sel.focusNode.nodeType == 1 ? sel.focusNode : sel.focusNode.parentNode) || oldNode == sel.focusNode && oldOff == sel.focusOffset;
         // Restore the previous selection
         sel.removeAllRanges();
         sel.addRange(oldRange);
         if (oldBidiLevel != null) sel.caretBidiLevel = oldBidiLevel;
-        return result1;
+        return result;
     });
 }
 var cachedState = null, cachedDir = null, cachedResult = false;
@@ -14702,8 +14343,8 @@ Object.defineProperties(ViewDesc.prototype, prototypeAccessors);
 var nothing = [];
 // A widget desc represents a widget decoration, which is a DOM node
 // drawn between the document nodes.
-var WidgetViewDesc = /*@__PURE__*/ function(ViewDesc1) {
-    function WidgetViewDesc1(parent, widget, view, pos) {
+var WidgetViewDesc = /*@__PURE__*/ function(ViewDesc) {
+    function WidgetViewDesc(parent, widget, view, pos) {
         var self, dom = widget.type.toDOM;
         if (typeof dom == "function") dom = dom(view, function() {
             if (!self) return pos;
@@ -14718,96 +14359,96 @@ var WidgetViewDesc = /*@__PURE__*/ function(ViewDesc1) {
             dom.contentEditable = false;
             dom.classList.add("ProseMirror-widget");
         }
-        ViewDesc1.call(this, parent, nothing, dom, null);
+        ViewDesc.call(this, parent, nothing, dom, null);
         this.widget = widget;
         self = this;
     }
-    if (ViewDesc1) WidgetViewDesc1.__proto__ = ViewDesc1;
-    WidgetViewDesc1.prototype = Object.create(ViewDesc1 && ViewDesc1.prototype);
-    WidgetViewDesc1.prototype.constructor = WidgetViewDesc1;
-    var prototypeAccessors$11 = {
+    if (ViewDesc) WidgetViewDesc.__proto__ = ViewDesc;
+    WidgetViewDesc.prototype = Object.create(ViewDesc && ViewDesc.prototype);
+    WidgetViewDesc.prototype.constructor = WidgetViewDesc;
+    var prototypeAccessors$1 = {
         domAtom: {
             configurable: true
         }
     };
-    WidgetViewDesc1.prototype.matchesWidget = function matchesWidget(widget) {
+    WidgetViewDesc.prototype.matchesWidget = function matchesWidget(widget) {
         return this.dirty == NOT_DIRTY && widget.type.eq(this.widget.type);
     };
-    WidgetViewDesc1.prototype.parseRule = function parseRule() {
+    WidgetViewDesc.prototype.parseRule = function parseRule() {
         return {
             ignore: true
         };
     };
-    WidgetViewDesc1.prototype.stopEvent = function stopEvent(event) {
+    WidgetViewDesc.prototype.stopEvent = function stopEvent(event) {
         var stop = this.widget.spec.stopEvent;
         return stop ? stop(event) : false;
     };
-    WidgetViewDesc1.prototype.ignoreMutation = function ignoreMutation(mutation) {
+    WidgetViewDesc.prototype.ignoreMutation = function ignoreMutation(mutation) {
         return mutation.type != "selection" || this.widget.spec.ignoreSelection;
     };
-    WidgetViewDesc1.prototype.destroy = function destroy() {
+    WidgetViewDesc.prototype.destroy = function destroy() {
         this.widget.type.destroy(this.dom);
-        ViewDesc1.prototype.destroy.call(this);
+        ViewDesc.prototype.destroy.call(this);
     };
-    prototypeAccessors$11.domAtom.get = function() {
+    prototypeAccessors$1.domAtom.get = function() {
         return true;
     };
-    Object.defineProperties(WidgetViewDesc1.prototype, prototypeAccessors$11);
-    return WidgetViewDesc1;
+    Object.defineProperties(WidgetViewDesc.prototype, prototypeAccessors$1);
+    return WidgetViewDesc;
 }(ViewDesc);
-var CompositionViewDesc = /*@__PURE__*/ function(ViewDesc2) {
-    function CompositionViewDesc1(parent, dom, textDOM, text) {
-        ViewDesc2.call(this, parent, nothing, dom, null);
+var CompositionViewDesc = /*@__PURE__*/ function(ViewDesc) {
+    function CompositionViewDesc(parent, dom, textDOM, text) {
+        ViewDesc.call(this, parent, nothing, dom, null);
         this.textDOM = textDOM;
         this.text = text;
     }
-    if (ViewDesc2) CompositionViewDesc1.__proto__ = ViewDesc2;
-    CompositionViewDesc1.prototype = Object.create(ViewDesc2 && ViewDesc2.prototype);
-    CompositionViewDesc1.prototype.constructor = CompositionViewDesc1;
-    var prototypeAccessors$21 = {
+    if (ViewDesc) CompositionViewDesc.__proto__ = ViewDesc;
+    CompositionViewDesc.prototype = Object.create(ViewDesc && ViewDesc.prototype);
+    CompositionViewDesc.prototype.constructor = CompositionViewDesc;
+    var prototypeAccessors$2 = {
         size: {
             configurable: true
         }
     };
-    prototypeAccessors$21.size.get = function() {
+    prototypeAccessors$2.size.get = function() {
         return this.text.length;
     };
-    CompositionViewDesc1.prototype.localPosFromDOM = function localPosFromDOM(dom, offset) {
+    CompositionViewDesc.prototype.localPosFromDOM = function localPosFromDOM(dom, offset) {
         if (dom != this.textDOM) return this.posAtStart + (offset ? this.size : 0);
         return this.posAtStart + offset;
     };
-    CompositionViewDesc1.prototype.domFromPos = function domFromPos(pos) {
+    CompositionViewDesc.prototype.domFromPos = function domFromPos(pos) {
         return {
             node: this.textDOM,
             offset: pos
         };
     };
-    CompositionViewDesc1.prototype.ignoreMutation = function ignoreMutation(mut) {
-        return mut.type === 'characterData' && mut.target.nodeValue == mut.oldValue;
+    CompositionViewDesc.prototype.ignoreMutation = function ignoreMutation(mut) {
+        return mut.type === "characterData" && mut.target.nodeValue == mut.oldValue;
     };
-    Object.defineProperties(CompositionViewDesc1.prototype, prototypeAccessors$21);
-    return CompositionViewDesc1;
+    Object.defineProperties(CompositionViewDesc.prototype, prototypeAccessors$2);
+    return CompositionViewDesc;
 }(ViewDesc);
 // A mark desc represents a mark. May have multiple children,
 // depending on how the mark is split. Note that marks are drawn using
 // a fixed nesting order, for simplicity and predictability, so in
 // some cases they will be split more often than would appear
 // necessary.
-var MarkViewDesc = /*@__PURE__*/ function(ViewDesc3) {
-    function MarkViewDesc1(parent, mark, dom, contentDOM) {
-        ViewDesc3.call(this, parent, [], dom, contentDOM);
+var MarkViewDesc = /*@__PURE__*/ function(ViewDesc) {
+    function MarkViewDesc(parent, mark, dom, contentDOM) {
+        ViewDesc.call(this, parent, [], dom, contentDOM);
         this.mark = mark;
     }
-    if (ViewDesc3) MarkViewDesc1.__proto__ = ViewDesc3;
-    MarkViewDesc1.prototype = Object.create(ViewDesc3 && ViewDesc3.prototype);
-    MarkViewDesc1.prototype.constructor = MarkViewDesc1;
-    MarkViewDesc1.create = function create(parent, mark, inline, view) {
+    if (ViewDesc) MarkViewDesc.__proto__ = ViewDesc;
+    MarkViewDesc.prototype = Object.create(ViewDesc && ViewDesc.prototype);
+    MarkViewDesc.prototype.constructor = MarkViewDesc;
+    MarkViewDesc.create = function create(parent, mark, inline, view) {
         var custom = view.nodeViews[mark.type.name];
         var spec = custom && custom(mark, view, inline);
-        if (!spec || !spec.dom) spec = _prosemirrorModel.DOMSerializer.renderSpec(document, mark.type.spec.toDOM(mark, inline));
-        return new MarkViewDesc1(parent, mark, spec.dom, spec.contentDOM || spec.dom);
+        if (!spec || !spec.dom) spec = (0, _prosemirrorModel.DOMSerializer).renderSpec(document, mark.type.spec.toDOM(mark, inline));
+        return new MarkViewDesc(parent, mark, spec.dom, spec.contentDOM || spec.dom);
     };
-    MarkViewDesc1.prototype.parseRule = function parseRule() {
+    MarkViewDesc.prototype.parseRule = function parseRule() {
         if (this.dirty & NODE_DIRTY || this.mark.type.spec.reparseInView) return null;
         return {
             mark: this.mark.type.name,
@@ -14815,11 +14456,11 @@ var MarkViewDesc = /*@__PURE__*/ function(ViewDesc3) {
             contentElement: this.contentDOM
         };
     };
-    MarkViewDesc1.prototype.matchesMark = function matchesMark(mark) {
+    MarkViewDesc.prototype.matchesMark = function matchesMark(mark) {
         return this.dirty != NODE_DIRTY && this.mark.eq(mark);
     };
-    MarkViewDesc1.prototype.markDirty = function markDirty(from, to) {
-        ViewDesc3.prototype.markDirty.call(this, from, to);
+    MarkViewDesc.prototype.markDirty = function markDirty(from, to) {
+        ViewDesc.prototype.markDirty.call(this, from, to);
         // Move dirty info to nearest node view
         if (this.dirty != NOT_DIRTY) {
             var parent = this.parent;
@@ -14828,8 +14469,8 @@ var MarkViewDesc = /*@__PURE__*/ function(ViewDesc3) {
             this.dirty = NOT_DIRTY;
         }
     };
-    MarkViewDesc1.prototype.slice = function slice(from, to, view) {
-        var copy = MarkViewDesc1.create(this.parent, this.mark, true, view);
+    MarkViewDesc.prototype.slice = function slice(from, to, view) {
+        var copy = MarkViewDesc.create(this.parent, this.mark, true, view);
         var nodes = this.children, size = this.size;
         if (to < size) nodes = replaceNodes(nodes, to, size, view);
         if (from > 0) nodes = replaceNodes(nodes, 0, from, view);
@@ -14837,23 +14478,23 @@ var MarkViewDesc = /*@__PURE__*/ function(ViewDesc3) {
         copy.children = nodes;
         return copy;
     };
-    return MarkViewDesc1;
+    return MarkViewDesc;
 }(ViewDesc);
 // Node view descs are the main, most common type of view desc, and
 // correspond to an actual node in the document. Unlike mark descs,
 // they populate their child array themselves.
-var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
-    function NodeViewDesc1(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos) {
-        ViewDesc4.call(this, parent, node.isLeaf ? nothing : [], dom, contentDOM);
+var NodeViewDesc = /*@__PURE__*/ function(ViewDesc) {
+    function NodeViewDesc(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos) {
+        ViewDesc.call(this, parent, node.isLeaf ? nothing : [], dom, contentDOM);
         this.nodeDOM = nodeDOM;
         this.node = node;
         this.outerDeco = outerDeco;
         this.innerDeco = innerDeco;
         if (contentDOM) this.updateChildren(view, pos);
     }
-    if (ViewDesc4) NodeViewDesc1.__proto__ = ViewDesc4;
-    NodeViewDesc1.prototype = Object.create(ViewDesc4 && ViewDesc4.prototype);
-    NodeViewDesc1.prototype.constructor = NodeViewDesc1;
+    if (ViewDesc) NodeViewDesc.__proto__ = ViewDesc;
+    NodeViewDesc.prototype = Object.create(ViewDesc && ViewDesc.prototype);
+    NodeViewDesc.prototype.constructor = NodeViewDesc;
     var prototypeAccessors$3 = {
         size: {
             configurable: true
@@ -14874,7 +14515,7 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
     // since it'd require exposing a whole slew of finicky
     // implementation details to the user code that they probably will
     // never need.)
-    NodeViewDesc1.create = function create(parent, node, outerDeco, innerDeco, view, pos) {
+    NodeViewDesc.create = function create(parent, node, outerDeco, innerDeco, view, pos) {
         var assign;
         var custom = view.nodeViews[node.type.name], descObj;
         var spec = custom && custom(node, view, function() {
@@ -14887,7 +14528,7 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
         if (node.isText) {
             if (!dom) dom = document.createTextNode(node.text);
             else if (dom.nodeType != 3) throw new RangeError("Text must be rendered as a DOM text node");
-        } else if (!dom) assign = _prosemirrorModel.DOMSerializer.renderSpec(document, node.type.spec.toDOM(node)), dom = assign.dom, contentDOM = assign.contentDOM;
+        } else if (!dom) assign = (0, _prosemirrorModel.DOMSerializer).renderSpec(document, node.type.spec.toDOM(node)), dom = assign.dom, contentDOM = assign.contentDOM;
         if (!contentDOM && !node.isText && dom.nodeName != "BR") {
             if (!dom.hasAttribute("contenteditable")) dom.contentEditable = false;
             if (node.type.spec.draggable) dom.draggable = true;
@@ -14896,9 +14537,9 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
         dom = applyOuterDeco(dom, outerDeco, node);
         if (spec) return descObj = new CustomNodeViewDesc(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, spec, view, pos + 1);
         else if (node.isText) return new TextViewDesc(parent, node, outerDeco, innerDeco, dom, nodeDOM, view);
-        else return new NodeViewDesc1(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos + 1);
+        else return new NodeViewDesc(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos + 1);
     };
-    NodeViewDesc1.prototype.parseRule = function parseRule() {
+    NodeViewDesc.prototype.parseRule = function parseRule() {
         var this$1 = this;
         // Experimental kludge to allow opt-in re-parsing of nodes
         if (this.node.type.spec.reparseInView) return null;
@@ -14927,12 +14568,12 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
                 }
             }
             if (!rule.contentElement) rule.getContent = function() {
-                return _prosemirrorModel.Fragment.empty;
+                return (0, _prosemirrorModel.Fragment).empty;
             };
         }
         return rule;
     };
-    NodeViewDesc1.prototype.matchesNode = function matchesNode(node, outerDeco, innerDeco) {
+    NodeViewDesc.prototype.matchesNode = function matchesNode(node, outerDeco, innerDeco) {
         return this.dirty == NOT_DIRTY && node.eq(this.node) && sameOuterDeco(outerDeco, this.outerDeco) && innerDeco.eq(this.innerDeco);
     };
     prototypeAccessors$3.size.get = function() {
@@ -14945,7 +14586,7 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
     // decorations, possibly introducing nesting for marks. Then, in a
     // separate step, syncs the DOM inside `this.contentDOM` to
     // `this.children`.
-    NodeViewDesc1.prototype.updateChildren = function updateChildren(view, pos) {
+    NodeViewDesc.prototype.updateChildren = function updateChildren(view, pos) {
         var this$1 = this;
         var inline = this.node.inlineContent, off = pos;
         var composition = view.composing && this.localCompositionInfo(view, pos);
@@ -14954,7 +14595,7 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
         var updater = new ViewTreeUpdater(this, localComposition && localComposition.node);
         iterDeco(this.node, this.innerDeco, function(widget, i, insideNode) {
             if (widget.spec.marks) updater.syncToMarks(widget.spec.marks, inline, view);
-            else if (widget.type.side >= 0 && !insideNode) updater.syncToMarks(i == this$1.node.childCount ? _prosemirrorModel.Mark.none : this$1.node.child(i).marks, inline, view);
+            else if (widget.type.side >= 0 && !insideNode) updater.syncToMarks(i == this$1.node.childCount ? (0, _prosemirrorModel.Mark).none : this$1.node.child(i).marks, inline, view);
             // If the next node is a desc matching this widget, reuse it,
             // otherwise insert the widget as a new view desc.
             updater.placeWidget(widget, view, off);
@@ -14982,13 +14623,13 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
             if (result.ios) iosHacks(this.dom);
         }
     };
-    NodeViewDesc1.prototype.localCompositionInfo = function localCompositionInfo(view, pos) {
+    NodeViewDesc.prototype.localCompositionInfo = function localCompositionInfo(view, pos) {
         // Only do something if both the selection and a focused text node
         // are inside of this node
         var ref = view.state.selection;
         var from = ref.from;
         var to = ref.to;
-        if (!(view.state.selection instanceof _prosemirrorState.TextSelection) || from < pos || to > pos + this.node.content.size) return;
+        if (!(view.state.selection instanceof (0, _prosemirrorState.TextSelection)) || from < pos || to > pos + this.node.content.size) return;
         var sel = view.root.getSelection();
         var textNode = nearbyTextNode(sel.focusNode, sel.focusOffset);
         if (!textNode || !this.dom.contains(textNode.parentNode)) return;
@@ -15008,7 +14649,7 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
             pos: -1
         };
     };
-    NodeViewDesc1.prototype.protectLocalComposition = function protectLocalComposition(view, ref) {
+    NodeViewDesc.prototype.protectLocalComposition = function protectLocalComposition(view, ref) {
         var node = ref.node;
         var pos = ref.pos;
         var text = ref.text;
@@ -15030,19 +14671,19 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
     // : (Node, [Decoration], DecorationSource, EditorView) → bool
     // If this desc be updated to match the given node decoration,
     // do so and return true.
-    NodeViewDesc1.prototype.update = function update(node, outerDeco, innerDeco, view) {
+    NodeViewDesc.prototype.update = function update(node, outerDeco, innerDeco, view) {
         if (this.dirty == NODE_DIRTY || !node.sameMarkup(this.node)) return false;
         this.updateInner(node, outerDeco, innerDeco, view);
         return true;
     };
-    NodeViewDesc1.prototype.updateInner = function updateInner(node, outerDeco, innerDeco, view) {
+    NodeViewDesc.prototype.updateInner = function updateInner(node, outerDeco, innerDeco, view) {
         this.updateOuterDeco(outerDeco);
         this.node = node;
         this.innerDeco = innerDeco;
         if (this.contentDOM) this.updateChildren(view, this.posAtStart);
         this.dirty = NOT_DIRTY;
     };
-    NodeViewDesc1.prototype.updateOuterDeco = function updateOuterDeco(outerDeco) {
+    NodeViewDesc.prototype.updateOuterDeco = function updateOuterDeco(outerDeco) {
         if (sameOuterDeco(outerDeco, this.outerDeco)) return;
         var needsWrap = this.nodeDOM.nodeType != 1;
         var oldDOM = this.dom;
@@ -15054,20 +14695,20 @@ var NodeViewDesc = /*@__PURE__*/ function(ViewDesc4) {
         this.outerDeco = outerDeco;
     };
     // Mark this node as being the selected node.
-    NodeViewDesc1.prototype.selectNode = function selectNode() {
+    NodeViewDesc.prototype.selectNode = function selectNode() {
         this.nodeDOM.classList.add("ProseMirror-selectednode");
         if (this.contentDOM || !this.node.type.spec.draggable) this.dom.draggable = true;
     };
     // Remove selected node marking from this node.
-    NodeViewDesc1.prototype.deselectNode = function deselectNode() {
+    NodeViewDesc.prototype.deselectNode = function deselectNode() {
         this.nodeDOM.classList.remove("ProseMirror-selectednode");
         if (this.contentDOM || !this.node.type.spec.draggable) this.dom.removeAttribute("draggable");
     };
     prototypeAccessors$3.domAtom.get = function() {
         return this.node.isAtom;
     };
-    Object.defineProperties(NodeViewDesc1.prototype, prototypeAccessors$3);
-    return NodeViewDesc1;
+    Object.defineProperties(NodeViewDesc.prototype, prototypeAccessors$3);
+    return NodeViewDesc;
 }(ViewDesc);
 // Create a view desc for the top-level document node, to be exported
 // and used by the view class.
@@ -15075,26 +14716,26 @@ function docViewDesc(doc, outerDeco, innerDeco, dom, view) {
     applyOuterDeco(dom, outerDeco, doc);
     return new NodeViewDesc(null, doc, outerDeco, innerDeco, dom, dom, dom, view, 0);
 }
-var TextViewDesc = /*@__PURE__*/ function(NodeViewDesc2) {
-    function TextViewDesc1(parent, node, outerDeco, innerDeco, dom, nodeDOM, view) {
-        NodeViewDesc2.call(this, parent, node, outerDeco, innerDeco, dom, null, nodeDOM, view);
+var TextViewDesc = /*@__PURE__*/ function(NodeViewDesc) {
+    function TextViewDesc(parent, node, outerDeco, innerDeco, dom, nodeDOM, view) {
+        NodeViewDesc.call(this, parent, node, outerDeco, innerDeco, dom, null, nodeDOM, view);
     }
-    if (NodeViewDesc2) TextViewDesc1.__proto__ = NodeViewDesc2;
-    TextViewDesc1.prototype = Object.create(NodeViewDesc2 && NodeViewDesc2.prototype);
-    TextViewDesc1.prototype.constructor = TextViewDesc1;
+    if (NodeViewDesc) TextViewDesc.__proto__ = NodeViewDesc;
+    TextViewDesc.prototype = Object.create(NodeViewDesc && NodeViewDesc.prototype);
+    TextViewDesc.prototype.constructor = TextViewDesc;
     var prototypeAccessors$4 = {
         domAtom: {
             configurable: true
         }
     };
-    TextViewDesc1.prototype.parseRule = function parseRule() {
+    TextViewDesc.prototype.parseRule = function parseRule() {
         var skip = this.nodeDOM.parentNode;
         while(skip && skip != this.dom && !skip.pmIsDeco)skip = skip.parentNode;
         return {
             skip: skip || true
         };
     };
-    TextViewDesc1.prototype.update = function update(node, outerDeco, _, view) {
+    TextViewDesc.prototype.update = function update(node, outerDeco, _, view) {
         if (this.dirty == NODE_DIRTY || this.dirty != NOT_DIRTY && !this.inParent() || !node.sameMarkup(this.node)) return false;
         this.updateOuterDeco(outerDeco);
         if ((this.dirty != NOT_DIRTY || node.text != this.node.text) && node.text != this.nodeDOM.nodeValue) {
@@ -15105,49 +14746,49 @@ var TextViewDesc = /*@__PURE__*/ function(NodeViewDesc2) {
         this.dirty = NOT_DIRTY;
         return true;
     };
-    TextViewDesc1.prototype.inParent = function inParent() {
+    TextViewDesc.prototype.inParent = function inParent() {
         var parentDOM = this.parent.contentDOM;
         for(var n = this.nodeDOM; n; n = n.parentNode){
             if (n == parentDOM) return true;
         }
         return false;
     };
-    TextViewDesc1.prototype.domFromPos = function domFromPos(pos) {
+    TextViewDesc.prototype.domFromPos = function domFromPos(pos) {
         return {
             node: this.nodeDOM,
             offset: pos
         };
     };
-    TextViewDesc1.prototype.localPosFromDOM = function localPosFromDOM(dom, offset, bias) {
+    TextViewDesc.prototype.localPosFromDOM = function localPosFromDOM(dom, offset, bias) {
         if (dom == this.nodeDOM) return this.posAtStart + Math.min(offset, this.node.text.length);
-        return NodeViewDesc2.prototype.localPosFromDOM.call(this, dom, offset, bias);
+        return NodeViewDesc.prototype.localPosFromDOM.call(this, dom, offset, bias);
     };
-    TextViewDesc1.prototype.ignoreMutation = function ignoreMutation(mutation) {
+    TextViewDesc.prototype.ignoreMutation = function ignoreMutation(mutation) {
         return mutation.type != "characterData" && mutation.type != "selection";
     };
-    TextViewDesc1.prototype.slice = function slice(from, to, view) {
+    TextViewDesc.prototype.slice = function slice(from, to, view) {
         var node = this.node.cut(from, to), dom = document.createTextNode(node.text);
-        return new TextViewDesc1(this.parent, node, this.outerDeco, this.innerDeco, dom, dom, view);
+        return new TextViewDesc(this.parent, node, this.outerDeco, this.innerDeco, dom, dom, view);
     };
-    TextViewDesc1.prototype.markDirty = function markDirty(from, to) {
-        NodeViewDesc2.prototype.markDirty.call(this, from, to);
+    TextViewDesc.prototype.markDirty = function markDirty(from, to) {
+        NodeViewDesc.prototype.markDirty.call(this, from, to);
         if (this.dom != this.nodeDOM && (from == 0 || to == this.nodeDOM.nodeValue.length)) this.dirty = NODE_DIRTY;
     };
     prototypeAccessors$4.domAtom.get = function() {
         return false;
     };
-    Object.defineProperties(TextViewDesc1.prototype, prototypeAccessors$4);
-    return TextViewDesc1;
+    Object.defineProperties(TextViewDesc.prototype, prototypeAccessors$4);
+    return TextViewDesc;
 }(NodeViewDesc);
 // A dummy desc used to tag trailing BR or IMG nodes created to work
 // around contentEditable terribleness.
-var TrailingHackViewDesc = /*@__PURE__*/ function(ViewDesc5) {
-    function TrailingHackViewDesc1() {
-        ViewDesc5.apply(this, arguments);
+var TrailingHackViewDesc = /*@__PURE__*/ function(ViewDesc) {
+    function TrailingHackViewDesc() {
+        ViewDesc.apply(this, arguments);
     }
-    if (ViewDesc5) TrailingHackViewDesc1.__proto__ = ViewDesc5;
-    TrailingHackViewDesc1.prototype = Object.create(ViewDesc5 && ViewDesc5.prototype);
-    TrailingHackViewDesc1.prototype.constructor = TrailingHackViewDesc1;
+    if (ViewDesc) TrailingHackViewDesc.__proto__ = ViewDesc;
+    TrailingHackViewDesc.prototype = Object.create(ViewDesc && ViewDesc.prototype);
+    TrailingHackViewDesc.prototype.constructor = TrailingHackViewDesc;
     var prototypeAccessors$5 = {
         domAtom: {
             configurable: true
@@ -15156,12 +14797,12 @@ var TrailingHackViewDesc = /*@__PURE__*/ function(ViewDesc5) {
             configurable: true
         }
     };
-    TrailingHackViewDesc1.prototype.parseRule = function parseRule() {
+    TrailingHackViewDesc.prototype.parseRule = function parseRule() {
         return {
             ignore: true
         };
     };
-    TrailingHackViewDesc1.prototype.matchesHack = function matchesHack(nodeName) {
+    TrailingHackViewDesc.prototype.matchesHack = function matchesHack(nodeName) {
         return this.dirty == NOT_DIRTY && this.dom.nodeName == nodeName;
     };
     prototypeAccessors$5.domAtom.get = function() {
@@ -15170,52 +14811,52 @@ var TrailingHackViewDesc = /*@__PURE__*/ function(ViewDesc5) {
     prototypeAccessors$5.ignoreForCoords.get = function() {
         return this.dom.nodeName == "IMG";
     };
-    Object.defineProperties(TrailingHackViewDesc1.prototype, prototypeAccessors$5);
-    return TrailingHackViewDesc1;
+    Object.defineProperties(TrailingHackViewDesc.prototype, prototypeAccessors$5);
+    return TrailingHackViewDesc;
 }(ViewDesc);
 // A separate subclass is used for customized node views, so that the
 // extra checks only have to be made for nodes that are actually
 // customized.
-var CustomNodeViewDesc = /*@__PURE__*/ function(NodeViewDesc3) {
-    function CustomNodeViewDesc1(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, spec, view, pos) {
-        NodeViewDesc3.call(this, parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos);
+var CustomNodeViewDesc = /*@__PURE__*/ function(NodeViewDesc) {
+    function CustomNodeViewDesc(parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, spec, view, pos) {
+        NodeViewDesc.call(this, parent, node, outerDeco, innerDeco, dom, contentDOM, nodeDOM, view, pos);
         this.spec = spec;
     }
-    if (NodeViewDesc3) CustomNodeViewDesc1.__proto__ = NodeViewDesc3;
-    CustomNodeViewDesc1.prototype = Object.create(NodeViewDesc3 && NodeViewDesc3.prototype);
-    CustomNodeViewDesc1.prototype.constructor = CustomNodeViewDesc1;
+    if (NodeViewDesc) CustomNodeViewDesc.__proto__ = NodeViewDesc;
+    CustomNodeViewDesc.prototype = Object.create(NodeViewDesc && NodeViewDesc.prototype);
+    CustomNodeViewDesc.prototype.constructor = CustomNodeViewDesc;
     // A custom `update` method gets to decide whether the update goes
     // through. If it does, and there's a `contentDOM` node, our logic
     // updates the children.
-    CustomNodeViewDesc1.prototype.update = function update(node, outerDeco, innerDeco, view) {
+    CustomNodeViewDesc.prototype.update = function update(node, outerDeco, innerDeco, view) {
         if (this.dirty == NODE_DIRTY) return false;
         if (this.spec.update) {
-            var result2 = this.spec.update(node, outerDeco, innerDeco);
-            if (result2) this.updateInner(node, outerDeco, innerDeco, view);
-            return result2;
+            var result = this.spec.update(node, outerDeco, innerDeco);
+            if (result) this.updateInner(node, outerDeco, innerDeco, view);
+            return result;
         } else if (!this.contentDOM && !node.isLeaf) return false;
-        else return NodeViewDesc3.prototype.update.call(this, node, outerDeco, innerDeco, view);
+        else return NodeViewDesc.prototype.update.call(this, node, outerDeco, innerDeco, view);
     };
-    CustomNodeViewDesc1.prototype.selectNode = function selectNode() {
-        this.spec.selectNode ? this.spec.selectNode() : NodeViewDesc3.prototype.selectNode.call(this);
+    CustomNodeViewDesc.prototype.selectNode = function selectNode() {
+        this.spec.selectNode ? this.spec.selectNode() : NodeViewDesc.prototype.selectNode.call(this);
     };
-    CustomNodeViewDesc1.prototype.deselectNode = function deselectNode() {
-        this.spec.deselectNode ? this.spec.deselectNode() : NodeViewDesc3.prototype.deselectNode.call(this);
+    CustomNodeViewDesc.prototype.deselectNode = function deselectNode() {
+        this.spec.deselectNode ? this.spec.deselectNode() : NodeViewDesc.prototype.deselectNode.call(this);
     };
-    CustomNodeViewDesc1.prototype.setSelection = function setSelection(anchor, head, root, force) {
-        this.spec.setSelection ? this.spec.setSelection(anchor, head, root) : NodeViewDesc3.prototype.setSelection.call(this, anchor, head, root, force);
+    CustomNodeViewDesc.prototype.setSelection = function setSelection(anchor, head, root, force) {
+        this.spec.setSelection ? this.spec.setSelection(anchor, head, root) : NodeViewDesc.prototype.setSelection.call(this, anchor, head, root, force);
     };
-    CustomNodeViewDesc1.prototype.destroy = function destroy() {
+    CustomNodeViewDesc.prototype.destroy = function destroy() {
         if (this.spec.destroy) this.spec.destroy();
-        NodeViewDesc3.prototype.destroy.call(this);
+        NodeViewDesc.prototype.destroy.call(this);
     };
-    CustomNodeViewDesc1.prototype.stopEvent = function stopEvent(event) {
+    CustomNodeViewDesc.prototype.stopEvent = function stopEvent(event) {
         return this.spec.stopEvent ? this.spec.stopEvent(event) : false;
     };
-    CustomNodeViewDesc1.prototype.ignoreMutation = function ignoreMutation(mutation) {
-        return this.spec.ignoreMutation ? this.spec.ignoreMutation(mutation) : NodeViewDesc3.prototype.ignoreMutation.call(this, mutation);
+    CustomNodeViewDesc.prototype.ignoreMutation = function ignoreMutation(mutation) {
+        return this.spec.ignoreMutation ? this.spec.ignoreMutation(mutation) : NodeViewDesc.prototype.ignoreMutation.call(this, mutation);
     };
-    return CustomNodeViewDesc1;
+    return CustomNodeViewDesc;
 }(NodeViewDesc);
 // : (dom.Node, [ViewDesc])
 // Sync the content of the given DOM node with the nodes associated
@@ -15256,23 +14897,23 @@ var noDeco = [
 ];
 function computeOuterDeco(outerDeco, node, needsWrap) {
     if (outerDeco.length == 0) return noDeco;
-    var top = needsWrap ? noDeco[0] : new OuterDecoLevel, result3 = [
+    var top = needsWrap ? noDeco[0] : new OuterDecoLevel, result = [
         top
     ];
     for(var i = 0; i < outerDeco.length; i++){
         var attrs = outerDeco[i].type.attrs;
         if (!attrs) continue;
-        if (attrs.nodeName) result3.push(top = new OuterDecoLevel(attrs.nodeName));
+        if (attrs.nodeName) result.push(top = new OuterDecoLevel(attrs.nodeName));
         for(var name in attrs){
             var val = attrs[name];
             if (val == null) continue;
-            if (needsWrap && result3.length == 1) result3.push(top = new OuterDecoLevel(node.isInline ? "span" : "div"));
+            if (needsWrap && result.length == 1) result.push(top = new OuterDecoLevel(node.isInline ? "span" : "div"));
             if (name == "class") top.class = (top.class ? top.class + " " : "") + val;
             else if (name == "style") top.style = (top.style ? top.style + ";" : "") + val;
             else if (name != "nodeName") top[name] = val;
         }
     }
-    return result3;
+    return result;
 }
 function patchOuterDeco(outerDOM, nodeDOM, prevComputed, curComputed) {
     // Shortcut for trivial case
@@ -15307,8 +14948,8 @@ function patchAttributes(dom, prev, cur) {
     }
     if (prev.style != cur.style) {
         if (prev.style) {
-            var prop1 = /\s*([\w\-\xa1-\uffff]+)\s*:(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\(.*?\)|[^;])*/g, m;
-            while(m = prop1.exec(prev.style))dom.style.removeProperty(m[1]);
+            var prop = /\s*([\w\-\xa1-\uffff]+)\s*:(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\(.*?\)|[^;])*/g, m;
+            while(m = prop.exec(prev.style))dom.style.removeProperty(m[1]);
         }
         if (cur.style) dom.style.cssText += cur.style;
     }
@@ -15440,8 +15081,8 @@ ViewTreeUpdater.prototype.updateNextNode = function updateNextNode(node, outerDe
     for(var i = this.index; i < this.top.children.length; i++){
         var next = this.top.children[i];
         if (next instanceof NodeViewDesc) {
-            var preMatch1 = this.preMatch.matched.get(next);
-            if (preMatch1 != null && preMatch1 != index) return false;
+            var preMatch = this.preMatch.matched.get(next);
+            if (preMatch != null && preMatch != index) return false;
             var nextDOM = next.dom;
             // Can't update if nextDOM is or contains this.lock, except if
             // it's a text node whose content already matches the new text
@@ -15655,20 +15296,20 @@ function findTextInFragment(frag, text, from, to) {
 // right shape in one go, rather than messing with them after
 // creation, but is necessary in the composition hack.
 function replaceNodes(nodes, from, to, view, replacement) {
-    var result4 = [];
+    var result = [];
     for(var i = 0, off = 0; i < nodes.length; i++){
         var child = nodes[i], start = off, end = off += child.size;
-        if (start >= to || end <= from) result4.push(child);
+        if (start >= to || end <= from) result.push(child);
         else {
-            if (start < from) result4.push(child.slice(0, from - start, view));
+            if (start < from) result.push(child.slice(0, from - start, view));
             if (replacement) {
-                result4.push(replacement);
+                result.push(replacement);
                 replacement = null;
             }
-            if (end > to) result4.push(child.slice(to - start, child.size, view));
+            if (end > to) result.push(child.slice(to - start, child.size, view));
         }
     }
-    return result4;
+    return result;
 }
 function selectionFromDOM(view, origin) {
     var domSel = view.root.getSelection(), doc = view.state.doc;
@@ -15680,9 +15321,9 @@ function selectionFromDOM(view, origin) {
     if (selectionCollapsed(domSel)) {
         $anchor = $head;
         while(nearestDesc && !nearestDesc.node)nearestDesc = nearestDesc.parent;
-        if (nearestDesc && nearestDesc.node.isAtom && _prosemirrorState.NodeSelection.isSelectable(nearestDesc.node) && nearestDesc.parent && !(nearestDesc.node.isInline && isOnEdge(domSel.focusNode, domSel.focusOffset, nearestDesc.dom))) {
+        if (nearestDesc && nearestDesc.node.isAtom && (0, _prosemirrorState.NodeSelection).isSelectable(nearestDesc.node) && nearestDesc.parent && !(nearestDesc.node.isInline && isOnEdge(domSel.focusNode, domSel.focusOffset, nearestDesc.dom))) {
             var pos = nearestDesc.posBefore;
-            selection = new _prosemirrorState.NodeSelection(head == pos ? $head : doc.resolve(pos));
+            selection = new (0, _prosemirrorState.NodeSelection)(head == pos ? $head : doc.resolve(pos));
         }
     } else {
         var anchor = view.docView.posFromDOM(domSel.anchorNode, domSel.anchorOffset);
@@ -15719,7 +15360,7 @@ function selectionToDOM(view, force) {
         var anchor = sel.anchor;
         var head = sel.head;
         var resetEditableFrom, resetEditableTo;
-        if (brokenSelectBetweenUneditable && !(sel instanceof _prosemirrorState.TextSelection)) {
+        if (brokenSelectBetweenUneditable && !(sel instanceof (0, _prosemirrorState.TextSelection))) {
             if (!sel.$from.parent.inlineContent) resetEditableFrom = temporarilyEditableNear(view, sel.from);
             if (!sel.empty && !sel.$from.parent.inlineContent) resetEditableTo = temporarilyEditableNear(view, sel.to);
         }
@@ -15801,7 +15442,7 @@ function selectCursorWrapper(view) {
     }
 }
 function syncNodeSelection(view, sel) {
-    if (sel instanceof _prosemirrorState.NodeSelection) {
+    if (sel instanceof (0, _prosemirrorState.NodeSelection)) {
         var desc = view.docView.descAt(sel.from);
         if (desc != view.lastSelectedViewDesc) {
             clearNodeSelection(view);
@@ -15820,7 +15461,7 @@ function clearNodeSelection(view) {
 function selectionBetween(view, $anchor, $head, bias) {
     return view.someProp("createSelectionBetween", function(f) {
         return f(view, $anchor, $head);
-    }) || _prosemirrorState.TextSelection.between($anchor, $head, bias);
+    }) || (0, _prosemirrorState.TextSelection).between($anchor, $head, bias);
 }
 function hasFocusAndSelection(view) {
     if (view.editable && view.root.activeElement != view.dom) return false;
@@ -15849,7 +15490,7 @@ function moveSelectionBlock(state, dir) {
     var $head = ref.$head;
     var $side = dir > 0 ? $anchor.max($head) : $anchor.min($head);
     var $start = !$side.parent.inlineContent ? $side : $side.depth ? state.doc.resolve(dir > 0 ? $side.after() : $side.before()) : null;
-    return $start && _prosemirrorState.Selection.findFrom($start, dir);
+    return $start && (0, _prosemirrorState.Selection).findFrom($start, dir);
 }
 function apply(view, sel) {
     view.dispatch(view.state.tr.setSelection(sel).scrollIntoView());
@@ -15857,25 +15498,25 @@ function apply(view, sel) {
 }
 function selectHorizontally(view, dir, mods) {
     var sel = view.state.selection;
-    if (sel instanceof _prosemirrorState.TextSelection) {
+    if (sel instanceof (0, _prosemirrorState.TextSelection)) {
         if (!sel.empty || mods.indexOf("s") > -1) return false;
         else if (view.endOfTextblock(dir > 0 ? "right" : "left")) {
             var next = moveSelectionBlock(view.state, dir);
-            if (next && next instanceof _prosemirrorState.NodeSelection) return apply(view, next);
+            if (next && next instanceof (0, _prosemirrorState.NodeSelection)) return apply(view, next);
             return false;
         } else if (!(result.mac && mods.indexOf("m") > -1)) {
             var $head = sel.$head, node = $head.textOffset ? null : dir < 0 ? $head.nodeBefore : $head.nodeAfter, desc;
             if (!node || node.isText) return false;
             var nodePos = dir < 0 ? $head.pos - node.nodeSize : $head.pos;
             if (!(node.isAtom || (desc = view.docView.descAt(nodePos)) && !desc.contentDOM)) return false;
-            if (_prosemirrorState.NodeSelection.isSelectable(node)) return apply(view, new _prosemirrorState.NodeSelection(dir < 0 ? view.state.doc.resolve($head.pos - node.nodeSize) : $head));
+            if ((0, _prosemirrorState.NodeSelection).isSelectable(node)) return apply(view, new (0, _prosemirrorState.NodeSelection)(dir < 0 ? view.state.doc.resolve($head.pos - node.nodeSize) : $head));
             else if (result.webkit) // Chrome and Safari will introduce extra pointless cursor
             // positions around inline uneditable nodes, so we have to
             // take over and move the cursor past them (#937)
-            return apply(view, new _prosemirrorState.TextSelection(view.state.doc.resolve(dir < 0 ? nodePos : nodePos + node.nodeSize)));
+            return apply(view, new (0, _prosemirrorState.TextSelection)(view.state.doc.resolve(dir < 0 ? nodePos : nodePos + node.nodeSize)));
             else return false;
         }
-    } else if (sel instanceof _prosemirrorState.NodeSelection && sel.node.isInline) return apply(view, new _prosemirrorState.TextSelection(dir > 0 ? sel.$to : sel.$from));
+    } else if (sel instanceof (0, _prosemirrorState.NodeSelection) && sel.node.isInline) return apply(view, new (0, _prosemirrorState.TextSelection)(dir > 0 ? sel.$to : sel.$from));
     else {
         var next$1 = moveSelectionBlock(view.state, dir);
         if (next$1) return apply(view, next$1);
@@ -15996,29 +15637,29 @@ function setSelFocus(view, sel, node, offset) {
 // browser)
 function selectVertically(view, dir, mods) {
     var sel = view.state.selection;
-    if (sel instanceof _prosemirrorState.TextSelection && !sel.empty || mods.indexOf("s") > -1) return false;
+    if (sel instanceof (0, _prosemirrorState.TextSelection) && !sel.empty || mods.indexOf("s") > -1) return false;
     if (result.mac && mods.indexOf("m") > -1) return false;
     var $from = sel.$from;
     var $to = sel.$to;
     if (!$from.parent.inlineContent || view.endOfTextblock(dir < 0 ? "up" : "down")) {
         var next = moveSelectionBlock(view.state, dir);
-        if (next && next instanceof _prosemirrorState.NodeSelection) return apply(view, next);
+        if (next && next instanceof (0, _prosemirrorState.NodeSelection)) return apply(view, next);
     }
     if (!$from.parent.inlineContent) {
         var side = dir < 0 ? $from : $to;
-        var beyond = sel instanceof _prosemirrorState.AllSelection ? _prosemirrorState.Selection.near(side, dir) : _prosemirrorState.Selection.findFrom(side, dir);
+        var beyond = sel instanceof (0, _prosemirrorState.AllSelection) ? (0, _prosemirrorState.Selection).near(side, dir) : (0, _prosemirrorState.Selection).findFrom(side, dir);
         return beyond ? apply(view, beyond) : false;
     }
     return false;
 }
 function stopNativeHorizontalDelete(view, dir) {
-    if (!(view.state.selection instanceof _prosemirrorState.TextSelection)) return true;
+    if (!(view.state.selection instanceof (0, _prosemirrorState.TextSelection))) return true;
     var ref = view.state.selection;
     var $head = ref.$head;
     var $anchor = ref.$anchor;
-    var empty1 = ref.empty;
+    var empty = ref.empty;
     if (!$head.sameParent($anchor)) return true;
-    if (!empty1) return false;
+    if (!empty) return false;
     if (view.endOfTextblock(dir > 0 ? "forward" : "backward")) return true;
     var nextNode = !$head.textOffset && (dir < 0 ? $head.nodeBefore : $head.nodeAfter);
     if (nextNode && !nextNode.isText) {
@@ -16060,12 +15701,12 @@ function safariDownArrowBug(view) {
 // cursor-motion keys, the code in the handlers also takes care of
 // block selections.
 function getMods(event) {
-    var result5 = "";
-    if (event.ctrlKey) result5 += "c";
-    if (event.metaKey) result5 += "m";
-    if (event.altKey) result5 += "a";
-    if (event.shiftKey) result5 += "s";
-    return result5;
+    var result = "";
+    if (event.ctrlKey) result += "c";
+    if (event.metaKey) result += "m";
+    if (event.altKey) result += "a";
+    if (event.shiftKey) result += "s";
+    return result;
 }
 function captureKeyDown(view, event) {
     var code = event.keyCode, mods = getMods(event);
@@ -16115,7 +15756,7 @@ function parseBetween(view, from_, to_) {
         if (!desc || desc.size) break;
     }
     var startDoc = view.state.doc;
-    var parser = view.someProp("domParser") || _prosemirrorModel.DOMParser.fromSchema(view.state.schema);
+    var parser = view.someProp("domParser") || (0, _prosemirrorModel.DOMParser).fromSchema(view.state.schema);
     var $from = startDoc.resolve(from);
     var sel = null, doc = parser.parse(parent, {
         topNode: $from.parent,
@@ -16213,7 +15854,7 @@ function readDOMChange(view, from, to, typeOver, addedNodes) {
         return;
     }
     if (!change) {
-        if (typeOver && sel instanceof _prosemirrorState.TextSelection && !sel.empty && sel.$head.sameParent(sel.$anchor) && !view.composing && !(parse.sel && parse.sel.anchor != parse.sel.head)) change = {
+        if (typeOver && sel instanceof (0, _prosemirrorState.TextSelection) && !sel.empty && sel.$head.sameParent(sel.$anchor) && !view.composing && !(parse.sel && parse.sel.anchor != parse.sel.head)) change = {
             start: sel.from,
             endA: sel.to,
             endB: sel.to
@@ -16230,7 +15871,7 @@ function readDOMChange(view, from, to, typeOver, addedNodes) {
     // Handle the case where overwriting a selection by typing matches
     // the start or end of the selected content, creating a change
     // that's smaller than what was actually overwritten.
-    if (view.state.selection.from < view.state.selection.to && change.start == change.endB && view.state.selection instanceof _prosemirrorState.TextSelection) {
+    if (view.state.selection.from < view.state.selection.to && change.start == change.endB && view.state.selection instanceof (0, _prosemirrorState.TextSelection)) {
         if (change.start > view.state.selection.from && change.start <= view.state.selection.from + 2 && view.state.selection.from >= parse.from) change.start = view.state.selection.from;
         else if (change.endA < view.state.selection.to && change.endA >= view.state.selection.to - 2 && view.state.selection.to <= parse.to) {
             change.endB += view.state.selection.to - change.endA;
@@ -16240,7 +15881,7 @@ function readDOMChange(view, from, to, typeOver, addedNodes) {
     // IE11 will insert a non-breaking space _ahead_ of the space after
     // the cursor space when adding a space before another space. When
     // that happened, adjust the change to cover the space instead.
-    if (result.ie && result.ie_version <= 11 && change.endB == change.start + 1 && change.endA == change.start && change.start > parse.from && parse.doc.textBetween(change.start - parse.from - 1, change.start - parse.from + 1) == " \u00a0") {
+    if (result.ie && result.ie_version <= 11 && change.endB == change.start + 1 && change.endA == change.start && change.start > parse.from && parse.doc.textBetween(change.start - parse.from - 1, change.start - parse.from + 1) == " \xa0") {
         change.start--;
         change.endA--;
         change.endB--;
@@ -16253,7 +15894,7 @@ function readDOMChange(view, from, to, typeOver, addedNodes) {
     // as being an iOS enter press), just dispatch an Enter key instead.
     if ((result.ios && view.lastIOSEnter > Date.now() - 225 && (!inlineChange || addedNodes.some(function(n) {
         return n.nodeName == "DIV" || n.nodeName == "P";
-    })) || !inlineChange && $from.pos < parse.doc.content.size && (nextSel = _prosemirrorState.Selection.findFrom(parse.doc.resolve($from.pos + 1), 1, true)) && nextSel.head == $to.pos) && view.someProp("handleKeyDown", function(f) {
+    })) || !inlineChange && $from.pos < parse.doc.content.size && (nextSel = (0, _prosemirrorState.Selection).findFrom(parse.doc.resolve($from.pos + 1), 1, true)) && nextSel.head == $to.pos) && view.someProp("handleKeyDown", function(f) {
         return f(view, keyEvent(13, "Enter"));
     })) {
         view.lastIOSEnter = 0;
@@ -16356,7 +15997,7 @@ function isMarkChange(cur, prev) {
     } else return null;
     var updated = [];
     for(var i$2 = 0; i$2 < prev.childCount; i$2++)updated.push(update(prev.child(i$2)));
-    if (_prosemirrorModel.Fragment.from(updated).eq(cur)) return {
+    if ((0, _prosemirrorModel.Fragment).from(updated).eq(cur)) return {
         mark: mark,
         type: type
     };
@@ -16429,7 +16070,7 @@ function serializeForClipboard(view, slice) {
         context.push(node.type.name, node.attrs != node.type.defaultAttrs ? node.attrs : null);
         content = node.content;
     }
-    var serializer = view.someProp("clipboardSerializer") || _prosemirrorModel.DOMSerializer.fromSchema(view.state.schema);
+    var serializer = view.someProp("clipboardSerializer") || (0, _prosemirrorModel.DOMSerializer).fromSchema(view.state.schema);
     var doc = detachedDoc(), wrap = doc.createElement("div");
     wrap.appendChild(serializer.serializeFragment(content, {
         document: doc
@@ -16459,14 +16100,14 @@ function serializeForClipboard(view, slice) {
 // : (EditorView, string, string, ?bool, ResolvedPos) → ?Slice
 // Read a slice of content from the clipboard (or drop data).
 function parseFromClipboard(view, text, html, plainText, $context) {
-    var dom1, inCode = $context.parent.type.spec.code, slice;
+    var dom, inCode = $context.parent.type.spec.code, slice;
     if (!html && !text) return null;
     var asText = text && (plainText || inCode || !html);
     if (asText) {
         view.someProp("transformPastedText", function(f) {
             text = f(text, inCode || plainText);
         });
-        if (inCode) return text ? new _prosemirrorModel.Slice(_prosemirrorModel.Fragment.from(view.state.schema.text(text.replace(/\r\n?/g, "\n"))), 0, 0) : _prosemirrorModel.Slice.empty;
+        if (inCode) return text ? new (0, _prosemirrorModel.Slice)((0, _prosemirrorModel.Fragment).from(view.state.schema.text(text.replace(/\r\n?/g, "\n"))), 0, 0) : (0, _prosemirrorModel.Slice).empty;
         var parsed = view.someProp("clipboardTextParser", function(f) {
             return f(text, $context, plainText);
         });
@@ -16475,10 +16116,10 @@ function parseFromClipboard(view, text, html, plainText, $context) {
             var marks = $context.marks();
             var ref = view.state;
             var schema = ref.schema;
-            var serializer = _prosemirrorModel.DOMSerializer.fromSchema(schema);
-            dom1 = document.createElement("div");
+            var serializer = (0, _prosemirrorModel.DOMSerializer).fromSchema(schema);
+            dom = document.createElement("div");
             text.split(/(?:\r\n?|\n)+/).forEach(function(block) {
-                var p = dom1.appendChild(document.createElement("p"));
+                var p = dom.appendChild(document.createElement("p"));
                 if (block) p.appendChild(serializer.serializeNode(schema.text(block, marks)));
             });
         }
@@ -16486,14 +16127,14 @@ function parseFromClipboard(view, text, html, plainText, $context) {
         view.someProp("transformPastedHTML", function(f) {
             html = f(html);
         });
-        dom1 = readHTML(html);
-        if (result.webkit) restoreReplacedSpaces(dom1);
+        dom = readHTML(html);
+        if (result.webkit) restoreReplacedSpaces(dom);
     }
-    var contextNode = dom1 && dom1.querySelector("[data-pm-slice]");
+    var contextNode = dom && dom.querySelector("[data-pm-slice]");
     var sliceData = contextNode && /^(\d+) (\d+) (.*)/.exec(contextNode.getAttribute("data-pm-slice"));
     if (!slice) {
-        var parser = view.someProp("clipboardParser") || view.someProp("domParser") || _prosemirrorModel.DOMParser.fromSchema(view.state.schema);
-        slice = parser.parseSlice(dom1, {
+        var parser = view.someProp("clipboardParser") || view.someProp("domParser") || (0, _prosemirrorModel.DOMParser).fromSchema(view.state.schema);
+        slice = parser.parseSlice(dom, {
             preserveWhitespace: !!(asText || sliceData),
             context: $context,
             ruleFromNode: function ruleFromNode(dom) {
@@ -16505,7 +16146,7 @@ function parseFromClipboard(view, text, html, plainText, $context) {
     }
     if (sliceData) slice = addContext(closeSlice(slice, +sliceData[1], +sliceData[2]), sliceData[3]);
     else {
-        slice = _prosemirrorModel.Slice.maxOpen(normalizeSiblings(slice.content, $context), true);
+        slice = (0, _prosemirrorModel.Slice).maxOpen(normalizeSiblings(slice.content, $context), true);
         if (slice.openStart || slice.openEnd) {
             var openStart = 0, openEnd = 0;
             for(var node = slice.content.firstChild; openStart < slice.openStart && !node.type.spec.isolating; openStart++, node = node.firstChild);
@@ -16532,33 +16173,33 @@ function normalizeSiblings(fragment, $context) {
     var loop = function(d) {
         var parent = $context.node(d);
         var match = parent.contentMatchAt($context.index(d));
-        var lastWrap = void 0, result6 = [];
+        var lastWrap = void 0, result = [];
         fragment.forEach(function(node) {
-            if (!result6) return;
+            if (!result) return;
             var wrap = match.findWrapping(node.type), inLast;
-            if (!wrap) return result6 = null;
-            if (inLast = result6.length && lastWrap.length && addToSibling(wrap, lastWrap, node, result6[result6.length - 1], 0)) result6[result6.length - 1] = inLast;
+            if (!wrap) return result = null;
+            if (inLast = result.length && lastWrap.length && addToSibling(wrap, lastWrap, node, result[result.length - 1], 0)) result[result.length - 1] = inLast;
             else {
-                if (result6.length) result6[result6.length - 1] = closeRight(result6[result6.length - 1], lastWrap.length);
+                if (result.length) result[result.length - 1] = closeRight(result[result.length - 1], lastWrap.length);
                 var wrapped = withWrappers(node, wrap);
-                result6.push(wrapped);
+                result.push(wrapped);
                 match = match.matchType(wrapped.type, wrapped.attrs);
                 lastWrap = wrap;
             }
         });
-        if (result6) return {
-            v: _prosemirrorModel.Fragment.from(result6)
+        if (result) return {
+            v: (0, _prosemirrorModel.Fragment).from(result)
         };
     };
-    for(var d1 = $context.depth; d1 >= 0; d1--){
-        var returned = loop(d1);
+    for(var d = $context.depth; d >= 0; d--){
+        var returned = loop(d);
         if (returned) return returned.v;
     }
     return fragment;
 }
 function withWrappers(node, wrap, from) {
     if (from === void 0) from = 0;
-    for(var i = wrap.length - 1; i >= from; i--)node = wrap[i].create(null, _prosemirrorModel.Fragment.from(node));
+    for(var i = wrap.length - 1; i >= from; i--)node = wrap[i].create(null, (0, _prosemirrorModel.Fragment).from(node));
     return node;
 }
 // Used to group adjacent nodes wrapped in similar parents by
@@ -16568,24 +16209,24 @@ function addToSibling(wrap, lastWrap, node, sibling, depth) {
         var inner = addToSibling(wrap, lastWrap, node, sibling.lastChild, depth + 1);
         if (inner) return sibling.copy(sibling.content.replaceChild(sibling.childCount - 1, inner));
         var match = sibling.contentMatchAt(sibling.childCount);
-        if (match.matchType(depth == wrap.length - 1 ? node.type : wrap[depth + 1])) return sibling.copy(sibling.content.append(_prosemirrorModel.Fragment.from(withWrappers(node, wrap, depth + 1))));
+        if (match.matchType(depth == wrap.length - 1 ? node.type : wrap[depth + 1])) return sibling.copy(sibling.content.append((0, _prosemirrorModel.Fragment).from(withWrappers(node, wrap, depth + 1))));
     }
 }
 function closeRight(node, depth) {
     if (depth == 0) return node;
     var fragment = node.content.replaceChild(node.childCount - 1, closeRight(node.lastChild, depth - 1));
-    var fill = node.contentMatchAt(node.childCount).fillBefore(_prosemirrorModel.Fragment.empty, true);
+    var fill = node.contentMatchAt(node.childCount).fillBefore((0, _prosemirrorModel.Fragment).empty, true);
     return node.copy(fragment.append(fill));
 }
 function closeRange(fragment, side, from, to, depth, openEnd) {
     var node = side < 0 ? fragment.firstChild : fragment.lastChild, inner = node.content;
     if (depth < to - 1) inner = closeRange(inner, side, from, to, depth + 1, openEnd);
-    if (depth >= from) inner = side < 0 ? node.contentMatchAt(0).fillBefore(inner, fragment.childCount > 1 || openEnd <= depth).append(inner) : inner.append(node.contentMatchAt(node.childCount).fillBefore(_prosemirrorModel.Fragment.empty, true));
+    if (depth >= from) inner = side < 0 ? node.contentMatchAt(0).fillBefore(inner, fragment.childCount > 1 || openEnd <= depth).append(inner) : inner.append(node.contentMatchAt(node.childCount).fillBefore((0, _prosemirrorModel.Fragment).empty, true));
     return fragment.replaceChild(side < 0 ? 0 : fragment.childCount - 1, node.copy(inner));
 }
 function closeSlice(slice, openStart, openEnd) {
-    if (openStart < slice.openStart) slice = new _prosemirrorModel.Slice(closeRange(slice.content, -1, openStart, slice.openStart, 0, slice.openEnd), openStart, slice.openEnd);
-    if (openEnd < slice.openEnd) slice = new _prosemirrorModel.Slice(closeRange(slice.content, 1, openEnd, slice.openEnd, 0, 0), slice.openStart, openEnd);
+    if (openStart < slice.openStart) slice = new (0, _prosemirrorModel.Slice)(closeRange(slice.content, -1, openStart, slice.openStart, 0, slice.openEnd), openStart, slice.openEnd);
+    if (openEnd < slice.openEnd) slice = new (0, _prosemirrorModel.Slice)(closeRange(slice.content, 1, openEnd, slice.openEnd, 0, 0), slice.openStart, openEnd);
     return slice;
 }
 // Trick from jQuery -- some elements must be wrapped in other
@@ -16653,7 +16294,7 @@ function restoreReplacedSpaces(dom) {
     var nodes = dom.querySelectorAll(result.chrome ? "span:not([class]):not([style])" : "span.Apple-converted-space");
     for(var i = 0; i < nodes.length; i++){
         var node = nodes[i];
-        if (node.childNodes.length == 1 && node.textContent == "\u00a0" && node.parentNode) node.parentNode.replaceChild(dom.ownerDocument.createTextNode(" "), node);
+        if (node.childNodes.length == 1 && node.textContent == "\xa0" && node.parentNode) node.parentNode.replaceChild(dom.ownerDocument.createTextNode(" "), node);
     }
 }
 function addContext(slice, context) {
@@ -16670,11 +16311,11 @@ function addContext(slice, context) {
     for(var i = array.length - 2; i >= 0; i -= 2){
         var type = schema.nodes[array[i]];
         if (!type || type.hasRequiredAttrs()) break;
-        content = _prosemirrorModel.Fragment.from(type.create(array[i + 1], content));
+        content = (0, _prosemirrorModel.Fragment).from(type.create(array[i + 1], content));
         openStart++;
         openEnd++;
     }
-    return new _prosemirrorModel.Slice(content, openStart, openEnd);
+    return new (0, _prosemirrorModel.Slice)(content, openStart, openEnd);
 }
 var observeOptions = {
     childList: true,
@@ -16922,13 +16563,13 @@ function initInput(view) {
     // Used by hacks like the beforeinput handler to check whether anything happened in the DOM
     view.domChangeCount = 0;
     view.eventHandlers = Object.create(null);
-    var loop = function(event2) {
-        var handler = handlers[event2];
-        view.dom.addEventListener(event2, view.eventHandlers[event2] = function(event) {
+    var loop = function(event) {
+        var handler = handlers[event];
+        view.dom.addEventListener(event, view.eventHandlers[event] = function(event) {
             if (eventBelongsToView(view, event) && !runCustomHandler(view, event) && (view.editable || !(event.type in editHandlers))) handler(view, event);
         });
     };
-    for(var event1 in handlers)loop(event1);
+    for(var event in handlers)loop(event);
     // On Safari, for reasons beyond my understanding, adding an input
     // event handler makes an issue where the composition vanishes when
     // you press enter go away.
@@ -16955,8 +16596,8 @@ function ensureListeners(view) {
     });
 }
 function runCustomHandler(view, event) {
-    return view.someProp("handleDOMEvents", function(handlers1) {
-        var handler = handlers1[event.type];
+    return view.someProp("handleDOMEvents", function(handlers) {
+        var handler = handlers[event.type];
         return handler ? handler(view, event) || event.defaultPrevented : false;
     });
 }
@@ -17013,7 +16654,7 @@ editHandlers.keypress = function(view, event) {
         return;
     }
     var sel = view.state.selection;
-    if (!(sel instanceof _prosemirrorState.TextSelection) || !sel.$from.sameParent(sel.$to)) {
+    if (!(sel instanceof (0, _prosemirrorState.TextSelection)) || !sel.$from.sameParent(sel.$to)) {
         var text = String.fromCharCode(event.charCode);
         if (!view.someProp("handleTextInput", function(f) {
             return f(view, sel.$from.pos, sel.$to.pos, text);
@@ -17041,8 +16682,8 @@ function runHandlerOnContext(view, propName, pos, inside, event) {
             v: true
         };
     };
-    for(var i1 = $pos.depth + 1; i1 > 0; i1--){
-        var returned = loop(i1);
+    for(var i = $pos.depth + 1; i > 0; i--){
+        var returned = loop(i);
         if (returned) return returned.v;
     }
     return false;
@@ -17056,8 +16697,8 @@ function updateSelection(view, selection, origin) {
 function selectClickedLeaf(view, inside) {
     if (inside == -1) return false;
     var $pos = view.state.doc.resolve(inside), node = $pos.nodeAfter;
-    if (node && node.isAtom && _prosemirrorState.NodeSelection.isSelectable(node)) {
-        updateSelection(view, new _prosemirrorState.NodeSelection($pos), "pointer");
+    if (node && node.isAtom && (0, _prosemirrorState.NodeSelection).isSelectable(node)) {
+        updateSelection(view, new (0, _prosemirrorState.NodeSelection)($pos), "pointer");
         return true;
     }
     return false;
@@ -17065,18 +16706,18 @@ function selectClickedLeaf(view, inside) {
 function selectClickedNode(view, inside) {
     if (inside == -1) return false;
     var sel = view.state.selection, selectedNode, selectAt;
-    if (sel instanceof _prosemirrorState.NodeSelection) selectedNode = sel.node;
+    if (sel instanceof (0, _prosemirrorState.NodeSelection)) selectedNode = sel.node;
     var $pos = view.state.doc.resolve(inside);
     for(var i = $pos.depth + 1; i > 0; i--){
         var node = i > $pos.depth ? $pos.nodeAfter : $pos.node(i);
-        if (_prosemirrorState.NodeSelection.isSelectable(node)) {
+        if ((0, _prosemirrorState.NodeSelection).isSelectable(node)) {
             if (selectedNode && sel.$from.depth > 0 && i >= sel.$from.depth && $pos.before(sel.$from.depth + 1) == sel.$from.pos) selectAt = $pos.before(sel.$from.depth);
             else selectAt = $pos.before(i);
             break;
         }
     }
     if (selectAt != null) {
-        updateSelection(view, _prosemirrorState.NodeSelection.create(view.state.doc, selectAt), "pointer");
+        updateSelection(view, (0, _prosemirrorState.NodeSelection).create(view.state.doc, selectAt), "pointer");
         return true;
     } else return false;
 }
@@ -17100,7 +16741,7 @@ function defaultTripleClick(view, inside, event) {
     var doc = view.state.doc;
     if (inside == -1) {
         if (doc.inlineContent) {
-            updateSelection(view, _prosemirrorState.TextSelection.create(doc, 0, doc.content.size), "pointer");
+            updateSelection(view, (0, _prosemirrorState.TextSelection).create(doc, 0, doc.content.size), "pointer");
             return true;
         }
         return false;
@@ -17109,8 +16750,8 @@ function defaultTripleClick(view, inside, event) {
     for(var i = $pos.depth + 1; i > 0; i--){
         var node = i > $pos.depth ? $pos.nodeAfter : $pos.node(i);
         var nodePos = $pos.before(i);
-        if (node.inlineContent) updateSelection(view, _prosemirrorState.TextSelection.create(doc, nodePos + 1, nodePos + 1 + node.content.size), "pointer");
-        else if (_prosemirrorState.NodeSelection.isSelectable(node)) updateSelection(view, _prosemirrorState.NodeSelection.create(doc, nodePos), "pointer");
+        if (node.inlineContent) updateSelection(view, (0, _prosemirrorState.TextSelection).create(doc, nodePos + 1, nodePos + 1 + node.content.size), "pointer");
+        else if ((0, _prosemirrorState.NodeSelection).isSelectable(node)) updateSelection(view, (0, _prosemirrorState.NodeSelection).create(doc, nodePos), "pointer");
         else continue;
         return true;
     }
@@ -17166,7 +16807,7 @@ var MouseDown = function MouseDown(view, pos, event, flushed) {
     this.target = targetDesc ? targetDesc.dom : null;
     var ref = view.state;
     var selection = ref.selection;
-    if (event.button == 0 && targetNode.type.spec.draggable && targetNode.type.spec.selectable !== false || selection instanceof _prosemirrorState.NodeSelection && selection.from <= targetPos && selection.to > targetPos) this.mightDrag = {
+    if (event.button == 0 && targetNode.type.spec.draggable && targetNode.type.spec.selectable !== false || selection instanceof (0, _prosemirrorState.NodeSelection) && selection.from <= targetPos && selection.to > targetPos) this.mightDrag = {
         node: targetNode,
         pos: targetPos,
         addAttr: this.target && !this.target.draggable,
@@ -17206,8 +16847,8 @@ MouseDown.prototype.up = function up(event) {
     if (this.view.state.doc != this.startDoc) pos = this.view.posAtCoords(eventCoords(event));
     if (this.allowDefault || !pos) setSelectionOrigin(this.view, "pointer");
     else if (handleSingleClick(this.view, pos.pos, pos.inside, event, this.selectNode)) event.preventDefault();
-    else if (event.button == 0 && (this.flushed || result.safari && this.mightDrag && !this.mightDrag.node.isAtom || result.chrome && !(this.view.state.selection instanceof _prosemirrorState.TextSelection) && Math.min(Math.abs(pos.pos - this.view.state.selection.from), Math.abs(pos.pos - this.view.state.selection.to)) <= 2)) {
-        updateSelection(this.view, _prosemirrorState.Selection.near(this.view.state.doc.resolve(pos.pos)), "pointer");
+    else if (event.button == 0 && (this.flushed || result.safari && this.mightDrag && !this.mightDrag.node.isAtom || result.chrome && !(this.view.state.selection instanceof (0, _prosemirrorState.TextSelection)) && Math.min(Math.abs(pos.pos - this.view.state.selection.from), Math.abs(pos.pos - this.view.state.selection.to)) <= 2)) {
+        updateSelection(this.view, (0, _prosemirrorState.Selection).near(this.view.state.doc.resolve(pos.pos)), "pointer");
         event.preventDefault();
     } else setSelectionOrigin(this.view, "pointer");
 };
@@ -17377,7 +17018,7 @@ function capturePaste(view, e) {
 function doPaste(view, text, html, e) {
     var slice = parseFromClipboard(view, text, html, view.shiftKey, view.state.selection.$from);
     if (view.someProp("handlePaste", function(f) {
-        return f(view, e, slice || _prosemirrorModel.Slice.empty);
+        return f(view, e, slice || (0, _prosemirrorModel.Slice).empty);
     })) return true;
     if (!slice) return false;
     var singleNode = sliceSingleNode(slice);
@@ -17406,11 +17047,11 @@ handlers.dragstart = function(view, e) {
     if (!e.dataTransfer) return;
     var sel = view.state.selection;
     var pos = sel.empty ? null : view.posAtCoords(eventCoords(e));
-    if (pos && pos.pos >= sel.from && pos.pos <= (sel instanceof _prosemirrorState.NodeSelection ? sel.to - 1 : sel.to)) ;
-    else if (mouseDown && mouseDown.mightDrag) view.dispatch(view.state.tr.setSelection(_prosemirrorState.NodeSelection.create(view.state.doc, mouseDown.mightDrag.pos)));
+    if (pos && pos.pos >= sel.from && pos.pos <= (sel instanceof (0, _prosemirrorState.NodeSelection) ? sel.to - 1 : sel.to)) ;
+    else if (mouseDown && mouseDown.mightDrag) view.dispatch(view.state.tr.setSelection((0, _prosemirrorState.NodeSelection).create(view.state.doc, mouseDown.mightDrag.pos)));
     else if (e.target && e.target.nodeType == 1) {
         var desc = view.docView.nearestDesc(e.target, true);
-        if (desc && desc.node.type.spec.draggable && desc != view.docView) view.dispatch(view.state.tr.setSelection(_prosemirrorState.NodeSelection.create(view.state.doc, desc.posBefore)));
+        if (desc && desc.node.type.spec.draggable && desc != view.docView) view.dispatch(view.state.tr.setSelection((0, _prosemirrorState.NodeSelection).create(view.state.doc, desc.posBefore)));
     }
     var slice = view.state.selection.content();
     var ref = serializeForClipboard(view, slice);
@@ -17447,14 +17088,14 @@ editHandlers.drop = function(view, e) {
     else slice = parseFromClipboard(view, e.dataTransfer.getData(brokenClipboardAPI ? "Text" : "text/plain"), brokenClipboardAPI ? null : e.dataTransfer.getData("text/html"), false, $mouse);
     var move = dragging && !e[dragCopyModifier];
     if (view.someProp("handleDrop", function(f) {
-        return f(view, e, slice || _prosemirrorModel.Slice.empty, move);
+        return f(view, e, slice || (0, _prosemirrorModel.Slice).empty, move);
     })) {
         e.preventDefault();
         return;
     }
     if (!slice) return;
     e.preventDefault();
-    var insertPos = slice ? _prosemirrorTransform.dropPoint(view.state.doc, $mouse.pos, slice) : $mouse.pos;
+    var insertPos = slice ? (0, _prosemirrorTransform.dropPoint)(view.state.doc, $mouse.pos, slice) : $mouse.pos;
     if (insertPos == null) insertPos = $mouse.pos;
     var tr = view.state.tr;
     if (move) tr.deleteSelection();
@@ -17465,7 +17106,7 @@ editHandlers.drop = function(view, e) {
     else tr.replaceRange(pos, pos, slice);
     if (tr.doc.eq(beforeInsert)) return;
     var $pos = tr.doc.resolve(pos);
-    if (isNode && _prosemirrorState.NodeSelection.isSelectable(slice.content.firstChild) && $pos.nodeAfter && $pos.nodeAfter.sameMarkup(slice.content.firstChild)) tr.setSelection(new _prosemirrorState.NodeSelection($pos));
+    if (isNode && (0, _prosemirrorState.NodeSelection).isSelectable(slice.content.firstChild) && $pos.nodeAfter && $pos.nodeAfter.sameMarkup(slice.content.firstChild)) tr.setSelection(new (0, _prosemirrorState.NodeSelection)($pos));
     else {
         var end = tr.mapping.map(insertPos);
         tr.mapping.maps[tr.mapping.maps.length - 1].forEach(function(_from, _to, _newFrom, newTo) {
@@ -17759,18 +17400,18 @@ DecorationSet.create = function create(doc, decorations) {
 // considered. When `predicate` isn't given, all decorations are
 // assumed to match.
 DecorationSet.prototype.find = function find(start, end, predicate) {
-    var result7 = [];
-    this.findInner(start == null ? 0 : start, end == null ? 1e9 : end, result7, 0, predicate);
-    return result7;
+    var result = [];
+    this.findInner(start == null ? 0 : start, end == null ? 1e9 : end, result, 0, predicate);
+    return result;
 };
-DecorationSet.prototype.findInner = function findInner(start, end, result8, offset, predicate) {
+DecorationSet.prototype.findInner = function findInner(start, end, result, offset, predicate) {
     for(var i = 0; i < this.local.length; i++){
         var span = this.local[i];
-        if (span.from <= end && span.to >= start && (!predicate || predicate(span.spec))) result8.push(span.copy(span.from + offset, span.to + offset));
+        if (span.from <= end && span.to >= start && (!predicate || predicate(span.spec))) result.push(span.copy(span.from + offset, span.to + offset));
     }
     for(var i$1 = 0; i$1 < this.children.length; i$1 += 3)if (this.children[i$1] < end && this.children[i$1 + 1] > start) {
         var childOff = this.children[i$1] + 1;
-        this.children[i$1 + 2].findInner(start - childOff, end - childOff, result8, offset + childOff, predicate);
+        this.children[i$1 + 2].findInner(start - childOff, end - childOff, result, offset + childOff, predicate);
     }
 };
 // :: (Mapping, Node, ?Object) → DecorationSet
@@ -17903,9 +17544,9 @@ DecorationSet.prototype.locals = function locals(node) {
 DecorationSet.prototype.localsInner = function localsInner(node) {
     if (this == empty) return none;
     if (node.inlineContent || !this.local.some(InlineType.is)) return this.local;
-    var result9 = [];
-    for(var i = 0; i < this.local.length; i++)if (!(this.local[i].type instanceof InlineType)) result9.push(this.local[i]);
-    return result9;
+    var result = [];
+    for(var i = 0; i < this.local.length; i++)if (!(this.local[i].type instanceof InlineType)) result.push(this.local[i]);
+    return result;
 };
 // DecorationSource:: interface
 // An object that can [provide](#view.EditorProps.decorations)
@@ -17936,10 +17577,10 @@ DecorationGroup.prototype.forChild = function forChild(offset, child) {
     if (child.isLeaf) return DecorationSet.empty;
     var found = [];
     for(var i = 0; i < this.members.length; i++){
-        var result10 = this.members[i].forChild(offset, child);
-        if (result10 == empty) continue;
-        if (result10 instanceof DecorationGroup) found = found.concat(result10.members);
-        else found.push(result10);
+        var result = this.members[i].forChild(offset, child);
+        if (result == empty) continue;
+        if (result instanceof DecorationGroup) found = found.concat(result.members);
+        else found.push(result);
     }
     return DecorationGroup.from(found);
 };
@@ -17951,20 +17592,20 @@ DecorationGroup.prototype.eq = function eq(other) {
     return true;
 };
 DecorationGroup.prototype.locals = function locals(node) {
-    var result11, sorted = true;
+    var result, sorted = true;
     for(var i = 0; i < this.members.length; i++){
         var locals = this.members[i].localsInner(node);
         if (!locals.length) continue;
-        if (!result11) result11 = locals;
+        if (!result) result = locals;
         else {
             if (sorted) {
-                result11 = result11.slice();
+                result = result.slice();
                 sorted = false;
             }
-            for(var j = 0; j < locals.length; j++)result11.push(locals[j]);
+            for(var j = 0; j < locals.length; j++)result.push(locals[j]);
         }
     }
-    return result11 ? removeOverlap(sorted ? result11 : result11.sort(byPos)) : none;
+    return result ? removeOverlap(sorted ? result : result.sort(byPos)) : none;
 };
 // : ([DecorationSet]) → union<DecorationSet, DecorationGroup>
 // Create a group for the given array of decoration sets, or return
@@ -17995,7 +17636,7 @@ function mapChildren(oldChildren, newLocal, mapping, node, offset, oldOffset, op
             }
         }
     };
-    for(var i2 = 0; i2 < mapping.maps.length; i2++)mapping.maps[i2].forEach(shift);
+    for(var i = 0; i < mapping.maps.length; i++)mapping.maps[i].forEach(shift);
     // Find the child nodes that still correspond to a single node,
     // recursively call mapInner on them and update their positions.
     var mustRebuild = false;
@@ -18047,14 +17688,14 @@ function mapChildren(oldChildren, newLocal, mapping, node, offset, oldOffset, op
 }
 function moveSpans(spans, offset) {
     if (!offset || !spans.length) return spans;
-    var result12 = [];
+    var result = [];
     for(var i = 0; i < spans.length; i++){
         var span = spans[i];
-        result12.push(new Decoration(span.from + offset, span.to + offset, span.type));
+        result.push(new Decoration(span.from + offset, span.to + offset, span.type));
     }
-    return result12;
+    return result;
 }
-function mapAndGatherRemainingDecorations(children, oldChildren, decorations, mapping, offset, oldOffset1, options) {
+function mapAndGatherRemainingDecorations(children, oldChildren, decorations, mapping, offset, oldOffset, options) {
     // Gather all decorations from the remaining marked children
     function gather(set, oldOffset) {
         for(var i = 0; i < set.local.length; i++){
@@ -18064,7 +17705,7 @@ function mapAndGatherRemainingDecorations(children, oldChildren, decorations, ma
         }
         for(var i$1 = 0; i$1 < set.children.length; i$1 += 3)gather(set.children[i$1 + 2], set.children[i$1] + oldOffset + 1);
     }
-    for(var i3 = 0; i3 < children.length; i3 += 3)if (children[i3 + 1] == -1) gather(children[i3 + 2], oldChildren[i3] + oldOffset1 + 1);
+    for(var i = 0; i < children.length; i += 3)if (children[i + 1] == -1) gather(children[i + 2], oldChildren[i] + oldOffset + 1);
     return decorations;
 }
 function takeSpansForNode(spans, node, offset) {
@@ -18077,9 +17718,9 @@ function takeSpansForNode(spans, node, offset) {
     return found;
 }
 function withoutNulls(array) {
-    var result13 = [];
-    for(var i = 0; i < array.length; i++)if (array[i] != null) result13.push(array[i]);
-    return result13;
+    var result = [];
+    for(var i = 0; i < array.length; i++)if (array[i] != null) result.push(array[i]);
+    return result;
 }
 // : ([Decoration], Node, number) → DecorationSet
 // Build up a tree that corresponds to a set of decorations. `offset`
@@ -18153,8 +17794,8 @@ function insertAhead(array, i, deco) {
 function viewDecorations(view) {
     var found = [];
     view.someProp("decorations", function(f) {
-        var result14 = f(view.state);
-        if (result14 && result14 != empty) found.push(result14);
+        var result = f(view.state);
+        if (result && result != empty) found.push(result);
     });
     if (view.cursorWrapper) found.push(DecorationSet.create(view.state.doc, [
         view.cursorWrapper.deco
@@ -18323,7 +17964,7 @@ EditorView.prototype.updateStateInner = function updateStateInner(state, reconfi
         if (this.someProp("handleScrollToSelection", function(f) {
             return f(this$1);
         })) ; // Handled
-        else if (state.selection instanceof _prosemirrorState.NodeSelection) scrollRectIntoView(this, this.docView.domAfterPos(state.selection.from).getBoundingClientRect(), startDOM);
+        else if (state.selection instanceof (0, _prosemirrorState.NodeSelection)) scrollRectIntoView(this, this.docView.domAfterPos(state.selection.from).getBoundingClientRect(), startDOM);
         else scrollRectIntoView(this, this.coordsAtPos(state.selection.head, 1), startDOM);
     } else if (oldScrollPos) resetScrollPos(oldScrollPos);
 };
@@ -18356,8 +17997,8 @@ EditorView.prototype.updatePluginViews = function updatePluginViews(prevState) {
 // immediately returned. When `f` isn't provided, it is treated as
 // the identity function (the prop value is returned directly).
 EditorView.prototype.someProp = function someProp(propName, f) {
-    var prop2 = this._props && this._props[propName], value;
-    if (prop2 != null && (value = f ? f(prop2) : prop2)) return value;
+    var prop = this._props && this._props[propName], value;
+    if (prop != null && (value = f ? f(prop) : prop)) return value;
     for(var i = 0; i < this.directPlugins.length; i++){
         var prop$1 = this.directPlugins[i].props[propName];
         if (prop$1 != null && (value = f ? f(prop$1) : prop$1)) return value;
@@ -18552,16 +18193,16 @@ function selectionContextChanged(sel1, sel2) {
     return sel1.$anchor.start(depth) != sel2.$anchor.start(depth);
 }
 function buildNodeViews(view) {
-    var result15 = {};
+    var result = {};
     view.someProp("nodeViews", function(obj) {
-        for(var prop3 in obj)if (!Object.prototype.hasOwnProperty.call(result15, prop3)) result15[prop3] = obj[prop3];
+        for(var prop in obj)if (!Object.prototype.hasOwnProperty.call(result, prop)) result[prop] = obj[prop];
     });
-    return result15;
+    return result;
 }
 function changedNodeViews(a, b) {
     var nA = 0, nB = 0;
-    for(var prop4 in a){
-        if (a[prop4] != b[prop4]) return true;
+    for(var prop in a){
+        if (a[prop] != b[prop]) return true;
         nA++;
     }
     for(var _ in b)nB++;
@@ -18574,10 +18215,8 @@ function checkStateComponent(plugin) {
 },{"prosemirror-state":"jYSWR","prosemirror-model":"eeCSD","prosemirror-transform":"bTHhB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fN5KY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "keydownHandler", ()=>keydownHandler
-);
-parcelHelpers.export(exports, "keymap", ()=>keymap
-);
+parcelHelpers.export(exports, "keydownHandler", ()=>keydownHandler);
+parcelHelpers.export(exports, "keymap", ()=>keymap);
 var _w3CKeyname = require("w3c-keyname");
 var _prosemirrorState = require("prosemirror-state");
 // declare global: navigator
@@ -18646,7 +18285,7 @@ function modifiers(name, event, shift) {
 // which they appear determines their precedence (the ones early in
 // the array get to dispatch first).
 function keymap(bindings) {
-    return new _prosemirrorState.Plugin({
+    return new (0, _prosemirrorState.Plugin)({
         props: {
             handleKeyDown: keydownHandler(bindings)
         }
@@ -18659,10 +18298,10 @@ function keymap(bindings) {
 function keydownHandler(bindings) {
     var map = normalize(bindings);
     return function(view, event) {
-        var name = _w3CKeyname.keyName(event), isChar = name.length == 1 && name != " ", baseName;
+        var name = (0, _w3CKeyname.keyName)(event), isChar = name.length == 1 && name != " ", baseName;
         var direct = map[modifiers(name, event, !isChar)];
         if (direct && direct(view.state, view.dispatch, view)) return true;
-        if (isChar && (event.shiftKey || event.altKey || event.metaKey || name.charCodeAt(0) > 127) && (baseName = _w3CKeyname.base[event.keyCode]) && baseName != name) {
+        if (isChar && (event.shiftKey || event.altKey || event.metaKey || name.charCodeAt(0) > 127) && (baseName = (0, _w3CKeyname.base)[event.keyCode]) && baseName != name) {
             // Try falling back to the keyCode when there's a modifier
             // active or the character produced isn't ASCII, and our table
             // produces a different name from the the keyCode. See #668,
@@ -18682,12 +18321,9 @@ function keydownHandler(bindings) {
 },{"w3c-keyname":"aiTuv","prosemirror-state":"jYSWR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aiTuv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "base", ()=>base
-);
-parcelHelpers.export(exports, "shift", ()=>shift
-);
-parcelHelpers.export(exports, "keyName", ()=>keyName
-);
+parcelHelpers.export(exports, "base", ()=>base);
+parcelHelpers.export(exports, "shift", ()=>shift);
+parcelHelpers.export(exports, "keyName", ()=>keyName);
 var base = {
     8: "Backspace",
     9: "Tab",
@@ -18767,7 +18403,7 @@ var shift = {
     219: "{",
     220: "|",
     221: "}",
-    222: "\"",
+    222: '"',
     229: "Q"
 };
 var chrome = typeof navigator != "undefined" && /Chrome\/(\d+)/.exec(navigator.userAgent);
@@ -18806,8 +18442,7 @@ function keyName(event) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"anv4W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>StarterKit
-);
+parcelHelpers.export(exports, "default", ()=>StarterKit);
 var _core = require("@tiptap/core");
 var _extensionBlockquote = require("@tiptap/extension-blockquote");
 var _extensionBlockquoteDefault = parcelHelpers.interopDefault(_extensionBlockquote);
@@ -18845,29 +18480,29 @@ var _extensionStrike = require("@tiptap/extension-strike");
 var _extensionStrikeDefault = parcelHelpers.interopDefault(_extensionStrike);
 var _extensionText = require("@tiptap/extension-text");
 var _extensionTextDefault = parcelHelpers.interopDefault(_extensionText);
-const StarterKit = _core.Extension.create({
-    name: 'starterKit',
+const StarterKit = (0, _core.Extension).create({
+    name: "starterKit",
     addExtensions () {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
         const extensions = [];
-        if (this.options.blockquote !== false) extensions.push(_extensionBlockquoteDefault.default.configure((_a = this.options) === null || _a === void 0 ? void 0 : _a.blockquote));
-        if (this.options.bold !== false) extensions.push(_extensionBoldDefault.default.configure((_b = this.options) === null || _b === void 0 ? void 0 : _b.bold));
-        if (this.options.bulletList !== false) extensions.push(_extensionBulletListDefault.default.configure((_c = this.options) === null || _c === void 0 ? void 0 : _c.bulletList));
-        if (this.options.code !== false) extensions.push(_extensionCodeDefault.default.configure((_d = this.options) === null || _d === void 0 ? void 0 : _d.code));
-        if (this.options.codeBlock !== false) extensions.push(_extensionCodeBlockDefault.default.configure((_e = this.options) === null || _e === void 0 ? void 0 : _e.codeBlock));
-        if (this.options.document !== false) extensions.push(_extensionDocumentDefault.default.configure((_f = this.options) === null || _f === void 0 ? void 0 : _f.document));
-        if (this.options.dropcursor !== false) extensions.push(_extensionDropcursorDefault.default.configure((_g = this.options) === null || _g === void 0 ? void 0 : _g.dropcursor));
-        if (this.options.gapcursor !== false) extensions.push(_extensionGapcursorDefault.default.configure((_h = this.options) === null || _h === void 0 ? void 0 : _h.gapcursor));
-        if (this.options.hardBreak !== false) extensions.push(_extensionHardBreakDefault.default.configure((_j = this.options) === null || _j === void 0 ? void 0 : _j.hardBreak));
-        if (this.options.heading !== false) extensions.push(_extensionHeadingDefault.default.configure((_k = this.options) === null || _k === void 0 ? void 0 : _k.heading));
-        if (this.options.history !== false) extensions.push(_extensionHistoryDefault.default.configure((_l = this.options) === null || _l === void 0 ? void 0 : _l.history));
-        if (this.options.horizontalRule !== false) extensions.push(_extensionHorizontalRuleDefault.default.configure((_m = this.options) === null || _m === void 0 ? void 0 : _m.horizontalRule));
-        if (this.options.italic !== false) extensions.push(_extensionItalicDefault.default.configure((_o = this.options) === null || _o === void 0 ? void 0 : _o.italic));
-        if (this.options.listItem !== false) extensions.push(_extensionListItemDefault.default.configure((_p = this.options) === null || _p === void 0 ? void 0 : _p.listItem));
-        if (this.options.orderedList !== false) extensions.push(_extensionOrderedListDefault.default.configure((_q = this.options) === null || _q === void 0 ? void 0 : _q.orderedList));
-        if (this.options.paragraph !== false) extensions.push(_extensionParagraphDefault.default.configure((_r = this.options) === null || _r === void 0 ? void 0 : _r.paragraph));
-        if (this.options.strike !== false) extensions.push(_extensionStrikeDefault.default.configure((_s = this.options) === null || _s === void 0 ? void 0 : _s.strike));
-        if (this.options.text !== false) extensions.push(_extensionTextDefault.default.configure((_t = this.options) === null || _t === void 0 ? void 0 : _t.text));
+        if (this.options.blockquote !== false) extensions.push((0, _extensionBlockquoteDefault.default).configure((_a = this.options) === null || _a === void 0 ? void 0 : _a.blockquote));
+        if (this.options.bold !== false) extensions.push((0, _extensionBoldDefault.default).configure((_b = this.options) === null || _b === void 0 ? void 0 : _b.bold));
+        if (this.options.bulletList !== false) extensions.push((0, _extensionBulletListDefault.default).configure((_c = this.options) === null || _c === void 0 ? void 0 : _c.bulletList));
+        if (this.options.code !== false) extensions.push((0, _extensionCodeDefault.default).configure((_d = this.options) === null || _d === void 0 ? void 0 : _d.code));
+        if (this.options.codeBlock !== false) extensions.push((0, _extensionCodeBlockDefault.default).configure((_e = this.options) === null || _e === void 0 ? void 0 : _e.codeBlock));
+        if (this.options.document !== false) extensions.push((0, _extensionDocumentDefault.default).configure((_f = this.options) === null || _f === void 0 ? void 0 : _f.document));
+        if (this.options.dropcursor !== false) extensions.push((0, _extensionDropcursorDefault.default).configure((_g = this.options) === null || _g === void 0 ? void 0 : _g.dropcursor));
+        if (this.options.gapcursor !== false) extensions.push((0, _extensionGapcursorDefault.default).configure((_h = this.options) === null || _h === void 0 ? void 0 : _h.gapcursor));
+        if (this.options.hardBreak !== false) extensions.push((0, _extensionHardBreakDefault.default).configure((_j = this.options) === null || _j === void 0 ? void 0 : _j.hardBreak));
+        if (this.options.heading !== false) extensions.push((0, _extensionHeadingDefault.default).configure((_k = this.options) === null || _k === void 0 ? void 0 : _k.heading));
+        if (this.options.history !== false) extensions.push((0, _extensionHistoryDefault.default).configure((_l = this.options) === null || _l === void 0 ? void 0 : _l.history));
+        if (this.options.horizontalRule !== false) extensions.push((0, _extensionHorizontalRuleDefault.default).configure((_m = this.options) === null || _m === void 0 ? void 0 : _m.horizontalRule));
+        if (this.options.italic !== false) extensions.push((0, _extensionItalicDefault.default).configure((_o = this.options) === null || _o === void 0 ? void 0 : _o.italic));
+        if (this.options.listItem !== false) extensions.push((0, _extensionListItemDefault.default).configure((_p = this.options) === null || _p === void 0 ? void 0 : _p.listItem));
+        if (this.options.orderedList !== false) extensions.push((0, _extensionOrderedListDefault.default).configure((_q = this.options) === null || _q === void 0 ? void 0 : _q.orderedList));
+        if (this.options.paragraph !== false) extensions.push((0, _extensionParagraphDefault.default).configure((_r = this.options) === null || _r === void 0 ? void 0 : _r.paragraph));
+        if (this.options.strike !== false) extensions.push((0, _extensionStrikeDefault.default).configure((_s = this.options) === null || _s === void 0 ? void 0 : _s.strike));
+        if (this.options.text !== false) extensions.push((0, _extensionTextDefault.default).configure((_t = this.options) === null || _t === void 0 ? void 0 : _t.text));
         return extensions;
     }
 });
@@ -18875,35 +18510,32 @@ const StarterKit = _core.Extension.create({
 },{"@tiptap/core":"61ldi","@tiptap/extension-blockquote":"gVL1L","@tiptap/extension-bold":"bVqvZ","@tiptap/extension-bullet-list":"brazx","@tiptap/extension-code":"pTzWI","@tiptap/extension-code-block":"TeqUH","@tiptap/extension-document":"8P1s9","@tiptap/extension-dropcursor":"4pmVh","@tiptap/extension-gapcursor":"ePFKd","@tiptap/extension-hard-break":"l44zG","@tiptap/extension-heading":"2QM0X","@tiptap/extension-history":"4yYHL","@tiptap/extension-horizontal-rule":"ls8tb","@tiptap/extension-italic":"gfvOE","@tiptap/extension-list-item":"jBeuk","@tiptap/extension-ordered-list":"gufrl","@tiptap/extension-paragraph":"gPhwR","@tiptap/extension-strike":"Zh0pF","@tiptap/extension-text":"bFU0K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gVL1L":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Blockquote", ()=>Blockquote
-);
-parcelHelpers.export(exports, "default", ()=>Blockquote
-);
-parcelHelpers.export(exports, "inputRegex", ()=>inputRegex
-);
+parcelHelpers.export(exports, "Blockquote", ()=>Blockquote);
+parcelHelpers.export(exports, "default", ()=>Blockquote);
+parcelHelpers.export(exports, "inputRegex", ()=>inputRegex);
 var _core = require("@tiptap/core");
 const inputRegex = /^\s*>\s$/;
-const Blockquote = _core.Node.create({
-    name: 'blockquote',
+const Blockquote = (0, _core.Node).create({
+    name: "blockquote",
     addOptions () {
         return {
             HTMLAttributes: {}
         };
     },
-    content: 'block+',
-    group: 'block',
+    content: "block+",
+    group: "block",
     defining: true,
     parseHTML () {
         return [
             {
-                tag: 'blockquote'
+                tag: "blockquote"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'blockquote',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "blockquote",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -18911,12 +18543,10 @@ const Blockquote = _core.Node.create({
         return {
             setBlockquote: ()=>({ commands  })=>{
                     return commands.wrapIn(this.name);
-                }
-            ,
+                },
             toggleBlockquote: ()=>({ commands  })=>{
                     return commands.toggleWrap(this.name);
-                }
-            ,
+                },
             unsetBlockquote: ()=>({ commands  })=>{
                     return commands.lift(this.name);
                 }
@@ -18924,12 +18554,12 @@ const Blockquote = _core.Node.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Shift-b': ()=>this.editor.commands.toggleBlockquote()
+            "Mod-Shift-b": ()=>this.editor.commands.toggleBlockquote()
         };
     },
     addInputRules () {
         return [
-            _core.wrappingInputRule({
+            (0, _core.wrappingInputRule)({
                 find: inputRegex,
                 type: this.type
             }), 
@@ -18940,25 +18570,19 @@ const Blockquote = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bVqvZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Bold", ()=>Bold
-);
-parcelHelpers.export(exports, "default", ()=>Bold
-);
-parcelHelpers.export(exports, "starInputRegex", ()=>starInputRegex
-);
-parcelHelpers.export(exports, "starPasteRegex", ()=>starPasteRegex
-);
-parcelHelpers.export(exports, "underscoreInputRegex", ()=>underscoreInputRegex
-);
-parcelHelpers.export(exports, "underscorePasteRegex", ()=>underscorePasteRegex
-);
+parcelHelpers.export(exports, "Bold", ()=>Bold);
+parcelHelpers.export(exports, "default", ()=>Bold);
+parcelHelpers.export(exports, "starInputRegex", ()=>starInputRegex);
+parcelHelpers.export(exports, "starPasteRegex", ()=>starPasteRegex);
+parcelHelpers.export(exports, "underscoreInputRegex", ()=>underscoreInputRegex);
+parcelHelpers.export(exports, "underscorePasteRegex", ()=>underscorePasteRegex);
 var _core = require("@tiptap/core");
 const starInputRegex = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))$/;
 const starPasteRegex = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))/g;
 const underscoreInputRegex = /(?:^|\s)((?:__)((?:[^__]+))(?:__))$/;
 const underscorePasteRegex = /(?:^|\s)((?:__)((?:[^__]+))(?:__))/g;
-const Bold = _core.Mark.create({
-    name: 'bold',
+const Bold = (0, _core.Mark).create({
+    name: "bold",
     addOptions () {
         return {
             HTMLAttributes: {}
@@ -18967,22 +18591,22 @@ const Bold = _core.Mark.create({
     parseHTML () {
         return [
             {
-                tag: 'strong'
+                tag: "strong"
             },
             {
-                tag: 'b',
-                getAttrs: (node)=>node.style.fontWeight !== 'normal' && null
+                tag: "b",
+                getAttrs: (node)=>node.style.fontWeight !== "normal" && null
             },
             {
-                style: 'font-weight',
+                style: "font-weight",
                 getAttrs: (value)=>/^(bold(er)?|[5-9]\d{2,})$/.test(value) && null
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'strong',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "strong",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -18990,12 +18614,10 @@ const Bold = _core.Mark.create({
         return {
             setBold: ()=>({ commands  })=>{
                     return commands.setMark(this.name);
-                }
-            ,
+                },
             toggleBold: ()=>({ commands  })=>{
                     return commands.toggleMark(this.name);
-                }
-            ,
+                },
             unsetBold: ()=>({ commands  })=>{
                     return commands.unsetMark(this.name);
                 }
@@ -19003,18 +18625,17 @@ const Bold = _core.Mark.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-b': ()=>this.editor.commands.toggleBold()
-            ,
-            'Mod-B': ()=>this.editor.commands.toggleBold()
+            "Mod-b": ()=>this.editor.commands.toggleBold(),
+            "Mod-B": ()=>this.editor.commands.toggleBold()
         };
     },
     addInputRules () {
         return [
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: starInputRegex,
                 type: this.type
             }),
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: underscoreInputRegex,
                 type: this.type
             }), 
@@ -19022,11 +18643,11 @@ const Bold = _core.Mark.create({
     },
     addPasteRules () {
         return [
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: starPasteRegex,
                 type: this.type
             }),
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: underscorePasteRegex,
                 type: this.type
             }), 
@@ -19037,37 +18658,34 @@ const Bold = _core.Mark.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"brazx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "BulletList", ()=>BulletList
-);
-parcelHelpers.export(exports, "default", ()=>BulletList
-);
-parcelHelpers.export(exports, "inputRegex", ()=>inputRegex
-);
+parcelHelpers.export(exports, "BulletList", ()=>BulletList);
+parcelHelpers.export(exports, "default", ()=>BulletList);
+parcelHelpers.export(exports, "inputRegex", ()=>inputRegex);
 var _core = require("@tiptap/core");
 const inputRegex = /^\s*([-+*])\s$/;
-const BulletList = _core.Node.create({
-    name: 'bulletList',
+const BulletList = (0, _core.Node).create({
+    name: "bulletList",
     addOptions () {
         return {
-            itemTypeName: 'listItem',
+            itemTypeName: "listItem",
             HTMLAttributes: {}
         };
     },
-    group: 'block list',
+    group: "block list",
     content () {
         return `${this.options.itemTypeName}+`;
     },
     parseHTML () {
         return [
             {
-                tag: 'ul'
+                tag: "ul"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'ul',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "ul",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -19080,12 +18698,12 @@ const BulletList = _core.Node.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Shift-8': ()=>this.editor.commands.toggleBulletList()
+            "Mod-Shift-8": ()=>this.editor.commands.toggleBulletList()
         };
     },
     addInputRules () {
         return [
-            _core.wrappingInputRule({
+            (0, _core.wrappingInputRule)({
                 find: inputRegex,
                 type: this.type
             }), 
@@ -19096,37 +18714,33 @@ const BulletList = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"pTzWI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Code", ()=>Code
-);
-parcelHelpers.export(exports, "default", ()=>Code
-);
-parcelHelpers.export(exports, "inputRegex", ()=>inputRegex
-);
-parcelHelpers.export(exports, "pasteRegex", ()=>pasteRegex
-);
+parcelHelpers.export(exports, "Code", ()=>Code);
+parcelHelpers.export(exports, "default", ()=>Code);
+parcelHelpers.export(exports, "inputRegex", ()=>inputRegex);
+parcelHelpers.export(exports, "pasteRegex", ()=>pasteRegex);
 var _core = require("@tiptap/core");
 const inputRegex = /(?:^|\s)((?:`)((?:[^`]+))(?:`))$/;
 const pasteRegex = /(?:^|\s)((?:`)((?:[^`]+))(?:`))/g;
-const Code = _core.Mark.create({
-    name: 'code',
+const Code = (0, _core.Mark).create({
+    name: "code",
     addOptions () {
         return {
             HTMLAttributes: {}
         };
     },
-    excludes: '_',
+    excludes: "_",
     code: true,
     parseHTML () {
         return [
             {
-                tag: 'code'
+                tag: "code"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'code',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "code",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -19134,12 +18748,10 @@ const Code = _core.Mark.create({
         return {
             setCode: ()=>({ commands  })=>{
                     return commands.setMark(this.name);
-                }
-            ,
+                },
             toggleCode: ()=>({ commands  })=>{
                     return commands.toggleMark(this.name);
-                }
-            ,
+                },
             unsetCode: ()=>({ commands  })=>{
                     return commands.unsetMark(this.name);
                 }
@@ -19147,12 +18759,12 @@ const Code = _core.Mark.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-e': ()=>this.editor.commands.toggleCode()
+            "Mod-e": ()=>this.editor.commands.toggleCode()
         };
     },
     addInputRules () {
         return [
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: inputRegex,
                 type: this.type
             }), 
@@ -19160,7 +18772,7 @@ const Code = _core.Mark.create({
     },
     addPasteRules () {
         return [
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: pasteRegex,
                 type: this.type
             }), 
@@ -19171,31 +18783,27 @@ const Code = _core.Mark.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"TeqUH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CodeBlock", ()=>CodeBlock
-);
-parcelHelpers.export(exports, "backtickInputRegex", ()=>backtickInputRegex
-);
-parcelHelpers.export(exports, "default", ()=>CodeBlock
-);
-parcelHelpers.export(exports, "tildeInputRegex", ()=>tildeInputRegex
-);
+parcelHelpers.export(exports, "CodeBlock", ()=>CodeBlock);
+parcelHelpers.export(exports, "backtickInputRegex", ()=>backtickInputRegex);
+parcelHelpers.export(exports, "default", ()=>CodeBlock);
+parcelHelpers.export(exports, "tildeInputRegex", ()=>tildeInputRegex);
 var _core = require("@tiptap/core");
 var _prosemirrorState = require("prosemirror-state");
 const backtickInputRegex = /^```([a-z]+)?[\s\n]$/;
 const tildeInputRegex = /^~~~([a-z]+)?[\s\n]$/;
-const CodeBlock = _core.Node.create({
-    name: 'codeBlock',
+const CodeBlock = (0, _core.Node).create({
+    name: "codeBlock",
     addOptions () {
         return {
-            languageClassPrefix: 'language-',
+            languageClassPrefix: "language-",
             exitOnTripleEnter: true,
             exitOnArrowDown: true,
             HTMLAttributes: {}
         };
     },
-    content: 'text*',
-    marks: '',
-    group: 'block',
+    content: "text*",
+    marks: "",
+    group: "block",
     code: true,
     defining: true,
     addAttributes () {
@@ -19208,9 +18816,7 @@ const CodeBlock = _core.Node.create({
                     const classNames = [
                         ...((_a = element.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList) || []
                     ];
-                    const languages = classNames.filter((className)=>className.startsWith(languageClassPrefix)
-                    ).map((className)=>className.replace(languageClassPrefix, '')
-                    );
+                    const languages = classNames.filter((className)=>className.startsWith(languageClassPrefix)).map((className)=>className.replace(languageClassPrefix, ""));
                     const language = languages[0];
                     if (!language) return null;
                     return language;
@@ -19222,17 +18828,17 @@ const CodeBlock = _core.Node.create({
     parseHTML () {
         return [
             {
-                tag: 'pre',
-                preserveWhitespace: 'full'
+                tag: "pre",
+                preserveWhitespace: "full"
             }, 
         ];
     },
     renderHTML ({ node , HTMLAttributes  }) {
         return [
-            'pre',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "pre",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             [
-                'code',
+                "code",
                 {
                     class: node.attrs.language ? this.options.languageClassPrefix + node.attrs.language : null
                 },
@@ -19244,17 +18850,15 @@ const CodeBlock = _core.Node.create({
         return {
             setCodeBlock: (attributes)=>({ commands  })=>{
                     return commands.setNode(this.name, attributes);
-                }
-            ,
+                },
             toggleCodeBlock: (attributes)=>({ commands  })=>{
-                    return commands.toggleNode(this.name, 'paragraph', attributes);
+                    return commands.toggleNode(this.name, "paragraph", attributes);
                 }
         };
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Alt-c': ()=>this.editor.commands.toggleCodeBlock()
-            ,
+            "Mod-Alt-c": ()=>this.editor.commands.toggleCodeBlock(),
             // remove code block when at start of document or code block is empty
             Backspace: ()=>{
                 const { empty , $anchor  } = this.editor.state.selection;
@@ -19271,7 +18875,7 @@ const CodeBlock = _core.Node.create({
                 const { $from , empty  } = selection;
                 if (!empty || $from.parent.type !== this.type) return false;
                 const isAtEnd = $from.parentOffset === $from.parent.nodeSize - 2;
-                const endsWithDoubleNewline = $from.parent.textContent.endsWith('\n\n');
+                const endsWithDoubleNewline = $from.parent.textContent.endsWith("\n\n");
                 if (!isAtEnd || !endsWithDoubleNewline) return false;
                 return editor.chain().command(({ tr  })=>{
                     tr.delete($from.pos - 2, $from.pos);
@@ -19297,14 +18901,14 @@ const CodeBlock = _core.Node.create({
     },
     addInputRules () {
         return [
-            _core.textblockTypeInputRule({
+            (0, _core.textblockTypeInputRule)({
                 find: backtickInputRegex,
                 type: this.type,
                 getAttributes: (match)=>({
                         language: match[1]
                     })
             }),
-            _core.textblockTypeInputRule({
+            (0, _core.textblockTypeInputRule)({
                 find: tildeInputRegex,
                 type: this.type,
                 getAttributes: (match)=>({
@@ -19317,15 +18921,15 @@ const CodeBlock = _core.Node.create({
         return [
             // this plugin creates a code block for pasted content from VS Code
             // we can also detect the copied code language
-            new _prosemirrorState.Plugin({
-                key: new _prosemirrorState.PluginKey('codeBlockVSCodeHandler'),
+            new (0, _prosemirrorState.Plugin)({
+                key: new (0, _prosemirrorState.PluginKey)("codeBlockVSCodeHandler"),
                 props: {
                     handlePaste: (view, event)=>{
                         if (!event.clipboardData) return false;
                         // don’t create a new code block within code blocks
                         if (this.editor.isActive(this.type.name)) return false;
-                        const text = event.clipboardData.getData('text/plain');
-                        const vscode = event.clipboardData.getData('vscode-editor-data');
+                        const text = event.clipboardData.getData("text/plain");
+                        const vscode = event.clipboardData.getData("vscode-editor-data");
                         const vscodeData = vscode ? JSON.parse(vscode) : undefined;
                         const language = vscodeData === null || vscodeData === void 0 ? void 0 : vscodeData.mode;
                         if (!text || !language) return false;
@@ -19335,15 +18939,15 @@ const CodeBlock = _core.Node.create({
                             language
                         }));
                         // put cursor inside the newly created code block
-                        tr.setSelection(_prosemirrorState.TextSelection.near(tr.doc.resolve(Math.max(0, tr.selection.from - 2))));
+                        tr.setSelection((0, _prosemirrorState.TextSelection).near(tr.doc.resolve(Math.max(0, tr.selection.from - 2))));
                         // add text to code block
                         // strip carriage return chars from text pasted as code
                         // see: https://github.com/ProseMirror/prosemirror-view/commit/a50a6bcceb4ce52ac8fcc6162488d8875613aacd
-                        tr.insertText(text.replace(/\r\n?/g, '\n'));
+                        tr.insertText(text.replace(/\r\n?/g, "\n"));
                         // store meta information
                         // this is useful for other plugins that depends on the paste event
                         // like the paste rule plugin
-                        tr.setMeta('paste', true);
+                        tr.setMeta("paste", true);
                         view.dispatch(tr);
                         return true;
                     }
@@ -19356,38 +18960,34 @@ const CodeBlock = _core.Node.create({
 },{"@tiptap/core":"61ldi","prosemirror-state":"jYSWR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8P1s9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Document", ()=>Document
-);
-parcelHelpers.export(exports, "default", ()=>Document
-);
+parcelHelpers.export(exports, "Document", ()=>Document);
+parcelHelpers.export(exports, "default", ()=>Document);
 var _core = require("@tiptap/core");
-const Document = _core.Node.create({
-    name: 'doc',
+const Document = (0, _core.Node).create({
+    name: "doc",
     topNode: true,
-    content: 'block+'
+    content: "block+"
 });
 
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4pmVh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Dropcursor", ()=>Dropcursor
-);
-parcelHelpers.export(exports, "default", ()=>Dropcursor
-);
+parcelHelpers.export(exports, "Dropcursor", ()=>Dropcursor);
+parcelHelpers.export(exports, "default", ()=>Dropcursor);
 var _core = require("@tiptap/core");
 var _prosemirrorDropcursor = require("prosemirror-dropcursor");
-const Dropcursor = _core.Extension.create({
-    name: 'dropCursor',
+const Dropcursor = (0, _core.Extension).create({
+    name: "dropCursor",
     addOptions () {
         return {
-            color: 'currentColor',
+            color: "currentColor",
             width: 1,
             class: null
         };
     },
     addProseMirrorPlugins () {
         return [
-            _prosemirrorDropcursor.dropCursor(this.options), 
+            (0, _prosemirrorDropcursor.dropCursor)(this.options), 
         ];
     }
 });
@@ -19395,8 +18995,7 @@ const Dropcursor = _core.Extension.create({
 },{"@tiptap/core":"61ldi","prosemirror-dropcursor":"iaX3q","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iaX3q":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "dropCursor", ()=>dropCursor
-);
+parcelHelpers.export(exports, "dropCursor", ()=>dropCursor);
 var _prosemirrorState = require("prosemirror-state");
 var _prosemirrorTransform = require("prosemirror-transform");
 // :: (options: ?Object) → Plugin
@@ -19421,7 +19020,7 @@ var _prosemirrorTransform = require("prosemirror-transform");
 //     A CSS class name to add to the cursor element.
 function dropCursor(options) {
     if (options === void 0) options = {};
-    return new _prosemirrorState.Plugin({
+    return new (0, _prosemirrorState.Plugin)({
         view: function view(editorView) {
             return new DropCursorView(editorView, options);
         }
@@ -19538,7 +19137,7 @@ DropCursorView.prototype.dragover = function dragover(event) {
     if (pos && !disabled) {
         var target = pos.pos;
         if (this.editorView.dragging && this.editorView.dragging.slice) {
-            target = _prosemirrorTransform.dropPoint(this.editorView.state.doc, target, this.editorView.dragging.slice);
+            target = (0, _prosemirrorTransform.dropPoint)(this.editorView.state.doc, target, this.editorView.dragging.slice);
             if (target == null) return this.setCursor(null);
         }
         this.setCursor(target);
@@ -19558,17 +19157,15 @@ DropCursorView.prototype.dragleave = function dragleave(event) {
 },{"prosemirror-state":"jYSWR","prosemirror-transform":"bTHhB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ePFKd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Gapcursor", ()=>Gapcursor
-);
-parcelHelpers.export(exports, "default", ()=>Gapcursor
-);
+parcelHelpers.export(exports, "Gapcursor", ()=>Gapcursor);
+parcelHelpers.export(exports, "default", ()=>Gapcursor);
 var _core = require("@tiptap/core");
 var _prosemirrorGapcursor = require("prosemirror-gapcursor");
-const Gapcursor = _core.Extension.create({
-    name: 'gapCursor',
+const Gapcursor = (0, _core.Extension).create({
+    name: "gapCursor",
     addProseMirrorPlugins () {
         return [
-            _prosemirrorGapcursor.gapCursor(), 
+            (0, _prosemirrorGapcursor.gapCursor)(), 
         ];
     },
     extendNodeSchema (extension) {
@@ -19579,7 +19176,7 @@ const Gapcursor = _core.Extension.create({
             storage: extension.storage
         };
         return {
-            allowGapCursor: (_a = _core.callOrReturn(_core.getExtensionField(extension, 'allowGapCursor', context))) !== null && _a !== void 0 ? _a : null
+            allowGapCursor: (_a = (0, _core.callOrReturn)((0, _core.getExtensionField)(extension, "allowGapCursor", context))) !== null && _a !== void 0 ? _a : null
         };
     }
 });
@@ -19587,10 +19184,8 @@ const Gapcursor = _core.Extension.create({
 },{"@tiptap/core":"61ldi","prosemirror-gapcursor":"51Caz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"51Caz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "GapCursor", ()=>GapCursor
-);
-parcelHelpers.export(exports, "gapCursor", ()=>gapCursor
-);
+parcelHelpers.export(exports, "GapCursor", ()=>GapCursor);
+parcelHelpers.export(exports, "gapCursor", ()=>gapCursor);
 var _prosemirrorKeymap = require("prosemirror-keymap");
 var _prosemirrorState = require("prosemirror-state");
 var _prosemirrorModel = require("prosemirror-model");
@@ -19598,36 +19193,36 @@ var _prosemirrorView = require("prosemirror-view");
 // ::- Gap cursor selections are represented using this class. Its
 // `$anchor` and `$head` properties both point at the cursor position.
 var GapCursor = /*@__PURE__*/ function(Selection) {
-    function GapCursor1($pos) {
+    function GapCursor($pos) {
         Selection.call(this, $pos, $pos);
     }
-    if (Selection) GapCursor1.__proto__ = Selection;
-    GapCursor1.prototype = Object.create(Selection && Selection.prototype);
-    GapCursor1.prototype.constructor = GapCursor1;
-    GapCursor1.prototype.map = function map(doc, mapping) {
+    if (Selection) GapCursor.__proto__ = Selection;
+    GapCursor.prototype = Object.create(Selection && Selection.prototype);
+    GapCursor.prototype.constructor = GapCursor;
+    GapCursor.prototype.map = function map(doc, mapping) {
         var $pos = doc.resolve(mapping.map(this.head));
-        return GapCursor1.valid($pos) ? new GapCursor1($pos) : Selection.near($pos);
+        return GapCursor.valid($pos) ? new GapCursor($pos) : Selection.near($pos);
     };
-    GapCursor1.prototype.content = function content() {
-        return _prosemirrorModel.Slice.empty;
+    GapCursor.prototype.content = function content() {
+        return (0, _prosemirrorModel.Slice).empty;
     };
-    GapCursor1.prototype.eq = function eq(other) {
-        return other instanceof GapCursor1 && other.head == this.head;
+    GapCursor.prototype.eq = function eq(other) {
+        return other instanceof GapCursor && other.head == this.head;
     };
-    GapCursor1.prototype.toJSON = function toJSON() {
+    GapCursor.prototype.toJSON = function toJSON() {
         return {
             type: "gapcursor",
             pos: this.head
         };
     };
-    GapCursor1.fromJSON = function fromJSON(doc, json) {
+    GapCursor.fromJSON = function fromJSON(doc, json) {
         if (typeof json.pos != "number") throw new RangeError("Invalid input for GapCursor.fromJSON");
-        return new GapCursor1(doc.resolve(json.pos));
+        return new GapCursor(doc.resolve(json.pos));
     };
-    GapCursor1.prototype.getBookmark = function getBookmark() {
+    GapCursor.prototype.getBookmark = function getBookmark() {
         return new GapBookmark(this.anchor);
     };
-    GapCursor1.valid = function valid($pos) {
+    GapCursor.valid = function valid($pos) {
         var parent = $pos.parent;
         if (parent.isTextblock || !closedBefore($pos) || !closedAfter($pos)) return false;
         var override = parent.type.spec.allowGapCursor;
@@ -19635,9 +19230,9 @@ var GapCursor = /*@__PURE__*/ function(Selection) {
         var deflt = parent.contentMatchAt($pos.index()).defaultType;
         return deflt && deflt.isTextblock;
     };
-    GapCursor1.findFrom = function findFrom($pos, dir, mustMove) {
+    GapCursor.findFrom = function findFrom($pos, dir, mustMove) {
         search: for(;;){
-            if (!mustMove && GapCursor1.valid($pos)) return $pos;
+            if (!mustMove && GapCursor.valid($pos)) return $pos;
             var pos = $pos.pos, next = null;
             // Scan up from this position
             for(var d = $pos.depth;; d--){
@@ -19648,13 +19243,13 @@ var GapCursor = /*@__PURE__*/ function(Selection) {
                 } else if (d == 0) return null;
                 pos += dir;
                 var $cur = $pos.doc.resolve(pos);
-                if (GapCursor1.valid($cur)) return $cur;
+                if (GapCursor.valid($cur)) return $cur;
             }
             // And then down into the next node
             for(;;){
                 var inside = dir > 0 ? next.firstChild : next.lastChild;
                 if (!inside) {
-                    if (next.isAtom && !next.isText && !_prosemirrorState.NodeSelection.isSelectable(next)) {
+                    if (next.isAtom && !next.isText && !(0, _prosemirrorState.NodeSelection).isSelectable(next)) {
                         $pos = $pos.doc.resolve(pos + next.nodeSize * dir);
                         mustMove = false;
                         continue search;
@@ -19664,15 +19259,15 @@ var GapCursor = /*@__PURE__*/ function(Selection) {
                 next = inside;
                 pos += dir;
                 var $cur$1 = $pos.doc.resolve(pos);
-                if (GapCursor1.valid($cur$1)) return $cur$1;
+                if (GapCursor.valid($cur$1)) return $cur$1;
             }
             return null;
         }
     };
-    return GapCursor1;
-}(_prosemirrorState.Selection);
+    return GapCursor;
+}((0, _prosemirrorState.Selection));
 GapCursor.prototype.visible = false;
-_prosemirrorState.Selection.jsonID("gapcursor", GapCursor);
+(0, _prosemirrorState.Selection).jsonID("gapcursor", GapCursor);
 var GapBookmark = function GapBookmark(pos) {
     this.pos = pos;
 };
@@ -19681,7 +19276,7 @@ GapBookmark.prototype.map = function map(mapping) {
 };
 GapBookmark.prototype.resolve = function resolve(doc) {
     var $pos = doc.resolve(this.pos);
-    return GapCursor.valid($pos) ? new GapCursor($pos) : _prosemirrorState.Selection.near($pos);
+    return GapCursor.valid($pos) ? new GapCursor($pos) : (0, _prosemirrorState.Selection).near($pos);
 };
 function closedBefore($pos) {
     for(var d = $pos.depth; d >= 0; d--){
@@ -19723,7 +19318,7 @@ function closedAfter($pos) {
 // `style/gapcursor.css` from the package's directory or add your own
 // styles to make it visible.
 var gapCursor = function() {
-    return new _prosemirrorState.Plugin({
+    return new (0, _prosemirrorState.Plugin)({
         props: {
             decorations: drawGapCursor,
             createSelectionBetween: function createSelectionBetween(_view, $anchor, $head) {
@@ -19737,7 +19332,7 @@ var gapCursor = function() {
         }
     });
 };
-var handleKeyDown = _prosemirrorKeymap.keydownHandler({
+var handleKeyDown = (0, _prosemirrorKeymap.keydownHandler)({
     "ArrowLeft": arrow("horiz", -1),
     "ArrowRight": arrow("horiz", 1),
     "ArrowUp": arrow("vert", -1),
@@ -19748,7 +19343,7 @@ function arrow(axis, dir) {
     return function(state, dispatch, view) {
         var sel = state.selection;
         var $start = dir > 0 ? sel.$to : sel.$from, mustMove = sel.empty;
-        if (sel instanceof _prosemirrorState.TextSelection) {
+        if (sel instanceof (0, _prosemirrorState.TextSelection)) {
             if (!view.endOfTextblock(dirStr) || $start.depth == 0) return false;
             mustMove = false;
             $start = state.doc.resolve(dir > 0 ? $start.after() : $start.before());
@@ -19768,7 +19363,7 @@ function handleClick(view, pos, event) {
         top: event.clientY
     });
     var inside = ref.inside;
-    if (inside > -1 && _prosemirrorState.NodeSelection.isSelectable(view.state.doc.nodeAt(inside))) return false;
+    if (inside > -1 && (0, _prosemirrorState.NodeSelection).isSelectable(view.state.doc.nodeAt(inside))) return false;
     view.dispatch(view.state.tr.setSelection(new GapCursor($pos)));
     return true;
 }
@@ -19782,10 +19377,10 @@ function beforeinput(view, event) {
     var $from = ref.$from;
     var insert = $from.parent.contentMatchAt($from.index()).findWrapping(view.state.schema.nodes.text);
     if (!insert) return false;
-    var frag = _prosemirrorModel.Fragment.empty;
-    for(var i = insert.length - 1; i >= 0; i--)frag = _prosemirrorModel.Fragment.from(insert[i].createAndFill(null, frag));
-    var tr = view.state.tr.replace($from.pos, $from.pos, new _prosemirrorModel.Slice(frag, 0, 0));
-    tr.setSelection(_prosemirrorState.TextSelection.near(tr.doc.resolve($from.pos + 1)));
+    var frag = (0, _prosemirrorModel.Fragment).empty;
+    for(var i = insert.length - 1; i >= 0; i--)frag = (0, _prosemirrorModel.Fragment).from(insert[i].createAndFill(null, frag));
+    var tr = view.state.tr.replace($from.pos, $from.pos, new (0, _prosemirrorModel.Slice)(frag, 0, 0));
+    tr.setSelection((0, _prosemirrorState.TextSelection).near(tr.doc.resolve($from.pos + 1)));
     view.dispatch(tr);
     return false;
 }
@@ -19793,8 +19388,8 @@ function drawGapCursor(state) {
     if (!(state.selection instanceof GapCursor)) return null;
     var node = document.createElement("div");
     node.className = "ProseMirror-gapcursor";
-    return _prosemirrorView.DecorationSet.create(state.doc, [
-        _prosemirrorView.Decoration.widget(state.selection.head, node, {
+    return (0, _prosemirrorView.DecorationSet).create(state.doc, [
+        (0, _prosemirrorView.Decoration).widget(state.selection.head, node, {
             key: "gapcursor"
         })
     ]);
@@ -19803,13 +19398,11 @@ function drawGapCursor(state) {
 },{"prosemirror-keymap":"fN5KY","prosemirror-state":"jYSWR","prosemirror-model":"eeCSD","prosemirror-view":"9u8cM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l44zG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HardBreak", ()=>HardBreak
-);
-parcelHelpers.export(exports, "default", ()=>HardBreak
-);
+parcelHelpers.export(exports, "HardBreak", ()=>HardBreak);
+parcelHelpers.export(exports, "default", ()=>HardBreak);
 var _core = require("@tiptap/core");
-const HardBreak = _core.Node.create({
-    name: 'hardBreak',
+const HardBreak = (0, _core.Node).create({
+    name: "hardBreak",
     addOptions () {
         return {
             keepMarks: true,
@@ -19817,30 +19410,29 @@ const HardBreak = _core.Node.create({
         };
     },
     inline: true,
-    group: 'inline',
+    group: "inline",
     selectable: false,
     parseHTML () {
         return [
             {
-                tag: 'br'
+                tag: "br"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'br',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)
+            "br",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes)
         ];
     },
     renderText () {
-        return '\n';
+        return "\n";
     },
     addCommands () {
         return {
             setHardBreak: ()=>({ commands , chain , state , editor ,  })=>{
                     return commands.first([
-                        ()=>commands.exitCode()
-                        ,
+                        ()=>commands.exitCode(),
                         ()=>commands.command(()=>{
                                 const { selection , storedMarks  } = state;
                                 if (selection.$from.parent.type.spec.isolating) return false;
@@ -19851,23 +19443,20 @@ const HardBreak = _core.Node.create({
                                     type: this.name
                                 }).command(({ tr , dispatch  })=>{
                                     if (dispatch && marks && keepMarks) {
-                                        const filteredMarks = marks.filter((mark)=>splittableMarks.includes(mark.type.name)
-                                        );
+                                        const filteredMarks = marks.filter((mark)=>splittableMarks.includes(mark.type.name));
                                         tr.ensureMarks(filteredMarks);
                                     }
                                     return true;
                                 }).run();
-                            })
-                        , 
+                            }), 
                     ]);
                 }
         };
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Enter': ()=>this.editor.commands.setHardBreak()
-            ,
-            'Shift-Enter': ()=>this.editor.commands.setHardBreak()
+            "Mod-Enter": ()=>this.editor.commands.setHardBreak(),
+            "Shift-Enter": ()=>this.editor.commands.setHardBreak()
         };
     }
 });
@@ -19875,13 +19464,11 @@ const HardBreak = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2QM0X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Heading", ()=>Heading
-);
-parcelHelpers.export(exports, "default", ()=>Heading
-);
+parcelHelpers.export(exports, "Heading", ()=>Heading);
+parcelHelpers.export(exports, "default", ()=>Heading);
 var _core = require("@tiptap/core");
-const Heading = _core.Node.create({
-    name: 'heading',
+const Heading = (0, _core.Node).create({
+    name: "heading",
     addOptions () {
         return {
             levels: [
@@ -19895,8 +19482,8 @@ const Heading = _core.Node.create({
             HTMLAttributes: {}
         };
     },
-    content: 'inline*',
-    group: 'block',
+    content: "inline*",
+    group: "block",
     defining: true,
     addAttributes () {
         return {
@@ -19912,15 +19499,14 @@ const Heading = _core.Node.create({
                 attrs: {
                     level
                 }
-            })
-        );
+            }));
     },
     renderHTML ({ node , HTMLAttributes  }) {
         const hasLevel = this.options.levels.includes(node.attrs.level);
         const level = hasLevel ? node.attrs.level : this.options.levels[0];
         return [
             `h${level}`,
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -19929,11 +19515,10 @@ const Heading = _core.Node.create({
             setHeading: (attributes)=>({ commands  })=>{
                     if (!this.options.levels.includes(attributes.level)) return false;
                     return commands.setNode(this.name, attributes);
-                }
-            ,
+                },
             toggleHeading: (attributes)=>({ commands  })=>{
                     if (!this.options.levels.includes(attributes.level)) return false;
-                    return commands.toggleNode(this.name, 'paragraph', attributes);
+                    return commands.toggleNode(this.name, "paragraph", attributes);
                 }
         };
     },
@@ -19943,12 +19528,11 @@ const Heading = _core.Node.create({
                 [`Mod-Alt-${level}`]: ()=>this.editor.commands.toggleHeading({
                         level
                     })
-            })
-        , {});
+            }), {});
     },
     addInputRules () {
         return this.options.levels.map((level)=>{
-            return _core.textblockTypeInputRule({
+            return (0, _core.textblockTypeInputRule)({
                 find: new RegExp(`^(#{1,${level}})\\s$`),
                 type: this.type,
                 getAttributes: {
@@ -19962,14 +19546,12 @@ const Heading = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4yYHL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "History", ()=>History
-);
-parcelHelpers.export(exports, "default", ()=>History
-);
+parcelHelpers.export(exports, "History", ()=>History);
+parcelHelpers.export(exports, "default", ()=>History);
 var _core = require("@tiptap/core");
 var _prosemirrorHistory = require("prosemirror-history");
-const History = _core.Extension.create({
-    name: 'history',
+const History = (0, _core.Extension).create({
+    name: "history",
     addOptions () {
         return {
             depth: 100,
@@ -19979,31 +19561,26 @@ const History = _core.Extension.create({
     addCommands () {
         return {
             undo: ()=>({ state , dispatch  })=>{
-                    return _prosemirrorHistory.undo(state, dispatch);
-                }
-            ,
+                    return (0, _prosemirrorHistory.undo)(state, dispatch);
+                },
             redo: ()=>({ state , dispatch  })=>{
-                    return _prosemirrorHistory.redo(state, dispatch);
+                    return (0, _prosemirrorHistory.redo)(state, dispatch);
                 }
         };
     },
     addProseMirrorPlugins () {
         return [
-            _prosemirrorHistory.history(this.options), 
+            (0, _prosemirrorHistory.history)(this.options), 
         ];
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-z': ()=>this.editor.commands.undo()
-            ,
-            'Mod-y': ()=>this.editor.commands.redo()
-            ,
-            'Shift-Mod-z': ()=>this.editor.commands.redo()
-            ,
+            "Mod-z": ()=>this.editor.commands.undo(),
+            "Mod-y": ()=>this.editor.commands.redo(),
+            "Shift-Mod-z": ()=>this.editor.commands.redo(),
             // Russian keyboard layouts
-            'Mod-я': ()=>this.editor.commands.undo()
-            ,
-            'Shift-Mod-я': ()=>this.editor.commands.redo()
+            "Mod-я": ()=>this.editor.commands.undo(),
+            "Shift-Mod-я": ()=>this.editor.commands.redo()
         };
     }
 });
@@ -20011,20 +19588,13 @@ const History = _core.Extension.create({
 },{"@tiptap/core":"61ldi","prosemirror-history":"jStha","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jStha":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HistoryState", ()=>HistoryState
-);
-parcelHelpers.export(exports, "closeHistory", ()=>closeHistory
-);
-parcelHelpers.export(exports, "history", ()=>history
-);
-parcelHelpers.export(exports, "redo", ()=>redo
-);
-parcelHelpers.export(exports, "redoDepth", ()=>redoDepth
-);
-parcelHelpers.export(exports, "undo", ()=>undo
-);
-parcelHelpers.export(exports, "undoDepth", ()=>undoDepth
-);
+parcelHelpers.export(exports, "HistoryState", ()=>HistoryState);
+parcelHelpers.export(exports, "closeHistory", ()=>closeHistory);
+parcelHelpers.export(exports, "history", ()=>history);
+parcelHelpers.export(exports, "redo", ()=>redo);
+parcelHelpers.export(exports, "redoDepth", ()=>redoDepth);
+parcelHelpers.export(exports, "undo", ()=>undo);
+parcelHelpers.export(exports, "undoDepth", ()=>undoDepth);
 var _ropeSequence = require("rope-sequence");
 var _ropeSequenceDefault = parcelHelpers.interopDefault(_ropeSequence);
 var _prosemirrorTransform = require("prosemirror-transform");
@@ -20132,7 +19702,7 @@ Branch.prototype.addTransform = function addTransform(transform, selection, hist
     return new Branch(oldItems.append(newItems), eventCount);
 };
 Branch.prototype.remapping = function remapping(from, to) {
-    var maps = new _prosemirrorTransform.Mapping;
+    var maps = new (0, _prosemirrorTransform.Mapping);
     this.items.forEach(function(item, i) {
         var mirrorPos = item.mirrorOffset != null && i - item.mirrorOffset >= from ? maps.maps.length - item.mirrorOffset : null;
         maps.appendMap(item.map, mirrorPos);
@@ -20213,9 +19783,9 @@ Branch.prototype.compress = function compress(upto) {
             }
         } else if (item.map) mapFrom--;
     }, this.items.length, 0);
-    return new Branch(_ropeSequenceDefault.default.from(items.reverse()), events);
+    return new Branch((0, _ropeSequenceDefault.default).from(items.reverse()), events);
 };
-Branch.empty = new Branch(_ropeSequenceDefault.default.empty, 0);
+Branch.empty = new Branch((0, _ropeSequenceDefault.default).empty, 0);
 function cutOffEvents(items, n) {
     var cutPoint;
     items.forEach(function(item, i) {
@@ -20257,24 +19827,24 @@ var HistoryState = function HistoryState(done, undone, prevRanges, prevTime) {
 var DEPTH_OVERFLOW = 20;
 // : (HistoryState, EditorState, Transaction, Object)
 // Record a transformation in undo history.
-function applyTransaction(history1, state, tr, options) {
+function applyTransaction(history, state, tr, options) {
     var historyTr = tr.getMeta(historyKey), rebased;
     if (historyTr) return historyTr.historyState;
-    if (tr.getMeta(closeHistoryKey)) history1 = new HistoryState(history1.done, history1.undone, null, 0);
+    if (tr.getMeta(closeHistoryKey)) history = new HistoryState(history.done, history.undone, null, 0);
     var appended = tr.getMeta("appendedTransaction");
-    if (tr.steps.length == 0) return history1;
+    if (tr.steps.length == 0) return history;
     else if (appended && appended.getMeta(historyKey)) {
-        if (appended.getMeta(historyKey).redo) return new HistoryState(history1.done.addTransform(tr, null, options, mustPreserveItems(state)), history1.undone, rangesFor(tr.mapping.maps[tr.steps.length - 1]), history1.prevTime);
-        else return new HistoryState(history1.done, history1.undone.addTransform(tr, null, options, mustPreserveItems(state)), null, history1.prevTime);
+        if (appended.getMeta(historyKey).redo) return new HistoryState(history.done.addTransform(tr, null, options, mustPreserveItems(state)), history.undone, rangesFor(tr.mapping.maps[tr.steps.length - 1]), history.prevTime);
+        else return new HistoryState(history.done, history.undone.addTransform(tr, null, options, mustPreserveItems(state)), null, history.prevTime);
     } else if (tr.getMeta("addToHistory") !== false && !(appended && appended.getMeta("addToHistory") === false)) {
         // Group transforms that occur in quick succession into one event.
-        var newGroup = history1.prevTime == 0 || !appended && (history1.prevTime < (tr.time || 0) - options.newGroupDelay || !isAdjacentTo(tr, history1.prevRanges));
-        var prevRanges = appended ? mapRanges(history1.prevRanges, tr.mapping) : rangesFor(tr.mapping.maps[tr.steps.length - 1]);
-        return new HistoryState(history1.done.addTransform(tr, newGroup ? state.selection.getBookmark() : null, options, mustPreserveItems(state)), Branch.empty, prevRanges, tr.time);
+        var newGroup = history.prevTime == 0 || !appended && (history.prevTime < (tr.time || 0) - options.newGroupDelay || !isAdjacentTo(tr, history.prevRanges));
+        var prevRanges = appended ? mapRanges(history.prevRanges, tr.mapping) : rangesFor(tr.mapping.maps[tr.steps.length - 1]);
+        return new HistoryState(history.done.addTransform(tr, newGroup ? state.selection.getBookmark() : null, options, mustPreserveItems(state)), Branch.empty, prevRanges, tr.time);
     } else if (rebased = tr.getMeta("rebased")) // Used by the collab module to tell the history that some of its
     // content has been rebased.
-    return new HistoryState(history1.done.rebased(tr, rebased), history1.undone.rebased(tr, rebased), mapRanges(history1.prevRanges, tr.mapping), history1.prevTime);
-    else return new HistoryState(history1.done.addMaps(tr.mapping.maps), history1.undone.addMaps(tr.mapping.maps), mapRanges(history1.prevRanges, tr.mapping), history1.prevTime);
+    return new HistoryState(history.done.rebased(tr, rebased), history.undone.rebased(tr, rebased), mapRanges(history.prevRanges, tr.mapping), history.prevTime);
+    else return new HistoryState(history.done.addMaps(tr.mapping.maps), history.undone.addMaps(tr.mapping.maps), mapRanges(history.prevRanges, tr.mapping), history.prevTime);
 }
 function isAdjacentTo(transform, prevRanges) {
     if (!prevRanges) return false;
@@ -20304,15 +19874,15 @@ function mapRanges(ranges, mapping) {
 // : (HistoryState, EditorState, (tr: Transaction), bool)
 // Apply the latest event from one branch to the document and shift the event
 // onto the other branch.
-function histTransaction(history2, state, dispatch, redo1) {
+function histTransaction(history, state, dispatch, redo) {
     var preserveItems = mustPreserveItems(state), histOptions = historyKey.get(state).spec.config;
-    var pop = (redo1 ? history2.undone : history2.done).popEvent(state, preserveItems);
+    var pop = (redo ? history.undone : history.done).popEvent(state, preserveItems);
     if (!pop) return;
     var selection = pop.selection.resolve(pop.transform.doc);
-    var added = (redo1 ? history2.done : history2.undone).addTransform(pop.transform, state.selection.getBookmark(), histOptions, preserveItems);
-    var newHist = new HistoryState(redo1 ? added : pop.remaining, redo1 ? pop.remaining : added, null, 0);
+    var added = (redo ? history.done : history.undone).addTransform(pop.transform, state.selection.getBookmark(), histOptions, preserveItems);
+    var newHist = new HistoryState(redo ? added : pop.remaining, redo ? pop.remaining : added, null, 0);
     dispatch(pop.transform.setSelection(selection).setMeta(historyKey, {
-        redo: redo1,
+        redo: redo,
         historyState: newHist
     }).scrollIntoView());
 }
@@ -20340,8 +19910,8 @@ function mustPreserveItems(state) {
 function closeHistory(tr) {
     return tr.setMeta(closeHistoryKey, true);
 }
-var historyKey = new _prosemirrorState.PluginKey("history");
-var closeHistoryKey = new _prosemirrorState.PluginKey("closeHistory");
+var historyKey = new (0, _prosemirrorState.PluginKey)("history");
+var closeHistoryKey = new (0, _prosemirrorState.PluginKey)("closeHistory");
 // :: (?Object) → Plugin
 // Returns a plugin that enables the undo history for an editor. The
 // plugin will track undo and redo stacks, which can be used with the
@@ -20367,7 +19937,7 @@ function history(config) {
         depth: config && config.depth || 100,
         newGroupDelay: config && config.newGroupDelay || 500
     };
-    return new _prosemirrorState.Plugin({
+    return new (0, _prosemirrorState.Plugin)({
         key: historyKey,
         state: {
             init: function init() {
@@ -20484,14 +20054,14 @@ RopeSequence.from = function from(values) {
     if (values instanceof RopeSequence) return values;
     return values && values.length ? new Leaf(values) : RopeSequence.empty;
 };
-var Leaf = /*@__PURE__*/ function(RopeSequence1) {
-    function Leaf1(values) {
-        RopeSequence1.call(this);
+var Leaf = /*@__PURE__*/ function(RopeSequence) {
+    function Leaf(values) {
+        RopeSequence.call(this);
         this.values = values;
     }
-    if (RopeSequence1) Leaf1.__proto__ = RopeSequence1;
-    Leaf1.prototype = Object.create(RopeSequence1 && RopeSequence1.prototype);
-    Leaf1.prototype.constructor = Leaf1;
+    if (RopeSequence) Leaf.__proto__ = RopeSequence;
+    Leaf.prototype = Object.create(RopeSequence && RopeSequence.prototype);
+    Leaf.prototype.constructor = Leaf;
     var prototypeAccessors = {
         length: {
             configurable: true
@@ -20500,31 +20070,31 @@ var Leaf = /*@__PURE__*/ function(RopeSequence1) {
             configurable: true
         }
     };
-    Leaf1.prototype.flatten = function flatten() {
+    Leaf.prototype.flatten = function flatten() {
         return this.values;
     };
-    Leaf1.prototype.sliceInner = function sliceInner(from, to) {
+    Leaf.prototype.sliceInner = function sliceInner(from, to) {
         if (from == 0 && to == this.length) return this;
-        return new Leaf1(this.values.slice(from, to));
+        return new Leaf(this.values.slice(from, to));
     };
-    Leaf1.prototype.getInner = function getInner(i) {
+    Leaf.prototype.getInner = function getInner(i) {
         return this.values[i];
     };
-    Leaf1.prototype.forEachInner = function forEachInner(f, from, to, start) {
+    Leaf.prototype.forEachInner = function forEachInner(f, from, to, start) {
         for(var i = from; i < to; i++){
             if (f(this.values[i], start + i) === false) return false;
         }
     };
-    Leaf1.prototype.forEachInvertedInner = function forEachInvertedInner(f, from, to, start) {
+    Leaf.prototype.forEachInvertedInner = function forEachInvertedInner(f, from, to, start) {
         for(var i = from - 1; i >= to; i--){
             if (f(this.values[i], start + i) === false) return false;
         }
     };
-    Leaf1.prototype.leafAppend = function leafAppend(other) {
-        if (this.length + other.length <= GOOD_LEAF_SIZE) return new Leaf1(this.values.concat(other.flatten()));
+    Leaf.prototype.leafAppend = function leafAppend(other) {
+        if (this.length + other.length <= GOOD_LEAF_SIZE) return new Leaf(this.values.concat(other.flatten()));
     };
-    Leaf1.prototype.leafPrepend = function leafPrepend(other) {
-        if (this.length + other.length <= GOOD_LEAF_SIZE) return new Leaf1(other.flatten().concat(this.values));
+    Leaf.prototype.leafPrepend = function leafPrepend(other) {
+        if (this.length + other.length <= GOOD_LEAF_SIZE) return new Leaf(other.flatten().concat(this.values));
     };
     prototypeAccessors.length.get = function() {
         return this.values.length;
@@ -20532,59 +20102,59 @@ var Leaf = /*@__PURE__*/ function(RopeSequence1) {
     prototypeAccessors.depth.get = function() {
         return 0;
     };
-    Object.defineProperties(Leaf1.prototype, prototypeAccessors);
-    return Leaf1;
+    Object.defineProperties(Leaf.prototype, prototypeAccessors);
+    return Leaf;
 }(RopeSequence);
 // :: RopeSequence
 // The empty rope sequence.
 RopeSequence.empty = new Leaf([]);
-var Append = /*@__PURE__*/ function(RopeSequence2) {
-    function Append1(left, right) {
-        RopeSequence2.call(this);
+var Append = /*@__PURE__*/ function(RopeSequence) {
+    function Append(left, right) {
+        RopeSequence.call(this);
         this.left = left;
         this.right = right;
         this.length = left.length + right.length;
         this.depth = Math.max(left.depth, right.depth) + 1;
     }
-    if (RopeSequence2) Append1.__proto__ = RopeSequence2;
-    Append1.prototype = Object.create(RopeSequence2 && RopeSequence2.prototype);
-    Append1.prototype.constructor = Append1;
-    Append1.prototype.flatten = function flatten() {
+    if (RopeSequence) Append.__proto__ = RopeSequence;
+    Append.prototype = Object.create(RopeSequence && RopeSequence.prototype);
+    Append.prototype.constructor = Append;
+    Append.prototype.flatten = function flatten() {
         return this.left.flatten().concat(this.right.flatten());
     };
-    Append1.prototype.getInner = function getInner(i) {
+    Append.prototype.getInner = function getInner(i) {
         return i < this.left.length ? this.left.get(i) : this.right.get(i - this.left.length);
     };
-    Append1.prototype.forEachInner = function forEachInner(f, from, to, start) {
+    Append.prototype.forEachInner = function forEachInner(f, from, to, start) {
         var leftLen = this.left.length;
         if (from < leftLen && this.left.forEachInner(f, from, Math.min(to, leftLen), start) === false) return false;
         if (to > leftLen && this.right.forEachInner(f, Math.max(from - leftLen, 0), Math.min(this.length, to) - leftLen, start + leftLen) === false) return false;
     };
-    Append1.prototype.forEachInvertedInner = function forEachInvertedInner(f, from, to, start) {
+    Append.prototype.forEachInvertedInner = function forEachInvertedInner(f, from, to, start) {
         var leftLen = this.left.length;
         if (from > leftLen && this.right.forEachInvertedInner(f, from - leftLen, Math.max(to, leftLen) - leftLen, start + leftLen) === false) return false;
         if (to < leftLen && this.left.forEachInvertedInner(f, Math.min(from, leftLen), to, start) === false) return false;
     };
-    Append1.prototype.sliceInner = function sliceInner(from, to) {
+    Append.prototype.sliceInner = function sliceInner(from, to) {
         if (from == 0 && to == this.length) return this;
         var leftLen = this.left.length;
         if (to <= leftLen) return this.left.slice(from, to);
         if (from >= leftLen) return this.right.slice(from - leftLen, to - leftLen);
         return this.left.slice(from, leftLen).append(this.right.slice(0, to - leftLen));
     };
-    Append1.prototype.leafAppend = function leafAppend(other) {
+    Append.prototype.leafAppend = function leafAppend(other) {
         var inner = this.right.leafAppend(other);
-        if (inner) return new Append1(this.left, inner);
+        if (inner) return new Append(this.left, inner);
     };
-    Append1.prototype.leafPrepend = function leafPrepend(other) {
+    Append.prototype.leafPrepend = function leafPrepend(other) {
         var inner = this.left.leafPrepend(other);
-        if (inner) return new Append1(inner, this.right);
+        if (inner) return new Append(inner, this.right);
     };
-    Append1.prototype.appendInner = function appendInner(other) {
-        if (this.left.depth >= Math.max(this.right.depth, other.depth) + 1) return new Append1(this.left, new Append1(this.right, other));
-        return new Append1(this, other);
+    Append.prototype.appendInner = function appendInner(other) {
+        if (this.left.depth >= Math.max(this.right.depth, other.depth) + 1) return new Append(this.left, new Append(this.right, other));
+        return new Append(this, other);
     };
-    return Append1;
+    return Append;
 }(RopeSequence);
 var ropeSequence = RopeSequence;
 exports.default = ropeSequence;
@@ -20592,31 +20162,29 @@ exports.default = ropeSequence;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ls8tb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HorizontalRule", ()=>HorizontalRule
-);
-parcelHelpers.export(exports, "default", ()=>HorizontalRule
-);
+parcelHelpers.export(exports, "HorizontalRule", ()=>HorizontalRule);
+parcelHelpers.export(exports, "default", ()=>HorizontalRule);
 var _core = require("@tiptap/core");
 var _prosemirrorState = require("prosemirror-state");
-const HorizontalRule = _core.Node.create({
-    name: 'horizontalRule',
+const HorizontalRule = (0, _core.Node).create({
+    name: "horizontalRule",
     addOptions () {
         return {
             HTMLAttributes: {}
         };
     },
-    group: 'block',
+    group: "block",
     parseHTML () {
         return [
             {
-                tag: 'hr'
+                tag: "hr"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'hr',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)
+            "hr",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes)
         ];
     },
     addCommands () {
@@ -20630,13 +20198,13 @@ const HorizontalRule = _core.Node.create({
                         if (dispatch) {
                             const { $to  } = tr.selection;
                             const posAfter = $to.end();
-                            if ($to.nodeAfter) tr.setSelection(_prosemirrorState.TextSelection.create(tr.doc, $to.pos));
+                            if ($to.nodeAfter) tr.setSelection((0, _prosemirrorState.TextSelection).create(tr.doc, $to.pos));
                             else {
                                 // add node after horizontal rule if it’s the end of the document
                                 const node = (_a = $to.parent.type.contentMatch.defaultType) === null || _a === void 0 ? void 0 : _a.create();
                                 if (node) {
                                     tr.insert(posAfter, node);
-                                    tr.setSelection(_prosemirrorState.TextSelection.create(tr.doc, posAfter));
+                                    tr.setSelection((0, _prosemirrorState.TextSelection).create(tr.doc, posAfter));
                                 }
                             }
                             tr.scrollIntoView();
@@ -20648,7 +20216,7 @@ const HorizontalRule = _core.Node.create({
     },
     addInputRules () {
         return [
-            _core.nodeInputRule({
+            (0, _core.nodeInputRule)({
                 find: /^(?:---|—-|___\s|\*\*\*\s)$/,
                 type: this.type
             }), 
@@ -20659,25 +20227,19 @@ const HorizontalRule = _core.Node.create({
 },{"@tiptap/core":"61ldi","prosemirror-state":"jYSWR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gfvOE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Italic", ()=>Italic
-);
-parcelHelpers.export(exports, "default", ()=>Italic
-);
-parcelHelpers.export(exports, "starInputRegex", ()=>starInputRegex
-);
-parcelHelpers.export(exports, "starPasteRegex", ()=>starPasteRegex
-);
-parcelHelpers.export(exports, "underscoreInputRegex", ()=>underscoreInputRegex
-);
-parcelHelpers.export(exports, "underscorePasteRegex", ()=>underscorePasteRegex
-);
+parcelHelpers.export(exports, "Italic", ()=>Italic);
+parcelHelpers.export(exports, "default", ()=>Italic);
+parcelHelpers.export(exports, "starInputRegex", ()=>starInputRegex);
+parcelHelpers.export(exports, "starPasteRegex", ()=>starPasteRegex);
+parcelHelpers.export(exports, "underscoreInputRegex", ()=>underscoreInputRegex);
+parcelHelpers.export(exports, "underscorePasteRegex", ()=>underscorePasteRegex);
 var _core = require("@tiptap/core");
 const starInputRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))$/;
 const starPasteRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))/g;
 const underscoreInputRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))$/;
 const underscorePasteRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))/g;
-const Italic = _core.Mark.create({
-    name: 'italic',
+const Italic = (0, _core.Mark).create({
+    name: "italic",
     addOptions () {
         return {
             HTMLAttributes: {}
@@ -20686,21 +20248,21 @@ const Italic = _core.Mark.create({
     parseHTML () {
         return [
             {
-                tag: 'em'
+                tag: "em"
             },
             {
-                tag: 'i',
-                getAttrs: (node)=>node.style.fontStyle !== 'normal' && null
+                tag: "i",
+                getAttrs: (node)=>node.style.fontStyle !== "normal" && null
             },
             {
-                style: 'font-style=italic'
+                style: "font-style=italic"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'em',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "em",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -20708,12 +20270,10 @@ const Italic = _core.Mark.create({
         return {
             setItalic: ()=>({ commands  })=>{
                     return commands.setMark(this.name);
-                }
-            ,
+                },
             toggleItalic: ()=>({ commands  })=>{
                     return commands.toggleMark(this.name);
-                }
-            ,
+                },
             unsetItalic: ()=>({ commands  })=>{
                     return commands.unsetMark(this.name);
                 }
@@ -20721,18 +20281,17 @@ const Italic = _core.Mark.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-i': ()=>this.editor.commands.toggleItalic()
-            ,
-            'Mod-I': ()=>this.editor.commands.toggleItalic()
+            "Mod-i": ()=>this.editor.commands.toggleItalic(),
+            "Mod-I": ()=>this.editor.commands.toggleItalic()
         };
     },
     addInputRules () {
         return [
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: starInputRegex,
                 type: this.type
             }),
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: underscoreInputRegex,
                 type: this.type
             }), 
@@ -20740,11 +20299,11 @@ const Italic = _core.Mark.create({
     },
     addPasteRules () {
         return [
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: starPasteRegex,
                 type: this.type
             }),
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: underscorePasteRegex,
                 type: this.type
             }), 
@@ -20755,41 +20314,37 @@ const Italic = _core.Mark.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jBeuk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ListItem", ()=>ListItem
-);
-parcelHelpers.export(exports, "default", ()=>ListItem
-);
+parcelHelpers.export(exports, "ListItem", ()=>ListItem);
+parcelHelpers.export(exports, "default", ()=>ListItem);
 var _core = require("@tiptap/core");
-const ListItem = _core.Node.create({
-    name: 'listItem',
+const ListItem = (0, _core.Node).create({
+    name: "listItem",
     addOptions () {
         return {
             HTMLAttributes: {}
         };
     },
-    content: 'paragraph block*',
+    content: "paragraph block*",
     defining: true,
     parseHTML () {
         return [
             {
-                tag: 'li'
+                tag: "li"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'li',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "li",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
     addKeyboardShortcuts () {
         return {
-            Enter: ()=>this.editor.commands.splitListItem(this.name)
-            ,
-            Tab: ()=>this.editor.commands.sinkListItem(this.name)
-            ,
-            'Shift-Tab': ()=>this.editor.commands.liftListItem(this.name)
+            Enter: ()=>this.editor.commands.splitListItem(this.name),
+            Tab: ()=>this.editor.commands.sinkListItem(this.name),
+            "Shift-Tab": ()=>this.editor.commands.liftListItem(this.name)
         };
     }
 });
@@ -20797,23 +20352,20 @@ const ListItem = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gufrl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "OrderedList", ()=>OrderedList
-);
-parcelHelpers.export(exports, "default", ()=>OrderedList
-);
-parcelHelpers.export(exports, "inputRegex", ()=>inputRegex
-);
+parcelHelpers.export(exports, "OrderedList", ()=>OrderedList);
+parcelHelpers.export(exports, "default", ()=>OrderedList);
+parcelHelpers.export(exports, "inputRegex", ()=>inputRegex);
 var _core = require("@tiptap/core");
 const inputRegex = /^(\d+)\.\s$/;
-const OrderedList = _core.Node.create({
-    name: 'orderedList',
+const OrderedList = (0, _core.Node).create({
+    name: "orderedList",
     addOptions () {
         return {
-            itemTypeName: 'listItem',
+            itemTypeName: "listItem",
             HTMLAttributes: {}
         };
     },
-    group: 'block list',
+    group: "block list",
     content () {
         return `${this.options.itemTypeName}+`;
     },
@@ -20822,7 +20374,7 @@ const OrderedList = _core.Node.create({
             start: {
                 default: 1,
                 parseHTML: (element)=>{
-                    return element.hasAttribute('start') ? parseInt(element.getAttribute('start') || '', 10) : 1;
+                    return element.hasAttribute("start") ? parseInt(element.getAttribute("start") || "", 10) : 1;
                 }
             }
         };
@@ -20830,19 +20382,19 @@ const OrderedList = _core.Node.create({
     parseHTML () {
         return [
             {
-                tag: 'ol'
+                tag: "ol"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         const { start , ...attributesWithoutStart } = HTMLAttributes;
         return start === 1 ? [
-            'ol',
-            _core.mergeAttributes(this.options.HTMLAttributes, attributesWithoutStart),
+            "ol",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, attributesWithoutStart),
             0
         ] : [
-            'ol',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "ol",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -20855,18 +20407,17 @@ const OrderedList = _core.Node.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Shift-7': ()=>this.editor.commands.toggleOrderedList()
+            "Mod-Shift-7": ()=>this.editor.commands.toggleOrderedList()
         };
     },
     addInputRules () {
         return [
-            _core.wrappingInputRule({
+            (0, _core.wrappingInputRule)({
                 find: inputRegex,
                 type: this.type,
                 getAttributes: (match)=>({
                         start: +match[1]
-                    })
-                ,
+                    }),
                 joinPredicate: (match, node)=>node.childCount + node.attrs.start === +match[1]
             }), 
         ];
@@ -20876,32 +20427,30 @@ const OrderedList = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gPhwR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Paragraph", ()=>Paragraph
-);
-parcelHelpers.export(exports, "default", ()=>Paragraph
-);
+parcelHelpers.export(exports, "Paragraph", ()=>Paragraph);
+parcelHelpers.export(exports, "default", ()=>Paragraph);
 var _core = require("@tiptap/core");
-const Paragraph = _core.Node.create({
-    name: 'paragraph',
+const Paragraph = (0, _core.Node).create({
+    name: "paragraph",
     priority: 1000,
     addOptions () {
         return {
             HTMLAttributes: {}
         };
     },
-    group: 'block',
-    content: 'inline*',
+    group: "block",
+    content: "inline*",
     parseHTML () {
         return [
             {
-                tag: 'p'
+                tag: "p"
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            'p',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "p",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -20914,7 +20463,7 @@ const Paragraph = _core.Node.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Alt-0': ()=>this.editor.commands.setParagraph()
+            "Mod-Alt-0": ()=>this.editor.commands.setParagraph()
         };
     }
 });
@@ -20922,19 +20471,15 @@ const Paragraph = _core.Node.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Zh0pF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Strike", ()=>Strike
-);
-parcelHelpers.export(exports, "default", ()=>Strike
-);
-parcelHelpers.export(exports, "inputRegex", ()=>inputRegex
-);
-parcelHelpers.export(exports, "pasteRegex", ()=>pasteRegex
-);
+parcelHelpers.export(exports, "Strike", ()=>Strike);
+parcelHelpers.export(exports, "default", ()=>Strike);
+parcelHelpers.export(exports, "inputRegex", ()=>inputRegex);
+parcelHelpers.export(exports, "pasteRegex", ()=>pasteRegex);
 var _core = require("@tiptap/core");
 const inputRegex = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))$/;
 const pasteRegex = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))/g;
-const Strike = _core.Mark.create({
-    name: 'strike',
+const Strike = (0, _core.Mark).create({
+    name: "strike",
     addOptions () {
         return {
             HTMLAttributes: {}
@@ -20943,25 +20488,25 @@ const Strike = _core.Mark.create({
     parseHTML () {
         return [
             {
-                tag: 's'
+                tag: "s"
             },
             {
-                tag: 'del'
+                tag: "del"
             },
             {
-                tag: 'strike'
+                tag: "strike"
             },
             {
-                style: 'text-decoration',
+                style: "text-decoration",
                 consuming: false,
-                getAttrs: (style)=>style.includes('line-through') ? {} : false
+                getAttrs: (style)=>style.includes("line-through") ? {} : false
             }, 
         ];
     },
     renderHTML ({ HTMLAttributes  }) {
         return [
-            's',
-            _core.mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+            "s",
+            (0, _core.mergeAttributes)(this.options.HTMLAttributes, HTMLAttributes),
             0
         ];
     },
@@ -20969,12 +20514,10 @@ const Strike = _core.Mark.create({
         return {
             setStrike: ()=>({ commands  })=>{
                     return commands.setMark(this.name);
-                }
-            ,
+                },
             toggleStrike: ()=>({ commands  })=>{
                     return commands.toggleMark(this.name);
-                }
-            ,
+                },
             unsetStrike: ()=>({ commands  })=>{
                     return commands.unsetMark(this.name);
                 }
@@ -20982,12 +20525,12 @@ const Strike = _core.Mark.create({
     },
     addKeyboardShortcuts () {
         return {
-            'Mod-Shift-x': ()=>this.editor.commands.toggleStrike()
+            "Mod-Shift-x": ()=>this.editor.commands.toggleStrike()
         };
     },
     addInputRules () {
         return [
-            _core.markInputRule({
+            (0, _core.markInputRule)({
                 find: inputRegex,
                 type: this.type
             }), 
@@ -20995,7 +20538,7 @@ const Strike = _core.Mark.create({
     },
     addPasteRules () {
         return [
-            _core.markPasteRule({
+            (0, _core.markPasteRule)({
                 find: pasteRegex,
                 type: this.type
             }), 
@@ -21006,33 +20549,27 @@ const Strike = _core.Mark.create({
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bFU0K":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Text", ()=>Text
-);
-parcelHelpers.export(exports, "default", ()=>Text
-);
+parcelHelpers.export(exports, "Text", ()=>Text);
+parcelHelpers.export(exports, "default", ()=>Text);
 var _core = require("@tiptap/core");
-const Text = _core.Node.create({
-    name: 'text',
-    group: 'inline'
+const Text = (0, _core.Node).create({
+    name: "text",
+    group: "inline"
 });
 
 },{"@tiptap/core":"61ldi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cvMRI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FloatingMenu", ()=>FloatingMenu
-);
-parcelHelpers.export(exports, "FloatingMenuPlugin", ()=>FloatingMenuPlugin
-);
-parcelHelpers.export(exports, "FloatingMenuView", ()=>FloatingMenuView
-);
-parcelHelpers.export(exports, "default", ()=>FloatingMenu
-);
+parcelHelpers.export(exports, "FloatingMenu", ()=>FloatingMenu);
+parcelHelpers.export(exports, "FloatingMenuPlugin", ()=>FloatingMenuPlugin);
+parcelHelpers.export(exports, "FloatingMenuView", ()=>FloatingMenuView);
+parcelHelpers.export(exports, "default", ()=>FloatingMenu);
 var _core = require("@tiptap/core");
 var _prosemirrorState = require("prosemirror-state");
 var _tippyJs = require("tippy.js");
 var _tippyJsDefault = parcelHelpers.interopDefault(_tippyJs);
 class FloatingMenuView {
-    constructor({ editor , element , view: view1 , tippyOptions ={} , shouldShow ,  }){
+    constructor({ editor , element , view , tippyOptions ={} , shouldShow ,  }){
         this.preventHide = false;
         this.shouldShow = ({ view , state  })=>{
             const { selection  } = state;
@@ -21047,8 +20584,7 @@ class FloatingMenuView {
         };
         this.focusHandler = ()=>{
             // we use `setTimeout` to make sure `selection` is already updated
-            setTimeout(()=>this.update(this.editor.view)
-            );
+            setTimeout(()=>this.update(this.editor.view));
         };
         this.blurHandler = ({ event  })=>{
             var _a;
@@ -21061,34 +20597,34 @@ class FloatingMenuView {
         };
         this.editor = editor;
         this.element = element;
-        this.view = view1;
+        this.view = view;
         if (shouldShow) this.shouldShow = shouldShow;
-        this.element.addEventListener('mousedown', this.mousedownHandler, {
+        this.element.addEventListener("mousedown", this.mousedownHandler, {
             capture: true
         });
-        this.editor.on('focus', this.focusHandler);
-        this.editor.on('blur', this.blurHandler);
+        this.editor.on("focus", this.focusHandler);
+        this.editor.on("blur", this.blurHandler);
         this.tippyOptions = tippyOptions;
         // Detaches menu content from its current parent
         this.element.remove();
-        this.element.style.visibility = 'visible';
+        this.element.style.visibility = "visible";
     }
     createTooltip() {
         const { element: editorElement  } = this.editor.options;
         const editorIsAttached = !!editorElement.parentElement;
         if (this.tippy || !editorIsAttached) return;
-        this.tippy = _tippyJsDefault.default(editorElement, {
+        this.tippy = (0, _tippyJsDefault.default)(editorElement, {
             duration: 0,
             getReferenceClientRect: null,
             content: this.element,
             interactive: true,
-            trigger: 'manual',
-            placement: 'right',
-            hideOnClick: 'toggle',
+            trigger: "manual",
+            placement: "right",
+            hideOnClick: "toggle",
             ...this.tippyOptions
         });
         // maybe we have to hide tippy on its own blur event as well
-        if (this.tippy.popper.firstChild) this.tippy.popper.firstChild.addEventListener('blur', (event)=>{
+        if (this.tippy.popper.firstChild) this.tippy.popper.firstChild.addEventListener("blur", (event)=>{
             this.blurHandler({
                 event
             });
@@ -21113,8 +20649,7 @@ class FloatingMenuView {
             return;
         }
         (_b = this.tippy) === null || _b === void 0 || _b.setProps({
-            getReferenceClientRect: ((_c = this.tippyOptions) === null || _c === void 0 ? void 0 : _c.getReferenceClientRect) || (()=>_core.posToDOMRect(view, from, to)
-            )
+            getReferenceClientRect: ((_c = this.tippyOptions) === null || _c === void 0 ? void 0 : _c.getReferenceClientRect) || (()=>(0, _core.posToDOMRect)(view, from, to))
         });
         this.show();
     }
@@ -21129,29 +20664,29 @@ class FloatingMenuView {
     destroy() {
         var _a;
         (_a = this.tippy) === null || _a === void 0 || _a.destroy();
-        this.element.removeEventListener('mousedown', this.mousedownHandler, {
+        this.element.removeEventListener("mousedown", this.mousedownHandler, {
             capture: true
         });
-        this.editor.off('focus', this.focusHandler);
-        this.editor.off('blur', this.blurHandler);
+        this.editor.off("focus", this.focusHandler);
+        this.editor.off("blur", this.blurHandler);
     }
 }
 const FloatingMenuPlugin = (options)=>{
-    return new _prosemirrorState.Plugin({
-        key: typeof options.pluginKey === 'string' ? new _prosemirrorState.PluginKey(options.pluginKey) : options.pluginKey,
+    return new (0, _prosemirrorState.Plugin)({
+        key: typeof options.pluginKey === "string" ? new (0, _prosemirrorState.PluginKey)(options.pluginKey) : options.pluginKey,
         view: (view)=>new FloatingMenuView({
                 view,
                 ...options
             })
     });
 };
-const FloatingMenu = _core.Extension.create({
-    name: 'floatingMenu',
+const FloatingMenu = (0, _core.Extension).create({
+    name: "floatingMenu",
     addOptions () {
         return {
             element: null,
             tippyOptions: {},
-            pluginKey: 'floatingMenu',
+            pluginKey: "floatingMenu",
             shouldShow: null
         };
     },
@@ -21172,22 +20707,14 @@ const FloatingMenu = _core.Extension.create({
 },{"@tiptap/core":"61ldi","prosemirror-state":"jYSWR","tippy.js":"ccpCS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ccpCS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "animateFill", ()=>animateFill
-);
-parcelHelpers.export(exports, "createSingleton", ()=>createSingleton
-);
-parcelHelpers.export(exports, "delegate", ()=>delegate
-);
-parcelHelpers.export(exports, "followCursor", ()=>followCursor
-);
-parcelHelpers.export(exports, "hideAll", ()=>hideAll
-);
-parcelHelpers.export(exports, "inlinePositioning", ()=>inlinePositioning
-);
-parcelHelpers.export(exports, "roundArrow", ()=>ROUND_ARROW
-);
-parcelHelpers.export(exports, "sticky", ()=>sticky
-);
+parcelHelpers.export(exports, "animateFill", ()=>animateFill);
+parcelHelpers.export(exports, "createSingleton", ()=>createSingleton);
+parcelHelpers.export(exports, "delegate", ()=>delegate);
+parcelHelpers.export(exports, "followCursor", ()=>followCursor);
+parcelHelpers.export(exports, "hideAll", ()=>hideAll);
+parcelHelpers.export(exports, "inlinePositioning", ()=>inlinePositioning);
+parcelHelpers.export(exports, "roundArrow", ()=>ROUND_ARROW);
+parcelHelpers.export(exports, "sticky", ()=>sticky);
 /**!
 * tippy.js v6.3.7
 * (c) 2017-2021 atomiks
@@ -21218,10 +20745,10 @@ function getValueAtIndexOrReturn(value, index, defaultValue) {
 }
 function isType(value, type) {
     var str = ({}).toString.call(value);
-    return str.indexOf('[object') === 0 && str.indexOf(type + "]") > -1;
+    return str.indexOf("[object") === 0 && str.indexOf(type + "]") > -1;
 }
 function invokeWithArgsOrReturn(value, args) {
-    return typeof value === 'function' ? value.apply(void 0, args) : value;
+    return typeof value === "function" ? value.apply(void 0, args) : value;
 }
 function debounce(fn, ms) {
     // Avoid wrapping in `setTimeout` if ms is 0 anyway
@@ -21256,7 +20783,7 @@ function unique(arr) {
     });
 }
 function getBasePlacement(placement) {
-    return placement.split('-')[0];
+    return placement.split("-")[0];
 }
 function arrayFrom(value) {
     return [].slice.call(value);
@@ -21268,21 +20795,21 @@ function removeUndefinedProps(obj) {
     }, {});
 }
 function div() {
-    return document.createElement('div');
+    return document.createElement("div");
 }
 function isElement(value) {
     return [
-        'Element',
-        'Fragment'
+        "Element",
+        "Fragment"
     ].some(function(type) {
         return isType(value, type);
     });
 }
 function isNodeList(value) {
-    return isType(value, 'NodeList');
+    return isType(value, "NodeList");
 }
 function isMouseEvent(value) {
-    return isType(value, 'MouseEvent');
+    return isType(value, "MouseEvent");
 }
 function isReferenceElement(value) {
     return !!(value && value._tippy && value._tippy.reference === value);
@@ -21302,7 +20829,7 @@ function setTransitionDuration(els, value) {
 }
 function setVisibilityState(els, state) {
     els.forEach(function(el) {
-        if (el) el.setAttribute('data-state', state);
+        if (el) el.setAttribute("data-state", state);
     });
 }
 function getOwnerDocument(elementOrElements) {
@@ -21318,10 +20845,10 @@ function isCursorOutsideInteractiveBorder(popperTreeData, event) {
         var basePlacement = getBasePlacement(popperState.placement);
         var offsetData = popperState.modifiersData.offset;
         if (!offsetData) return true;
-        var topDistance = basePlacement === 'bottom' ? offsetData.top.y : 0;
-        var bottomDistance = basePlacement === 'top' ? offsetData.bottom.y : 0;
-        var leftDistance = basePlacement === 'right' ? offsetData.left.x : 0;
-        var rightDistance = basePlacement === 'left' ? offsetData.right.x : 0;
+        var topDistance = basePlacement === "bottom" ? offsetData.top.y : 0;
+        var bottomDistance = basePlacement === "top" ? offsetData.bottom.y : 0;
+        var leftDistance = basePlacement === "right" ? offsetData.left.x : 0;
+        var rightDistance = basePlacement === "left" ? offsetData.right.x : 0;
         var exceedsTop = popperRect.top - clientY + topDistance > interactiveBorder;
         var exceedsBottom = clientY - popperRect.bottom - bottomDistance > interactiveBorder;
         var exceedsLeft = popperRect.left - clientX + leftDistance > interactiveBorder;
@@ -21333,8 +20860,8 @@ function updateTransitionEndListener(box, action, listener) {
     var method = action + "EventListener"; // some browsers apparently support `transition` (unprefixed) but only fire
     // `webkitTransitionEnd`...
     [
-        'transitionend',
-        'webkitTransitionEnd'
+        "transitionend",
+        "webkitTransitionEnd"
     ].forEach(function(event) {
         box[method](event, listener);
     });
@@ -21363,7 +20890,7 @@ var lastMouseMoveTime = 0;
  */ function onDocumentTouchStart() {
     if (currentInput.isTouch) return;
     currentInput.isTouch = true;
-    if (window.performance) document.addEventListener('mousemove', onDocumentMouseMove);
+    if (window.performance) document.addEventListener("mousemove", onDocumentMouseMove);
 }
 /**
  * When two `mousemove` event are fired consecutively within 20ms, it's assumed
@@ -21373,7 +20900,7 @@ var lastMouseMoveTime = 0;
     var now = performance.now();
     if (now - lastMouseMoveTime < 20) {
         currentInput.isTouch = false;
-        document.removeEventListener('mousemove', onDocumentMouseMove);
+        document.removeEventListener("mousemove", onDocumentMouseMove);
     }
     lastMouseMoveTime = now;
 }
@@ -21390,32 +20917,32 @@ var lastMouseMoveTime = 0;
     }
 }
 function bindGlobalEventListeners() {
-    document.addEventListener('touchstart', onDocumentTouchStart, TOUCH_OPTIONS);
-    window.addEventListener('blur', onWindowBlur);
+    document.addEventListener("touchstart", onDocumentTouchStart, TOUCH_OPTIONS);
+    window.addEventListener("blur", onWindowBlur);
 }
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+var isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
 var isIE11 = isBrowser ? !!window.msCrypto : false;
 function createMemoryLeakWarning(method) {
-    var txt = method === 'destroy' ? 'n already-' : ' ';
+    var txt = method === "destroy" ? "n already-" : " ";
     return [
         method + "() was called on a" + txt + "destroyed instance. This is a no-op but",
-        'indicates a potential memory leak.'
-    ].join(' ');
+        "indicates a potential memory leak."
+    ].join(" ");
 }
 function clean(value) {
     var spacesAndTabs = /[ \t]{2,}/g;
     var lineStartWithSpaces = /^[ \t]*/gm;
-    return value.replace(spacesAndTabs, ' ').replace(lineStartWithSpaces, '').trim();
+    return value.replace(spacesAndTabs, " ").replace(lineStartWithSpaces, "").trim();
 }
 function getDevMessage(message) {
-    return clean("\n  %ctippy.js\n\n  %c" + clean(message) + "\n\n  %c\uD83D\uDC77\u200D This is a development-only message. It will be removed in production.\n  ");
+    return clean("\n  %ctippy.js\n\n  %c" + clean(message) + "\n\n  %c\uD83D\uDC77‍ This is a development-only message. It will be removed in production.\n  ");
 }
 function getFormattedMessage(message) {
     return [
         getDevMessage(message),
-        'color: #00C584; font-size: 1.3em; font-weight: bold;',
-        'line-height: 1.5',
-        'color: #a6a095;'
+        "color: #00C584; font-size: 1.3em; font-weight: bold;",
+        "line-height: 1.5",
+        "color: #a6a095;"
     ];
 } // Assume warnings and errors never have the same message
 var visitedMessages;
@@ -21439,17 +20966,17 @@ function errorWhen(condition, message) {
 }
 function validateTargets(targets) {
     var didPassFalsyValue = !targets;
-    var didPassPlainObject = Object.prototype.toString.call(targets) === '[object Object]' && !targets.addEventListener;
+    var didPassPlainObject = Object.prototype.toString.call(targets) === "[object Object]" && !targets.addEventListener;
     errorWhen(didPassFalsyValue, [
-        'tippy() was passed',
-        '`' + String(targets) + '`',
-        'as its targets (first) argument. Valid types are: String, Element,',
-        'Element[], or NodeList.'
-    ].join(' '));
+        "tippy() was passed",
+        "`" + String(targets) + "`",
+        "as its targets (first) argument. Valid types are: String, Element,",
+        "Element[], or NodeList."
+    ].join(" "));
     errorWhen(didPassPlainObject, [
-        'tippy() was passed a plain object which is not supported as an argument',
-        'for virtual positioning. Use props.getReferenceClientRect instead.'
-    ].join(' '));
+        "tippy() was passed a plain object which is not supported as an argument",
+        "for virtual positioning. Use props.getReferenceClientRect instead."
+    ].join(" "));
 }
 var pluginProps = {
     animateFill: false,
@@ -21459,20 +20986,20 @@ var pluginProps = {
 };
 var renderProps = {
     allowHTML: false,
-    animation: 'fade',
+    animation: "fade",
     arrow: true,
-    content: '',
+    content: "",
     inertia: false,
     maxWidth: 350,
-    role: 'tooltip',
-    theme: '',
+    role: "tooltip",
+    theme: "",
     zIndex: 9999
 };
 var defaultProps = Object.assign({
     appendTo: TIPPY_DEFAULT_APPEND_TO,
     aria: {
-        content: 'auto',
-        expanded: 'auto'
+        content: "auto",
+        expanded: "auto"
     },
     delay: 0,
     duration: [
@@ -21485,7 +21012,7 @@ var defaultProps = Object.assign({
     interactive: false,
     interactiveBorder: 2,
     interactiveDebounce: 0,
-    moveTransition: '',
+    moveTransition: "",
     offset: [
         0,
         10
@@ -21502,13 +21029,13 @@ var defaultProps = Object.assign({
     onTrigger: function onTrigger() {},
     onUntrigger: function onUntrigger() {},
     onClickOutside: function onClickOutside() {},
-    placement: 'top',
+    placement: "top",
     plugins: [],
     popperOptions: {},
     render: null,
     showOnCreate: false,
     touch: true,
-    trigger: 'mouseenter focus',
+    trigger: "mouseenter focus",
     triggerTarget: null
 }, pluginProps, renderProps);
 var defaultKeys = Object.keys(defaultProps);
@@ -21521,7 +21048,7 @@ var setDefaultProps = function setDefaultProps(partialProps) {
 };
 function getExtendedPassedProps(passedProps) {
     var plugins = passedProps.plugins || [];
-    var pluginProps1 = plugins.reduce(function(acc, plugin) {
+    var pluginProps = plugins.reduce(function(acc, plugin) {
         var name = plugin.name, defaultValue = plugin.defaultValue;
         if (name) {
             var _name;
@@ -21529,16 +21056,16 @@ function getExtendedPassedProps(passedProps) {
         }
         return acc;
     }, {});
-    return Object.assign({}, passedProps, pluginProps1);
+    return Object.assign({}, passedProps, pluginProps);
 }
 function getDataAttributeProps(reference, plugins) {
     var propKeys = plugins ? Object.keys(getExtendedPassedProps(Object.assign({}, defaultProps, {
         plugins: plugins
     }))) : defaultKeys;
     var props = propKeys.reduce(function(acc, key) {
-        var valueAsString = (reference.getAttribute("data-tippy-" + key) || '').trim();
+        var valueAsString = (reference.getAttribute("data-tippy-" + key) || "").trim();
         if (!valueAsString) return acc;
-        if (key === 'content') acc[key] = valueAsString;
+        if (key === "content") acc[key] = valueAsString;
         else try {
             acc[key] = JSON.parse(valueAsString);
         } catch (e) {
@@ -21556,8 +21083,8 @@ function evaluateProps(reference, props) {
     }, props.ignoreAttributes ? {} : getDataAttributeProps(reference, props.plugins));
     out.aria = Object.assign({}, defaultProps.aria, out.aria);
     out.aria = {
-        expanded: out.aria.expanded === 'auto' ? props.interactive : out.aria.expanded,
-        content: out.aria.content === 'auto' ? props.interactive ? null : 'describedby' : out.aria.content
+        expanded: out.aria.expanded === "auto" ? props.interactive : out.aria.expanded,
+        content: out.aria.content === "auto" ? props.interactive ? null : "describedby" : out.aria.content
     };
     return out;
 }
@@ -21574,15 +21101,15 @@ function validateProps(partialProps, plugins) {
         warnWhen(didPassUnknownProp, [
             "`" + prop + "`",
             "is not a valid prop. You may have spelled it incorrectly, or if it's",
-            'a plugin, forgot to pass it in an array as props.plugins.',
-            '\n\n',
-            'All props: https://atomiks.github.io/tippyjs/v6/all-props/\n',
-            'Plugins: https://atomiks.github.io/tippyjs/v6/plugins/'
-        ].join(' '));
+            "a plugin, forgot to pass it in an array as props.plugins.",
+            "\n\n",
+            "All props: https://atomiks.github.io/tippyjs/v6/all-props/\n",
+            "Plugins: https://atomiks.github.io/tippyjs/v6/plugins/"
+        ].join(" "));
     });
 }
 var innerHTML = function innerHTML() {
-    return 'innerHTML';
+    return "innerHTML";
 };
 function dangerouslySetInnerHTML(element, html) {
     element[innerHTML()] = html;
@@ -21599,9 +21126,9 @@ function createArrowElement(value) {
 }
 function setContent(content, props) {
     if (isElement(props.content)) {
-        dangerouslySetInnerHTML(content, '');
+        dangerouslySetInnerHTML(content, "");
         content.appendChild(props.content);
-    } else if (typeof props.content !== 'function') {
+    } else if (typeof props.content !== "function") {
         if (props.allowHTML) dangerouslySetInnerHTML(content, props.content);
         else content.textContent = props.content;
     }
@@ -21624,28 +21151,28 @@ function getChildren(popper) {
 }
 function render(instance) {
     var popper = div();
-    var box1 = div();
-    box1.className = BOX_CLASS;
-    box1.setAttribute('data-state', 'hidden');
-    box1.setAttribute('tabindex', '-1');
-    var content1 = div();
-    content1.className = CONTENT_CLASS;
-    content1.setAttribute('data-state', 'hidden');
-    setContent(content1, instance.props);
-    popper.appendChild(box1);
-    box1.appendChild(content1);
+    var box = div();
+    box.className = BOX_CLASS;
+    box.setAttribute("data-state", "hidden");
+    box.setAttribute("tabindex", "-1");
+    var content = div();
+    content.className = CONTENT_CLASS;
+    content.setAttribute("data-state", "hidden");
+    setContent(content, instance.props);
+    popper.appendChild(box);
+    box.appendChild(content);
     onUpdate(instance.props, instance.props);
     function onUpdate(prevProps, nextProps) {
         var _getChildren = getChildren(popper), box = _getChildren.box, content = _getChildren.content, arrow = _getChildren.arrow;
-        if (nextProps.theme) box.setAttribute('data-theme', nextProps.theme);
-        else box.removeAttribute('data-theme');
-        if (typeof nextProps.animation === 'string') box.setAttribute('data-animation', nextProps.animation);
-        else box.removeAttribute('data-animation');
-        if (nextProps.inertia) box.setAttribute('data-inertia', '');
-        else box.removeAttribute('data-inertia');
-        box.style.maxWidth = typeof nextProps.maxWidth === 'number' ? nextProps.maxWidth + "px" : nextProps.maxWidth;
-        if (nextProps.role) box.setAttribute('role', nextProps.role);
-        else box.removeAttribute('role');
+        if (nextProps.theme) box.setAttribute("data-theme", nextProps.theme);
+        else box.removeAttribute("data-theme");
+        if (typeof nextProps.animation === "string") box.setAttribute("data-animation", nextProps.animation);
+        else box.removeAttribute("data-animation");
+        if (nextProps.inertia) box.setAttribute("data-inertia", "");
+        else box.removeAttribute("data-inertia");
+        box.style.maxWidth = typeof nextProps.maxWidth === "number" ? nextProps.maxWidth + "px" : nextProps.maxWidth;
+        if (nextProps.role) box.setAttribute("role", nextProps.role);
+        else box.removeAttribute("role");
         if (prevProps.content !== nextProps.content || prevProps.allowHTML !== nextProps.allowHTML) setContent(content, instance.props);
         if (nextProps.arrow) {
             if (!arrow) box.appendChild(createArrowElement(nextProps.arrow));
@@ -21684,10 +21211,10 @@ function createTippy(reference, passedProps) {
     var currentTarget; // ===========================================================================
     // 🔑 Public members
     // ===========================================================================
-    var id1 = idCounter++;
+    var id = idCounter++;
     var popperInstance = null;
     var plugins = unique(props.plugins);
-    var state1 = {
+    var state = {
         // Is the instance currently enabled?
         isEnabled: true,
         // Is the tippy currently showing and not transitioning out?
@@ -21699,19 +21226,19 @@ function createTippy(reference, passedProps) {
         // Has the tippy finished transitioning in?
         isShown: false
     };
-    var instance1 = {
+    var instance = {
         // properties
-        id: id1,
+        id: id,
         reference: reference,
         popper: div(),
         popperInstance: popperInstance,
         props: props,
-        state: state1,
+        state: state,
         plugins: plugins,
         // methods
         clearDelayTimeouts: clearDelayTimeouts,
         setProps: setProps,
-        setContent: setContent1,
+        setContent: setContent,
         show: show,
         hide: hide,
         hideWithInteractivity: hideWithInteractivity,
@@ -21722,53 +21249,53 @@ function createTippy(reference, passedProps) {
     }; // TODO: Investigate why this early return causes a TDZ error in the tests —
     // it doesn't seem to happen in the browser
     /* istanbul ignore if */ if (!props.render) {
-        errorWhen(true, 'render() function has not been supplied.');
-        return instance1;
+        errorWhen(true, "render() function has not been supplied.");
+        return instance;
     } // ===========================================================================
     // Initial mutations
     // ===========================================================================
-    var _props$render = props.render(instance1), popper1 = _props$render.popper, onUpdate = _props$render.onUpdate;
-    popper1.setAttribute('data-tippy-root', '');
-    popper1.id = "tippy-" + instance1.id;
-    instance1.popper = popper1;
-    reference._tippy = instance1;
-    popper1._tippy = instance1;
+    var _props$render = props.render(instance), popper = _props$render.popper, onUpdate = _props$render.onUpdate;
+    popper.setAttribute("data-tippy-root", "");
+    popper.id = "tippy-" + instance.id;
+    instance.popper = popper;
+    reference._tippy = instance;
+    popper._tippy = instance;
     var pluginsHooks = plugins.map(function(plugin) {
-        return plugin.fn(instance1);
+        return plugin.fn(instance);
     });
-    var hasAriaExpanded = reference.hasAttribute('aria-expanded');
+    var hasAriaExpanded = reference.hasAttribute("aria-expanded");
     addListeners();
     handleAriaExpandedAttribute();
     handleStyles();
-    invokeHook('onCreate', [
-        instance1
+    invokeHook("onCreate", [
+        instance
     ]);
     if (props.showOnCreate) scheduleShow();
      // Prevent a tippy with a delay from hiding if the cursor left then returned
     // before it started hiding
-    popper1.addEventListener('mouseenter', function() {
-        if (instance1.props.interactive && instance1.state.isVisible) instance1.clearDelayTimeouts();
+    popper.addEventListener("mouseenter", function() {
+        if (instance.props.interactive && instance.state.isVisible) instance.clearDelayTimeouts();
     });
-    popper1.addEventListener('mouseleave', function() {
-        if (instance1.props.interactive && instance1.props.trigger.indexOf('mouseenter') >= 0) getDocument().addEventListener('mousemove', debouncedOnMouseMove);
+    popper.addEventListener("mouseleave", function() {
+        if (instance.props.interactive && instance.props.trigger.indexOf("mouseenter") >= 0) getDocument().addEventListener("mousemove", debouncedOnMouseMove);
     });
-    return instance1; // ===========================================================================
+    return instance; // ===========================================================================
     // 🔒 Private methods
     // ===========================================================================
     function getNormalizedTouchSettings() {
-        var touch = instance1.props.touch;
+        var touch = instance.props.touch;
         return Array.isArray(touch) ? touch : [
             touch,
             0
         ];
     }
     function getIsCustomTouchBehavior() {
-        return getNormalizedTouchSettings()[0] === 'hold';
+        return getNormalizedTouchSettings()[0] === "hold";
     }
     function getIsDefaultRenderFn() {
         var _instance$props$rende;
         // @ts-ignore
-        return !!((_instance$props$rende = instance1.props.render) != null && _instance$props$rende.$$tippy);
+        return !!((_instance$props$rende = instance.props.render) != null && _instance$props$rende.$$tippy);
     }
     function getCurrentTarget() {
         return currentTarget || reference;
@@ -21778,23 +21305,23 @@ function createTippy(reference, passedProps) {
         return parent ? getOwnerDocument(parent) : document;
     }
     function getDefaultTemplateChildren() {
-        return getChildren(popper1);
+        return getChildren(popper);
     }
     function getDelay(isShow) {
         // For touch or keyboard input, force `0` delay for UX reasons
         // Also if the instance is mounted but not visible (transitioning out),
         // ignore delay
-        if (instance1.state.isMounted && !instance1.state.isVisible || currentInput.isTouch || lastTriggerEvent && lastTriggerEvent.type === 'focus') {
+        if (instance.state.isMounted && !instance.state.isVisible || currentInput.isTouch || lastTriggerEvent && lastTriggerEvent.type === "focus") {
             return 0;
         }
-        return getValueAtIndexOrReturn(instance1.props.delay, isShow ? 0 : 1, defaultProps.delay);
+        return getValueAtIndexOrReturn(instance.props.delay, isShow ? 0 : 1, defaultProps.delay);
     }
     function handleStyles(fromHide) {
         if (fromHide === void 0) {
             fromHide = false;
         }
-        popper1.style.pointerEvents = instance1.props.interactive && !fromHide ? '' : 'none';
-        popper1.style.zIndex = "" + instance1.props.zIndex;
+        popper.style.pointerEvents = instance.props.interactive && !fromHide ? "" : "none";
+        popper.style.zIndex = "" + instance.props.zIndex;
     }
     function invokeHook(hook, args, shouldInvokePropsHook) {
         if (shouldInvokePropsHook === void 0) {
@@ -21807,23 +21334,23 @@ function createTippy(reference, passedProps) {
         });
         if (shouldInvokePropsHook) {
             var _instance$props;
-            (_instance$props = instance1.props)[hook].apply(_instance$props, args);
+            (_instance$props = instance.props)[hook].apply(_instance$props, args);
         }
     }
     function handleAriaContentAttribute() {
-        var aria = instance1.props.aria;
+        var aria = instance.props.aria;
         if (!aria.content) {
             return;
         }
         var attr = "aria-" + aria.content;
-        var id = popper1.id;
-        var nodes = normalizeToArray(instance1.props.triggerTarget || reference);
+        var id = popper.id;
+        var nodes = normalizeToArray(instance.props.triggerTarget || reference);
         nodes.forEach(function(node) {
             var currentValue = node.getAttribute(attr);
-            if (instance1.state.isVisible) {
+            if (instance.state.isVisible) {
                 node.setAttribute(attr, currentValue ? currentValue + " " + id : id);
             } else {
-                var nextValue = currentValue && currentValue.replace(id, '').trim();
+                var nextValue = currentValue && currentValue.replace(id, "").trim();
                 if (nextValue) {
                     node.setAttribute(attr, nextValue);
                 } else {
@@ -21833,20 +21360,20 @@ function createTippy(reference, passedProps) {
         });
     }
     function handleAriaExpandedAttribute() {
-        if (hasAriaExpanded || !instance1.props.aria.expanded) {
+        if (hasAriaExpanded || !instance.props.aria.expanded) {
             return;
         }
-        var nodes = normalizeToArray(instance1.props.triggerTarget || reference);
+        var nodes = normalizeToArray(instance.props.triggerTarget || reference);
         nodes.forEach(function(node) {
-            if (instance1.props.interactive) {
-                node.setAttribute('aria-expanded', instance1.state.isVisible && node === getCurrentTarget() ? 'true' : 'false');
+            if (instance.props.interactive) {
+                node.setAttribute("aria-expanded", instance.state.isVisible && node === getCurrentTarget() ? "true" : "false");
             } else {
-                node.removeAttribute('aria-expanded');
+                node.removeAttribute("aria-expanded");
             }
         });
     }
     function cleanupInteractiveMouseListeners() {
-        getDocument().removeEventListener('mousemove', debouncedOnMouseMove);
+        getDocument().removeEventListener("mousemove", debouncedOnMouseMove);
         mouseMoveListeners = mouseMoveListeners.filter(function(listener) {
             return listener !== debouncedOnMouseMove;
         });
@@ -21854,32 +21381,32 @@ function createTippy(reference, passedProps) {
     function onDocumentPress(event) {
         // Moved finger to scroll instead of an intentional tap outside
         if (currentInput.isTouch) {
-            if (didTouchMove || event.type === 'mousedown') {
+            if (didTouchMove || event.type === "mousedown") {
                 return;
             }
         }
         var actualTarget = event.composedPath && event.composedPath()[0] || event.target; // Clicked on interactive popper
-        if (instance1.props.interactive && actualContains(popper1, actualTarget)) {
+        if (instance.props.interactive && actualContains(popper, actualTarget)) {
             return;
         } // Clicked on the event listeners target
-        if (normalizeToArray(instance1.props.triggerTarget || reference).some(function(el) {
+        if (normalizeToArray(instance.props.triggerTarget || reference).some(function(el) {
             return actualContains(el, actualTarget);
         })) {
             if (currentInput.isTouch) {
                 return;
             }
-            if (instance1.state.isVisible && instance1.props.trigger.indexOf('click') >= 0) {
+            if (instance.state.isVisible && instance.props.trigger.indexOf("click") >= 0) {
                 return;
             }
         } else {
-            invokeHook('onClickOutside', [
-                instance1,
+            invokeHook("onClickOutside", [
+                instance,
                 event
             ]);
         }
-        if (instance1.props.hideOnClick === true) {
-            instance1.clearDelayTimeouts();
-            instance1.hide(); // `mousedown` event is fired right before `focus` if pressing the
+        if (instance.props.hideOnClick === true) {
+            instance.clearDelayTimeouts();
+            instance.hide(); // `mousedown` event is fired right before `focus` if pressing the
             // currentTarget. This lets a tippy with `focus` trigger know that it
             // should not show
             didHideDueToDocumentMouseDown = true;
@@ -21888,7 +21415,7 @@ function createTippy(reference, passedProps) {
             }); // The listener gets added in `scheduleShow()`, but this may be hiding it
             // before it shows, and hide()'s early bail-out behavior can prevent it
             // from being cleaned up
-            if (!instance1.state.isMounted) {
+            if (!instance.state.isMounted) {
                 removeDocumentPress();
             }
         }
@@ -21901,21 +21428,21 @@ function createTippy(reference, passedProps) {
     }
     function addDocumentPress() {
         var doc = getDocument();
-        doc.addEventListener('mousedown', onDocumentPress, true);
-        doc.addEventListener('touchend', onDocumentPress, TOUCH_OPTIONS);
-        doc.addEventListener('touchstart', onTouchStart, TOUCH_OPTIONS);
-        doc.addEventListener('touchmove', onTouchMove, TOUCH_OPTIONS);
+        doc.addEventListener("mousedown", onDocumentPress, true);
+        doc.addEventListener("touchend", onDocumentPress, TOUCH_OPTIONS);
+        doc.addEventListener("touchstart", onTouchStart, TOUCH_OPTIONS);
+        doc.addEventListener("touchmove", onTouchMove, TOUCH_OPTIONS);
     }
     function removeDocumentPress() {
         var doc = getDocument();
-        doc.removeEventListener('mousedown', onDocumentPress, true);
-        doc.removeEventListener('touchend', onDocumentPress, TOUCH_OPTIONS);
-        doc.removeEventListener('touchstart', onTouchStart, TOUCH_OPTIONS);
-        doc.removeEventListener('touchmove', onTouchMove, TOUCH_OPTIONS);
+        doc.removeEventListener("mousedown", onDocumentPress, true);
+        doc.removeEventListener("touchend", onDocumentPress, TOUCH_OPTIONS);
+        doc.removeEventListener("touchstart", onTouchStart, TOUCH_OPTIONS);
+        doc.removeEventListener("touchmove", onTouchMove, TOUCH_OPTIONS);
     }
     function onTransitionedOut(duration, callback) {
         onTransitionEnd(duration, function() {
-            if (!instance1.state.isVisible && popper1.parentNode && popper1.parentNode.contains(popper1)) {
+            if (!instance.state.isVisible && popper.parentNode && popper.parentNode.contains(popper)) {
                 callback();
             }
         });
@@ -21927,7 +21454,7 @@ function createTippy(reference, passedProps) {
         var box = getDefaultTemplateChildren().box;
         function listener(event) {
             if (event.target === box) {
-                updateTransitionEndListener(box, 'remove', listener);
+                updateTransitionEndListener(box, "remove", listener);
                 callback();
             }
         } // Make callback synchronous if duration is 0
@@ -21935,15 +21462,15 @@ function createTippy(reference, passedProps) {
         if (duration === 0) {
             return callback();
         }
-        updateTransitionEndListener(box, 'remove', currentTransitionEndListener);
-        updateTransitionEndListener(box, 'add', listener);
+        updateTransitionEndListener(box, "remove", currentTransitionEndListener);
+        updateTransitionEndListener(box, "add", listener);
         currentTransitionEndListener = listener;
     }
     function on(eventType, handler, options) {
         if (options === void 0) {
             options = false;
         }
-        var nodes = normalizeToArray(instance1.props.triggerTarget || reference);
+        var nodes = normalizeToArray(instance.props.triggerTarget || reference);
         nodes.forEach(function(node) {
             node.addEventListener(eventType, handler, options);
             listeners.push({
@@ -21956,27 +21483,27 @@ function createTippy(reference, passedProps) {
     }
     function addListeners() {
         if (getIsCustomTouchBehavior()) {
-            on('touchstart', onTrigger, {
+            on("touchstart", onTrigger, {
                 passive: true
             });
-            on('touchend', onMouseLeave, {
+            on("touchend", onMouseLeave, {
                 passive: true
             });
         }
-        splitBySpaces(instance1.props.trigger).forEach(function(eventType) {
-            if (eventType === 'manual') {
+        splitBySpaces(instance.props.trigger).forEach(function(eventType) {
+            if (eventType === "manual") {
                 return;
             }
             on(eventType, onTrigger);
             switch(eventType){
-                case 'mouseenter':
-                    on('mouseleave', onMouseLeave);
+                case "mouseenter":
+                    on("mouseleave", onMouseLeave);
                     break;
-                case 'focus':
-                    on(isIE11 ? 'focusout' : 'blur', onBlurOrFocusOut);
+                case "focus":
+                    on(isIE11 ? "focusout" : "blur", onBlurOrFocusOut);
                     break;
-                case 'focusin':
-                    on('focusout', onBlurOrFocusOut);
+                case "focusin":
+                    on("focusout", onBlurOrFocusOut);
                     break;
             }
         });
@@ -21991,14 +21518,14 @@ function createTippy(reference, passedProps) {
     function onTrigger(event) {
         var _lastTriggerEvent;
         var shouldScheduleClickHide = false;
-        if (!instance1.state.isEnabled || isEventListenerStopped(event) || didHideDueToDocumentMouseDown) {
+        if (!instance.state.isEnabled || isEventListenerStopped(event) || didHideDueToDocumentMouseDown) {
             return;
         }
-        var wasFocused = ((_lastTriggerEvent = lastTriggerEvent) == null ? void 0 : _lastTriggerEvent.type) === 'focus';
+        var wasFocused = ((_lastTriggerEvent = lastTriggerEvent) == null ? void 0 : _lastTriggerEvent.type) === "focus";
         lastTriggerEvent = event;
         currentTarget = event.currentTarget;
         handleAriaExpandedAttribute();
-        if (!instance1.state.isVisible && isMouseEvent(event)) {
+        if (!instance.state.isVisible && isMouseEvent(event)) {
             // If scrolling, `mouseenter` events can be fired if the cursor lands
             // over a new target, but `mousemove` events don't get fired. This
             // causes interactive tooltips to get stuck open until the cursor is
@@ -22007,12 +21534,12 @@ function createTippy(reference, passedProps) {
                 return listener(event);
             });
         } // Toggle show/hide when clicking click-triggered tooltips
-        if (event.type === 'click' && (instance1.props.trigger.indexOf('mouseenter') < 0 || isVisibleFromClick) && instance1.props.hideOnClick !== false && instance1.state.isVisible) {
+        if (event.type === "click" && (instance.props.trigger.indexOf("mouseenter") < 0 || isVisibleFromClick) && instance.props.hideOnClick !== false && instance.state.isVisible) {
             shouldScheduleClickHide = true;
         } else {
             scheduleShow(event);
         }
-        if (event.type === 'click') {
+        if (event.type === "click") {
             isVisibleFromClick = !shouldScheduleClickHide;
         }
         if (shouldScheduleClickHide && !wasFocused) {
@@ -22021,11 +21548,11 @@ function createTippy(reference, passedProps) {
     }
     function onMouseMove(event) {
         var target = event.target;
-        var isCursorOverReferenceOrPopper = getCurrentTarget().contains(target) || popper1.contains(target);
-        if (event.type === 'mousemove' && isCursorOverReferenceOrPopper) {
+        var isCursorOverReferenceOrPopper = getCurrentTarget().contains(target) || popper.contains(target);
+        if (event.type === "mousemove" && isCursorOverReferenceOrPopper) {
             return;
         }
-        var popperTreeData = getNestedPopperTree().concat(popper1).map(function(popper) {
+        var popperTreeData = getNestedPopperTree().concat(popper).map(function(popper) {
             var _instance$popperInsta;
             var instance = popper._tippy;
             var state = (_instance$popperInsta = instance.popperInstance) == null ? void 0 : _instance$popperInsta.state;
@@ -22044,57 +21571,57 @@ function createTippy(reference, passedProps) {
         }
     }
     function onMouseLeave(event) {
-        var shouldBail = isEventListenerStopped(event) || instance1.props.trigger.indexOf('click') >= 0 && isVisibleFromClick;
+        var shouldBail = isEventListenerStopped(event) || instance.props.trigger.indexOf("click") >= 0 && isVisibleFromClick;
         if (shouldBail) {
             return;
         }
-        if (instance1.props.interactive) {
-            instance1.hideWithInteractivity(event);
+        if (instance.props.interactive) {
+            instance.hideWithInteractivity(event);
             return;
         }
         scheduleHide(event);
     }
     function onBlurOrFocusOut(event) {
-        if (instance1.props.trigger.indexOf('focusin') < 0 && event.target !== getCurrentTarget()) {
+        if (instance.props.trigger.indexOf("focusin") < 0 && event.target !== getCurrentTarget()) {
             return;
         } // If focus was moved to within the popper
-        if (instance1.props.interactive && event.relatedTarget && popper1.contains(event.relatedTarget)) {
+        if (instance.props.interactive && event.relatedTarget && popper.contains(event.relatedTarget)) {
             return;
         }
         scheduleHide(event);
     }
     function isEventListenerStopped(event) {
-        return currentInput.isTouch ? getIsCustomTouchBehavior() !== event.type.indexOf('touch') >= 0 : false;
+        return currentInput.isTouch ? getIsCustomTouchBehavior() !== event.type.indexOf("touch") >= 0 : false;
     }
     function createPopperInstance() {
         destroyPopperInstance();
-        var _instance$props2 = instance1.props, popperOptions = _instance$props2.popperOptions, placement = _instance$props2.placement, offset = _instance$props2.offset, getReferenceClientRect = _instance$props2.getReferenceClientRect, moveTransition = _instance$props2.moveTransition;
-        var arrow = getIsDefaultRenderFn() ? getChildren(popper1).arrow : null;
+        var _instance$props2 = instance.props, popperOptions = _instance$props2.popperOptions, placement = _instance$props2.placement, offset = _instance$props2.offset, getReferenceClientRect = _instance$props2.getReferenceClientRect, moveTransition = _instance$props2.moveTransition;
+        var arrow = getIsDefaultRenderFn() ? getChildren(popper).arrow : null;
         var computedReference = getReferenceClientRect ? {
             getBoundingClientRect: getReferenceClientRect,
             contextElement: getReferenceClientRect.contextElement || getCurrentTarget()
         } : reference;
         var tippyModifier = {
-            name: '$$tippy',
+            name: "$$tippy",
             enabled: true,
-            phase: 'beforeWrite',
+            phase: "beforeWrite",
             requires: [
-                'computeStyles'
+                "computeStyles"
             ],
             fn: function fn(_ref2) {
                 var state = _ref2.state;
                 if (getIsDefaultRenderFn()) {
                     var _getDefaultTemplateCh = getDefaultTemplateChildren(), box = _getDefaultTemplateCh.box;
                     [
-                        'placement',
-                        'reference-hidden',
-                        'escaped'
+                        "placement",
+                        "reference-hidden",
+                        "escaped"
                     ].forEach(function(attr) {
-                        if (attr === 'placement') {
-                            box.setAttribute('data-placement', state.placement);
+                        if (attr === "placement") {
+                            box.setAttribute("data-placement", state.placement);
                         } else {
                             if (state.attributes.popper["data-popper-" + attr]) {
-                                box.setAttribute("data-" + attr, '');
+                                box.setAttribute("data-" + attr, "");
                             } else {
                                 box.removeAttribute("data-" + attr);
                             }
@@ -22106,13 +21633,13 @@ function createTippy(reference, passedProps) {
         };
         var modifiers = [
             {
-                name: 'offset',
+                name: "offset",
                 options: {
                     offset: offset
                 }
             },
             {
-                name: 'preventOverflow',
+                name: "preventOverflow",
                 options: {
                     padding: {
                         top: 2,
@@ -22123,13 +21650,13 @@ function createTippy(reference, passedProps) {
                 }
             },
             {
-                name: 'flip',
+                name: "flip",
                 options: {
                     padding: 5
                 }
             },
             {
-                name: 'computeStyles',
+                name: "computeStyles",
                 options: {
                     adaptive: !moveTransition
                 }
@@ -22138,7 +21665,7 @@ function createTippy(reference, passedProps) {
         ];
         if (getIsDefaultRenderFn() && arrow) {
             modifiers.push({
-                name: 'arrow',
+                name: "arrow",
                 options: {
                     element: arrow,
                     padding: 3
@@ -22146,27 +21673,27 @@ function createTippy(reference, passedProps) {
             });
         }
         modifiers.push.apply(modifiers, (popperOptions == null ? void 0 : popperOptions.modifiers) || []);
-        instance1.popperInstance = _core.createPopper(computedReference, popper1, Object.assign({}, popperOptions, {
+        instance.popperInstance = (0, _core.createPopper)(computedReference, popper, Object.assign({}, popperOptions, {
             placement: placement,
             onFirstUpdate: onFirstUpdate,
             modifiers: modifiers
         }));
     }
     function destroyPopperInstance() {
-        if (instance1.popperInstance) {
-            instance1.popperInstance.destroy();
-            instance1.popperInstance = null;
+        if (instance.popperInstance) {
+            instance.popperInstance.destroy();
+            instance.popperInstance = null;
         }
     }
     function mount() {
-        var appendTo = instance1.props.appendTo;
+        var appendTo = instance.props.appendTo;
         var parentNode; // By default, we'll append the popper to the triggerTargets's parentNode so
         // it's directly after the reference element so the elements inside the
         // tippy can be tabbed to
         // If there are clipping issues, the user can specify a different appendTo
         // and ensure focus management is handled correctly manually
         var node = getCurrentTarget();
-        if (instance1.props.interactive && appendTo === TIPPY_DEFAULT_APPEND_TO || appendTo === 'parent') {
+        if (instance.props.interactive && appendTo === TIPPY_DEFAULT_APPEND_TO || appendTo === "parent") {
             parentNode = node.parentNode;
         } else {
             parentNode = invokeWithArgsOrReturn(appendTo, [
@@ -22174,98 +21701,98 @@ function createTippy(reference, passedProps) {
             ]);
         } // The popper element needs to exist on the DOM before its position can be
         // updated as Popper needs to read its dimensions
-        if (!parentNode.contains(popper1)) {
-            parentNode.appendChild(popper1);
+        if (!parentNode.contains(popper)) {
+            parentNode.appendChild(popper);
         }
-        instance1.state.isMounted = true;
+        instance.state.isMounted = true;
         createPopperInstance();
         /* istanbul ignore else */ if (true) {
             // Accessibility check
-            warnWhen(instance1.props.interactive && appendTo === defaultProps.appendTo && node.nextElementSibling !== popper1, [
-                'Interactive tippy element may not be accessible via keyboard',
-                'navigation because it is not directly after the reference element',
-                'in the DOM source order.',
-                '\n\n',
-                'Using a wrapper <div> or <span> tag around the reference element',
-                'solves this by creating a new parentNode context.',
-                '\n\n',
-                'Specifying `appendTo: document.body` silences this warning, but it',
-                'assumes you are using a focus management solution to handle',
-                'keyboard navigation.',
-                '\n\n',
-                'See: https://atomiks.github.io/tippyjs/v6/accessibility/#interactivity'
-            ].join(' '));
+            warnWhen(instance.props.interactive && appendTo === defaultProps.appendTo && node.nextElementSibling !== popper, [
+                "Interactive tippy element may not be accessible via keyboard",
+                "navigation because it is not directly after the reference element",
+                "in the DOM source order.",
+                "\n\n",
+                "Using a wrapper <div> or <span> tag around the reference element",
+                "solves this by creating a new parentNode context.",
+                "\n\n",
+                "Specifying `appendTo: document.body` silences this warning, but it",
+                "assumes you are using a focus management solution to handle",
+                "keyboard navigation.",
+                "\n\n",
+                "See: https://atomiks.github.io/tippyjs/v6/accessibility/#interactivity"
+            ].join(" "));
         }
     }
     function getNestedPopperTree() {
-        return arrayFrom(popper1.querySelectorAll('[data-tippy-root]'));
+        return arrayFrom(popper.querySelectorAll("[data-tippy-root]"));
     }
     function scheduleShow(event) {
-        instance1.clearDelayTimeouts();
+        instance.clearDelayTimeouts();
         if (event) {
-            invokeHook('onTrigger', [
-                instance1,
+            invokeHook("onTrigger", [
+                instance,
                 event
             ]);
         }
         addDocumentPress();
         var delay = getDelay(true);
         var _getNormalizedTouchSe = getNormalizedTouchSettings(), touchValue = _getNormalizedTouchSe[0], touchDelay = _getNormalizedTouchSe[1];
-        if (currentInput.isTouch && touchValue === 'hold' && touchDelay) {
+        if (currentInput.isTouch && touchValue === "hold" && touchDelay) {
             delay = touchDelay;
         }
         if (delay) {
             showTimeout = setTimeout(function() {
-                instance1.show();
+                instance.show();
             }, delay);
         } else {
-            instance1.show();
+            instance.show();
         }
     }
     function scheduleHide(event) {
-        instance1.clearDelayTimeouts();
-        invokeHook('onUntrigger', [
-            instance1,
+        instance.clearDelayTimeouts();
+        invokeHook("onUntrigger", [
+            instance,
             event
         ]);
-        if (!instance1.state.isVisible) {
+        if (!instance.state.isVisible) {
             removeDocumentPress();
             return;
         } // For interactive tippies, scheduleHide is added to a document.body handler
         // from onMouseLeave so must intercept scheduled hides from mousemove/leave
         // events when trigger contains mouseenter and click, and the tip is
         // currently shown as a result of a click.
-        if (instance1.props.trigger.indexOf('mouseenter') >= 0 && instance1.props.trigger.indexOf('click') >= 0 && [
-            'mouseleave',
-            'mousemove'
+        if (instance.props.trigger.indexOf("mouseenter") >= 0 && instance.props.trigger.indexOf("click") >= 0 && [
+            "mouseleave",
+            "mousemove"
         ].indexOf(event.type) >= 0 && isVisibleFromClick) {
             return;
         }
         var delay = getDelay(false);
         if (delay) {
             hideTimeout = setTimeout(function() {
-                if (instance1.state.isVisible) {
-                    instance1.hide();
+                if (instance.state.isVisible) {
+                    instance.hide();
                 }
             }, delay);
         } else {
             // Fixes a `transitionend` problem when it fires 1 frame too
             // late sometimes, we don't want hide() to be called.
             scheduleHideAnimationFrame = requestAnimationFrame(function() {
-                instance1.hide();
+                instance.hide();
             });
         }
     } // ===========================================================================
     // 🔑 Public methods
     // ===========================================================================
     function enable() {
-        instance1.state.isEnabled = true;
+        instance.state.isEnabled = true;
     }
     function disable() {
         // Disabling the instance should also hide it
         // https://github.com/atomiks/tippy.js-react/issues/106
-        instance1.hide();
-        instance1.state.isEnabled = false;
+        instance.hide();
+        instance.state.isEnabled = false;
     }
     function clearDelayTimeouts() {
         clearTimeout(showTimeout);
@@ -22274,21 +21801,21 @@ function createTippy(reference, passedProps) {
     }
     function setProps(partialProps) {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('setProps'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("setProps"));
         }
-        if (instance1.state.isDestroyed) {
+        if (instance.state.isDestroyed) {
             return;
         }
-        invokeHook('onBeforeUpdate', [
-            instance1,
+        invokeHook("onBeforeUpdate", [
+            instance,
             partialProps
         ]);
         removeListeners();
-        var prevProps = instance1.props;
+        var prevProps = instance.props;
         var nextProps = evaluateProps(reference, Object.assign({}, prevProps, removeUndefinedProps(partialProps), {
             ignoreAttributes: true
         }));
-        instance1.props = nextProps;
+        instance.props = nextProps;
         addListeners();
         if (prevProps.interactiveDebounce !== nextProps.interactiveDebounce) {
             cleanupInteractiveMouseListeners();
@@ -22296,17 +21823,17 @@ function createTippy(reference, passedProps) {
         } // Ensure stale aria-expanded attributes are removed
         if (prevProps.triggerTarget && !nextProps.triggerTarget) {
             normalizeToArray(prevProps.triggerTarget).forEach(function(node) {
-                node.removeAttribute('aria-expanded');
+                node.removeAttribute("aria-expanded");
             });
         } else if (nextProps.triggerTarget) {
-            reference.removeAttribute('aria-expanded');
+            reference.removeAttribute("aria-expanded");
         }
         handleAriaExpandedAttribute();
         handleStyles();
         if (onUpdate) {
             onUpdate(prevProps, nextProps);
         }
-        if (instance1.popperInstance) {
+        if (instance.popperInstance) {
             createPopperInstance(); // Fixes an issue with nested tippies if they are all getting re-rendered,
             // and the nested ones get re-rendered first.
             // https://github.com/atomiks/tippyjs-react/issues/177
@@ -22317,47 +21844,47 @@ function createTippy(reference, passedProps) {
                 requestAnimationFrame(nestedPopper._tippy.popperInstance.forceUpdate);
             });
         }
-        invokeHook('onAfterUpdate', [
-            instance1,
+        invokeHook("onAfterUpdate", [
+            instance,
             partialProps
         ]);
     }
-    function setContent1(content) {
-        instance1.setProps({
+    function setContent(content) {
+        instance.setProps({
             content: content
         });
     }
     function show() {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('show'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("show"));
         } // Early bail-out
-        var isAlreadyVisible = instance1.state.isVisible;
-        var isDestroyed = instance1.state.isDestroyed;
-        var isDisabled = !instance1.state.isEnabled;
-        var isTouchAndTouchDisabled = currentInput.isTouch && !instance1.props.touch;
-        var duration = getValueAtIndexOrReturn(instance1.props.duration, 0, defaultProps.duration);
+        var isAlreadyVisible = instance.state.isVisible;
+        var isDestroyed = instance.state.isDestroyed;
+        var isDisabled = !instance.state.isEnabled;
+        var isTouchAndTouchDisabled = currentInput.isTouch && !instance.props.touch;
+        var duration = getValueAtIndexOrReturn(instance.props.duration, 0, defaultProps.duration);
         if (isAlreadyVisible || isDestroyed || isDisabled || isTouchAndTouchDisabled) {
             return;
         } // Normalize `disabled` behavior across browsers.
         // Firefox allows events on disabled elements, but Chrome doesn't.
         // Using a wrapper element (i.e. <span>) is recommended.
-        if (getCurrentTarget().hasAttribute('disabled')) {
+        if (getCurrentTarget().hasAttribute("disabled")) {
             return;
         }
-        invokeHook('onShow', [
-            instance1
+        invokeHook("onShow", [
+            instance
         ], false);
-        if (instance1.props.onShow(instance1) === false) {
+        if (instance.props.onShow(instance) === false) {
             return;
         }
-        instance1.state.isVisible = true;
+        instance.state.isVisible = true;
         if (getIsDefaultRenderFn()) {
-            popper1.style.visibility = 'visible';
+            popper.style.visibility = "visible";
         }
         handleStyles();
         addDocumentPress();
-        if (!instance1.state.isMounted) {
-            popper1.style.transition = 'none';
+        if (!instance.state.isMounted) {
+            popper.style.transition = "none";
         } // If flipping to the opposite side after hiding at least once, the
         // animation will use the wrong placement without resetting the duration
         if (getIsDefaultRenderFn()) {
@@ -22369,13 +21896,13 @@ function createTippy(reference, passedProps) {
         }
         onFirstUpdate = function onFirstUpdate() {
             var _instance$popperInsta2;
-            if (!instance1.state.isVisible || ignoreOnFirstUpdate) {
+            if (!instance.state.isVisible || ignoreOnFirstUpdate) {
                 return;
             }
             ignoreOnFirstUpdate = true; // reflow
-            void popper1.offsetHeight;
-            popper1.style.transition = instance1.props.moveTransition;
-            if (getIsDefaultRenderFn() && instance1.props.animation) {
+            void popper.offsetHeight;
+            popper.style.transition = instance.props.moveTransition;
+            if (getIsDefaultRenderFn() && instance.props.animation) {
                 var _getDefaultTemplateCh3 = getDefaultTemplateChildren(), _box = _getDefaultTemplateCh3.box, _content = _getDefaultTemplateCh3.content;
                 setTransitionDuration([
                     _box,
@@ -22384,21 +21911,21 @@ function createTippy(reference, passedProps) {
                 setVisibilityState([
                     _box,
                     _content
-                ], 'visible');
+                ], "visible");
             }
             handleAriaContentAttribute();
             handleAriaExpandedAttribute();
-            pushIfUnique(mountedInstances, instance1); // certain modifiers (e.g. `maxSize`) require a second update after the
+            pushIfUnique(mountedInstances, instance); // certain modifiers (e.g. `maxSize`) require a second update after the
             // popper has been positioned for the first time
-            (_instance$popperInsta2 = instance1.popperInstance) == null ? void 0 : _instance$popperInsta2.forceUpdate();
-            invokeHook('onMount', [
-                instance1
+            (_instance$popperInsta2 = instance.popperInstance) == null ? void 0 : _instance$popperInsta2.forceUpdate();
+            invokeHook("onMount", [
+                instance
             ]);
-            if (instance1.props.animation && getIsDefaultRenderFn()) {
+            if (instance.props.animation && getIsDefaultRenderFn()) {
                 onTransitionedIn(duration, function() {
-                    instance1.state.isShown = true;
-                    invokeHook('onShown', [
-                        instance1
+                    instance.state.isShown = true;
+                    invokeHook("onShown", [
+                        instance
                     ]);
                 });
             }
@@ -22407,34 +21934,34 @@ function createTippy(reference, passedProps) {
     }
     function hide() {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('hide'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("hide"));
         } // Early bail-out
-        var isAlreadyHidden = !instance1.state.isVisible;
-        var isDestroyed = instance1.state.isDestroyed;
-        var isDisabled = !instance1.state.isEnabled;
-        var duration = getValueAtIndexOrReturn(instance1.props.duration, 1, defaultProps.duration);
+        var isAlreadyHidden = !instance.state.isVisible;
+        var isDestroyed = instance.state.isDestroyed;
+        var isDisabled = !instance.state.isEnabled;
+        var duration = getValueAtIndexOrReturn(instance.props.duration, 1, defaultProps.duration);
         if (isAlreadyHidden || isDestroyed || isDisabled) {
             return;
         }
-        invokeHook('onHide', [
-            instance1
+        invokeHook("onHide", [
+            instance
         ], false);
-        if (instance1.props.onHide(instance1) === false) {
+        if (instance.props.onHide(instance) === false) {
             return;
         }
-        instance1.state.isVisible = false;
-        instance1.state.isShown = false;
+        instance.state.isVisible = false;
+        instance.state.isShown = false;
         ignoreOnFirstUpdate = false;
         isVisibleFromClick = false;
         if (getIsDefaultRenderFn()) {
-            popper1.style.visibility = 'hidden';
+            popper.style.visibility = "hidden";
         }
         cleanupInteractiveMouseListeners();
         removeDocumentPress();
         handleStyles(true);
         if (getIsDefaultRenderFn()) {
             var _getDefaultTemplateCh4 = getDefaultTemplateChildren(), box = _getDefaultTemplateCh4.box, content = _getDefaultTemplateCh4.content;
-            if (instance1.props.animation) {
+            if (instance.props.animation) {
                 setTransitionDuration([
                     box,
                     content
@@ -22442,35 +21969,35 @@ function createTippy(reference, passedProps) {
                 setVisibilityState([
                     box,
                     content
-                ], 'hidden');
+                ], "hidden");
             }
         }
         handleAriaContentAttribute();
         handleAriaExpandedAttribute();
-        if (instance1.props.animation) {
+        if (instance.props.animation) {
             if (getIsDefaultRenderFn()) {
-                onTransitionedOut(duration, instance1.unmount);
+                onTransitionedOut(duration, instance.unmount);
             }
         } else {
-            instance1.unmount();
+            instance.unmount();
         }
     }
     function hideWithInteractivity(event) {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('hideWithInteractivity'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("hideWithInteractivity"));
         }
-        getDocument().addEventListener('mousemove', debouncedOnMouseMove);
+        getDocument().addEventListener("mousemove", debouncedOnMouseMove);
         pushIfUnique(mouseMoveListeners, debouncedOnMouseMove);
         debouncedOnMouseMove(event);
     }
     function unmount() {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('unmount'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("unmount"));
         }
-        if (instance1.state.isVisible) {
-            instance1.hide();
+        if (instance.state.isVisible) {
+            instance.hide();
         }
-        if (!instance1.state.isMounted) {
+        if (!instance.state.isMounted) {
             return;
         }
         destroyPopperInstance(); // If a popper is not interactive, it will be appended outside the popper
@@ -22479,31 +22006,31 @@ function createTippy(reference, passedProps) {
         getNestedPopperTree().forEach(function(nestedPopper) {
             nestedPopper._tippy.unmount();
         });
-        if (popper1.parentNode) {
-            popper1.parentNode.removeChild(popper1);
+        if (popper.parentNode) {
+            popper.parentNode.removeChild(popper);
         }
         mountedInstances = mountedInstances.filter(function(i) {
-            return i !== instance1;
+            return i !== instance;
         });
-        instance1.state.isMounted = false;
-        invokeHook('onHidden', [
-            instance1
+        instance.state.isMounted = false;
+        invokeHook("onHidden", [
+            instance
         ]);
     }
     function destroy() {
         /* istanbul ignore else */ if (true) {
-            warnWhen(instance1.state.isDestroyed, createMemoryLeakWarning('destroy'));
+            warnWhen(instance.state.isDestroyed, createMemoryLeakWarning("destroy"));
         }
-        if (instance1.state.isDestroyed) {
+        if (instance.state.isDestroyed) {
             return;
         }
-        instance1.clearDelayTimeouts();
-        instance1.unmount();
+        instance.clearDelayTimeouts();
+        instance.unmount();
         removeListeners();
         delete reference._tippy;
-        instance1.state.isDestroyed = true;
-        invokeHook('onDestroy', [
-            instance1
+        instance.state.isDestroyed = true;
+        invokeHook("onDestroy", [
+            instance
         ]);
     }
 }
@@ -22520,16 +22047,16 @@ function tippy(targets, optionalProps) {
     var isSingleContentElement = isElement(passedProps.content);
     var isMoreThanOneReferenceElement = elements.length > 1;
     warnWhen(isSingleContentElement && isMoreThanOneReferenceElement, [
-        'tippy() was passed an Element as the `content` prop, but more than',
-        'one tippy instance was created by this invocation. This means the',
-        'content element will only be appended to the last tippy instance.',
-        '\n\n',
-        'Instead, pass the .innerHTML of the element, or use a function that',
-        'returns a cloned version of the element instead.',
-        '\n\n',
-        '1) content: element.innerHTML\n',
-        '2) content: () => element.cloneNode(true)'
-    ].join(' '));
+        "tippy() was passed an Element as the `content` prop, but more than",
+        "one tippy instance was created by this invocation. This means the",
+        "content element will only be appended to the last tippy instance.",
+        "\n\n",
+        "Instead, pass the .innerHTML of the element, or use a function that",
+        "returns a cloned version of the element instead.",
+        "\n\n",
+        "1) content: element.innerHTML\n",
+        "2) content: () => element.cloneNode(true)"
+    ].join(" "));
     var instances = elements.reduce(function(acc, reference) {
         var instance = reference && createTippy(reference, passedProps);
         if (instance) acc.push(instance);
@@ -22560,18 +22087,18 @@ var hideAll = function hideAll(_temp) {
 // every time the popper is destroyed (i.e. a new target), removing the styles
 // and causing transitions to break for singletons when the console is open, but
 // most notably for non-transform styles being used, `gpuAcceleration: false`.
-var applyStylesModifier = Object.assign({}, _core.applyStyles, {
+var applyStylesModifier = Object.assign({}, (0, _core.applyStyles), {
     effect: function effect(_ref) {
         var state = _ref.state;
         var initialStyles = {
             popper: {
                 position: state.options.strategy,
-                left: '0',
-                top: '0',
-                margin: '0'
+                left: "0",
+                top: "0",
+                margin: "0"
             },
             arrow: {
-                position: 'absolute'
+                position: "absolute"
             },
             reference: {}
         };
@@ -22586,10 +22113,10 @@ var createSingleton = function createSingleton(tippyInstances, optionalProps) {
     var _optionalProps$popper;
     if (optionalProps === void 0) optionalProps = {};
     errorWhen(!Array.isArray(tippyInstances), [
-        'The first argument passed to createSingleton() must be an array of',
-        'tippy instances. The passed value was',
+        "The first argument passed to createSingleton() must be an array of",
+        "tippy instances. The passed value was",
         String(tippyInstances)
-    ].join(' '));
+    ].join(" "));
     var individualInstances = tippyInstances;
     var references = [];
     var triggerTargets = [];
@@ -22631,12 +22158,12 @@ var createSingleton = function createSingleton(tippyInstances, optionalProps) {
         var index = triggerTargets.indexOf(target); // bail-out
         if (target === currentTarget) return;
         currentTarget = target;
-        var overrideProps = (overrides || []).concat('content').reduce(function(acc, prop) {
+        var overrideProps = (overrides || []).concat("content").reduce(function(acc, prop) {
             acc[prop] = individualInstances[index].props[prop];
             return acc;
         }, {});
         singleton.setProps(Object.assign({}, overrideProps, {
-            getReferenceClientRect: typeof overrideProps.getReferenceClientRect === 'function' ? overrideProps.getReferenceClientRect : function() {
+            getReferenceClientRect: typeof overrideProps.getReferenceClientRect === "function" ? overrideProps.getReferenceClientRect : function() {
                 var _references$index;
                 return (_references$index = references[index]) == null ? void 0 : _references$index.getBoundingClientRect();
             }
@@ -22672,8 +22199,8 @@ var createSingleton = function createSingleton(tippyInstances, optionalProps) {
             };
         }
     };
-    var singleton1 = tippy(div(), Object.assign({}, removeProperties(optionalProps, [
-        'overrides'
+    var singleton = tippy(div(), Object.assign({}, removeProperties(optionalProps, [
+        "overrides"
     ]), {
         plugins: [
             plugin
@@ -22685,42 +22212,42 @@ var createSingleton = function createSingleton(tippyInstances, optionalProps) {
             ])
         })
     }));
-    var originalShow = singleton1.show;
-    singleton1.show = function(target) {
+    var originalShow = singleton.show;
+    singleton.show = function(target) {
         originalShow(); // first time, showOnCreate or programmatic call with no params
         // default to showing first instance
-        if (!currentTarget && target == null) return prepareInstance(singleton1, references[0]);
+        if (!currentTarget && target == null) return prepareInstance(singleton, references[0]);
          // triggered from event (do nothing as prepareInstance already called by onTrigger)
         // programmatic call with no params when already visible (do nothing again)
         if (currentTarget && target == null) return;
          // target is index of instance
-        if (typeof target === 'number') return references[target] && prepareInstance(singleton1, references[target]);
+        if (typeof target === "number") return references[target] && prepareInstance(singleton, references[target]);
          // target is a child tippy instance
         if (individualInstances.indexOf(target) >= 0) {
             var ref = target.reference;
-            return prepareInstance(singleton1, ref);
+            return prepareInstance(singleton, ref);
         } // target is a ReferenceElement
-        if (references.indexOf(target) >= 0) return prepareInstance(singleton1, target);
+        if (references.indexOf(target) >= 0) return prepareInstance(singleton, target);
     };
-    singleton1.showNext = function() {
+    singleton.showNext = function() {
         var first = references[0];
-        if (!currentTarget) return singleton1.show(0);
+        if (!currentTarget) return singleton.show(0);
         var index = references.indexOf(currentTarget);
-        singleton1.show(references[index + 1] || first);
+        singleton.show(references[index + 1] || first);
     };
-    singleton1.showPrevious = function() {
+    singleton.showPrevious = function() {
         var last = references[references.length - 1];
-        if (!currentTarget) return singleton1.show(last);
+        if (!currentTarget) return singleton.show(last);
         var index = references.indexOf(currentTarget);
         var target = references[index - 1] || last;
-        singleton1.show(target);
+        singleton.show(target);
     };
-    var originalSetProps1 = singleton1.setProps;
-    singleton1.setProps = function(props) {
+    var originalSetProps = singleton.setProps;
+    singleton.setProps = function(props) {
         overrides = props.overrides || overrides;
-        originalSetProps1(props);
+        originalSetProps(props);
     };
-    singleton1.setInstances = function(nextInstances) {
+    singleton.setInstances = function(nextInstances) {
         enableInstances(true);
         interceptSetPropsCleanups.forEach(function(fn) {
             return fn();
@@ -22729,36 +22256,36 @@ var createSingleton = function createSingleton(tippyInstances, optionalProps) {
         enableInstances(false);
         setReferences();
         setTriggerTargets();
-        interceptSetPropsCleanups = interceptSetProps(singleton1);
-        singleton1.setProps({
+        interceptSetPropsCleanups = interceptSetProps(singleton);
+        singleton.setProps({
             triggerTarget: triggerTargets
         });
     };
-    interceptSetPropsCleanups = interceptSetProps(singleton1);
-    return singleton1;
+    interceptSetPropsCleanups = interceptSetProps(singleton);
+    return singleton;
 };
 var BUBBLING_EVENTS_MAP = {
-    mouseover: 'mouseenter',
-    focusin: 'focus',
-    click: 'click'
+    mouseover: "mouseenter",
+    focusin: "focus",
+    click: "click"
 };
 /**
  * Creates a delegate instance that controls the creation of tippy instances
  * for child elements (`target` CSS selector).
  */ function delegate(targets, props) {
     errorWhen(!(props && props.target), [
-        'You must specity a `target` prop indicating a CSS selector string matching',
-        'the target elements that should receive a tippy.'
-    ].join(' '));
+        "You must specity a `target` prop indicating a CSS selector string matching",
+        "the target elements that should receive a tippy."
+    ].join(" "));
     var listeners = [];
     var childTippyInstances = [];
     var disabled = false;
     var target = props.target;
     var nativeProps = removeProperties(props, [
-        'target'
+        "target"
     ]);
     var parentProps = Object.assign({}, nativeProps, {
-        trigger: 'manual',
+        trigger: "manual",
         touch: false
     });
     var childProps = Object.assign({
@@ -22776,10 +22303,10 @@ var BUBBLING_EVENTS_MAP = {
         // 1. Check `data-tippy-trigger` attribute on target node
         // 2. Fallback to `trigger` passed to `delegate()`
         // 3. Fallback to `defaultProps.trigger`
-        var trigger = targetNode.getAttribute('data-tippy-trigger') || props.trigger || defaultProps.trigger; // @ts-ignore
+        var trigger = targetNode.getAttribute("data-tippy-trigger") || props.trigger || defaultProps.trigger; // @ts-ignore
         if (targetNode._tippy) return;
-        if (event.type === 'touchstart' && typeof childProps.touch === 'boolean') return;
-        if (event.type !== 'touchstart' && trigger.indexOf(BUBBLING_EVENTS_MAP[event.type]) < 0) return;
+        if (event.type === "touchstart" && typeof childProps.touch === "boolean") return;
+        if (event.type !== "touchstart" && trigger.indexOf(BUBBLING_EVENTS_MAP[event.type]) < 0) return;
         var instance = tippy(targetNode, childProps);
         if (instance) childTippyInstances = childTippyInstances.concat(instance);
     }
@@ -22795,10 +22322,10 @@ var BUBBLING_EVENTS_MAP = {
     }
     function addEventListeners(instance) {
         var reference = instance.reference;
-        on(reference, 'touchstart', onTrigger, TOUCH_OPTIONS);
-        on(reference, 'mouseover', onTrigger);
-        on(reference, 'focusin', onTrigger);
-        on(reference, 'click', onTrigger);
+        on(reference, "touchstart", onTrigger, TOUCH_OPTIONS);
+        on(reference, "mouseover", onTrigger);
+        on(reference, "focusin", onTrigger);
+        on(reference, "click", onTrigger);
     }
     function removeEventListeners() {
         listeners.forEach(function(_ref) {
@@ -22807,11 +22334,11 @@ var BUBBLING_EVENTS_MAP = {
         });
         listeners = [];
     }
-    function applyMutations(instance2) {
-        var originalDestroy = instance2.destroy;
-        var originalEnable = instance2.enable;
-        var originalDisable = instance2.disable;
-        instance2.destroy = function(shouldDestroyChildInstances) {
+    function applyMutations(instance) {
+        var originalDestroy = instance.destroy;
+        var originalEnable = instance.enable;
+        var originalDisable = instance.disable;
+        instance.destroy = function(shouldDestroyChildInstances) {
             if (shouldDestroyChildInstances === void 0) shouldDestroyChildInstances = true;
             if (shouldDestroyChildInstances) childTippyInstances.forEach(function(instance) {
                 instance.destroy();
@@ -22820,33 +22347,33 @@ var BUBBLING_EVENTS_MAP = {
             removeEventListeners();
             originalDestroy();
         };
-        instance2.enable = function() {
+        instance.enable = function() {
             originalEnable();
             childTippyInstances.forEach(function(instance) {
                 return instance.enable();
             });
             disabled = false;
         };
-        instance2.disable = function() {
+        instance.disable = function() {
             originalDisable();
             childTippyInstances.forEach(function(instance) {
                 return instance.disable();
             });
             disabled = true;
         };
-        addEventListeners(instance2);
+        addEventListeners(instance);
     }
     normalizedReturnValue.forEach(applyMutations);
     return returnValue;
 }
 var animateFill = {
-    name: 'animateFill',
+    name: "animateFill",
     defaultValue: false,
     fn: function fn(instance) {
         var _instance$props$rende;
         // @ts-ignore
         if (!((_instance$props$rende = instance.props.render) != null && _instance$props$rende.$$tippy)) {
-            errorWhen(instance.props.animateFill, 'The `animateFill` plugin requires the default render function.');
+            errorWhen(instance.props.animateFill, "The `animateFill` plugin requires the default render function.");
             return {};
         }
         var _getChildren = getChildren(instance.popper), box = _getChildren.box, content = _getChildren.content;
@@ -22855,34 +22382,34 @@ var animateFill = {
             onCreate: function onCreate() {
                 if (backdrop) {
                     box.insertBefore(backdrop, box.firstElementChild);
-                    box.setAttribute('data-animatefill', '');
-                    box.style.overflow = 'hidden';
+                    box.setAttribute("data-animatefill", "");
+                    box.style.overflow = "hidden";
                     instance.setProps({
                         arrow: false,
-                        animation: 'shift-away'
+                        animation: "shift-away"
                     });
                 }
             },
             onMount: function onMount() {
                 if (backdrop) {
                     var transitionDuration = box.style.transitionDuration;
-                    var duration = Number(transitionDuration.replace('ms', '')); // The content should fade in after the backdrop has mostly filled the
+                    var duration = Number(transitionDuration.replace("ms", "")); // The content should fade in after the backdrop has mostly filled the
                     // tooltip element. `clip-path` is the other alternative but is not
                     // well-supported and is buggy on some devices.
                     content.style.transitionDelay = Math.round(duration / 10) + "ms";
                     backdrop.style.transitionDuration = transitionDuration;
                     setVisibilityState([
                         backdrop
-                    ], 'visible');
+                    ], "visible");
                 }
             },
             onShow: function onShow() {
-                if (backdrop) backdrop.style.transitionDuration = '0ms';
+                if (backdrop) backdrop.style.transitionDuration = "0ms";
             },
             onHide: function onHide() {
                 if (backdrop) setVisibilityState([
                     backdrop
-                ], 'hidden');
+                ], "hidden");
             }
         };
     }
@@ -22892,7 +22419,7 @@ function createBackdropElement() {
     backdrop.className = BACKDROP_CLASS;
     setVisibilityState([
         backdrop
-    ], 'hidden');
+    ], "hidden");
     return backdrop;
 }
 var mouseCoords = {
@@ -22908,13 +22435,13 @@ function storeMouseCoords(_ref) {
     };
 }
 function addMouseCoordsListener(doc) {
-    doc.addEventListener('mousemove', storeMouseCoords);
+    doc.addEventListener("mousemove", storeMouseCoords);
 }
 function removeMouseCoordsListener(doc) {
-    doc.removeEventListener('mousemove', storeMouseCoords);
+    doc.removeEventListener("mousemove", storeMouseCoords);
 }
 var followCursor = {
-    name: 'followCursor',
+    name: "followCursor",
     defaultValue: false,
     fn: function fn(instance) {
         var reference = instance.reference;
@@ -22924,13 +22451,13 @@ var followCursor = {
         var isUnmounted = true;
         var prevProps = instance.props;
         function getIsInitialBehavior() {
-            return instance.props.followCursor === 'initial' && instance.state.isVisible;
+            return instance.props.followCursor === "initial" && instance.state.isVisible;
         }
         function addListener() {
-            doc.addEventListener('mousemove', onMouseMove);
+            doc.addEventListener("mousemove", onMouseMove);
         }
         function removeListener() {
-            doc.removeEventListener('mousemove', onMouseMove);
+            doc.removeEventListener("mousemove", onMouseMove);
         }
         function unsetGetReferenceClientRect() {
             isInternalUpdate = true;
@@ -22943,25 +22470,25 @@ var followCursor = {
             // If the instance is interactive, avoid updating the position unless it's
             // over the reference element
             var isCursorOverReference = event.target ? reference.contains(event.target) : true;
-            var followCursor1 = instance.props.followCursor;
+            var followCursor = instance.props.followCursor;
             var clientX = event.clientX, clientY = event.clientY;
-            var rect1 = reference.getBoundingClientRect();
-            var relativeX = clientX - rect1.left;
-            var relativeY = clientY - rect1.top;
+            var rect = reference.getBoundingClientRect();
+            var relativeX = clientX - rect.left;
+            var relativeY = clientY - rect.top;
             if (isCursorOverReference || !instance.props.interactive) instance.setProps({
                 // @ts-ignore - unneeded DOMRect properties
                 getReferenceClientRect: function getReferenceClientRect() {
                     var rect = reference.getBoundingClientRect();
                     var x = clientX;
                     var y = clientY;
-                    if (followCursor1 === 'initial') {
+                    if (followCursor === "initial") {
                         x = rect.left + relativeX;
                         y = rect.top + relativeY;
                     }
-                    var top = followCursor1 === 'horizontal' ? rect.top : y;
-                    var right = followCursor1 === 'vertical' ? rect.right : x;
-                    var bottom = followCursor1 === 'horizontal' ? rect.bottom : y;
-                    var left = followCursor1 === 'vertical' ? rect.left : x;
+                    var top = followCursor === "horizontal" ? rect.top : y;
+                    var right = followCursor === "vertical" ? rect.right : x;
+                    var bottom = followCursor === "horizontal" ? rect.bottom : y;
+                    var left = followCursor === "vertical" ? rect.left : x;
                     return {
                         width: right - left,
                         height: bottom - top,
@@ -22997,11 +22524,11 @@ var followCursor = {
                 prevProps = instance.props;
             },
             onAfterUpdate: function onAfterUpdate(_, _ref2) {
-                var followCursor2 = _ref2.followCursor;
+                var followCursor = _ref2.followCursor;
                 if (isInternalUpdate) return;
-                if (followCursor2 !== undefined && prevProps.followCursor !== followCursor2) {
+                if (followCursor !== undefined && prevProps.followCursor !== followCursor) {
                     destroy();
-                    if (followCursor2) {
+                    if (followCursor) {
                         create();
                         if (instance.state.isMounted && !wasFocusEvent && !getIsInitialBehavior()) addListener();
                     } else {
@@ -23024,7 +22551,7 @@ var followCursor = {
                     clientX: event.clientX,
                     clientY: event.clientY
                 };
-                wasFocusEvent = event.type === 'focus';
+                wasFocusEvent = event.type === "focus";
             },
             onHidden: function onHidden() {
                 if (instance.props.followCursor) {
@@ -23050,26 +22577,26 @@ function getProps(props, modifier) {
     };
 }
 var inlinePositioning = {
-    name: 'inlinePositioning',
+    name: "inlinePositioning",
     defaultValue: false,
     fn: function fn(instance) {
         var reference = instance.reference;
         function isEnabled() {
             return !!instance.props.inlinePositioning;
         }
-        var placement1;
+        var placement;
         var cursorRectIndex = -1;
         var isInternalUpdate = false;
         var triedPlacements = [];
         var modifier = {
-            name: 'tippyInlinePositioning',
+            name: "tippyInlinePositioning",
             enabled: true,
-            phase: 'afterWrite',
+            phase: "afterWrite",
             fn: function fn(_ref2) {
                 var state = _ref2.state;
                 if (isEnabled()) {
                     if (triedPlacements.indexOf(state.placement) !== -1) triedPlacements = [];
-                    if (placement1 !== state.placement && triedPlacements.indexOf(state.placement) === -1) {
+                    if (placement !== state.placement && triedPlacements.indexOf(state.placement) === -1) {
                         triedPlacements.push(state.placement);
                         instance.setProps({
                             // @ts-ignore - unneeded DOMRect properties
@@ -23078,7 +22605,7 @@ var inlinePositioning = {
                             }
                         });
                     }
-                    placement1 = state.placement;
+                    placement = state.placement;
                 }
             }
         };
@@ -23118,11 +22645,11 @@ function getInlineBoundingClientRect(currentBasePlacement, boundingRect, clientR
      // There are two rects and they are disjoined
     if (clientRects.length === 2 && cursorRectIndex >= 0 && clientRects[0].left > clientRects[1].right) return clientRects[cursorRectIndex] || boundingRect;
     switch(currentBasePlacement){
-        case 'top':
-        case 'bottom':
+        case "top":
+        case "bottom":
             var firstRect = clientRects[0];
             var lastRect = clientRects[clientRects.length - 1];
-            var isTop = currentBasePlacement === 'top';
+            var isTop = currentBasePlacement === "top";
             var top = firstRect.top;
             var bottom = lastRect.bottom;
             var left = isTop ? firstRect.left : lastRect.left;
@@ -23137,8 +22664,8 @@ function getInlineBoundingClientRect(currentBasePlacement, boundingRect, clientR
                 width: width,
                 height: height
             };
-        case 'left':
-        case 'right':
+        case "left":
+        case "right":
             var minLeft = Math.min.apply(Math, clientRects.map(function(rects) {
                 return rects.left;
             }));
@@ -23146,7 +22673,7 @@ function getInlineBoundingClientRect(currentBasePlacement, boundingRect, clientR
                 return rects.right;
             }));
             var measureRects = clientRects.filter(function(rect) {
-                return currentBasePlacement === 'left' ? rect.left === minLeft : rect.right === maxRight;
+                return currentBasePlacement === "left" ? rect.left === minLeft : rect.right === maxRight;
             });
             var _top = measureRects[0].top;
             var _bottom = measureRects[measureRects.length - 1].bottom;
@@ -23167,7 +22694,7 @@ function getInlineBoundingClientRect(currentBasePlacement, boundingRect, clientR
     }
 }
 var sticky = {
-    name: 'sticky',
+    name: "sticky",
     defaultValue: false,
     fn: function fn(instance) {
         var reference = instance.reference, popper = instance.popper;
@@ -23180,8 +22707,8 @@ var sticky = {
         var prevRefRect = null;
         var prevPopRect = null;
         function updatePosition() {
-            var currentRefRect = shouldCheck('reference') ? getReference().getBoundingClientRect() : null;
-            var currentPopRect = shouldCheck('popper') ? popper.getBoundingClientRect() : null;
+            var currentRefRect = shouldCheck("reference") ? getReference().getBoundingClientRect() : null;
+            var currentPopRect = shouldCheck("popper") ? popper.getBoundingClientRect() : null;
             if (currentRefRect && areRectsDifferent(prevRefRect, currentRefRect) || currentPopRect && areRectsDifferent(prevPopRect, currentPopRect)) {
                 if (instance.popperInstance) instance.popperInstance.update();
             }
@@ -23208,18 +22735,13 @@ exports.default = tippy;
 },{"@popperjs/core":"7unqC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7unqC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "popperGenerator", ()=>_createPopperJs.popperGenerator
-) // eslint-disable-next-line import/no-unused-modules
+parcelHelpers.export(exports, "popperGenerator", ()=>(0, _createPopperJs.popperGenerator)) // eslint-disable-next-line import/no-unused-modules
 ;
-parcelHelpers.export(exports, "detectOverflow", ()=>_createPopperJs.detectOverflow
-);
-parcelHelpers.export(exports, "createPopperBase", ()=>_createPopperJs.createPopper
-);
-parcelHelpers.export(exports, "createPopper", ()=>_popperJs.createPopper
-) // eslint-disable-next-line import/no-unused-modules
+parcelHelpers.export(exports, "detectOverflow", ()=>(0, _createPopperJs.detectOverflow));
+parcelHelpers.export(exports, "createPopperBase", ()=>(0, _createPopperJs.createPopper));
+parcelHelpers.export(exports, "createPopper", ()=>(0, _popperJs.createPopper)) // eslint-disable-next-line import/no-unused-modules
 ;
-parcelHelpers.export(exports, "createPopperLite", ()=>_popperLiteJs.createPopper
-);
+parcelHelpers.export(exports, "createPopperLite", ()=>(0, _popperLiteJs.createPopper));
 var _enumsJs = require("./enums.js");
 parcelHelpers.exportAll(_enumsJs, exports);
 var _indexJs = require("./modifiers/index.js"); // eslint-disable-next-line import/no-unused-modules
@@ -23231,71 +22753,47 @@ var _popperLiteJs = require("./popper-lite.js");
 },{"./enums.js":"lCAq5","./modifiers/index.js":"cap3W","./createPopper.js":"cHuNp","./popper.js":"1PuRF","./popper-lite.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lCAq5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "top", ()=>top
-);
-parcelHelpers.export(exports, "bottom", ()=>bottom
-);
-parcelHelpers.export(exports, "right", ()=>right
-);
-parcelHelpers.export(exports, "left", ()=>left
-);
-parcelHelpers.export(exports, "auto", ()=>auto
-);
-parcelHelpers.export(exports, "basePlacements", ()=>basePlacements
-);
-parcelHelpers.export(exports, "start", ()=>start
-);
-parcelHelpers.export(exports, "end", ()=>end
-);
-parcelHelpers.export(exports, "clippingParents", ()=>clippingParents
-);
-parcelHelpers.export(exports, "viewport", ()=>viewport
-);
-parcelHelpers.export(exports, "popper", ()=>popper
-);
-parcelHelpers.export(exports, "reference", ()=>reference
-);
-parcelHelpers.export(exports, "variationPlacements", ()=>variationPlacements
-);
-parcelHelpers.export(exports, "placements", ()=>placements
-);
-parcelHelpers.export(exports, "beforeRead", ()=>beforeRead
-);
-parcelHelpers.export(exports, "read", ()=>read
-);
-parcelHelpers.export(exports, "afterRead", ()=>afterRead
-);
-parcelHelpers.export(exports, "beforeMain", ()=>beforeMain
-);
-parcelHelpers.export(exports, "main", ()=>main
-);
-parcelHelpers.export(exports, "afterMain", ()=>afterMain
-);
-parcelHelpers.export(exports, "beforeWrite", ()=>beforeWrite
-);
-parcelHelpers.export(exports, "write", ()=>write
-);
-parcelHelpers.export(exports, "afterWrite", ()=>afterWrite
-);
-parcelHelpers.export(exports, "modifierPhases", ()=>modifierPhases
-);
-var top = 'top';
-var bottom = 'bottom';
-var right = 'right';
-var left = 'left';
-var auto = 'auto';
+parcelHelpers.export(exports, "top", ()=>top);
+parcelHelpers.export(exports, "bottom", ()=>bottom);
+parcelHelpers.export(exports, "right", ()=>right);
+parcelHelpers.export(exports, "left", ()=>left);
+parcelHelpers.export(exports, "auto", ()=>auto);
+parcelHelpers.export(exports, "basePlacements", ()=>basePlacements);
+parcelHelpers.export(exports, "start", ()=>start);
+parcelHelpers.export(exports, "end", ()=>end);
+parcelHelpers.export(exports, "clippingParents", ()=>clippingParents);
+parcelHelpers.export(exports, "viewport", ()=>viewport);
+parcelHelpers.export(exports, "popper", ()=>popper);
+parcelHelpers.export(exports, "reference", ()=>reference);
+parcelHelpers.export(exports, "variationPlacements", ()=>variationPlacements);
+parcelHelpers.export(exports, "placements", ()=>placements);
+parcelHelpers.export(exports, "beforeRead", ()=>beforeRead);
+parcelHelpers.export(exports, "read", ()=>read);
+parcelHelpers.export(exports, "afterRead", ()=>afterRead);
+parcelHelpers.export(exports, "beforeMain", ()=>beforeMain);
+parcelHelpers.export(exports, "main", ()=>main);
+parcelHelpers.export(exports, "afterMain", ()=>afterMain);
+parcelHelpers.export(exports, "beforeWrite", ()=>beforeWrite);
+parcelHelpers.export(exports, "write", ()=>write);
+parcelHelpers.export(exports, "afterWrite", ()=>afterWrite);
+parcelHelpers.export(exports, "modifierPhases", ()=>modifierPhases);
+var top = "top";
+var bottom = "bottom";
+var right = "right";
+var left = "left";
+var auto = "auto";
 var basePlacements = [
     top,
     bottom,
     right,
     left
 ];
-var start = 'start';
-var end = 'end';
-var clippingParents = 'clippingParents';
-var viewport = 'viewport';
-var popper = 'popper';
-var reference = 'reference';
+var start = "start";
+var end = "end";
+var clippingParents = "clippingParents";
+var viewport = "viewport";
+var popper = "popper";
+var reference = "reference";
 var variationPlacements = /*#__PURE__*/ basePlacements.reduce(function(acc, placement) {
     return acc.concat([
         placement + "-" + start,
@@ -23311,15 +22809,15 @@ var placements = /*#__PURE__*/ [].concat(basePlacements, [
         placement + "-" + end
     ]);
 }, []); // modifiers that need to read the DOM
-var beforeRead = 'beforeRead';
-var read = 'read';
-var afterRead = 'afterRead'; // pure-logic modifiers
-var beforeMain = 'beforeMain';
-var main = 'main';
-var afterMain = 'afterMain'; // modifier with the purpose to write to the DOM (or write into a framework state)
-var beforeWrite = 'beforeWrite';
-var write = 'write';
-var afterWrite = 'afterWrite';
+var beforeRead = "beforeRead";
+var read = "read";
+var afterRead = "afterRead"; // pure-logic modifiers
+var beforeMain = "beforeMain";
+var main = "main";
+var afterMain = "afterMain"; // modifier with the purpose to write to the DOM (or write into a framework state)
+var beforeWrite = "beforeWrite";
+var write = "write";
+var afterWrite = "afterWrite";
 var modifierPhases = [
     beforeRead,
     read,
@@ -23335,24 +22833,15 @@ var modifierPhases = [
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cap3W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "applyStyles", ()=>_applyStylesJsDefault.default
-);
-parcelHelpers.export(exports, "arrow", ()=>_arrowJsDefault.default
-);
-parcelHelpers.export(exports, "computeStyles", ()=>_computeStylesJsDefault.default
-);
-parcelHelpers.export(exports, "eventListeners", ()=>_eventListenersJsDefault.default
-);
-parcelHelpers.export(exports, "flip", ()=>_flipJsDefault.default
-);
-parcelHelpers.export(exports, "hide", ()=>_hideJsDefault.default
-);
-parcelHelpers.export(exports, "offset", ()=>_offsetJsDefault.default
-);
-parcelHelpers.export(exports, "popperOffsets", ()=>_popperOffsetsJsDefault.default
-);
-parcelHelpers.export(exports, "preventOverflow", ()=>_preventOverflowJsDefault.default
-);
+parcelHelpers.export(exports, "applyStyles", ()=>(0, _applyStylesJsDefault.default));
+parcelHelpers.export(exports, "arrow", ()=>(0, _arrowJsDefault.default));
+parcelHelpers.export(exports, "computeStyles", ()=>(0, _computeStylesJsDefault.default));
+parcelHelpers.export(exports, "eventListeners", ()=>(0, _eventListenersJsDefault.default));
+parcelHelpers.export(exports, "flip", ()=>(0, _flipJsDefault.default));
+parcelHelpers.export(exports, "hide", ()=>(0, _hideJsDefault.default));
+parcelHelpers.export(exports, "offset", ()=>(0, _offsetJsDefault.default));
+parcelHelpers.export(exports, "popperOffsets", ()=>(0, _popperOffsetsJsDefault.default));
+parcelHelpers.export(exports, "preventOverflow", ()=>(0, _preventOverflowJsDefault.default));
 var _applyStylesJs = require("./applyStyles.js");
 var _applyStylesJsDefault = parcelHelpers.interopDefault(_applyStylesJs);
 var _arrowJs = require("./arrow.js");
@@ -23381,11 +22870,11 @@ var _instanceOfJs = require("../dom-utils/instanceOf.js"); // This modifier take
 // and applies them to the HTMLElements such as popper and arrow
 function applyStyles(_ref) {
     var state = _ref.state;
-    Object.keys(state.elements).forEach(function(name1) {
-        var style = state.styles[name1] || {};
-        var attributes = state.attributes[name1] || {};
-        var element = state.elements[name1]; // arrow is optional + virtual elements
-        if (!_instanceOfJs.isHTMLElement(element) || !_getNodeNameJsDefault.default(element)) return;
+    Object.keys(state.elements).forEach(function(name) {
+        var style = state.styles[name] || {};
+        var attributes = state.attributes[name] || {};
+        var element = state.elements[name]; // arrow is optional + virtual elements
+        if (!(0, _instanceOfJs.isHTMLElement)(element) || !(0, _getNodeNameJsDefault.default)(element)) return;
          // Flow doesn't support to extend this property, but it's the most
         // effective way to apply styles to an HTMLElement
         // $FlowFixMe[cannot-write]
@@ -23393,7 +22882,7 @@ function applyStyles(_ref) {
         Object.keys(attributes).forEach(function(name) {
             var value = attributes[name];
             if (value === false) element.removeAttribute(name);
-            else element.setAttribute(name, value === true ? '' : value);
+            else element.setAttribute(name, value === true ? "" : value);
         });
     });
 }
@@ -23402,12 +22891,12 @@ function effect(_ref2) {
     var initialStyles = {
         popper: {
             position: state.options.strategy,
-            left: '0',
-            top: '0',
-            margin: '0'
+            left: "0",
+            top: "0",
+            margin: "0"
         },
         arrow: {
-            position: 'absolute'
+            position: "absolute"
         },
         reference: {}
     };
@@ -23419,12 +22908,12 @@ function effect(_ref2) {
             var element = state.elements[name];
             var attributes = state.attributes[name] || {};
             var styleProperties = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]); // Set all values to an empty string to unset them
-            var style1 = styleProperties.reduce(function(style, property) {
-                style[property] = '';
+            var style = styleProperties.reduce(function(style, property) {
+                style[property] = "";
                 return style;
             }, {}); // arrow is optional + virtual elements
-            if (!_instanceOfJs.isHTMLElement(element) || !_getNodeNameJsDefault.default(element)) return;
-            Object.assign(element.style, style1);
+            if (!(0, _instanceOfJs.isHTMLElement)(element) || !(0, _getNodeNameJsDefault.default)(element)) return;
+            Object.assign(element.style, style);
             Object.keys(attributes).forEach(function(attribute) {
                 element.removeAttribute(attribute);
             });
@@ -23432,13 +22921,13 @@ function effect(_ref2) {
     };
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'applyStyles',
+    name: "applyStyles",
     enabled: true,
-    phase: 'write',
+    phase: "write",
     fn: applyStyles,
     effect: effect,
     requires: [
-        'computeStyles'
+        "computeStyles"
     ]
 };
 
@@ -23446,33 +22935,30 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getNodeName(element) {
-    return element ? (element.nodeName || '').toLowerCase() : null;
+    return element ? (element.nodeName || "").toLowerCase() : null;
 }
 exports.default = getNodeName;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gYFUC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isElement", ()=>isElement
-);
-parcelHelpers.export(exports, "isHTMLElement", ()=>isHTMLElement
-);
-parcelHelpers.export(exports, "isShadowRoot", ()=>isShadowRoot
-);
+parcelHelpers.export(exports, "isElement", ()=>isElement);
+parcelHelpers.export(exports, "isHTMLElement", ()=>isHTMLElement);
+parcelHelpers.export(exports, "isShadowRoot", ()=>isShadowRoot);
 var _getWindowJs = require("./getWindow.js");
 var _getWindowJsDefault = parcelHelpers.interopDefault(_getWindowJs);
 function isElement(node) {
-    var OwnElement = _getWindowJsDefault.default(node).Element;
+    var OwnElement = (0, _getWindowJsDefault.default)(node).Element;
     return node instanceof OwnElement || node instanceof Element;
 }
 function isHTMLElement(node) {
-    var OwnElement = _getWindowJsDefault.default(node).HTMLElement;
+    var OwnElement = (0, _getWindowJsDefault.default)(node).HTMLElement;
     return node instanceof OwnElement || node instanceof HTMLElement;
 }
 function isShadowRoot(node) {
     // IE 11 has no ShadowRoot
-    if (typeof ShadowRoot === 'undefined') return false;
-    var OwnElement = _getWindowJsDefault.default(node).ShadowRoot;
+    if (typeof ShadowRoot === "undefined") return false;
+    var OwnElement = (0, _getWindowJsDefault.default)(node).ShadowRoot;
     return node instanceof OwnElement || node instanceof ShadowRoot;
 }
 
@@ -23481,7 +22967,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getWindow(node) {
     if (node == null) return window;
-    if (node.toString() !== '[object Window]') {
+    if (node.toString() !== "[object Window]") {
         var ownerDocument = node.ownerDocument;
         return ownerDocument ? ownerDocument.defaultView || window : window;
     }
@@ -23510,75 +22996,75 @@ var _expandToHashMapJsDefault = parcelHelpers.interopDefault(_expandToHashMapJs)
 var _enumsJs = require("../enums.js");
 var _instanceOfJs = require("../dom-utils/instanceOf.js"); // eslint-disable-next-line import/no-unused-modules
 var toPaddingObject = function toPaddingObject(padding, state) {
-    padding = typeof padding === 'function' ? padding(Object.assign({}, state.rects, {
+    padding = typeof padding === "function" ? padding(Object.assign({}, state.rects, {
         placement: state.placement
     })) : padding;
-    return _mergePaddingObjectJsDefault.default(typeof padding !== 'number' ? padding : _expandToHashMapJsDefault.default(padding, _enumsJs.basePlacements));
+    return (0, _mergePaddingObjectJsDefault.default)(typeof padding !== "number" ? padding : (0, _expandToHashMapJsDefault.default)(padding, (0, _enumsJs.basePlacements)));
 };
 function arrow(_ref) {
     var _state$modifiersData$;
     var state = _ref.state, name = _ref.name, options = _ref.options;
     var arrowElement = state.elements.arrow;
     var popperOffsets = state.modifiersData.popperOffsets;
-    var basePlacement = _getBasePlacementJsDefault.default(state.placement);
-    var axis = _getMainAxisFromPlacementJsDefault.default(basePlacement);
+    var basePlacement = (0, _getBasePlacementJsDefault.default)(state.placement);
+    var axis = (0, _getMainAxisFromPlacementJsDefault.default)(basePlacement);
     var isVertical = [
-        _enumsJs.left,
-        _enumsJs.right
+        (0, _enumsJs.left),
+        (0, _enumsJs.right)
     ].indexOf(basePlacement) >= 0;
-    var len = isVertical ? 'height' : 'width';
+    var len = isVertical ? "height" : "width";
     if (!arrowElement || !popperOffsets) return;
     var paddingObject = toPaddingObject(options.padding, state);
-    var arrowRect = _getLayoutRectJsDefault.default(arrowElement);
-    var minProp = axis === 'y' ? _enumsJs.top : _enumsJs.left;
-    var maxProp = axis === 'y' ? _enumsJs.bottom : _enumsJs.right;
+    var arrowRect = (0, _getLayoutRectJsDefault.default)(arrowElement);
+    var minProp = axis === "y" ? (0, _enumsJs.top) : (0, _enumsJs.left);
+    var maxProp = axis === "y" ? (0, _enumsJs.bottom) : (0, _enumsJs.right);
     var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
     var startDiff = popperOffsets[axis] - state.rects.reference[axis];
-    var arrowOffsetParent = _getOffsetParentJsDefault.default(arrowElement);
-    var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
+    var arrowOffsetParent = (0, _getOffsetParentJsDefault.default)(arrowElement);
+    var clientSize = arrowOffsetParent ? axis === "y" ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
     var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
     // outside of the popper bounds
     var min = paddingObject[minProp];
     var max = clientSize - arrowRect[len] - paddingObject[maxProp];
     var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
-    var offset = _withinJs.within(min, center, max); // Prevents breaking syntax highlighting...
+    var offset = (0, _withinJs.within)(min, center, max); // Prevents breaking syntax highlighting...
     var axisProp = axis;
     state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
 }
 function effect(_ref2) {
     var state = _ref2.state, options = _ref2.options;
-    var _options$element = options.element, arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
+    var _options$element = options.element, arrowElement = _options$element === void 0 ? "[data-popper-arrow]" : _options$element;
     if (arrowElement == null) return;
      // CSS selector
-    if (typeof arrowElement === 'string') {
+    if (typeof arrowElement === "string") {
         arrowElement = state.elements.popper.querySelector(arrowElement);
         if (!arrowElement) return;
     }
-    if (!_instanceOfJs.isHTMLElement(arrowElement)) console.error([
+    if (!(0, _instanceOfJs.isHTMLElement)(arrowElement)) console.error([
         'Popper: "arrow" element must be an HTMLElement (not an SVGElement).',
-        'To use an SVG arrow, wrap it in an HTMLElement that will be used as',
-        'the arrow.'
-    ].join(' '));
-    if (!_containsJsDefault.default(state.elements.popper, arrowElement)) {
+        "To use an SVG arrow, wrap it in an HTMLElement that will be used as",
+        "the arrow."
+    ].join(" "));
+    if (!(0, _containsJsDefault.default)(state.elements.popper, arrowElement)) {
         console.error([
             'Popper: "arrow" modifier\'s `element` must be a child of the popper',
-            'element.'
-        ].join(' '));
+            "element."
+        ].join(" "));
         return;
     }
     state.elements.arrow = arrowElement;
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'arrow',
+    name: "arrow",
     enabled: true,
-    phase: 'main',
+    phase: "main",
     fn: arrow,
     effect: effect,
     requires: [
-        'popperOffsets'
+        "popperOffsets"
     ],
     requiresIfExists: [
-        'preventOverflow'
+        "preventOverflow"
     ]
 };
 
@@ -23587,7 +23073,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _enumsJs = require("../enums.js");
 function getBasePlacement(placement) {
-    return placement.split('-')[0];
+    return placement.split("-")[0];
 }
 exports.default = getBasePlacement;
 
@@ -23597,7 +23083,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _getBoundingClientRectJs = require("./getBoundingClientRect.js"); // Returns the layout rect of an element relative to its offsetParent. Layout
 var _getBoundingClientRectJsDefault = parcelHelpers.interopDefault(_getBoundingClientRectJs);
 function getLayoutRect(element) {
-    var clientRect = _getBoundingClientRectJsDefault.default(element); // Use the clientRect sizes if it's not been transformed.
+    var clientRect = (0, _getBoundingClientRectJsDefault.default)(element); // Use the clientRect sizes if it's not been transformed.
     // Fixes https://github.com/popperjs/popper-core/issues/1223
     var width = element.offsetWidth;
     var height = element.offsetHeight;
@@ -23622,12 +23108,12 @@ function getBoundingClientRect(element, includeScale) {
     var rect = element.getBoundingClientRect();
     var scaleX = 1;
     var scaleY = 1;
-    if (_instanceOfJs.isHTMLElement(element) && includeScale) {
+    if ((0, _instanceOfJs.isHTMLElement)(element) && includeScale) {
         var offsetHeight = element.offsetHeight;
         var offsetWidth = element.offsetWidth; // Do not attempt to divide by 0, otherwise we get `Infinity` as scale
         // Fallback to 1 in case both values are `0`
-        if (offsetWidth > 0) scaleX = _mathJs.round(rect.width) / offsetWidth || 1;
-        if (offsetHeight > 0) scaleY = _mathJs.round(rect.height) / offsetHeight || 1;
+        if (offsetWidth > 0) scaleX = (0, _mathJs.round)(rect.width) / offsetWidth || 1;
+        if (offsetHeight > 0) scaleY = (0, _mathJs.round)(rect.height) / offsetHeight || 1;
     }
     return {
         width: rect.width / scaleX,
@@ -23645,12 +23131,9 @@ exports.default = getBoundingClientRect;
 },{"./instanceOf.js":"gYFUC","../utils/math.js":"gQqVe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gQqVe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "max", ()=>max
-);
-parcelHelpers.export(exports, "min", ()=>min
-);
-parcelHelpers.export(exports, "round", ()=>round
-);
+parcelHelpers.export(exports, "max", ()=>max);
+parcelHelpers.export(exports, "min", ()=>min);
+parcelHelpers.export(exports, "round", ()=>round);
 var max = Math.max;
 var min = Math.min;
 var round = Math.round;
@@ -23662,13 +23145,13 @@ var _instanceOfJs = require("./instanceOf.js");
 function contains(parent, child) {
     var rootNode = child.getRootNode && child.getRootNode(); // First, attempt with faster native method
     if (parent.contains(child)) return true;
-    else if (rootNode && _instanceOfJs.isShadowRoot(rootNode)) {
+    else if (rootNode && (0, _instanceOfJs.isShadowRoot)(rootNode)) {
         var next = child;
         do {
             if (next && parent.isSameNode(next)) return true;
              // $FlowFixMe[prop-missing]: need a better way to handle this...
             next = next.parentNode || next.host;
-        }while (next)
+        }while (next);
     } // Give up, the result is false
     return false;
 }
@@ -23689,40 +23172,40 @@ var _isTableElementJsDefault = parcelHelpers.interopDefault(_isTableElementJs);
 var _getParentNodeJs = require("./getParentNode.js");
 var _getParentNodeJsDefault = parcelHelpers.interopDefault(_getParentNodeJs);
 function getTrueOffsetParent(element) {
-    if (!_instanceOfJs.isHTMLElement(element) || _getComputedStyleJsDefault.default(element).position === 'fixed') return null;
+    if (!(0, _instanceOfJs.isHTMLElement)(element) || (0, _getComputedStyleJsDefault.default)(element).position === "fixed") return null;
     return element.offsetParent;
 } // `.offsetParent` reports `null` for fixed elements, while absolute elements
 // return the containing block
 function getContainingBlock(element) {
-    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') !== -1;
-    var isIE = navigator.userAgent.indexOf('Trident') !== -1;
-    if (isIE && _instanceOfJs.isHTMLElement(element)) {
+    var isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") !== -1;
+    var isIE = navigator.userAgent.indexOf("Trident") !== -1;
+    if (isIE && (0, _instanceOfJs.isHTMLElement)(element)) {
         // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
-        var elementCss = _getComputedStyleJsDefault.default(element);
-        if (elementCss.position === 'fixed') return null;
+        var elementCss = (0, _getComputedStyleJsDefault.default)(element);
+        if (elementCss.position === "fixed") return null;
     }
-    var currentNode = _getParentNodeJsDefault.default(element);
-    if (_instanceOfJs.isShadowRoot(currentNode)) currentNode = currentNode.host;
-    while(_instanceOfJs.isHTMLElement(currentNode) && [
-        'html',
-        'body'
-    ].indexOf(_getNodeNameJsDefault.default(currentNode)) < 0){
-        var css = _getComputedStyleJsDefault.default(currentNode); // This is non-exhaustive but covers the most common CSS properties that
+    var currentNode = (0, _getParentNodeJsDefault.default)(element);
+    if ((0, _instanceOfJs.isShadowRoot)(currentNode)) currentNode = currentNode.host;
+    while((0, _instanceOfJs.isHTMLElement)(currentNode) && [
+        "html",
+        "body"
+    ].indexOf((0, _getNodeNameJsDefault.default)(currentNode)) < 0){
+        var css = (0, _getComputedStyleJsDefault.default)(currentNode); // This is non-exhaustive but covers the most common CSS properties that
         // create a containing block.
         // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-        if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || [
-            'transform',
-            'perspective'
-        ].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') return currentNode;
+        if (css.transform !== "none" || css.perspective !== "none" || css.contain === "paint" || [
+            "transform",
+            "perspective"
+        ].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === "filter" || isFirefox && css.filter && css.filter !== "none") return currentNode;
         else currentNode = currentNode.parentNode;
     }
     return null;
 } // Gets the closest ancestor positioned element. Handles some edge cases,
 function getOffsetParent(element) {
-    var window = _getWindowJsDefault.default(element);
+    var window = (0, _getWindowJsDefault.default)(element);
     var offsetParent = getTrueOffsetParent(element);
-    while(offsetParent && _isTableElementJsDefault.default(offsetParent) && _getComputedStyleJsDefault.default(offsetParent).position === 'static')offsetParent = getTrueOffsetParent(offsetParent);
-    if (offsetParent && (_getNodeNameJsDefault.default(offsetParent) === 'html' || _getNodeNameJsDefault.default(offsetParent) === 'body' && _getComputedStyleJsDefault.default(offsetParent).position === 'static')) return window;
+    while(offsetParent && (0, _isTableElementJsDefault.default)(offsetParent) && (0, _getComputedStyleJsDefault.default)(offsetParent).position === "static")offsetParent = getTrueOffsetParent(offsetParent);
+    if (offsetParent && ((0, _getNodeNameJsDefault.default)(offsetParent) === "html" || (0, _getNodeNameJsDefault.default)(offsetParent) === "body" && (0, _getComputedStyleJsDefault.default)(offsetParent).position === "static")) return window;
     return offsetParent || getContainingBlock(element) || window;
 }
 exports.default = getOffsetParent;
@@ -23733,7 +23216,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _getWindowJs = require("./getWindow.js");
 var _getWindowJsDefault = parcelHelpers.interopDefault(_getWindowJs);
 function getComputedStyle(element) {
-    return _getWindowJsDefault.default(element).getComputedStyle(element);
+    return (0, _getWindowJsDefault.default)(element).getComputedStyle(element);
 }
 exports.default = getComputedStyle;
 
@@ -23744,10 +23227,10 @@ var _getNodeNameJs = require("./getNodeName.js");
 var _getNodeNameJsDefault = parcelHelpers.interopDefault(_getNodeNameJs);
 function isTableElement(element) {
     return [
-        'table',
-        'td',
-        'th'
-    ].indexOf(_getNodeNameJsDefault.default(element)) >= 0;
+        "table",
+        "td",
+        "th"
+    ].indexOf((0, _getNodeNameJsDefault.default)(element)) >= 0;
 }
 exports.default = isTableElement;
 
@@ -23760,11 +23243,11 @@ var _getDocumentElementJs = require("./getDocumentElement.js");
 var _getDocumentElementJsDefault = parcelHelpers.interopDefault(_getDocumentElementJs);
 var _instanceOfJs = require("./instanceOf.js");
 function getParentNode(element) {
-    if (_getNodeNameJsDefault.default(element) === 'html') return element;
+    if ((0, _getNodeNameJsDefault.default)(element) === "html") return element;
     return(// $FlowFixMe[incompatible-return]
     // $FlowFixMe[prop-missing]
-    element.assignedSlot || element.parentNode || (_instanceOfJs.isShadowRoot(element) ? element.host : null) || // $FlowFixMe[incompatible-call]: HTMLElement is a Node
-    _getDocumentElementJsDefault.default(element) // fallback
+    element.assignedSlot || element.parentNode || ((0, _instanceOfJs.isShadowRoot)(element) ? element.host : null) || // $FlowFixMe[incompatible-call]: HTMLElement is a Node
+    (0, _getDocumentElementJsDefault.default)(element) // fallback
     );
 }
 exports.default = getParentNode;
@@ -23775,7 +23258,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _instanceOfJs = require("./instanceOf.js");
 function getDocumentElement(element) {
     // $FlowFixMe[incompatible-return]: assume body is always available
-    return ((_instanceOfJs.isElement(element) ? element.ownerDocument : element.document) || window.document).documentElement;
+    return (((0, _instanceOfJs.isElement)(element) ? element.ownerDocument : element.document) || window.document).documentElement;
 }
 exports.default = getDocumentElement;
 
@@ -23784,22 +23267,20 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getMainAxisFromPlacement(placement) {
     return [
-        'top',
-        'bottom'
-    ].indexOf(placement) >= 0 ? 'x' : 'y';
+        "top",
+        "bottom"
+    ].indexOf(placement) >= 0 ? "x" : "y";
 }
 exports.default = getMainAxisFromPlacement;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3glSz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "within", ()=>within
-);
-parcelHelpers.export(exports, "withinMaxClamp", ()=>withinMaxClamp
-);
+parcelHelpers.export(exports, "within", ()=>within);
+parcelHelpers.export(exports, "withinMaxClamp", ()=>withinMaxClamp);
 var _mathJs = require("./math.js");
 function within(min, value, max) {
-    return _mathJs.max(min, _mathJs.min(value, max));
+    return (0, _mathJs.max)(min, (0, _mathJs.min)(value, max));
 }
 function withinMaxClamp(min, value, max) {
     var v = within(min, value, max);
@@ -23812,7 +23293,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _getFreshSideObjectJs = require("./getFreshSideObject.js");
 var _getFreshSideObjectJsDefault = parcelHelpers.interopDefault(_getFreshSideObjectJs);
 function mergePaddingObject(paddingObject) {
-    return Object.assign({}, _getFreshSideObjectJsDefault.default(), paddingObject);
+    return Object.assign({}, (0, _getFreshSideObjectJsDefault.default)(), paddingObject);
 }
 exports.default = mergePaddingObject;
 
@@ -23843,8 +23324,7 @@ exports.default = expandToHashMap;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gDlm2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "mapToStyles", ()=>mapToStyles
-);
+parcelHelpers.export(exports, "mapToStyles", ()=>mapToStyles);
 var _enumsJs = require("../enums.js");
 var _getOffsetParentJs = require("../dom-utils/getOffsetParent.js");
 var _getOffsetParentJsDefault = parcelHelpers.interopDefault(_getOffsetParentJs);
@@ -23860,10 +23340,10 @@ var _getVariationJs = require("../utils/getVariation.js");
 var _getVariationJsDefault = parcelHelpers.interopDefault(_getVariationJs);
 var _mathJs = require("../utils/math.js"); // eslint-disable-next-line import/no-unused-modules
 var unsetSides = {
-    top: 'auto',
-    right: 'auto',
-    bottom: 'auto',
-    left: 'auto'
+    top: "auto",
+    right: "auto",
+    bottom: "auto",
+    left: "auto"
 }; // Round the offsets to the nearest suitable subpixel based on the DPR.
 // Zooming can change the DPR, but it seems to report a value that will
 // cleanly divide the values into the appropriate subpixels.
@@ -23872,15 +23352,15 @@ function roundOffsetsByDPR(_ref) {
     var win = window;
     var dpr = win.devicePixelRatio || 1;
     return {
-        x: _mathJs.round(x * dpr) / dpr || 0,
-        y: _mathJs.round(y * dpr) / dpr || 0
+        x: (0, _mathJs.round)(x * dpr) / dpr || 0,
+        y: (0, _mathJs.round)(y * dpr) / dpr || 0
     };
 }
 function mapToStyles(_ref2) {
     var _Object$assign2;
     var popper = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets, isFixed = _ref2.isFixed;
     var _offsets$x = offsets.x, x = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y = _offsets$y === void 0 ? 0 : _offsets$y;
-    var _ref3 = typeof roundOffsets === 'function' ? roundOffsets({
+    var _ref3 = typeof roundOffsets === "function" ? roundOffsets({
         x: x,
         y: y
     }) : {
@@ -23889,30 +23369,31 @@ function mapToStyles(_ref2) {
     };
     x = _ref3.x;
     y = _ref3.y;
-    var hasX = offsets.hasOwnProperty('x');
-    var hasY = offsets.hasOwnProperty('y');
-    var sideX = _enumsJs.left;
-    var sideY = _enumsJs.top;
+    var hasX = offsets.hasOwnProperty("x");
+    var hasY = offsets.hasOwnProperty("y");
+    var sideX = (0, _enumsJs.left);
+    var sideY = (0, _enumsJs.top);
     var win = window;
     if (adaptive) {
-        var offsetParent = _getOffsetParentJsDefault.default(popper);
-        var heightProp = 'clientHeight';
-        var widthProp = 'clientWidth';
-        if (offsetParent === _getWindowJsDefault.default(popper)) {
-            offsetParent = _getDocumentElementJsDefault.default(popper);
-            if (_getComputedStyleJsDefault.default(offsetParent).position !== 'static' && position === 'absolute') {
-                heightProp = 'scrollHeight';
-                widthProp = 'scrollWidth';
+        var offsetParent = (0, _getOffsetParentJsDefault.default)(popper);
+        var heightProp = "clientHeight";
+        var widthProp = "clientWidth";
+        if (offsetParent === (0, _getWindowJsDefault.default)(popper)) {
+            offsetParent = (0, _getDocumentElementJsDefault.default)(popper);
+            if ((0, _getComputedStyleJsDefault.default)(offsetParent).position !== "static" && position === "absolute") {
+                heightProp = "scrollHeight";
+                widthProp = "scrollWidth";
             }
         } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
-        if (placement === _enumsJs.top || (placement === _enumsJs.left || placement === _enumsJs.right) && variation === _enumsJs.end) {
-            sideY = _enumsJs.bottom;
+        offsetParent;
+        if (placement === (0, _enumsJs.top) || (placement === (0, _enumsJs.left) || placement === (0, _enumsJs.right)) && variation === (0, _enumsJs.end)) {
+            sideY = (0, _enumsJs.bottom);
             var offsetY = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.height : offsetParent[heightProp];
             y -= offsetY - popperRect.height;
             y *= gpuAcceleration ? 1 : -1;
         }
-        if (placement === _enumsJs.left || (placement === _enumsJs.top || placement === _enumsJs.bottom) && variation === _enumsJs.end) {
-            sideX = _enumsJs.right;
+        if (placement === (0, _enumsJs.left) || (placement === (0, _enumsJs.top) || placement === (0, _enumsJs.bottom)) && variation === (0, _enumsJs.end)) {
+            sideX = (0, _enumsJs.right);
             var offsetX = isFixed && offsetParent === win && win.visualViewport ? win.visualViewport.width : offsetParent[widthProp];
             x -= offsetX - popperRect.width;
             x *= gpuAcceleration ? 1 : -1;
@@ -23932,41 +23413,41 @@ function mapToStyles(_ref2) {
     y = _ref4.y;
     if (gpuAcceleration) {
         var _Object$assign;
-        return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
+        return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
     }
-    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : '', _Object$assign2[sideX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
+    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", _Object$assign2[sideX] = hasX ? x + "px" : "", _Object$assign2.transform = "", _Object$assign2));
 }
 function computeStyles(_ref5) {
     var state = _ref5.state, options = _ref5.options;
     var _options$gpuAccelerat = options.gpuAcceleration, gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat, _options$adaptive = options.adaptive, adaptive = _options$adaptive === void 0 ? true : _options$adaptive, _options$roundOffsets = options.roundOffsets, roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
-    var transitionProperty = _getComputedStyleJsDefault.default(state.elements.popper).transitionProperty || '';
+    var transitionProperty = (0, _getComputedStyleJsDefault.default)(state.elements.popper).transitionProperty || "";
     if (adaptive && [
-        'transform',
-        'top',
-        'right',
-        'bottom',
-        'left'
+        "transform",
+        "top",
+        "right",
+        "bottom",
+        "left"
     ].some(function(property) {
         return transitionProperty.indexOf(property) >= 0;
     })) console.warn([
-        'Popper: Detected CSS transitions on at least one of the following',
+        "Popper: Detected CSS transitions on at least one of the following",
         'CSS properties: "transform", "top", "right", "bottom", "left".',
-        '\n\n',
+        "\n\n",
         'Disable the "computeStyles" modifier\'s `adaptive` option to allow',
-        'for smooth transitions, or remove these properties from the CSS',
-        'transition declaration on the popper element if only transitioning',
-        'opacity or background-color for example.',
-        '\n\n',
-        'We recommend using the popper element as a wrapper around an inner',
-        'element that can have any CSS property transitioned for animations.'
-    ].join(' '));
+        "for smooth transitions, or remove these properties from the CSS",
+        "transition declaration on the popper element if only transitioning",
+        "opacity or background-color for example.",
+        "\n\n",
+        "We recommend using the popper element as a wrapper around an inner",
+        "element that can have any CSS property transitioned for animations."
+    ].join(" "));
     var commonStyles = {
-        placement: _getBasePlacementJsDefault.default(state.placement),
-        variation: _getVariationJsDefault.default(state.placement),
+        placement: (0, _getBasePlacementJsDefault.default)(state.placement),
+        variation: (0, _getVariationJsDefault.default)(state.placement),
         popper: state.elements.popper,
         popperRect: state.rects.popper,
         gpuAcceleration: gpuAcceleration,
-        isFixed: state.options.strategy === 'fixed'
+        isFixed: state.options.strategy === "fixed"
     };
     if (state.modifiersData.popperOffsets != null) state.styles.popper = Object.assign({}, state.styles.popper, mapToStyles(Object.assign({}, commonStyles, {
         offsets: state.modifiersData.popperOffsets,
@@ -23976,18 +23457,18 @@ function computeStyles(_ref5) {
     })));
     if (state.modifiersData.arrow != null) state.styles.arrow = Object.assign({}, state.styles.arrow, mapToStyles(Object.assign({}, commonStyles, {
         offsets: state.modifiersData.arrow,
-        position: 'absolute',
+        position: "absolute",
         adaptive: false,
         roundOffsets: roundOffsets
     })));
     state.attributes.popper = Object.assign({}, state.attributes.popper, {
-        'data-popper-placement': state.placement
+        "data-popper-placement": state.placement
     });
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'computeStyles',
+    name: "computeStyles",
     enabled: true,
-    phase: 'beforeWrite',
+    phase: "beforeWrite",
     fn: computeStyles,
     data: {}
 };
@@ -23996,7 +23477,7 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getVariation(placement) {
-    return placement.split('-')[1];
+    return placement.split("-")[1];
 }
 exports.default = getVariation;
 
@@ -24011,23 +23492,23 @@ var passive = {
 function effect(_ref) {
     var state = _ref.state, instance = _ref.instance, options = _ref.options;
     var _options$scroll = options.scroll, scroll = _options$scroll === void 0 ? true : _options$scroll, _options$resize = options.resize, resize = _options$resize === void 0 ? true : _options$resize;
-    var window = _getWindowJsDefault.default(state.elements.popper);
+    var window = (0, _getWindowJsDefault.default)(state.elements.popper);
     var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
     if (scroll) scrollParents.forEach(function(scrollParent) {
-        scrollParent.addEventListener('scroll', instance.update, passive);
+        scrollParent.addEventListener("scroll", instance.update, passive);
     });
-    if (resize) window.addEventListener('resize', instance.update, passive);
+    if (resize) window.addEventListener("resize", instance.update, passive);
     return function() {
         if (scroll) scrollParents.forEach(function(scrollParent) {
-            scrollParent.removeEventListener('scroll', instance.update, passive);
+            scrollParent.removeEventListener("scroll", instance.update, passive);
         });
-        if (resize) window.removeEventListener('resize', instance.update, passive);
+        if (resize) window.removeEventListener("resize", instance.update, passive);
     };
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'eventListeners',
+    name: "eventListeners",
     enabled: true,
-    phase: 'write',
+    phase: "write",
     fn: function fn() {},
     effect: effect,
     data: {}
@@ -24050,12 +23531,12 @@ var _enumsJs = require("../enums.js");
 var _getVariationJs = require("../utils/getVariation.js"); // eslint-disable-next-line import/no-unused-modules
 var _getVariationJsDefault = parcelHelpers.interopDefault(_getVariationJs);
 function getExpandedFallbackPlacements(placement) {
-    if (_getBasePlacementJsDefault.default(placement) === _enumsJs.auto) return [];
-    var oppositePlacement = _getOppositePlacementJsDefault.default(placement);
+    if ((0, _getBasePlacementJsDefault.default)(placement) === (0, _enumsJs.auto)) return [];
+    var oppositePlacement = (0, _getOppositePlacementJsDefault.default)(placement);
     return [
-        _getOppositeVariationPlacementJsDefault.default(placement),
+        (0, _getOppositeVariationPlacementJsDefault.default)(placement),
         oppositePlacement,
-        _getOppositeVariationPlacementJsDefault.default(oppositePlacement)
+        (0, _getOppositeVariationPlacementJsDefault.default)(oppositePlacement)
     ];
 }
 function flip(_ref) {
@@ -24063,15 +23544,15 @@ function flip(_ref) {
     if (state.modifiersData[name]._skip) return;
     var _options$mainAxis = options.mainAxis, checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis, _options$altAxis = options.altAxis, checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis, specifiedFallbackPlacements = options.fallbackPlacements, padding = options.padding, boundary = options.boundary, rootBoundary = options.rootBoundary, altBoundary = options.altBoundary, _options$flipVariatio = options.flipVariations, flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio, allowedAutoPlacements = options.allowedAutoPlacements;
     var preferredPlacement = state.options.placement;
-    var basePlacement = _getBasePlacementJsDefault.default(preferredPlacement);
+    var basePlacement = (0, _getBasePlacementJsDefault.default)(preferredPlacement);
     var isBasePlacement = basePlacement === preferredPlacement;
     var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [
-        _getOppositePlacementJsDefault.default(preferredPlacement)
+        (0, _getOppositePlacementJsDefault.default)(preferredPlacement)
     ] : getExpandedFallbackPlacements(preferredPlacement));
     var placements = [
         preferredPlacement
     ].concat(fallbackPlacements).reduce(function(acc, placement) {
-        return acc.concat(_getBasePlacementJsDefault.default(placement) === _enumsJs.auto ? _computeAutoPlacementJsDefault.default(state, {
+        return acc.concat((0, _getBasePlacementJsDefault.default)(placement) === (0, _enumsJs.auto) ? (0, _computeAutoPlacementJsDefault.default)(state, {
             placement: placement,
             boundary: boundary,
             rootBoundary: rootBoundary,
@@ -24086,35 +23567,35 @@ function flip(_ref) {
     var makeFallbackChecks = true;
     var firstFittingPlacement = placements[0];
     for(var i = 0; i < placements.length; i++){
-        var placement1 = placements[i];
-        var _basePlacement = _getBasePlacementJsDefault.default(placement1);
-        var isStartVariation = _getVariationJsDefault.default(placement1) === _enumsJs.start;
+        var placement = placements[i];
+        var _basePlacement = (0, _getBasePlacementJsDefault.default)(placement);
+        var isStartVariation = (0, _getVariationJsDefault.default)(placement) === (0, _enumsJs.start);
         var isVertical = [
-            _enumsJs.top,
-            _enumsJs.bottom
+            (0, _enumsJs.top),
+            (0, _enumsJs.bottom)
         ].indexOf(_basePlacement) >= 0;
-        var len = isVertical ? 'width' : 'height';
-        var overflow = _detectOverflowJsDefault.default(state, {
-            placement: placement1,
+        var len = isVertical ? "width" : "height";
+        var overflow = (0, _detectOverflowJsDefault.default)(state, {
+            placement: placement,
             boundary: boundary,
             rootBoundary: rootBoundary,
             altBoundary: altBoundary,
             padding: padding
         });
-        var mainVariationSide = isVertical ? isStartVariation ? _enumsJs.right : _enumsJs.left : isStartVariation ? _enumsJs.bottom : _enumsJs.top;
-        if (referenceRect[len] > popperRect[len]) mainVariationSide = _getOppositePlacementJsDefault.default(mainVariationSide);
-        var altVariationSide = _getOppositePlacementJsDefault.default(mainVariationSide);
+        var mainVariationSide = isVertical ? isStartVariation ? (0, _enumsJs.right) : (0, _enumsJs.left) : isStartVariation ? (0, _enumsJs.bottom) : (0, _enumsJs.top);
+        if (referenceRect[len] > popperRect[len]) mainVariationSide = (0, _getOppositePlacementJsDefault.default)(mainVariationSide);
+        var altVariationSide = (0, _getOppositePlacementJsDefault.default)(mainVariationSide);
         var checks = [];
         if (checkMainAxis) checks.push(overflow[_basePlacement] <= 0);
         if (checkAltAxis) checks.push(overflow[mainVariationSide] <= 0, overflow[altVariationSide] <= 0);
         if (checks.every(function(check) {
             return check;
         })) {
-            firstFittingPlacement = placement1;
+            firstFittingPlacement = placement;
             makeFallbackChecks = false;
             break;
         }
-        checksMap.set(placement1, checks);
+        checksMap.set(placement, checks);
     }
     if (makeFallbackChecks) {
         // `2` may be desired in some cases – research later
@@ -24131,8 +23612,8 @@ function flip(_ref) {
                 return "break";
             }
         };
-        for(var _i1 = numberOfChecks; _i1 > 0; _i1--){
-            var _ret = _loop(_i1);
+        for(var _i = numberOfChecks; _i > 0; _i--){
+            var _ret = _loop(_i);
             if (_ret === "break") break;
         }
     }
@@ -24143,12 +23624,12 @@ function flip(_ref) {
     }
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'flip',
+    name: "flip",
     enabled: true,
-    phase: 'main',
+    phase: "main",
     fn: flip,
     requiresIfExists: [
-        'offset'
+        "offset"
     ],
     data: {
         _skip: false
@@ -24159,10 +23640,10 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var hash = {
-    left: 'right',
-    right: 'left',
-    bottom: 'top',
-    top: 'bottom'
+    left: "right",
+    right: "left",
+    bottom: "top",
+    top: "bottom"
 };
 function getOppositePlacement(placement) {
     return placement.replace(/left|right|bottom|top/g, function(matched) {
@@ -24175,8 +23656,8 @@ exports.default = getOppositePlacement;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var hash = {
-    start: 'end',
-    end: 'start'
+    start: "end",
+    end: "start"
 };
 function getOppositeVariationPlacement(placement) {
     return placement.replace(/start|end/g, function(matched) {
@@ -24206,21 +23687,21 @@ var _expandToHashMapJs = require("./expandToHashMap.js"); // eslint-disable-next
 var _expandToHashMapJsDefault = parcelHelpers.interopDefault(_expandToHashMapJs);
 function detectOverflow(state, options) {
     if (options === void 0) options = {};
-    var _options = options, _options$placement = _options.placement, placement = _options$placement === void 0 ? state.placement : _options$placement, _options$boundary = _options.boundary, boundary = _options$boundary === void 0 ? _enumsJs.clippingParents : _options$boundary, _options$rootBoundary = _options.rootBoundary, rootBoundary = _options$rootBoundary === void 0 ? _enumsJs.viewport : _options$rootBoundary, _options$elementConte = _options.elementContext, elementContext = _options$elementConte === void 0 ? _enumsJs.popper : _options$elementConte, _options$altBoundary = _options.altBoundary, altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary, _options$padding = _options.padding, padding = _options$padding === void 0 ? 0 : _options$padding;
-    var paddingObject = _mergePaddingObjectJsDefault.default(typeof padding !== 'number' ? padding : _expandToHashMapJsDefault.default(padding, _enumsJs.basePlacements));
-    var altContext = elementContext === _enumsJs.popper ? _enumsJs.reference : _enumsJs.popper;
+    var _options = options, _options$placement = _options.placement, placement = _options$placement === void 0 ? state.placement : _options$placement, _options$boundary = _options.boundary, boundary = _options$boundary === void 0 ? (0, _enumsJs.clippingParents) : _options$boundary, _options$rootBoundary = _options.rootBoundary, rootBoundary = _options$rootBoundary === void 0 ? (0, _enumsJs.viewport) : _options$rootBoundary, _options$elementConte = _options.elementContext, elementContext = _options$elementConte === void 0 ? (0, _enumsJs.popper) : _options$elementConte, _options$altBoundary = _options.altBoundary, altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary, _options$padding = _options.padding, padding = _options$padding === void 0 ? 0 : _options$padding;
+    var paddingObject = (0, _mergePaddingObjectJsDefault.default)(typeof padding !== "number" ? padding : (0, _expandToHashMapJsDefault.default)(padding, (0, _enumsJs.basePlacements)));
+    var altContext = elementContext === (0, _enumsJs.popper) ? (0, _enumsJs.reference) : (0, _enumsJs.popper);
     var popperRect = state.rects.popper;
     var element = state.elements[altBoundary ? altContext : elementContext];
-    var clippingClientRect = _getClippingRectJsDefault.default(_instanceOfJs.isElement(element) ? element : element.contextElement || _getDocumentElementJsDefault.default(state.elements.popper), boundary, rootBoundary);
-    var referenceClientRect = _getBoundingClientRectJsDefault.default(state.elements.reference);
-    var popperOffsets = _computeOffsetsJsDefault.default({
+    var clippingClientRect = (0, _getClippingRectJsDefault.default)((0, _instanceOfJs.isElement)(element) ? element : element.contextElement || (0, _getDocumentElementJsDefault.default)(state.elements.popper), boundary, rootBoundary);
+    var referenceClientRect = (0, _getBoundingClientRectJsDefault.default)(state.elements.reference);
+    var popperOffsets = (0, _computeOffsetsJsDefault.default)({
         reference: referenceClientRect,
         element: popperRect,
-        strategy: 'absolute',
+        strategy: "absolute",
         placement: placement
     });
-    var popperClientRect = _rectToClientRectJsDefault.default(Object.assign({}, popperRect, popperOffsets));
-    var elementClientRect = elementContext === _enumsJs.popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
+    var popperClientRect = (0, _rectToClientRectJsDefault.default)(Object.assign({}, popperRect, popperOffsets));
+    var elementClientRect = elementContext === (0, _enumsJs.popper) ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
     // 0 or negative = within the clipping rect
     var overflowOffsets = {
         top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
@@ -24229,17 +23710,17 @@ function detectOverflow(state, options) {
         right: elementClientRect.right - clippingClientRect.right + paddingObject.right
     };
     var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
-    if (elementContext === _enumsJs.popper && offsetData) {
+    if (elementContext === (0, _enumsJs.popper) && offsetData) {
         var offset = offsetData[placement];
         Object.keys(overflowOffsets).forEach(function(key) {
             var multiply = [
-                _enumsJs.right,
-                _enumsJs.bottom
+                (0, _enumsJs.right),
+                (0, _enumsJs.bottom)
             ].indexOf(key) >= 0 ? 1 : -1;
             var axis = [
-                _enumsJs.top,
-                _enumsJs.bottom
-            ].indexOf(key) >= 0 ? 'y' : 'x';
+                (0, _enumsJs.top),
+                (0, _enumsJs.bottom)
+            ].indexOf(key) >= 0 ? "y" : "x";
             overflowOffsets[key] += offset[axis] * multiply;
         });
     }
@@ -24276,7 +23757,7 @@ var _rectToClientRectJs = require("../utils/rectToClientRect.js");
 var _rectToClientRectJsDefault = parcelHelpers.interopDefault(_rectToClientRectJs);
 var _mathJs = require("../utils/math.js");
 function getInnerBoundingClientRect(element) {
-    var rect = _getBoundingClientRectJsDefault.default(element);
+    var rect = (0, _getBoundingClientRectJsDefault.default)(element);
     rect.top = rect.top + element.clientTop;
     rect.left = rect.left + element.clientLeft;
     rect.bottom = rect.top + element.clientHeight;
@@ -24288,35 +23769,35 @@ function getInnerBoundingClientRect(element) {
     return rect;
 }
 function getClientRectFromMixedType(element, clippingParent) {
-    return clippingParent === _enumsJs.viewport ? _rectToClientRectJsDefault.default(_getViewportRectJsDefault.default(element)) : _instanceOfJs.isElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : _rectToClientRectJsDefault.default(_getDocumentRectJsDefault.default(_getDocumentElementJsDefault.default(element)));
+    return clippingParent === (0, _enumsJs.viewport) ? (0, _rectToClientRectJsDefault.default)((0, _getViewportRectJsDefault.default)(element)) : (0, _instanceOfJs.isElement)(clippingParent) ? getInnerBoundingClientRect(clippingParent) : (0, _rectToClientRectJsDefault.default)((0, _getDocumentRectJsDefault.default)((0, _getDocumentElementJsDefault.default)(element)));
 } // A "clipping parent" is an overflowable container with the characteristic of
 // clipping (or hiding) overflowing elements with a position different from
 // `initial`
 function getClippingParents(element) {
-    var clippingParents = _listScrollParentsJsDefault.default(_getParentNodeJsDefault.default(element));
+    var clippingParents = (0, _listScrollParentsJsDefault.default)((0, _getParentNodeJsDefault.default)(element));
     var canEscapeClipping = [
-        'absolute',
-        'fixed'
-    ].indexOf(_getComputedStyleJsDefault.default(element).position) >= 0;
-    var clipperElement = canEscapeClipping && _instanceOfJs.isHTMLElement(element) ? _getOffsetParentJsDefault.default(element) : element;
-    if (!_instanceOfJs.isElement(clipperElement)) return [];
+        "absolute",
+        "fixed"
+    ].indexOf((0, _getComputedStyleJsDefault.default)(element).position) >= 0;
+    var clipperElement = canEscapeClipping && (0, _instanceOfJs.isHTMLElement)(element) ? (0, _getOffsetParentJsDefault.default)(element) : element;
+    if (!(0, _instanceOfJs.isElement)(clipperElement)) return [];
      // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
     return clippingParents.filter(function(clippingParent) {
-        return _instanceOfJs.isElement(clippingParent) && _containsJsDefault.default(clippingParent, clipperElement) && _getNodeNameJsDefault.default(clippingParent) !== 'body';
+        return (0, _instanceOfJs.isElement)(clippingParent) && (0, _containsJsDefault.default)(clippingParent, clipperElement) && (0, _getNodeNameJsDefault.default)(clippingParent) !== "body";
     });
 } // Gets the maximum area that the element is visible in due to any number of
 function getClippingRect(element, boundary, rootBoundary) {
-    var mainClippingParents = boundary === 'clippingParents' ? getClippingParents(element) : [].concat(boundary);
+    var mainClippingParents = boundary === "clippingParents" ? getClippingParents(element) : [].concat(boundary);
     var clippingParents = [].concat(mainClippingParents, [
         rootBoundary
     ]);
     var firstClippingParent = clippingParents[0];
     var clippingRect = clippingParents.reduce(function(accRect, clippingParent) {
         var rect = getClientRectFromMixedType(element, clippingParent);
-        accRect.top = _mathJs.max(rect.top, accRect.top);
-        accRect.right = _mathJs.min(rect.right, accRect.right);
-        accRect.bottom = _mathJs.min(rect.bottom, accRect.bottom);
-        accRect.left = _mathJs.max(rect.left, accRect.left);
+        accRect.top = (0, _mathJs.max)(rect.top, accRect.top);
+        accRect.right = (0, _mathJs.min)(rect.right, accRect.right);
+        accRect.bottom = (0, _mathJs.min)(rect.bottom, accRect.bottom);
+        accRect.left = (0, _mathJs.max)(rect.left, accRect.left);
         return accRect;
     }, getClientRectFromMixedType(element, firstClippingParent));
     clippingRect.width = clippingRect.right - clippingRect.left;
@@ -24337,8 +23818,8 @@ var _getDocumentElementJsDefault = parcelHelpers.interopDefault(_getDocumentElem
 var _getWindowScrollBarXJs = require("./getWindowScrollBarX.js");
 var _getWindowScrollBarXJsDefault = parcelHelpers.interopDefault(_getWindowScrollBarXJs);
 function getViewportRect(element) {
-    var win = _getWindowJsDefault.default(element);
-    var html = _getDocumentElementJsDefault.default(element);
+    var win = (0, _getWindowJsDefault.default)(element);
+    var html = (0, _getDocumentElementJsDefault.default)(element);
     var visualViewport = win.visualViewport;
     var width = html.clientWidth;
     var height = html.clientHeight;
@@ -24366,7 +23847,7 @@ function getViewportRect(element) {
     return {
         width: width,
         height: height,
-        x: x + _getWindowScrollBarXJsDefault.default(element),
+        x: x + (0, _getWindowScrollBarXJsDefault.default)(element),
         y: y
     };
 }
@@ -24389,7 +23870,7 @@ function getWindowScrollBarX(element) {
     // anyway.
     // Browsers where the left scrollbar doesn't cause an issue report `0` for
     // this (e.g. Edge 2019, IE11, Safari)
-    return _getBoundingClientRectJsDefault.default(_getDocumentElementJsDefault.default(element)).left + _getWindowScrollJsDefault.default(element).scrollLeft;
+    return (0, _getBoundingClientRectJsDefault.default)((0, _getDocumentElementJsDefault.default)(element)).left + (0, _getWindowScrollJsDefault.default)(element).scrollLeft;
 }
 exports.default = getWindowScrollBarX;
 
@@ -24399,7 +23880,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _getWindowJs = require("./getWindow.js");
 var _getWindowJsDefault = parcelHelpers.interopDefault(_getWindowJs);
 function getWindowScroll(node) {
-    var win = _getWindowJsDefault.default(node);
+    var win = (0, _getWindowJsDefault.default)(node);
     var scrollLeft = win.pageXOffset;
     var scrollTop = win.pageYOffset;
     return {
@@ -24423,14 +23904,14 @@ var _getWindowScrollJsDefault = parcelHelpers.interopDefault(_getWindowScrollJs)
 var _mathJs = require("../utils/math.js"); // Gets the entire size of the scrollable document area, even extending outside
 function getDocumentRect(element) {
     var _element$ownerDocumen;
-    var html = _getDocumentElementJsDefault.default(element);
-    var winScroll = _getWindowScrollJsDefault.default(element);
+    var html = (0, _getDocumentElementJsDefault.default)(element);
+    var winScroll = (0, _getWindowScrollJsDefault.default)(element);
     var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-    var width = _mathJs.max(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
-    var height = _mathJs.max(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
-    var x = -winScroll.scrollLeft + _getWindowScrollBarXJsDefault.default(element);
+    var width = (0, _mathJs.max)(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
+    var height = (0, _mathJs.max)(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
+    var x = -winScroll.scrollLeft + (0, _getWindowScrollBarXJsDefault.default)(element);
     var y = -winScroll.scrollTop;
-    if (_getComputedStyleJsDefault.default(body || html).direction === 'rtl') x += _mathJs.max(html.clientWidth, body ? body.clientWidth : 0) - width;
+    if ((0, _getComputedStyleJsDefault.default)(body || html).direction === "rtl") x += (0, _mathJs.max)(html.clientWidth, body ? body.clientWidth : 0) - width;
     return {
         width: width,
         height: height,
@@ -24454,14 +23935,14 @@ var _isScrollParentJsDefault = parcelHelpers.interopDefault(_isScrollParentJs);
 function listScrollParents(element, list) {
     var _element$ownerDocumen;
     if (list === void 0) list = [];
-    var scrollParent = _getScrollParentJsDefault.default(element);
+    var scrollParent = (0, _getScrollParentJsDefault.default)(element);
     var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
-    var win = _getWindowJsDefault.default(scrollParent);
+    var win = (0, _getWindowJsDefault.default)(scrollParent);
     var target = isBody ? [
         win
-    ].concat(win.visualViewport || [], _isScrollParentJsDefault.default(scrollParent) ? scrollParent : []) : scrollParent;
+    ].concat(win.visualViewport || [], (0, _isScrollParentJsDefault.default)(scrollParent) ? scrollParent : []) : scrollParent;
     var updatedList = list.concat(target);
-    return isBody ? updatedList : updatedList.concat(listScrollParents(_getParentNodeJsDefault.default(target)));
+    return isBody ? updatedList : updatedList.concat(listScrollParents((0, _getParentNodeJsDefault.default)(target)));
 }
 exports.default = listScrollParents;
 
@@ -24477,13 +23958,13 @@ var _getNodeNameJsDefault = parcelHelpers.interopDefault(_getNodeNameJs);
 var _instanceOfJs = require("./instanceOf.js");
 function getScrollParent(node) {
     if ([
-        'html',
-        'body',
-        '#document'
-    ].indexOf(_getNodeNameJsDefault.default(node)) >= 0) // $FlowFixMe[incompatible-return]: assume body is always available
+        "html",
+        "body",
+        "#document"
+    ].indexOf((0, _getNodeNameJsDefault.default)(node)) >= 0) // $FlowFixMe[incompatible-return]: assume body is always available
     return node.ownerDocument.body;
-    if (_instanceOfJs.isHTMLElement(node) && _isScrollParentJsDefault.default(node)) return node;
-    return getScrollParent(_getParentNodeJsDefault.default(node));
+    if ((0, _instanceOfJs.isHTMLElement)(node) && (0, _isScrollParentJsDefault.default)(node)) return node;
+    return getScrollParent((0, _getParentNodeJsDefault.default)(node));
 }
 exports.default = getScrollParent;
 
@@ -24494,7 +23975,7 @@ var _getComputedStyleJs = require("./getComputedStyle.js");
 var _getComputedStyleJsDefault = parcelHelpers.interopDefault(_getComputedStyleJs);
 function isScrollParent(element) {
     // Firefox wants us to check `-x` and `-y` variations as well
-    var _getComputedStyle = _getComputedStyleJsDefault.default(element), overflow = _getComputedStyle.overflow, overflowX = _getComputedStyle.overflowX, overflowY = _getComputedStyle.overflowY;
+    var _getComputedStyle = (0, _getComputedStyleJsDefault.default)(element), overflow = _getComputedStyle.overflow, overflowX = _getComputedStyle.overflowX, overflowY = _getComputedStyle.overflowY;
     return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
 }
 exports.default = isScrollParent;
@@ -24524,31 +24005,31 @@ var _getMainAxisFromPlacementJsDefault = parcelHelpers.interopDefault(_getMainAx
 var _enumsJs = require("../enums.js");
 function computeOffsets(_ref) {
     var reference = _ref.reference, element = _ref.element, placement = _ref.placement;
-    var basePlacement = placement ? _getBasePlacementJsDefault.default(placement) : null;
-    var variation = placement ? _getVariationJsDefault.default(placement) : null;
+    var basePlacement = placement ? (0, _getBasePlacementJsDefault.default)(placement) : null;
+    var variation = placement ? (0, _getVariationJsDefault.default)(placement) : null;
     var commonX = reference.x + reference.width / 2 - element.width / 2;
     var commonY = reference.y + reference.height / 2 - element.height / 2;
     var offsets;
     switch(basePlacement){
-        case _enumsJs.top:
+        case 0, _enumsJs.top:
             offsets = {
                 x: commonX,
                 y: reference.y - element.height
             };
             break;
-        case _enumsJs.bottom:
+        case 0, _enumsJs.bottom:
             offsets = {
                 x: commonX,
                 y: reference.y + reference.height
             };
             break;
-        case _enumsJs.right:
+        case 0, _enumsJs.right:
             offsets = {
                 x: reference.x + reference.width,
                 y: commonY
             };
             break;
-        case _enumsJs.left:
+        case 0, _enumsJs.left:
             offsets = {
                 x: reference.x - element.width,
                 y: commonY
@@ -24560,14 +24041,14 @@ function computeOffsets(_ref) {
                 y: reference.y
             };
     }
-    var mainAxis = basePlacement ? _getMainAxisFromPlacementJsDefault.default(basePlacement) : null;
+    var mainAxis = basePlacement ? (0, _getMainAxisFromPlacementJsDefault.default)(basePlacement) : null;
     if (mainAxis != null) {
-        var len = mainAxis === 'y' ? 'height' : 'width';
+        var len = mainAxis === "y" ? "height" : "width";
         switch(variation){
-            case _enumsJs.start:
+            case 0, _enumsJs.start:
                 offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);
                 break;
-            case _enumsJs.end:
+            case 0, _enumsJs.end:
                 offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2 - element[len] / 2);
                 break;
             default:
@@ -24589,31 +24070,31 @@ var _getBasePlacementJs = require("./getBasePlacement.js");
 var _getBasePlacementJsDefault = parcelHelpers.interopDefault(_getBasePlacementJs);
 function computeAutoPlacement(state, options) {
     if (options === void 0) options = {};
-    var _options = options, placement1 = _options.placement, boundary = _options.boundary, rootBoundary = _options.rootBoundary, padding = _options.padding, flipVariations = _options.flipVariations, _options$allowedAutoP = _options.allowedAutoPlacements, allowedAutoPlacements = _options$allowedAutoP === void 0 ? _enumsJs.placements : _options$allowedAutoP;
-    var variation = _getVariationJsDefault.default(placement1);
-    var placements = variation ? flipVariations ? _enumsJs.variationPlacements : _enumsJs.variationPlacements.filter(function(placement) {
-        return _getVariationJsDefault.default(placement) === variation;
-    }) : _enumsJs.basePlacements;
+    var _options = options, placement = _options.placement, boundary = _options.boundary, rootBoundary = _options.rootBoundary, padding = _options.padding, flipVariations = _options.flipVariations, _options$allowedAutoP = _options.allowedAutoPlacements, allowedAutoPlacements = _options$allowedAutoP === void 0 ? (0, _enumsJs.placements) : _options$allowedAutoP;
+    var variation = (0, _getVariationJsDefault.default)(placement);
+    var placements = variation ? flipVariations ? (0, _enumsJs.variationPlacements) : (0, _enumsJs.variationPlacements).filter(function(placement) {
+        return (0, _getVariationJsDefault.default)(placement) === variation;
+    }) : (0, _enumsJs.basePlacements);
     var allowedPlacements = placements.filter(function(placement) {
         return allowedAutoPlacements.indexOf(placement) >= 0;
     });
     if (allowedPlacements.length === 0) {
         allowedPlacements = placements;
         console.error([
-            'Popper: The `allowedAutoPlacements` option did not allow any',
-            'placements. Ensure the `placement` option matches the variation',
-            'of the allowed placements.',
+            "Popper: The `allowedAutoPlacements` option did not allow any",
+            "placements. Ensure the `placement` option matches the variation",
+            "of the allowed placements.",
             'For example, "auto" cannot be used to allow "bottom-start".',
             'Use "auto-start" instead.'
-        ].join(' '));
+        ].join(" "));
     } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
     var overflows = allowedPlacements.reduce(function(acc, placement) {
-        acc[placement] = _detectOverflowJsDefault.default(state, {
+        acc[placement] = (0, _detectOverflowJsDefault.default)(state, {
             placement: placement,
             boundary: boundary,
             rootBoundary: rootBoundary,
             padding: padding
-        })[_getBasePlacementJsDefault.default(placement)];
+        })[(0, _getBasePlacementJsDefault.default)(placement)];
         return acc;
     }, {});
     return Object.keys(overflows).sort(function(a, b) {
@@ -24642,10 +24123,10 @@ function getSideOffsets(overflow, rect, preventedOffsets) {
 }
 function isAnySideFullyClipped(overflow) {
     return [
-        _enumsJs.top,
-        _enumsJs.right,
-        _enumsJs.bottom,
-        _enumsJs.left
+        (0, _enumsJs.top),
+        (0, _enumsJs.right),
+        (0, _enumsJs.bottom),
+        (0, _enumsJs.left)
     ].some(function(side) {
         return overflow[side] >= 0;
     });
@@ -24655,10 +24136,10 @@ function hide(_ref) {
     var referenceRect = state.rects.reference;
     var popperRect = state.rects.popper;
     var preventedOffsets = state.modifiersData.preventOverflow;
-    var referenceOverflow = _detectOverflowJsDefault.default(state, {
-        elementContext: 'reference'
+    var referenceOverflow = (0, _detectOverflowJsDefault.default)(state, {
+        elementContext: "reference"
     });
-    var popperAltOverflow = _detectOverflowJsDefault.default(state, {
+    var popperAltOverflow = (0, _detectOverflowJsDefault.default)(state, {
         altBoundary: true
     });
     var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
@@ -24672,16 +24153,16 @@ function hide(_ref) {
         hasPopperEscaped: hasPopperEscaped
     };
     state.attributes.popper = Object.assign({}, state.attributes.popper, {
-        'data-popper-reference-hidden': isReferenceHidden,
-        'data-popper-escaped': hasPopperEscaped
+        "data-popper-reference-hidden": isReferenceHidden,
+        "data-popper-escaped": hasPopperEscaped
     });
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'hide',
+    name: "hide",
     enabled: true,
-    phase: 'main',
+    phase: "main",
     requiresIfExists: [
-        'preventOverflow'
+        "preventOverflow"
     ],
     fn: hide
 };
@@ -24689,25 +24170,24 @@ exports.default = {
 },{"../enums.js":"lCAq5","../utils/detectOverflow.js":"ltCuw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3GKVY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "distanceAndSkiddingToXY", ()=>distanceAndSkiddingToXY
-);
+parcelHelpers.export(exports, "distanceAndSkiddingToXY", ()=>distanceAndSkiddingToXY);
 var _getBasePlacementJs = require("../utils/getBasePlacement.js");
 var _getBasePlacementJsDefault = parcelHelpers.interopDefault(_getBasePlacementJs);
 var _enumsJs = require("../enums.js"); // eslint-disable-next-line import/no-unused-modules
-function distanceAndSkiddingToXY(placement, rects, offset1) {
-    var basePlacement = _getBasePlacementJsDefault.default(placement);
+function distanceAndSkiddingToXY(placement, rects, offset) {
+    var basePlacement = (0, _getBasePlacementJsDefault.default)(placement);
     var invertDistance = [
-        _enumsJs.left,
-        _enumsJs.top
+        (0, _enumsJs.left),
+        (0, _enumsJs.top)
     ].indexOf(basePlacement) >= 0 ? -1 : 1;
-    var _ref = typeof offset1 === 'function' ? offset1(Object.assign({}, rects, {
+    var _ref = typeof offset === "function" ? offset(Object.assign({}, rects, {
         placement: placement
-    })) : offset1, skidding = _ref[0], distance = _ref[1];
+    })) : offset, skidding = _ref[0], distance = _ref[1];
     skidding = skidding || 0;
     distance = (distance || 0) * invertDistance;
     return [
-        _enumsJs.left,
-        _enumsJs.right
+        (0, _enumsJs.left),
+        (0, _enumsJs.right)
     ].indexOf(basePlacement) >= 0 ? {
         x: distance,
         y: skidding
@@ -24718,12 +24198,12 @@ function distanceAndSkiddingToXY(placement, rects, offset1) {
 }
 function offset(_ref2) {
     var state = _ref2.state, options = _ref2.options, name = _ref2.name;
-    var _options$offset = options.offset, offset2 = _options$offset === void 0 ? [
+    var _options$offset = options.offset, offset = _options$offset === void 0 ? [
         0,
         0
     ] : _options$offset;
-    var data = _enumsJs.placements.reduce(function(acc, placement) {
-        acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset2);
+    var data = (0, _enumsJs.placements).reduce(function(acc, placement) {
+        acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
         return acc;
     }, {});
     var _data$state$placement = data[state.placement], x = _data$state$placement.x, y = _data$state$placement.y;
@@ -24734,11 +24214,11 @@ function offset(_ref2) {
     state.modifiersData[name] = data;
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'offset',
+    name: "offset",
     enabled: true,
-    phase: 'main',
+    phase: "main",
     requires: [
-        'popperOffsets'
+        "popperOffsets"
     ],
     fn: offset
 };
@@ -24754,17 +24234,17 @@ function popperOffsets(_ref) {
     // properly positioned near its reference element
     // This is the most basic placement, and will be adjusted by
     // the modifiers in the next step
-    state.modifiersData[name] = _computeOffsetsJsDefault.default({
+    state.modifiersData[name] = (0, _computeOffsetsJsDefault.default)({
         reference: state.rects.reference,
         element: state.rects.popper,
-        strategy: 'absolute',
+        strategy: "absolute",
         placement: state.placement
     });
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'popperOffsets',
+    name: "popperOffsets",
     enabled: true,
-    phase: 'read',
+    phase: "read",
     fn: popperOffsets,
     data: {}
 };
@@ -24794,24 +24274,24 @@ var _mathJs = require("../utils/math.js");
 function preventOverflow(_ref) {
     var state = _ref.state, options = _ref.options, name = _ref.name;
     var _options$mainAxis = options.mainAxis, checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis, _options$altAxis = options.altAxis, checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis, boundary = options.boundary, rootBoundary = options.rootBoundary, altBoundary = options.altBoundary, padding = options.padding, _options$tether = options.tether, tether = _options$tether === void 0 ? true : _options$tether, _options$tetherOffset = options.tetherOffset, tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
-    var overflow = _detectOverflowJsDefault.default(state, {
+    var overflow = (0, _detectOverflowJsDefault.default)(state, {
         boundary: boundary,
         rootBoundary: rootBoundary,
         padding: padding,
         altBoundary: altBoundary
     });
-    var basePlacement = _getBasePlacementJsDefault.default(state.placement);
-    var variation = _getVariationJsDefault.default(state.placement);
+    var basePlacement = (0, _getBasePlacementJsDefault.default)(state.placement);
+    var variation = (0, _getVariationJsDefault.default)(state.placement);
     var isBasePlacement = !variation;
-    var mainAxis = _getMainAxisFromPlacementJsDefault.default(basePlacement);
-    var altAxis = _getAltAxisJsDefault.default(mainAxis);
+    var mainAxis = (0, _getMainAxisFromPlacementJsDefault.default)(basePlacement);
+    var altAxis = (0, _getAltAxisJsDefault.default)(mainAxis);
     var popperOffsets = state.modifiersData.popperOffsets;
     var referenceRect = state.rects.reference;
     var popperRect = state.rects.popper;
-    var tetherOffsetValue = typeof tetherOffset === 'function' ? tetherOffset(Object.assign({}, state.rects, {
+    var tetherOffsetValue = typeof tetherOffset === "function" ? tetherOffset(Object.assign({}, state.rects, {
         placement: state.placement
     })) : tetherOffset;
-    var normalizedTetherOffsetValue = typeof tetherOffsetValue === 'number' ? {
+    var normalizedTetherOffsetValue = typeof tetherOffsetValue === "number" ? {
         mainAxis: tetherOffsetValue,
         altAxis: tetherOffsetValue
     } : Object.assign({
@@ -24826,68 +24306,68 @@ function preventOverflow(_ref) {
     if (!popperOffsets) return;
     if (checkMainAxis) {
         var _offsetModifierState$;
-        var mainSide = mainAxis === 'y' ? _enumsJs.top : _enumsJs.left;
-        var altSide = mainAxis === 'y' ? _enumsJs.bottom : _enumsJs.right;
-        var len = mainAxis === 'y' ? 'height' : 'width';
+        var mainSide = mainAxis === "y" ? (0, _enumsJs.top) : (0, _enumsJs.left);
+        var altSide = mainAxis === "y" ? (0, _enumsJs.bottom) : (0, _enumsJs.right);
+        var len = mainAxis === "y" ? "height" : "width";
         var offset = popperOffsets[mainAxis];
         var min = offset + overflow[mainSide];
         var max = offset - overflow[altSide];
         var additive = tether ? -popperRect[len] / 2 : 0;
-        var minLen = variation === _enumsJs.start ? referenceRect[len] : popperRect[len];
-        var maxLen = variation === _enumsJs.start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
+        var minLen = variation === (0, _enumsJs.start) ? referenceRect[len] : popperRect[len];
+        var maxLen = variation === (0, _enumsJs.start) ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
         // outside the reference bounds
         var arrowElement = state.elements.arrow;
-        var arrowRect = tether && arrowElement ? _getLayoutRectJsDefault.default(arrowElement) : {
+        var arrowRect = tether && arrowElement ? (0, _getLayoutRectJsDefault.default)(arrowElement) : {
             width: 0,
             height: 0
         };
-        var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : _getFreshSideObjectJsDefault.default();
+        var arrowPaddingObject = state.modifiersData["arrow#persistent"] ? state.modifiersData["arrow#persistent"].padding : (0, _getFreshSideObjectJsDefault.default)();
         var arrowPaddingMin = arrowPaddingObject[mainSide];
         var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
         // to include its full size in the calculation. If the reference is small
         // and near the edge of a boundary, the popper can overflow even if the
         // reference is not overflowing as well (e.g. virtual elements with no
         // width or height)
-        var arrowLen = _withinJs.within(0, referenceRect[len], arrowRect[len]);
+        var arrowLen = (0, _withinJs.within)(0, referenceRect[len], arrowRect[len]);
         var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis : minLen - arrowLen - arrowPaddingMin - normalizedTetherOffsetValue.mainAxis;
         var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis : maxLen + arrowLen + arrowPaddingMax + normalizedTetherOffsetValue.mainAxis;
-        var arrowOffsetParent = state.elements.arrow && _getOffsetParentJsDefault.default(state.elements.arrow);
-        var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
+        var arrowOffsetParent = state.elements.arrow && (0, _getOffsetParentJsDefault.default)(state.elements.arrow);
+        var clientOffset = arrowOffsetParent ? mainAxis === "y" ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
         var offsetModifierValue = (_offsetModifierState$ = offsetModifierState == null ? void 0 : offsetModifierState[mainAxis]) != null ? _offsetModifierState$ : 0;
         var tetherMin = offset + minOffset - offsetModifierValue - clientOffset;
         var tetherMax = offset + maxOffset - offsetModifierValue;
-        var preventedOffset = _withinJs.within(tether ? _mathJs.min(min, tetherMin) : min, offset, tether ? _mathJs.max(max, tetherMax) : max);
+        var preventedOffset = (0, _withinJs.within)(tether ? (0, _mathJs.min)(min, tetherMin) : min, offset, tether ? (0, _mathJs.max)(max, tetherMax) : max);
         popperOffsets[mainAxis] = preventedOffset;
         data[mainAxis] = preventedOffset - offset;
     }
     if (checkAltAxis) {
         var _offsetModifierState$2;
-        var _mainSide = mainAxis === 'x' ? _enumsJs.top : _enumsJs.left;
-        var _altSide = mainAxis === 'x' ? _enumsJs.bottom : _enumsJs.right;
+        var _mainSide = mainAxis === "x" ? (0, _enumsJs.top) : (0, _enumsJs.left);
+        var _altSide = mainAxis === "x" ? (0, _enumsJs.bottom) : (0, _enumsJs.right);
         var _offset = popperOffsets[altAxis];
-        var _len = altAxis === 'y' ? 'height' : 'width';
+        var _len = altAxis === "y" ? "height" : "width";
         var _min = _offset + overflow[_mainSide];
         var _max = _offset - overflow[_altSide];
         var isOriginSide = [
-            _enumsJs.top,
-            _enumsJs.left
+            (0, _enumsJs.top),
+            (0, _enumsJs.left)
         ].indexOf(basePlacement) !== -1;
         var _offsetModifierValue = (_offsetModifierState$2 = offsetModifierState == null ? void 0 : offsetModifierState[altAxis]) != null ? _offsetModifierState$2 : 0;
         var _tetherMin = isOriginSide ? _min : _offset - referenceRect[_len] - popperRect[_len] - _offsetModifierValue + normalizedTetherOffsetValue.altAxis;
         var _tetherMax = isOriginSide ? _offset + referenceRect[_len] + popperRect[_len] - _offsetModifierValue - normalizedTetherOffsetValue.altAxis : _max;
-        var _preventedOffset = tether && isOriginSide ? _withinJs.withinMaxClamp(_tetherMin, _offset, _tetherMax) : _withinJs.within(tether ? _tetherMin : _min, _offset, tether ? _tetherMax : _max);
+        var _preventedOffset = tether && isOriginSide ? (0, _withinJs.withinMaxClamp)(_tetherMin, _offset, _tetherMax) : (0, _withinJs.within)(tether ? _tetherMin : _min, _offset, tether ? _tetherMax : _max);
         popperOffsets[altAxis] = _preventedOffset;
         data[altAxis] = _preventedOffset - _offset;
     }
     state.modifiersData[name] = data;
 } // eslint-disable-next-line import/no-unused-modules
 exports.default = {
-    name: 'preventOverflow',
+    name: "preventOverflow",
     enabled: true,
-    phase: 'main',
+    phase: "main",
     fn: preventOverflow,
     requiresIfExists: [
-        'offset'
+        "offset"
     ]
 };
 
@@ -24895,19 +24375,16 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getAltAxis(axis) {
-    return axis === 'x' ? 'y' : 'x';
+    return axis === "x" ? "y" : "x";
 }
 exports.default = getAltAxis;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cHuNp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "popperGenerator", ()=>popperGenerator
-);
-parcelHelpers.export(exports, "createPopper", ()=>createPopper
-);
-parcelHelpers.export(exports, "detectOverflow", ()=>_detectOverflowJsDefault.default
-);
+parcelHelpers.export(exports, "popperGenerator", ()=>popperGenerator);
+parcelHelpers.export(exports, "createPopper", ()=>createPopper);
+parcelHelpers.export(exports, "detectOverflow", ()=>(0, _detectOverflowJsDefault.default));
 var _getCompositeRectJs = require("./dom-utils/getCompositeRect.js");
 var _getCompositeRectJsDefault = parcelHelpers.interopDefault(_getCompositeRectJs);
 var _getLayoutRectJs = require("./dom-utils/getLayoutRect.js");
@@ -24934,32 +24411,32 @@ var _detectOverflowJs = require("./utils/detectOverflow.js");
 var _detectOverflowJsDefault = parcelHelpers.interopDefault(_detectOverflowJs);
 var _instanceOfJs = require("./dom-utils/instanceOf.js");
 var _enumsJs = require("./enums.js");
-var INVALID_ELEMENT_ERROR = 'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.';
-var INFINITE_LOOP_ERROR = 'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.';
+var INVALID_ELEMENT_ERROR = "Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.";
+var INFINITE_LOOP_ERROR = "Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.";
 var DEFAULT_OPTIONS = {
-    placement: 'bottom',
+    placement: "bottom",
     modifiers: [],
-    strategy: 'absolute'
+    strategy: "absolute"
 };
 function areValidElements() {
     for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
     return !args.some(function(element) {
-        return !(element && typeof element.getBoundingClientRect === 'function');
+        return !(element && typeof element.getBoundingClientRect === "function");
     });
 }
 function popperGenerator(generatorOptions) {
     if (generatorOptions === void 0) generatorOptions = {};
     var _generatorOptions = generatorOptions, _generatorOptions$def = _generatorOptions.defaultModifiers, defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def, _generatorOptions$def2 = _generatorOptions.defaultOptions, defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
-    return function createPopper(reference1, popper1, options1) {
-        if (options1 === void 0) options1 = defaultOptions;
-        var state1 = {
-            placement: 'bottom',
+    return function createPopper(reference, popper, options) {
+        if (options === void 0) options = defaultOptions;
+        var state = {
+            placement: "bottom",
             orderedModifiers: [],
             options: Object.assign({}, DEFAULT_OPTIONS, defaultOptions),
             modifiersData: {},
             elements: {
-                reference: reference1,
-                popper: popper1
+                reference: reference,
+                popper: popper
             },
             attributes: {},
             styles: {}
@@ -24967,36 +24444,36 @@ function popperGenerator(generatorOptions) {
         var effectCleanupFns = [];
         var isDestroyed = false;
         var instance = {
-            state: state1,
+            state: state,
             setOptions: function setOptions(setOptionsAction) {
-                var options = typeof setOptionsAction === 'function' ? setOptionsAction(state1.options) : setOptionsAction;
+                var options = typeof setOptionsAction === "function" ? setOptionsAction(state.options) : setOptionsAction;
                 cleanupModifierEffects();
-                state1.options = Object.assign({}, defaultOptions, state1.options, options);
-                state1.scrollParents = {
-                    reference: _instanceOfJs.isElement(reference1) ? _listScrollParentsJsDefault.default(reference1) : reference1.contextElement ? _listScrollParentsJsDefault.default(reference1.contextElement) : [],
-                    popper: _listScrollParentsJsDefault.default(popper1)
+                state.options = Object.assign({}, defaultOptions, state.options, options);
+                state.scrollParents = {
+                    reference: (0, _instanceOfJs.isElement)(reference) ? (0, _listScrollParentsJsDefault.default)(reference) : reference.contextElement ? (0, _listScrollParentsJsDefault.default)(reference.contextElement) : [],
+                    popper: (0, _listScrollParentsJsDefault.default)(popper)
                 }; // Orders the modifiers based on their dependencies and `phase`
                 // properties
-                var orderedModifiers = _orderModifiersJsDefault.default(_mergeByNameJsDefault.default([].concat(defaultModifiers, state1.options.modifiers))); // Strip out disabled modifiers
-                state1.orderedModifiers = orderedModifiers.filter(function(m) {
+                var orderedModifiers = (0, _orderModifiersJsDefault.default)((0, _mergeByNameJsDefault.default)([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
+                state.orderedModifiers = orderedModifiers.filter(function(m) {
                     return m.enabled;
                 }); // Validate the provided modifiers so that the consumer will get warned
-                var modifiers = _uniqueByJsDefault.default([].concat(orderedModifiers, state1.options.modifiers), function(_ref) {
+                var modifiers = (0, _uniqueByJsDefault.default)([].concat(orderedModifiers, state.options.modifiers), function(_ref) {
                     var name = _ref.name;
                     return name;
                 });
-                _validateModifiersJsDefault.default(modifiers);
-                if (_getBasePlacementJsDefault.default(state1.options.placement) === _enumsJs.auto) {
-                    var flipModifier = state1.orderedModifiers.find(function(_ref2) {
+                (0, _validateModifiersJsDefault.default)(modifiers);
+                if ((0, _getBasePlacementJsDefault.default)(state.options.placement) === (0, _enumsJs.auto)) {
+                    var flipModifier = state.orderedModifiers.find(function(_ref2) {
                         var name = _ref2.name;
-                        return name === 'flip';
+                        return name === "flip";
                     });
                     if (!flipModifier) console.error([
                         'Popper: "auto" placements require the "flip" modifier be',
-                        'present and enabled to work.'
-                    ].join(' '));
+                        "present and enabled to work."
+                    ].join(" "));
                 }
-                var _getComputedStyle = _getComputedStyleJsDefault.default(popper1), marginTop = _getComputedStyle.marginTop, marginRight = _getComputedStyle.marginRight, marginBottom = _getComputedStyle.marginBottom, marginLeft = _getComputedStyle.marginLeft; // We no longer take into account `margins` on the popper, and it can
+                var _getComputedStyle = (0, _getComputedStyleJsDefault.default)(popper), marginTop = _getComputedStyle.marginTop, marginRight = _getComputedStyle.marginRight, marginBottom = _getComputedStyle.marginBottom, marginLeft = _getComputedStyle.marginLeft; // We no longer take into account `margins` on the popper, and it can
                 // cause bugs with positioning, so we'll warn the consumer
                 if ([
                     marginTop,
@@ -25007,11 +24484,11 @@ function popperGenerator(generatorOptions) {
                     return parseFloat(margin);
                 })) console.warn([
                     'Popper: CSS "margin" styles cannot be used to apply padding',
-                    'between the popper and its reference element or boundary.',
-                    'To replicate margin, use the `offset` modifier, as well as',
-                    'the `padding` option in the `preventOverflow` and `flip`',
-                    'modifiers.'
-                ].join(' '));
+                    "between the popper and its reference element or boundary.",
+                    "To replicate margin, use the `offset` modifier, as well as",
+                    "the `padding` option in the `preventOverflow` and `flip`",
+                    "modifiers."
+                ].join(" "));
                 runModifierEffects();
                 return instance.update();
             },
@@ -25022,55 +24499,55 @@ function popperGenerator(generatorOptions) {
             // prefer the async Popper#update method
             forceUpdate: function forceUpdate() {
                 if (isDestroyed) return;
-                var _state$elements = state1.elements, reference = _state$elements.reference, popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
+                var _state$elements = state.elements, reference = _state$elements.reference, popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
                 // anymore
                 if (!areValidElements(reference, popper)) {
                     console.error(INVALID_ELEMENT_ERROR);
                     return;
                 } // Store the reference and popper rects to be read by modifiers
-                state1.rects = {
-                    reference: _getCompositeRectJsDefault.default(reference, _getOffsetParentJsDefault.default(popper), state1.options.strategy === 'fixed'),
-                    popper: _getLayoutRectJsDefault.default(popper)
+                state.rects = {
+                    reference: (0, _getCompositeRectJsDefault.default)(reference, (0, _getOffsetParentJsDefault.default)(popper), state.options.strategy === "fixed"),
+                    popper: (0, _getLayoutRectJsDefault.default)(popper)
                 }; // Modifiers have the ability to reset the current update cycle. The
                 // most common use case for this is the `flip` modifier changing the
                 // placement, which then needs to re-run all the modifiers, because the
                 // logic was previously ran for the previous placement and is therefore
                 // stale/incorrect
-                state1.reset = false;
-                state1.placement = state1.options.placement; // On each update cycle, the `modifiersData` property for each modifier
+                state.reset = false;
+                state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
                 // is filled with the initial data specified by the modifier. This means
                 // it doesn't persist and is fresh on each update.
                 // To ensure persistent data, use `${name}#persistent`
-                state1.orderedModifiers.forEach(function(modifier) {
-                    return state1.modifiersData[modifier.name] = Object.assign({}, modifier.data);
+                state.orderedModifiers.forEach(function(modifier) {
+                    return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
                 });
                 var __debug_loops__ = 0;
-                for(var index = 0; index < state1.orderedModifiers.length; index++){
+                for(var index = 0; index < state.orderedModifiers.length; index++){
                     __debug_loops__ += 1;
                     if (__debug_loops__ > 100) {
                         console.error(INFINITE_LOOP_ERROR);
                         break;
                     }
-                    if (state1.reset === true) {
-                        state1.reset = false;
+                    if (state.reset === true) {
+                        state.reset = false;
                         index = -1;
                         continue;
                     }
-                    var _state$orderedModifie = state1.orderedModifiers[index], fn = _state$orderedModifie.fn, _state$orderedModifie2 = _state$orderedModifie.options, _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2, name = _state$orderedModifie.name;
-                    if (typeof fn === 'function') state1 = fn({
-                        state: state1,
+                    var _state$orderedModifie = state.orderedModifiers[index], fn = _state$orderedModifie.fn, _state$orderedModifie2 = _state$orderedModifie.options, _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2, name = _state$orderedModifie.name;
+                    if (typeof fn === "function") state = fn({
+                        state: state,
                         options: _options,
                         name: name,
                         instance: instance
-                    }) || state1;
+                    }) || state;
                 }
             },
             // Async and optimistically optimized update – it will not be executed if
             // not necessary (debounced to run at most once-per-tick)
-            update: _debounceJsDefault.default(function() {
+            update: (0, _debounceJsDefault.default)(function() {
                 return new Promise(function(resolve) {
                     instance.forceUpdate();
-                    resolve(state1);
+                    resolve(state);
                 });
             }),
             destroy: function destroy() {
@@ -25078,23 +24555,23 @@ function popperGenerator(generatorOptions) {
                 isDestroyed = true;
             }
         };
-        if (!areValidElements(reference1, popper1)) {
+        if (!areValidElements(reference, popper)) {
             console.error(INVALID_ELEMENT_ERROR);
             return instance;
         }
-        instance.setOptions(options1).then(function(state) {
-            if (!isDestroyed && options1.onFirstUpdate) options1.onFirstUpdate(state);
+        instance.setOptions(options).then(function(state) {
+            if (!isDestroyed && options.onFirstUpdate) options.onFirstUpdate(state);
         }); // Modifiers have the ability to execute arbitrary code before the first
         // update cycle runs. They will be executed in the same order as the update
         // cycle. This is useful when a modifier adds some persistent data that
         // other modifiers need to use, but the modifier is run after the dependent
         // one.
         function runModifierEffects() {
-            state1.orderedModifiers.forEach(function(_ref3) {
+            state.orderedModifiers.forEach(function(_ref3) {
                 var name = _ref3.name, _ref3$options = _ref3.options, options = _ref3$options === void 0 ? {} : _ref3$options, effect = _ref3.effect;
-                if (typeof effect === 'function') {
+                if (typeof effect === "function") {
                     var cleanupFn = effect({
-                        state: state1,
+                        state: state,
                         name: name,
                         instance: instance,
                         options: options
@@ -25134,16 +24611,16 @@ var _isScrollParentJsDefault = parcelHelpers.interopDefault(_isScrollParentJs);
 var _mathJs = require("../utils/math.js");
 function isElementScaled(element) {
     var rect = element.getBoundingClientRect();
-    var scaleX = _mathJs.round(rect.width) / element.offsetWidth || 1;
-    var scaleY = _mathJs.round(rect.height) / element.offsetHeight || 1;
+    var scaleX = (0, _mathJs.round)(rect.width) / element.offsetWidth || 1;
+    var scaleY = (0, _mathJs.round)(rect.height) / element.offsetHeight || 1;
     return scaleX !== 1 || scaleY !== 1;
 } // Returns the composite rect of an element relative to its offsetParent.
 function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
     if (isFixed === void 0) isFixed = false;
-    var isOffsetParentAnElement = _instanceOfJs.isHTMLElement(offsetParent);
-    var offsetParentIsScaled = _instanceOfJs.isHTMLElement(offsetParent) && isElementScaled(offsetParent);
-    var documentElement = _getDocumentElementJsDefault.default(offsetParent);
-    var rect = _getBoundingClientRectJsDefault.default(elementOrVirtualElement, offsetParentIsScaled);
+    var isOffsetParentAnElement = (0, _instanceOfJs.isHTMLElement)(offsetParent);
+    var offsetParentIsScaled = (0, _instanceOfJs.isHTMLElement)(offsetParent) && isElementScaled(offsetParent);
+    var documentElement = (0, _getDocumentElementJsDefault.default)(offsetParent);
+    var rect = (0, _getBoundingClientRectJsDefault.default)(elementOrVirtualElement, offsetParentIsScaled);
     var scroll = {
         scrollLeft: 0,
         scrollTop: 0
@@ -25153,12 +24630,12 @@ function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
         y: 0
     };
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-        if (_getNodeNameJsDefault.default(offsetParent) !== 'body' || _isScrollParentJsDefault.default(documentElement)) scroll = _getNodeScrollJsDefault.default(offsetParent);
-        if (_instanceOfJs.isHTMLElement(offsetParent)) {
-            offsets = _getBoundingClientRectJsDefault.default(offsetParent, true);
+        if ((0, _getNodeNameJsDefault.default)(offsetParent) !== "body" || (0, _isScrollParentJsDefault.default)(documentElement)) scroll = (0, _getNodeScrollJsDefault.default)(offsetParent);
+        if ((0, _instanceOfJs.isHTMLElement)(offsetParent)) {
+            offsets = (0, _getBoundingClientRectJsDefault.default)(offsetParent, true);
             offsets.x += offsetParent.clientLeft;
             offsets.y += offsetParent.clientTop;
-        } else if (documentElement) offsets.x = _getWindowScrollBarXJsDefault.default(documentElement);
+        } else if (documentElement) offsets.x = (0, _getWindowScrollBarXJsDefault.default)(documentElement);
     }
     return {
         x: rect.left + scroll.scrollLeft - offsets.x,
@@ -25180,8 +24657,8 @@ var _instanceOfJs = require("./instanceOf.js");
 var _getHTMLElementScrollJs = require("./getHTMLElementScroll.js");
 var _getHTMLElementScrollJsDefault = parcelHelpers.interopDefault(_getHTMLElementScrollJs);
 function getNodeScroll(node) {
-    if (node === _getWindowJsDefault.default(node) || !_instanceOfJs.isHTMLElement(node)) return _getWindowScrollJsDefault.default(node);
-    else return _getHTMLElementScrollJsDefault.default(node);
+    if (node === (0, _getWindowJsDefault.default)(node) || !(0, _instanceOfJs.isHTMLElement)(node)) return (0, _getWindowScrollJsDefault.default)(node);
+    else return (0, _getHTMLElementScrollJsDefault.default)(node);
 }
 exports.default = getNodeScroll;
 
@@ -25227,7 +24704,7 @@ function order(modifiers) {
 function orderModifiers(modifiers) {
     // order based on dependencies
     var orderedModifiers = order(modifiers); // order based on phase
-    return _enumsJs.modifierPhases.reduce(function(acc, phase) {
+    return (0, _enumsJs.modifierPhases).reduce(function(acc, phase) {
         return acc.concat(orderedModifiers.filter(function(modifier) {
             return modifier.phase === phase;
         }));
@@ -25261,13 +24738,13 @@ var _enumsJs = require("../enums.js");
 var INVALID_MODIFIER_ERROR = 'Popper: modifier "%s" provided an invalid %s property, expected %s but got %s';
 var MISSING_DEPENDENCY_ERROR = 'Popper: modifier "%s" requires "%s", but "%s" modifier is not available';
 var VALID_PROPERTIES = [
-    'name',
-    'enabled',
-    'phase',
-    'fn',
-    'effect',
-    'requires',
-    'options'
+    "name",
+    "enabled",
+    "phase",
+    "fn",
+    "effect",
+    "requires",
+    "options"
 ];
 function validateModifiers(modifiers) {
     modifiers.forEach(function(modifier) {
@@ -25276,39 +24753,39 @@ function validateModifiers(modifiers) {
             return self.indexOf(value) === index;
         }).forEach(function(key) {
             switch(key){
-                case 'name':
-                    if (typeof modifier.name !== 'string') console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', "\"" + String(modifier.name) + "\""));
+                case "name":
+                    if (typeof modifier.name !== "string") console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', '"' + String(modifier.name) + '"'));
                     break;
-                case 'enabled':
-                    if (typeof modifier.enabled !== 'boolean') console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', "\"" + String(modifier.enabled) + "\""));
+                case "enabled":
+                    if (typeof modifier.enabled !== "boolean") console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', '"' + String(modifier.enabled) + '"'));
                     break;
-                case 'phase':
-                    if (_enumsJs.modifierPhases.indexOf(modifier.phase) < 0) console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + _enumsJs.modifierPhases.join(', '), "\"" + String(modifier.phase) + "\""));
+                case "phase":
+                    if ((0, _enumsJs.modifierPhases).indexOf(modifier.phase) < 0) console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + (0, _enumsJs.modifierPhases).join(", "), '"' + String(modifier.phase) + '"'));
                     break;
-                case 'fn':
-                    if (typeof modifier.fn !== 'function') console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', "\"" + String(modifier.fn) + "\""));
+                case "fn":
+                    if (typeof modifier.fn !== "function") console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', '"' + String(modifier.fn) + '"'));
                     break;
-                case 'effect':
-                    if (modifier.effect != null && typeof modifier.effect !== 'function') console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', "\"" + String(modifier.fn) + "\""));
+                case "effect":
+                    if (modifier.effect != null && typeof modifier.effect !== "function") console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', '"' + String(modifier.fn) + '"'));
                     break;
-                case 'requires':
-                    if (modifier.requires != null && !Array.isArray(modifier.requires)) console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', "\"" + String(modifier.requires) + "\""));
+                case "requires":
+                    if (modifier.requires != null && !Array.isArray(modifier.requires)) console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', '"' + String(modifier.requires) + '"'));
                     break;
-                case 'requiresIfExists':
-                    if (!Array.isArray(modifier.requiresIfExists)) console.error(_formatJsDefault.default(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', "\"" + String(modifier.requiresIfExists) + "\""));
+                case "requiresIfExists":
+                    if (!Array.isArray(modifier.requiresIfExists)) console.error((0, _formatJsDefault.default)(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', '"' + String(modifier.requiresIfExists) + '"'));
                     break;
-                case 'options':
-                case 'data':
+                case "options":
+                case "data":
                     break;
                 default:
-                    console.error("PopperJS: an invalid property has been provided to the \"" + modifier.name + "\" modifier, valid properties are " + VALID_PROPERTIES.map(function(s) {
-                        return "\"" + s + "\"";
-                    }).join(', ') + "; but \"" + key + "\" was provided.");
+                    console.error('PopperJS: an invalid property has been provided to the "' + modifier.name + '" modifier, valid properties are ' + VALID_PROPERTIES.map(function(s) {
+                        return '"' + s + '"';
+                    }).join(", ") + '; but "' + key + '" was provided.');
             }
             modifier.requires && modifier.requires.forEach(function(requirement) {
                 if (modifiers.find(function(mod) {
                     return mod.name === requirement;
-                }) == null) console.error(_formatJsDefault.default(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
+                }) == null) console.error((0, _formatJsDefault.default)(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
             });
         });
     });
@@ -25345,7 +24822,7 @@ exports.default = uniqueBy;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function mergeByName(modifiers) {
-    var merged1 = modifiers.reduce(function(merged, current) {
+    var merged = modifiers.reduce(function(merged, current) {
         var existing = merged[current.name];
         merged[current.name] = existing ? Object.assign({}, existing, current, {
             options: Object.assign({}, existing.options, current.options),
@@ -25353,8 +24830,8 @@ function mergeByName(modifiers) {
         }) : current;
         return merged;
     }, {}); // IE11 does not support Object.values
-    return Object.keys(merged1).map(function(key) {
-        return merged1[key];
+    return Object.keys(merged).map(function(key) {
+        return merged[key];
     });
 }
 exports.default = mergeByName;
@@ -25362,17 +24839,12 @@ exports.default = mergeByName;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1PuRF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createPopper", ()=>createPopper
-) // eslint-disable-next-line import/no-unused-modules
+parcelHelpers.export(exports, "createPopper", ()=>createPopper) // eslint-disable-next-line import/no-unused-modules
 ;
-parcelHelpers.export(exports, "popperGenerator", ()=>_createPopperJs.popperGenerator
-);
-parcelHelpers.export(exports, "defaultModifiers", ()=>defaultModifiers
-);
-parcelHelpers.export(exports, "detectOverflow", ()=>_createPopperJs.detectOverflow
-);
-parcelHelpers.export(exports, "createPopperLite", ()=>_popperLiteJs.createPopper
-) // eslint-disable-next-line import/no-unused-modules
+parcelHelpers.export(exports, "popperGenerator", ()=>(0, _createPopperJs.popperGenerator));
+parcelHelpers.export(exports, "defaultModifiers", ()=>defaultModifiers);
+parcelHelpers.export(exports, "detectOverflow", ()=>(0, _createPopperJs.detectOverflow));
+parcelHelpers.export(exports, "createPopperLite", ()=>(0, _popperLiteJs.createPopper)) // eslint-disable-next-line import/no-unused-modules
 ;
 var _createPopperJs = require("./createPopper.js");
 var _eventListenersJs = require("./modifiers/eventListeners.js");
@@ -25397,38 +24869,36 @@ var _popperLiteJs = require("./popper-lite.js");
 var _indexJs = require("./modifiers/index.js");
 parcelHelpers.exportAll(_indexJs, exports);
 var defaultModifiers = [
-    _eventListenersJsDefault.default,
-    _popperOffsetsJsDefault.default,
-    _computeStylesJsDefault.default,
-    _applyStylesJsDefault.default,
-    _offsetJsDefault.default,
-    _flipJsDefault.default,
-    _preventOverflowJsDefault.default,
-    _arrowJsDefault.default,
-    _hideJsDefault.default
+    (0, _eventListenersJsDefault.default),
+    (0, _popperOffsetsJsDefault.default),
+    (0, _computeStylesJsDefault.default),
+    (0, _applyStylesJsDefault.default),
+    (0, _offsetJsDefault.default),
+    (0, _flipJsDefault.default),
+    (0, _preventOverflowJsDefault.default),
+    (0, _arrowJsDefault.default),
+    (0, _hideJsDefault.default)
 ];
-var createPopper = /*#__PURE__*/ _createPopperJs.popperGenerator({
+var createPopper = /*#__PURE__*/ (0, _createPopperJs.popperGenerator)({
     defaultModifiers: defaultModifiers
 }); // eslint-disable-next-line import/no-unused-modules
 
 },{"./createPopper.js":"cHuNp","./modifiers/eventListeners.js":"hBKsL","./modifiers/popperOffsets.js":"6I679","./modifiers/computeStyles.js":"gDlm2","./modifiers/applyStyles.js":"4iMn4","./modifiers/offset.js":"3GKVY","./modifiers/flip.js":"fv5wq","./modifiers/preventOverflow.js":"1AMhb","./modifiers/arrow.js":"31HFW","./modifiers/hide.js":"2g4OF","./popper-lite.js":false,"./modifiers/index.js":"cap3W","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gWXL1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HeadingMenuStyle", ()=>HeadingMenuStyle
-);
-parcelHelpers.export(exports, "HTMLEditorStyle", ()=>HTMLEditorStyle
-);
+parcelHelpers.export(exports, "HeadingMenuStyle", ()=>HeadingMenuStyle);
+parcelHelpers.export(exports, "HTMLEditorStyle", ()=>HTMLEditorStyle);
 var _ui = require("../ui");
-class HeadingMenuStyle extends _ui.StyleClass {
+class HeadingMenuStyle extends (0, _ui.StyleClass) {
     static default = {
-        buttonColor: '#444',
-        activeColor: 'blue'
+        buttonColor: "#444",
+        activeColor: "blue"
     };
 }
-class HTMLEditorStyle extends _ui.StyleClass {
+class HTMLEditorStyle extends (0, _ui.StyleClass) {
     static default = {
-        menuColor: '#444',
-        activeColor: 'blue'
+        menuColor: "#444",
+        activeColor: "blue"
     };
     static css(style = {}) {
         style = {
@@ -25451,15 +24921,13 @@ class HTMLEditorStyle extends _ui.StyleClass {
 },{"../ui":"jSLlu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gF8uX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "InputRadioButton", ()=>InputRadioButton
-);
-parcelHelpers.export(exports, "InputRadioButtonGroup", ()=>InputRadioButtonGroup
-);
+parcelHelpers.export(exports, "InputRadioButton", ()=>InputRadioButton);
+parcelHelpers.export(exports, "InputRadioButtonGroup", ()=>InputRadioButtonGroup);
 var _ui = require("../ui");
 var _uhtml = require("uhtml");
 var _inputRadioButtonStyle = require("./input-radio-button.style");
-class InputRadioButton extends _ui.StyledElement {
-    static Style = _inputRadioButtonStyle.InputRadioButtonStyle;
+class InputRadioButton extends (0, _ui.StyledElement) {
+    static Style = (0, _inputRadioButtonStyle.InputRadioButtonStyle);
     static tagStyle(style) {
         super.tagStyle(style);
     }
@@ -25475,33 +24943,28 @@ class InputRadioButton extends _ui.StyledElement {
     constructor(){
         super();
         this.text = this.innerText;
-        this.el.input = this.querySelector('input[type="radio"]') || _uhtml.html`<input type="radio">`;
+        this.el.input = this.querySelector('input[type="radio"]') || (0, _uhtml.html)`<input type="radio">`;
         this.render();
     }
     render() {
-        _uhtml.render(this, _uhtml.html`
+        (0, _uhtml.render)(this, (0, _uhtml.html)`
         ${this.el.input}
         <button>${this.text}</button>
         `);
     }
 }
-class InputRadioButtonGroup extends _ui.StyledElement {
-    static Style = _inputRadioButtonStyle.InputRadioButtonGroupStyle;
+class InputRadioButtonGroup extends (0, _ui.StyledElement) {
+    static Style = (0, _inputRadioButtonStyle.InputRadioButtonGroupStyle);
 }
 
 },{"../ui":"jSLlu","uhtml":"if09d","./input-radio-button.style":"i3nzj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"if09d":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Hole", ()=>_rabbitJs.Hole
-);
-parcelHelpers.export(exports, "render", ()=>render
-);
-parcelHelpers.export(exports, "html", ()=>html
-);
-parcelHelpers.export(exports, "svg", ()=>svg
-);
-parcelHelpers.export(exports, "foreign", ()=>_uhandlers.foreign
-);
+parcelHelpers.export(exports, "Hole", ()=>(0, _rabbitJs.Hole));
+parcelHelpers.export(exports, "render", ()=>render);
+parcelHelpers.export(exports, "html", ()=>html);
+parcelHelpers.export(exports, "svg", ()=>svg);
+parcelHelpers.export(exports, "foreign", ()=>(0, _uhandlers.foreign));
 var _umap = require("umap");
 var _umapDefault = parcelHelpers.interopDefault(_umap);
 var _rabbitJs = require("./rabbit.js");
@@ -25511,19 +24974,17 @@ const { create , defineProperties  } = Object;
 // with a `for(ref[, id])` and a `node` tag too
 const tag = (type)=>{
     // both `html` and `svg` tags have their own cache
-    const keyed = _umapDefault.default(new WeakMap);
+    const keyed = (0, _umapDefault.default)(new WeakMap);
     // keyed operations always re-use the same cache and unroll
     // the template and its interpolations right away
-    const fixed = (cache1)=>(template, ...values)=>_rabbitJs.unroll(cache1, {
+    const fixed = (cache)=>(template, ...values)=>(0, _rabbitJs.unroll)(cache, {
                 type,
                 template,
                 values
-            })
-    ;
+            });
     return defineProperties(// non keyed operations are recognized as instance of Hole
     // during the "unroll", recursively resolved and updated
-    (template, ...values)=>new _rabbitJs.Hole(type, template, values)
-    , {
+    (template, ...values)=>new (0, _rabbitJs.Hole)(type, template, values), {
         for: {
             // keyed operations need a reference object, usually the parent node
             // which is showing keyed results, and optionally a unique id per each
@@ -25531,14 +24992,14 @@ const tag = (type)=>{
             // that usually carry a unique identifier
             value (ref, id) {
                 const memo = keyed.get(ref) || keyed.set(ref, create(null));
-                return memo[id] || (memo[id] = fixed(_rabbitJs.createCache()));
+                return memo[id] || (memo[id] = fixed((0, _rabbitJs.createCache)()));
             }
         },
         node: {
             // it is possible to create one-off content out of the box via node tag
             // this might return the single created node, or a fragment with all
             // nodes present at the root level and, of course, their child nodes
-            value: (template, ...values)=>_rabbitJs.unroll(_rabbitJs.createCache(), {
+            value: (template, ...values)=>(0, _rabbitJs.unroll)((0, _rabbitJs.createCache)(), {
                     type,
                     template,
                     values
@@ -25547,19 +25008,19 @@ const tag = (type)=>{
     });
 };
 // each rendered node gets its own cache
-const cache = _umapDefault.default(new WeakMap);
+const cache = (0, _umapDefault.default)(new WeakMap);
 // rendering means understanding what `html` or `svg` tags returned
 // and it relates a specific node to its own unique cache.
 // Each time the content to render changes, the node is cleaned up
 // and the new new content is appended, and if such content is a Hole
 // then it's "unrolled" to resolve all its inner nodes.
 const render = (where, what)=>{
-    const hole = typeof what === 'function' ? what() : what;
-    const info = cache.get(where) || cache.set(where, _rabbitJs.createCache());
-    const wire = hole instanceof _rabbitJs.Hole ? _rabbitJs.unroll(info, hole) : hole;
+    const hole = typeof what === "function" ? what() : what;
+    const info = cache.get(where) || cache.set(where, (0, _rabbitJs.createCache)());
+    const wire = hole instanceof (0, _rabbitJs.Hole) ? (0, _rabbitJs.unroll)(info, hole) : hole;
     if (wire !== info.wire) {
         info.wire = wire;
-        where.textContent = '';
+        where.textContent = "";
         // valueOf() simply returns the node itself, but in case it was a "wire"
         // it will eventually re-append all nodes to its fragment so that such
         // fragment can be re-appended many times in a meaningful way
@@ -25568,8 +25029,8 @@ const render = (where, what)=>{
     }
     return where;
 };
-const html = tag('html');
-const svg = tag('svg');
+const html = tag("html");
+const svg = tag("svg");
 
 },{"umap":"b3ep2","./rabbit.js":"4YYgA","uhandlers":"ceEOD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3ep2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -25580,27 +25041,22 @@ exports.default = (_)=>({
         // so that using bind slows it down by 60%.
         // Firefox and Chrome are just fine in both cases,
         // so let's use the approach that works fast everywhere 👍
-        get: (key)=>_.get(key)
-        ,
+        get: (key)=>_.get(key),
         set: (key, value)=>(_.set(key, value), value)
-    })
-;
+    });
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4YYgA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createCache", ()=>createCache
-);
-parcelHelpers.export(exports, "unroll", ()=>unroll
-);
+parcelHelpers.export(exports, "createCache", ()=>createCache);
+parcelHelpers.export(exports, "unroll", ()=>unroll);
 /**
  * Holds all details wrappers needed to render the content further on.
  * @constructor
  * @param {string} type The hole type, either `html` or `svg`.
  * @param {string[]} template The template literals used to the define the content.
  * @param {Array} values Zero, one, or more interpolated values to render.
- */ parcelHelpers.export(exports, "Hole", ()=>Hole
-);
+ */ parcelHelpers.export(exports, "Hole", ()=>Hole);
 var _umap = require("umap");
 var _umapDefault = parcelHelpers.interopDefault(_umap);
 var _uparser = require("uparser");
@@ -25616,7 +25072,7 @@ const createPath = (node)=>{
     const path = [];
     let { parentNode  } = node;
     while(parentNode){
-        path.push(_uarray.indexOf.call(parentNode.childNodes, node));
+        path.push((0, _uarray.indexOf).call(parentNode.childNodes, node));
         node = parentNode;
         parentNode = node.parentNode;
     }
@@ -25629,12 +25085,12 @@ const createPath = (node)=>{
 // the update to that specific comment node, hence its parent.
 // style and textarea will have <!--isµX--> text content, and are handled
 // directly through text-only updates.
-const prefix = 'isµ';
+const prefix = "is\xb5";
 // Template Literals are unique per scope and static, meaning a template
 // should be parsed once, and once only, as it will always represent the same
 // content, within the exact same amount of updates each time.
 // This cache relates each template to its unique content and updates.
-const cache = _umapDefault.default(new WeakMap);
+const cache = (0, _umapDefault.default)(new WeakMap);
 // a RegExp that helps checking nodes that cannot contain comments
 const textOnly = /^(?:plaintext|script|style|textarea|title|xmp)$/i;
 const createCache = ()=>({
@@ -25648,8 +25104,7 @@ const createCache = ()=>({
         // if the template or type are different from the previous one
         // the entry gets re-created each time
         wire: null // each rendered node represent some wired content and
-    })
-;
+    });
 // the entry stored in the rendered node cache, and per each "hole"
 const createEntry = (type, template)=>{
     const { content , updates  } = mapUpdates(type, template);
@@ -25665,11 +25120,11 @@ const createEntry = (type, template)=>{
 // Each unique template becomes a fragment, cloned once per each other
 // operation based on the same template, i.e. data => html`<p>${data}</p>`
 const mapTemplate = (type, template)=>{
-    const text = _uparserDefault.default(template, prefix, type === 'svg');
-    const content = _nodeJs.createFragment(text, type);
+    const text = (0, _uparserDefault.default)(template, prefix, type === "svg");
+    const content = (0, _nodeJs.createFragment)(text, type);
     // once instrumented and reproduced as fragment, it's crawled
     // to find out where each update is in the fragment tree
-    const tw = _nodeJs.createWalker(content);
+    const tw = (0, _nodeJs.createWalker)(content);
     const nodes = [];
     const length = template.length - 1;
     let i = 0;
@@ -25688,7 +25143,7 @@ const mapTemplate = (type, template)=>{
         {
             if (node.data === search) {
                 nodes.push({
-                    type: 'node',
+                    type: "node",
                     path: createPath(node)
                 });
                 search = `${prefix}${++i}`;
@@ -25701,7 +25156,7 @@ const mapTemplate = (type, template)=>{
             // let svg = -1;
             while(node.hasAttribute(search)){
                 nodes.push({
-                    type: 'attr',
+                    type: "attr",
                     path: createPath(node),
                     name: node.getAttribute(search)
                 });
@@ -25711,9 +25166,9 @@ const mapTemplate = (type, template)=>{
             // if the node was a style, textarea, or others, check its content
             // and if it is <!--isµX--> then update tex-only this node
             if (textOnly.test(node.tagName) && node.textContent.trim() === `<!--${search}-->`) {
-                node.textContent = '';
+                node.textContent = "";
                 nodes.push({
-                    type: 'text',
+                    type: "text",
                     path: createPath(node)
                 });
                 search = `${prefix}${++i}`;
@@ -25736,7 +25191,7 @@ const mapUpdates = (type, template)=>{
     // clone deeply the fragment
     const fragment = document.importNode(content, true);
     // and relate an update handler per each node that needs one
-    const updates = nodes.map(_handlersJs.handlers, fragment);
+    const updates = nodes.map((0, _handlersJs.handlers), fragment);
     // return the fragment and all updates to use within its nodes
     return {
         content: fragment,
@@ -25761,7 +25216,7 @@ const unroll = (info, { type , template , values  })=>{
     // create a new persistent entity to use during diffing.
     // This is simply a DOM node, when the template has a single container,
     // as in `<p></p>`, or a "wire" in `<p></p><p></p>` and similar cases.
-    return wire || (entry.wire = _uwire.persistent(content));
+    return wire || (entry.wire = (0, _uwire.persistent)(content));
 };
 // the stack retains, per each interpolation value, the cache
 // related to each interpolation value, or null, if the render
@@ -25772,7 +25227,7 @@ const unrollValues = ({ stack  }, values, length)=>{
         // each Hole gets unrolled and re-assigned as value
         // so that domdiff will deal with a node/wire, not with a hole
         if (hole instanceof Hole) values[i] = unroll(stack[i] || (stack[i] = createCache()), hole);
-        else if (_uarray.isArray(hole)) unrollValues(stack[i] || (stack[i] = createCache()), hole, hole.length);
+        else if ((0, _uarray.isArray)(hole)) unrollValues(stack[i] || (stack[i] = createCache()), hole, hole.length);
         else stack[i] = null;
     }
     if (length < stack.length) stack.splice(length);
@@ -25792,42 +25247,34 @@ const node = /<[a-z][^>]+$/i;
 const notNode = />[^<>]*$/;
 const selfClosing = /<([a-z]+[a-z0-9:._-]*)([^>]*?)(\/>)/ig;
 const trimEnd = /\s+$/;
-const isNode = (template, i)=>0 < i-- && (node.test(template[i]) || !notNode.test(template[i]) && isNode(template, i))
-;
-const regular = (original, name, extra)=>empty.test(name) ? original : `<${name}${extra.replace(trimEnd, '')}></${name}>`
-;
+const isNode = (template, i)=>0 < i-- && (node.test(template[i]) || !notNode.test(template[i]) && isNode(template, i));
+const regular = (original, name, extra)=>empty.test(name) ? original : `<${name}${extra.replace(trimEnd, "")}></${name}>`;
 exports.default = (template, prefix, svg)=>{
     const text = [];
     const { length  } = template;
     for(let i = 1; i < length; i++){
         const chunk = template[i - 1];
-        text.push(attr.test(chunk) && isNode(template, i) ? chunk.replace(attr, (_, $1, $2)=>`${prefix}${i - 1}=${$2 || '"'}${$1}${$2 ? '' : '"'}`
-        ) : `${chunk}<!--${prefix}${i - 1}-->`);
+        text.push(attr.test(chunk) && isNode(template, i) ? chunk.replace(attr, (_, $1, $2)=>`${prefix}${i - 1}=${$2 || '"'}${$1}${$2 ? "" : '"'}`) : `${chunk}<!--${prefix}${i - 1}-->`);
     }
     text.push(template[length - 1]);
-    const output = text.join('').trim();
+    const output = text.join("").trim();
     return svg ? output : output.replace(selfClosing, regular);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7ftea":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isArray", ()=>isArray
-);
-parcelHelpers.export(exports, "indexOf", ()=>indexOf
-);
-parcelHelpers.export(exports, "slice", ()=>slice
-);
+parcelHelpers.export(exports, "isArray", ()=>isArray);
+parcelHelpers.export(exports, "indexOf", ()=>indexOf);
+parcelHelpers.export(exports, "slice", ()=>slice);
 const { isArray  } = Array;
 const { indexOf , slice  } = [];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eGHCa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "diffable", ()=>diffable
-);
-parcelHelpers.export(exports, "persistent", ()=>persistent
-);
+parcelHelpers.export(exports, "diffable", ()=>diffable);
+parcelHelpers.export(exports, "persistent", ()=>persistent);
 var _uarray = require("uarray");
 const ELEMENT_NODE = 1;
 const nodeType = 111;
@@ -25838,13 +25285,12 @@ const remove = ({ firstChild , lastChild  })=>{
     range.deleteContents();
     return firstChild;
 };
-const diffable = (node, operation)=>node.nodeType === nodeType ? 1 / operation < 0 ? operation ? remove(node) : node.lastChild : operation ? node.valueOf() : node.firstChild : node
-;
+const diffable = (node, operation)=>node.nodeType === nodeType ? 1 / operation < 0 ? operation ? remove(node) : node.lastChild : operation ? node.valueOf() : node.firstChild : node;
 const persistent = (fragment)=>{
     const { childNodes  } = fragment;
     const { length  } = childNodes;
     if (length < 2) return length ? childNodes[0] : fragment;
-    const nodes = _uarray.slice.call(childNodes, 0);
+    const nodes = (0, _uarray.slice).call(childNodes, 0);
     const firstChild = nodes[0];
     const lastChild = nodes[length - 1];
     return {
@@ -25869,18 +25315,16 @@ parcelHelpers.defineInteropFlag(exports);
 // the type is either node, attribute, or text, while
 // the path is how to retrieve the related node to update.
 // In the attribute case, the attribute name is also carried along.
-parcelHelpers.export(exports, "handlers", ()=>handlers
-);
+parcelHelpers.export(exports, "handlers", ()=>handlers);
 var _uarray = require("uarray");
 var _udomdiff = require("udomdiff");
 var _udomdiffDefault = parcelHelpers.interopDefault(_udomdiff);
 var _uhandlers = require("uhandlers");
 var _uwire = require("uwire");
 // from a generic path, retrieves the exact targeted node
-const reducePath = ({ childNodes  }, i)=>childNodes[i]
-;
+const reducePath = ({ childNodes  }, i)=>childNodes[i];
 // this helper avoid code bloat around handleAnything() callback
-const diff = (comment, oldNodes, newNodes)=>_udomdiffDefault.default(comment.parentNode, // TODO: there is a possible edge case where a node has been
+const diff = (comment, oldNodes, newNodes)=>(0, _udomdiffDefault.default)(comment.parentNode, // TODO: there is a possible edge case where a node has been
     //       removed manually, or it was a keyed one, attached
     //       to a shared reference between renders.
     //       In this case udomdiff might fail at removing such node
@@ -25895,8 +25339,7 @@ const diff = (comment, oldNodes, newNodes)=>_udomdiffDefault.default(comment.par
     //       and both lighterhtml and hyperHTML might fail with this
     //       very specific edge case, I might as well document this possible
     //       "diffing shenanigan" and call it a day.
-    oldNodes, newNodes, _uwire.diffable, comment)
-;
+    oldNodes, newNodes, (0, _uwire.diffable), comment);
 // if an interpolation represents a comment, the whole
 // diffing will be related to such comment.
 // This helper is in charge of understanding how the new
@@ -25906,12 +25349,12 @@ const handleAnything = (comment)=>{
     const anyContent = (newValue)=>{
         switch(typeof newValue){
             // primitives are handled as text content
-            case 'string':
-            case 'number':
-            case 'boolean':
+            case "string":
+            case "number":
+            case "boolean":
                 if (oldValue !== newValue) {
                     oldValue = newValue;
-                    if (!text) text = document.createTextNode('');
+                    if (!text) text = document.createTextNode("");
                     text.data = newValue;
                     nodes = diff(comment, nodes, [
                         text
@@ -25919,8 +25362,8 @@ const handleAnything = (comment)=>{
                 }
                 break;
             // null, and undefined are used to cleanup previous content
-            case 'object':
-            case 'undefined':
+            case "object":
+            case "undefined":
                 if (newValue == null) {
                     if (oldValue != newValue) {
                         oldValue = newValue;
@@ -25929,11 +25372,11 @@ const handleAnything = (comment)=>{
                     break;
                 }
                 // arrays and nodes have a special treatment
-                if (_uarray.isArray(newValue)) {
+                if ((0, _uarray.isArray)(newValue)) {
                     oldValue = newValue;
                     // arrays can be used to cleanup, if empty
                     if (newValue.length === 0) nodes = diff(comment, nodes, []);
-                    else if (typeof newValue[0] === 'object') nodes = diff(comment, nodes, newValue);
+                    else if (typeof newValue[0] === "object") nodes = diff(comment, nodes, newValue);
                     else anyContent(String(newValue));
                     break;
                 }
@@ -25942,14 +25385,14 @@ const handleAnything = (comment)=>{
                 // if the node is a fragment, it's appended once via its childNodes
                 // There is no `else` here, meaning if the content
                 // is not expected one, nothing happens, as easy as that.
-                if (oldValue !== newValue && 'ELEMENT_NODE' in newValue) {
+                if (oldValue !== newValue && "ELEMENT_NODE" in newValue) {
                     oldValue = newValue;
-                    nodes = diff(comment, nodes, newValue.nodeType === 11 ? _uarray.slice.call(newValue.childNodes) : [
+                    nodes = diff(comment, nodes, newValue.nodeType === 11 ? (0, _uarray.slice).call(newValue.childNodes) : [
                         newValue
                     ]);
                 }
                 break;
-            case 'function':
+            case "function":
                 anyContent(newValue(comment));
                 break;
         }
@@ -25968,27 +25411,27 @@ const handleAnything = (comment)=>{
 //  * generic=${...}  to handle an attribute just like an attribute
 const handleAttribute = (node, name /*, svg*/ )=>{
     switch(name[0]){
-        case '?':
-            return _uhandlers.boolean(node, name.slice(1), false);
-        case '.':
-            return _uhandlers.setter(node, name.slice(1));
-        case '@':
-            return _uhandlers.event(node, 'on' + name.slice(1));
-        case 'o':
-            if (name[1] === 'n') return _uhandlers.event(node, name);
+        case "?":
+            return (0, _uhandlers.boolean)(node, name.slice(1), false);
+        case ".":
+            return (0, _uhandlers.setter)(node, name.slice(1));
+        case "@":
+            return (0, _uhandlers.event)(node, "on" + name.slice(1));
+        case "o":
+            if (name[1] === "n") return (0, _uhandlers.event)(node, name);
     }
     switch(name){
-        case 'ref':
-            return _uhandlers.ref(node);
-        case 'aria':
-            return _uhandlers.aria(node);
+        case "ref":
+            return (0, _uhandlers.ref)(node);
+        case "aria":
+            return (0, _uhandlers.aria)(node);
     }
-    return _uhandlers.attribute(node, name /*, svg*/ );
+    return (0, _uhandlers.attribute)(node, name /*, svg*/ );
 };
 function handlers(options) {
     const { type , path  } = options;
     const node = path.reduceRight(reducePath, this);
-    return type === 'node' ? handleAnything(node) : type === 'attr' ? handleAttribute(node, options.name /*, options.svg*/ ) : _uhandlers.text(node);
+    return type === "node" ? handleAnything(node) : type === "attr" ? handleAttribute(node, options.name /*, options.svg*/ ) : (0, _uhandlers.text)(node);
 }
 
 },{"uarray":"7ftea","udomdiff":"9UVlK","uhandlers":"ceEOD","uwire":"eGHCa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9UVlK":[function(require,module,exports) {
@@ -26052,9 +25495,9 @@ parcelHelpers.defineInteropFlag(exports);
             // or asymmetric too
             // [1, 2, 3, 4, 5]
             // [1, 2, 3, 5, 6, 4]
-            const node = get(a[--aEnd], -1).nextSibling;
+            const node1 = get(a[--aEnd], -1).nextSibling;
             parentNode.insertBefore(get(b[bStart++], 1), get(a[aStart++], -1).nextSibling);
-            parentNode.insertBefore(get(b[--bEnd], 1), node);
+            parentNode.insertBefore(get(b[--bEnd], 1), node1);
             // mark the future index as identical (yeah, it's dirty, but cheap 👍)
             // The main reason to do this, is that when a[aEnd] will be reached,
             // the loop will likely be on the fast path, as identical to b[bEnd].
@@ -26079,10 +25522,10 @@ parcelHelpers.defineInteropFlag(exports);
                 const index = map.get(a[aStart]);
                 // if it's not already processed, look on demand for the next LCS
                 if (bStart < index && index < bEnd) {
-                    let i = aStart;
+                    let i1 = aStart;
                     // counts the amount of nodes that are the same in the future
                     let sequence = 1;
-                    while(++i < aEnd && i < bEnd && map.get(a[i]) === index + sequence)sequence++;
+                    while(++i1 < aEnd && i1 < bEnd && map.get(a[i1]) === index + sequence)sequence++;
                     // effort decision here: if the sequence is longer than replaces
                     // needed to reach such sequence, which would brings again this loop
                     // to the fast path, prepend the difference before a sequence,
@@ -26094,8 +25537,8 @@ parcelHelpers.defineInteropFlag(exports);
                     // this would place 7 before 1 and, from that time on, 1, 2, and 3
                     // will be processed at zero cost
                     if (sequence > index - bStart) {
-                        const node = get(a[aStart], 0);
-                        while(bStart < index)parentNode.insertBefore(get(b[bStart++], 1), node);
+                        const node2 = get(a[aStart], 0);
+                        while(bStart < index)parentNode.insertBefore(get(b[bStart++], 1), node2);
                     } else parentNode.replaceChild(get(b[bStart++], 1), get(a[aStart++], -1));
                 } else aStart++;
             } else parentNode.removeChild(get(a[aStart++], -1));
@@ -26107,47 +25550,34 @@ parcelHelpers.defineInteropFlag(exports);
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ceEOD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Foreign", ()=>Foreign
-);
-parcelHelpers.export(exports, "foreign", ()=>foreign
-);
-parcelHelpers.export(exports, "aria", ()=>aria
-);
-parcelHelpers.export(exports, "attribute", ()=>attribute
-);
-parcelHelpers.export(exports, "boolean", ()=>boolean
-);
-parcelHelpers.export(exports, "data", ()=>data
-);
-parcelHelpers.export(exports, "event", ()=>event
-);
-parcelHelpers.export(exports, "ref", ()=>ref
-);
-parcelHelpers.export(exports, "setter", ()=>setter
-);
-parcelHelpers.export(exports, "text", ()=>text
-);
+parcelHelpers.export(exports, "Foreign", ()=>Foreign);
+parcelHelpers.export(exports, "foreign", ()=>foreign);
+parcelHelpers.export(exports, "aria", ()=>aria);
+parcelHelpers.export(exports, "attribute", ()=>attribute);
+parcelHelpers.export(exports, "boolean", ()=>boolean);
+parcelHelpers.export(exports, "data", ()=>data);
+parcelHelpers.export(exports, "event", ()=>event);
+parcelHelpers.export(exports, "ref", ()=>ref);
+parcelHelpers.export(exports, "setter", ()=>setter);
+parcelHelpers.export(exports, "text", ()=>text);
 var _uarray = require("uarray");
 // flag for foreign checks (slower path, fast by default)
 let useForeign = false;
 class Foreign {
     constructor(handler, value){
         useForeign = true;
-        this._ = (...args)=>handler(...args, value)
-        ;
+        this._ = (...args)=>handler(...args, value);
     }
 }
-const foreign = (handler, value)=>new Foreign(handler, value)
-;
+const foreign = (handler, value)=>new Foreign(handler, value);
 const aria = (node)=>(values)=>{
         for(const key in values){
-            const name = key === 'role' ? key : `aria-${key}`;
+            const name = key === "role" ? key : `aria-${key}`;
             const value = values[key];
             if (value == null) node.removeAttribute(name);
             else node.setAttribute(name, value);
         }
-    }
-;
+    };
 const attribute = (node, name)=>{
     let oldValue, orphan = true;
     const attributeNode = document.createAttributeNS(null, name);
@@ -26179,24 +25609,22 @@ const boolean = (node, key, oldValue)=>(newValue)=>{
         if (oldValue !== !!newValue) {
             // when IE won't be around anymore ...
             // node.toggleAttribute(key, oldValue = !!newValue);
-            if (oldValue = !!newValue) node.setAttribute(key, '');
+            if (oldValue = !!newValue) node.setAttribute(key, "");
             else node.removeAttribute(key);
         }
-    }
-;
+    };
 const data = ({ dataset  })=>(values)=>{
         for(const key in values){
             const value = values[key];
             if (value == null) delete dataset[key];
             else dataset[key] = value;
         }
-    }
-;
+    };
 const event = (node, name)=>{
     let oldValue, lower, type = name.slice(2);
     if (!(name in node) && (lower = name.toLowerCase()) in node) type = lower.slice(2);
     return (newValue)=>{
-        const info = _uarray.isArray(newValue) ? newValue : [
+        const info = (0, _uarray.isArray)(newValue) ? newValue : [
             newValue,
             false
         ];
@@ -26211,21 +25639,20 @@ const ref = (node)=>{
     return (value)=>{
         if (oldValue !== value) {
             oldValue = value;
-            if (typeof value === 'function') value(node);
+            if (typeof value === "function") value(node);
             else value.current = node;
         }
     };
 };
-const setter = (node, key)=>key === 'dataset' ? data(node) : (value)=>{
+const setter = (node, key)=>key === "dataset" ? data(node) : (value)=>{
         node[key] = value;
-    }
-;
+    };
 const text = (node)=>{
     let oldValue;
     return (newValue)=>{
         if (oldValue != newValue) {
             oldValue = newValue;
-            node.textContent = newValue == null ? '' : newValue;
+            node.textContent = newValue == null ? "" : newValue;
         }
     };
 };
@@ -26233,27 +25660,23 @@ const text = (node)=>{
 },{"uarray":"7ftea","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9Th3F":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "createFragment", ()=>createFragment
-);
-parcelHelpers.export(exports, "createWalker", ()=>createWalker
-);
+parcelHelpers.export(exports, "createFragment", ()=>createFragment);
+parcelHelpers.export(exports, "createWalker", ()=>createWalker);
 var _createContent = require("@ungap/create-content");
 var _createContentDefault = parcelHelpers.interopDefault(_createContent);
 // this "hack" tells the library if the browser is IE11 or old Edge
 const isImportNodeLengthWrong = document.importNode.length != 1;
-const createFragment = isImportNodeLengthWrong ? (text, type, normalize)=>document.importNode(_createContentDefault.default(text, type, normalize), true)
- : _createContentDefault.default;
-const createWalker = isImportNodeLengthWrong ? (fragment)=>document.createTreeWalker(fragment, 129, null, false)
- : (fragment)=>document.createTreeWalker(fragment, 129)
-;
+const createFragment = isImportNodeLengthWrong ? (text, type, normalize)=>document.importNode((0, _createContentDefault.default)(text, type, normalize), true) : (0, _createContentDefault.default);
+const createWalker = isImportNodeLengthWrong ? (fragment)=>document.createTreeWalker(fragment, 129, null, false) : (fragment)=>document.createTreeWalker(fragment, 129);
 
 },{"@ungap/create-content":"4xeIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xeIY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-/*! (c) Andrea Giammarchi - ISC */ var createContent = function(document) {
-    var FRAGMENT = 'fragment';
-    var TEMPLATE = 'template';
-    var HAS_CONTENT = 'content' in create(TEMPLATE);
+/*! (c) Andrea Giammarchi - ISC */ var createContent = function(document1) {
+    "use strict";
+    var FRAGMENT = "fragment";
+    var TEMPLATE = "template";
+    var HAS_CONTENT = "content" in create(TEMPLATE);
     var createHTML = HAS_CONTENT ? function(html) {
         var template = create(TEMPLATE);
         template.innerHTML = html;
@@ -26264,7 +25687,7 @@ parcelHelpers.defineInteropFlag(exports);
         var childNodes = null;
         if (/^[^\S]*?<(col(?:group)?|t(?:head|body|foot|r|d|h))/i.test(html)) {
             var selector = RegExp.$1;
-            template.innerHTML = '<table>' + html + '</table>';
+            template.innerHTML = "<table>" + html + "</table>";
             childNodes = template.querySelectorAll(selector);
         } else {
             template.innerHTML = html;
@@ -26274,22 +25697,22 @@ parcelHelpers.defineInteropFlag(exports);
         return content;
     };
     return function createContent(markup, type) {
-        return (type === 'svg' ? createSVG : createHTML)(markup);
+        return (type === "svg" ? createSVG : createHTML)(markup);
     };
     function append(root, childNodes) {
         var length = childNodes.length;
         while(length--)root.appendChild(childNodes[0]);
     }
     function create(element) {
-        return element === FRAGMENT ? document.createDocumentFragment() : document.createElementNS('http://www.w3.org/1999/xhtml', element);
+        return element === FRAGMENT ? document1.createDocumentFragment() : document1.createElementNS("http://www.w3.org/1999/xhtml", element);
     }
     // it could use createElementNS when hasNode is there
     // but this fallback is equally fast and easier to maintain
     // it is also battle tested already in all IE
     function createSVG(svg) {
         var content = create(FRAGMENT);
-        var template = create('div');
-        template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg + '</svg>';
+        var template = create("div");
+        template.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg">' + svg + "</svg>";
         append(content, template.firstChild.childNodes);
         return content;
     }
@@ -26299,18 +25722,16 @@ exports.default = createContent;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i3nzj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "InputRadioButtonStyle", ()=>InputRadioButtonStyle
-);
-parcelHelpers.export(exports, "InputRadioButtonGroupStyle", ()=>InputRadioButtonGroupStyle
-);
+parcelHelpers.export(exports, "InputRadioButtonStyle", ()=>InputRadioButtonStyle);
+parcelHelpers.export(exports, "InputRadioButtonGroupStyle", ()=>InputRadioButtonGroupStyle);
 var _ui = require("../ui");
 var _style = require("../../style");
 var _buttonStyle = require("../button/button.style");
-const Color = require('color');
-class InputRadioButtonStyle extends _ui.StyleClass {
+const Color = require("color");
+class InputRadioButtonStyle extends (0, _ui.StyleClass) {
     static default = {
-        activeColor: 'blue',
-        buttonColor: '#ccc'
+        activeColor: "blue",
+        buttonColor: "#ccc"
     };
     static css(style = {}) {
         style = {
@@ -26334,7 +25755,7 @@ class InputRadioButtonStyle extends _ui.StyleClass {
         }
 
         button {
-            ${_buttonStyle.ButtonStyle.css()}
+            ${(0, _buttonStyle.ButtonStyle).css()}
         }
         ${this.style(style)}
         `.trim();
@@ -26348,29 +25769,29 @@ class InputRadioButtonStyle extends _ui.StyleClass {
         return css;
     }
     static _activeColor(style = {}) {
-        if (style.activeColor == undefined) return '';
+        if (style.activeColor == undefined) return "";
         return `
         &:hover input[type="radio"] ~ button {
-            ${_style.bgColor(Color(style.activeColor).lighten(0.2).saturate(0.2))}
+            ${(0, _style.bgColor)(Color(style.activeColor).lighten(0.2).saturate(0.2))}
         }
 
         /* When the radio button is checked, add background color */
         input[type="radio"]:checked ~ button {
-            ${_style.bgColor(style.activeColor)}
+            ${(0, _style.bgColor)(style.activeColor)}
         }
         `.trim();
     }
     static _buttonColor(style = {}) {
-        if (style.buttonColor == undefined) return '';
+        if (style.buttonColor == undefined) return "";
         return `
         button {
-            ${_style.bgColor(style.buttonColor)}
+            ${(0, _style.bgColor)(style.buttonColor)}
         }`.trim();
     }
 }
-class InputRadioButtonGroupStyle extends _ui.StyleClass {
+class InputRadioButtonGroupStyle extends (0, _ui.StyleClass) {
     static default = {
-        borderRadius: '4px'
+        borderRadius: "4px"
     };
     static css(style = {}) {
         style = {
@@ -26387,7 +25808,7 @@ class InputRadioButtonGroupStyle extends _ui.StyleClass {
         return css;
     }
     static style(style = {}) {
-        if (style.borderRadius == undefined) return '';
+        if (style.borderRadius == undefined) return "";
         let css = `
         > *:first-of-type {
             button {
@@ -26407,18 +25828,12 @@ class InputRadioButtonGroupStyle extends _ui.StyleClass {
 },{"../ui":"jSLlu","../../style":"llAwq","../button/button.style":"5syH4","color":"gW2oi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"llAwq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addStyle", ()=>_addStyle.addStyle
-);
-parcelHelpers.export(exports, "aspectRatio", ()=>_aspectRatio.aspectRatio
-);
-parcelHelpers.export(exports, "bgColor", ()=>_bgColor.bgColor
-);
-parcelHelpers.export(exports, "bgColorInt", ()=>_bgColorInt.bgColorInt
-);
-parcelHelpers.export(exports, "fontFluid", ()=>_fontFluid.fontFluid
-);
-parcelHelpers.export(exports, "lift", ()=>_lift.lift
-);
+parcelHelpers.export(exports, "addStyle", ()=>(0, _addStyle.addStyle));
+parcelHelpers.export(exports, "aspectRatio", ()=>(0, _aspectRatio.aspectRatio));
+parcelHelpers.export(exports, "bgColor", ()=>(0, _bgColor.bgColor));
+parcelHelpers.export(exports, "bgColorInt", ()=>(0, _bgColorInt.bgColorInt));
+parcelHelpers.export(exports, "fontFluid", ()=>(0, _fontFluid.fontFluid));
+parcelHelpers.export(exports, "lift", ()=>(0, _lift.lift));
 var _addStyle = require("./style/add-style");
 var _aspectRatio = require("./style/aspect-ratio");
 var _bgColor = require("./style/bg-color");
@@ -26429,16 +25844,14 @@ var _lift = require("./style/lift");
 },{"./style/add-style":"hWanl","./style/aspect-ratio":"91a2D","./style/bg-color":"dTLl0","./style/bg-color-int":"cvHRb","./style/font-fluid":"gzrsH","./style/lift":"ipD0B","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hWanl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addStyle", ()=>_css.injectGlobal
-);
+parcelHelpers.export(exports, "addStyle", ()=>(0, _css.injectGlobal));
 var _css = require("@emotion/css");
 
 },{"@emotion/css":"gyRZs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"91a2D":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "aspectRatio", ()=>aspectRatio
-);
-const aspectRatio = (ratio = '1/1')=>{
+parcelHelpers.export(exports, "aspectRatio", ()=>aspectRatio);
+const aspectRatio = (ratio = "1/1")=>{
     return `
     aspect-ratio: ${ratio};
     @supports not (aspect-ratio: ${ratio}) {
@@ -26460,11 +25873,10 @@ const aspectRatio = (ratio = '1/1')=>{
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dTLl0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "bgColor", ()=>bgColor
-);
-const Color = require('color');
-const bgColor = (color = 'blue')=>{
-    let fontColor = Color(color).isDark() ? 'white' : 'black';
+parcelHelpers.export(exports, "bgColor", ()=>bgColor);
+const Color = require("color");
+const bgColor = (color = "blue")=>{
+    let fontColor = Color(color).isDark() ? "white" : "black";
     return `
     background-color: ${color};
     color: ${fontColor};
@@ -26472,29 +25884,29 @@ const bgColor = (color = 'blue')=>{
 };
 
 },{"color":"gW2oi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gW2oi":[function(require,module,exports) {
-const colorString = require('color-string');
-const convert = require('color-convert');
+const colorString = require("color-string");
+const convert = require("color-convert");
 const skippedModels = [
     // To be honest, I don't really feel like keyword belongs in color convert, but eh.
-    'keyword',
+    "keyword",
     // Gray conflicts with some method names, and has its own method defined.
-    'gray',
+    "gray",
     // Shouldn't really be in color-convert either...
-    'hex', 
+    "hex", 
 ];
 const hashedModelKeys = {};
 for (const model of Object.keys(convert))hashedModelKeys[[
     ...convert[model].labels
-].sort().join('')] = model;
+].sort().join("")] = model;
 const limiters = {};
-function Color(object, model2) {
-    if (!(this instanceof Color)) return new Color(object, model2);
-    if (model2 && model2 in skippedModels) model2 = null;
-    if (model2 && !(model2 in convert)) throw new Error('Unknown model: ' + model2);
+function Color(object, model) {
+    if (!(this instanceof Color)) return new Color(object, model);
+    if (model && model in skippedModels) model = null;
+    if (model && !(model in convert)) throw new Error("Unknown model: " + model);
     let i;
     let channels;
     if (object == null) {
-        this.model = 'rgb';
+        this.model = "rgb";
         this.color = [
             0,
             0,
@@ -26507,22 +25919,22 @@ function Color(object, model2) {
             ...object.color
         ];
         this.valpha = object.valpha;
-    } else if (typeof object === 'string') {
+    } else if (typeof object === "string") {
         const result = colorString.get(object);
-        if (result === null) throw new Error('Unable to parse color from string: ' + object);
+        if (result === null) throw new Error("Unable to parse color from string: " + object);
         this.model = result.model;
         channels = convert[this.model].channels;
         this.color = result.value.slice(0, channels);
-        this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;
+        this.valpha = typeof result.value[channels] === "number" ? result.value[channels] : 1;
     } else if (object.length > 0) {
-        this.model = model2 || 'rgb';
+        this.model = model || "rgb";
         channels = convert[this.model].channels;
         const newArray = Array.prototype.slice.call(object, 0, channels);
         this.color = zeroArray(newArray, channels);
-        this.valpha = typeof object[channels] === 'number' ? object[channels] : 1;
-    } else if (typeof object === 'number') {
+        this.valpha = typeof object[channels] === "number" ? object[channels] : 1;
+    } else if (typeof object === "number") {
         // This is always RGB - can be converted later on.
-        this.model = 'rgb';
+        this.model = "rgb";
         this.color = [
             object >> 16 & 0xFF,
             object >> 8 & 0xFF,
@@ -26532,12 +25944,12 @@ function Color(object, model2) {
     } else {
         this.valpha = 1;
         const keys = Object.keys(object);
-        if ('alpha' in object) {
-            keys.splice(keys.indexOf('alpha'), 1);
-            this.valpha = typeof object.alpha === 'number' ? object.alpha : 0;
+        if ("alpha" in object) {
+            keys.splice(keys.indexOf("alpha"), 1);
+            this.valpha = typeof object.alpha === "number" ? object.alpha : 0;
         }
-        const hashedKeys = keys.sort().join('');
-        if (!(hashedKeys in hashedModelKeys)) throw new Error('Unable to parse color from object: ' + JSON.stringify(object));
+        const hashedKeys = keys.sort().join("");
+        if (!(hashedKeys in hashedModelKeys)) throw new Error("Unable to parse color from object: " + JSON.stringify(object));
         this.model = hashedModelKeys[hashedKeys];
         const { labels  } = convert[this.model];
         const color = [];
@@ -26564,7 +25976,7 @@ Color.prototype = {
     },
     string (places) {
         let self = this.model in colorString.to ? this : this.rgb();
-        self = self.round(typeof places === 'number' ? places : 1);
+        self = self.round(typeof places === "number" ? places : 1);
         const args = self.valpha === 1 ? self.color : [
             ...self.color,
             this.valpha
@@ -26572,7 +25984,7 @@ Color.prototype = {
         return colorString.to[self.model](args);
     },
     percentString (places) {
-        const self = this.rgb().round(typeof places === 'number' ? places : 1);
+        const self = this.rgb().round(typeof places === "number" ? places : 1);
         const args = self.valpha === 1 ? self.color : [
             ...self.color,
             this.valpha
@@ -26626,35 +26038,34 @@ Color.prototype = {
         return this.valpha;
     },
     // Rgb
-    red: getset('rgb', 0, maxfn(255)),
-    green: getset('rgb', 1, maxfn(255)),
-    blue: getset('rgb', 2, maxfn(255)),
+    red: getset("rgb", 0, maxfn(255)),
+    green: getset("rgb", 1, maxfn(255)),
+    blue: getset("rgb", 2, maxfn(255)),
     hue: getset([
-        'hsl',
-        'hsv',
-        'hsl',
-        'hwb',
-        'hcg'
-    ], 0, (value)=>(value % 360 + 360) % 360
-    ),
-    saturationl: getset('hsl', 1, maxfn(100)),
-    lightness: getset('hsl', 2, maxfn(100)),
-    saturationv: getset('hsv', 1, maxfn(100)),
-    value: getset('hsv', 2, maxfn(100)),
-    chroma: getset('hcg', 1, maxfn(100)),
-    gray: getset('hcg', 2, maxfn(100)),
-    white: getset('hwb', 1, maxfn(100)),
-    wblack: getset('hwb', 2, maxfn(100)),
-    cyan: getset('cmyk', 0, maxfn(100)),
-    magenta: getset('cmyk', 1, maxfn(100)),
-    yellow: getset('cmyk', 2, maxfn(100)),
-    black: getset('cmyk', 3, maxfn(100)),
-    x: getset('xyz', 0, maxfn(95.047)),
-    y: getset('xyz', 1, maxfn(100)),
-    z: getset('xyz', 2, maxfn(108.833)),
-    l: getset('lab', 0, maxfn(100)),
-    a: getset('lab', 1),
-    b: getset('lab', 2),
+        "hsl",
+        "hsv",
+        "hsl",
+        "hwb",
+        "hcg"
+    ], 0, (value)=>(value % 360 + 360) % 360),
+    saturationl: getset("hsl", 1, maxfn(100)),
+    lightness: getset("hsl", 2, maxfn(100)),
+    saturationv: getset("hsv", 1, maxfn(100)),
+    value: getset("hsv", 2, maxfn(100)),
+    chroma: getset("hcg", 1, maxfn(100)),
+    gray: getset("hcg", 2, maxfn(100)),
+    white: getset("hwb", 1, maxfn(100)),
+    wblack: getset("hwb", 2, maxfn(100)),
+    cyan: getset("cmyk", 0, maxfn(100)),
+    magenta: getset("cmyk", 1, maxfn(100)),
+    yellow: getset("cmyk", 2, maxfn(100)),
+    black: getset("cmyk", 3, maxfn(100)),
+    x: getset("xyz", 0, maxfn(95.047)),
+    y: getset("xyz", 1, maxfn(100)),
+    z: getset("xyz", 2, maxfn(108.833)),
+    l: getset("lab", 0, maxfn(100)),
+    a: getset("lab", 1),
+    b: getset("lab", 2),
     keyword (value) {
         if (value !== undefined) return new Color(value);
         return convert[this.model].keyword(this.color);
@@ -26667,7 +26078,7 @@ Color.prototype = {
         if (value !== undefined) return new Color(value);
         const rgbArray = this.rgb().round().color;
         let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
-        if (alphaHex.length === 1) alphaHex = '0' + alphaHex;
+        if (alphaHex.length === 1) alphaHex = "0" + alphaHex;
         return colorString.to.hex(rgbArray) + alphaHex;
     },
     rgbNumber () {
@@ -26694,8 +26105,8 @@ Color.prototype = {
     level (color2) {
         // https://www.w3.org/TR/WCAG/#contrast-enhanced
         const contrastRatio = this.contrast(color2);
-        if (contrastRatio >= 7) return 'AAA';
-        return contrastRatio >= 4.5 ? 'AA' : '';
+        if (contrastRatio >= 7) return "AAA";
+        return contrastRatio >= 4.5 ? "AA" : "";
     },
     isDark () {
         // YIQ equation from http://24ways.org/2010/calculating-color-contrast
@@ -26791,7 +26202,7 @@ for (const model1 of Object.keys(convert)){
     // 'static' construction methods
     Color[model1] = function(...args) {
         let color = args[0];
-        if (typeof color === 'number') color = zeroArray(args, channels);
+        if (typeof color === "number") color = zeroArray(args, channels);
         return new Color(color, model1);
     };
 }
@@ -26803,21 +26214,21 @@ function roundToPlace(places) {
         return roundTo(number, places);
     };
 }
-function getset(model3, channel, modifier) {
-    model3 = Array.isArray(model3) ? model3 : [
-        model3
+function getset(model, channel, modifier) {
+    model = Array.isArray(model) ? model : [
+        model
     ];
-    for (const m of model3)(limiters[m] || (limiters[m] = []))[channel] = modifier;
-    model3 = model3[0];
+    for (const m of model)(limiters[m] || (limiters[m] = []))[channel] = modifier;
+    model = model[0];
     return function(value) {
         let result;
         if (value !== undefined) {
             if (modifier) value = modifier(value);
-            result = this[model3]();
+            result = this[model]();
             result.color[channel] = value;
             return result;
         }
-        result = this[model3]().color[channel];
+        result = this[model]().color[channel];
         if (modifier) result = modifier(result);
         return result;
     };
@@ -26833,14 +26244,14 @@ function assertArray(value) {
     ];
 }
 function zeroArray(array, length) {
-    for(let i = 0; i < length; i++)if (typeof array[i] !== 'number') array[i] = 0;
+    for(let i = 0; i < length; i++)if (typeof array[i] !== "number") array[i] = 0;
     return array;
 }
 module.exports = Color;
 
 },{"color-string":"d9oJb","color-convert":"6uFtr"}],"d9oJb":[function(require,module,exports) {
-/* MIT license */ var colorNames = require('color-name');
-var swizzle = require('simple-swizzle');
+/* MIT license */ var colorNames = require("color-name");
+var swizzle = require("simple-swizzle");
 var hasOwnProperty = Object.hasOwnProperty;
 var reverseNames = Object.create(null);
 // create a list of reverse color names
@@ -26854,17 +26265,17 @@ cs.get = function(string) {
     var val;
     var model;
     switch(prefix){
-        case 'hsl':
+        case "hsl":
             val = cs.get.hsl(string);
-            model = 'hsl';
+            model = "hsl";
             break;
-        case 'hwb':
+        case "hwb":
             val = cs.get.hwb(string);
-            model = 'hwb';
+            model = "hwb";
             break;
         default:
             val = cs.get.rgb(string);
-            model = 'rgb';
+            model = "rgb";
             break;
     }
     if (!val) return null;
@@ -26916,7 +26327,7 @@ cs.get.rgb = function(string) {
             else rgb[3] = parseFloat(match[4]);
         }
     } else if (match = string.match(keyword)) {
-        if (match[1] === 'transparent') return [
+        if (match[1] === "transparent") return [
             0,
             0,
             0,
@@ -26971,30 +26382,30 @@ cs.get.hwb = function(string) {
 };
 cs.to.hex = function() {
     var rgba = swizzle(arguments);
-    return '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : '');
+    return "#" + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : "");
 };
 cs.to.rgb = function() {
     var rgba = swizzle(arguments);
-    return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')' : 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ")" : "rgba(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ", " + rgba[3] + ")";
 };
 cs.to.rgb.percent = function() {
     var rgba = swizzle(arguments);
     var r = Math.round(rgba[0] / 255 * 100);
     var g = Math.round(rgba[1] / 255 * 100);
     var b = Math.round(rgba[2] / 255 * 100);
-    return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)' : 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + r + "%, " + g + "%, " + b + "%)" : "rgba(" + r + "%, " + g + "%, " + b + "%, " + rgba[3] + ")";
 };
 cs.to.hsl = function() {
     var hsla = swizzle(arguments);
-    return hsla.length < 4 || hsla[3] === 1 ? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)' : 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
+    return hsla.length < 4 || hsla[3] === 1 ? "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)" : "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, " + hsla[3] + ")";
 };
 // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
 // (hwb have alpha optional & 1 is default value)
 cs.to.hwb = function() {
     var hwba = swizzle(arguments);
-    var a = '';
-    if (hwba.length >= 4 && hwba[3] !== 1) a = ', ' + hwba[3];
-    return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
+    var a = "";
+    if (hwba.length >= 4 && hwba[3] !== 1) a = ", " + hwba[3];
+    return "hwb(" + hwba[0] + ", " + hwba[1] + "%, " + hwba[2] + "%" + a + ")";
 };
 cs.to.keyword = function(rgb) {
     return reverseNames[rgb.slice(0, 3)];
@@ -27005,11 +26416,11 @@ function clamp(num, min, max) {
 }
 function hexDouble(num) {
     var str = Math.round(num).toString(16).toUpperCase();
-    return str.length < 2 ? '0' + str : str;
+    return str.length < 2 ? "0" + str : str;
 }
 
 },{"color-name":"8NNt4","simple-swizzle":"1jxJ4"}],"8NNt4":[function(require,module,exports) {
-'use strict';
+"use strict";
 module.exports = {
     "aliceblue": [
         240,
@@ -27754,8 +27165,8 @@ module.exports = {
 };
 
 },{}],"1jxJ4":[function(require,module,exports) {
-'use strict';
-var isArrayish = require('is-arrayish');
+"use strict";
+var isArrayish = require("is-arrayish");
 var concat = Array.prototype.concat;
 var slice = Array.prototype.slice;
 var swizzle = module.exports = function swizzle(args) {
@@ -27776,13 +27187,13 @@ swizzle.wrap = function(fn) {
 
 },{"is-arrayish":"ll30o"}],"ll30o":[function(require,module,exports) {
 module.exports = function isArrayish(obj) {
-    if (!obj || typeof obj === 'string') return false;
-    return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== 'String');
+    if (!obj || typeof obj === "string") return false;
+    return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== "String");
 };
 
 },{}],"6uFtr":[function(require,module,exports) {
-const conversions = require('./conversions');
-const route = require('./route');
+const conversions = require("./conversions");
+const route = require("./route");
 const convert = {};
 const models = Object.keys(conversions);
 function wrapRaw(fn) {
@@ -27793,7 +27204,7 @@ function wrapRaw(fn) {
         return fn(args);
     };
     // Preserve .conversion property if there is one
-    if ('conversion' in fn) wrappedFn.conversion = fn.conversion;
+    if ("conversion" in fn) wrappedFn.conversion = fn.conversion;
     return wrappedFn;
 }
 function wrapRounded(fn) {
@@ -27805,19 +27216,19 @@ function wrapRounded(fn) {
         // We're assuming the result is an array here.
         // see notice in conversions.js; don't use box types
         // in conversion functions.
-        if (typeof result === 'object') for(let len = result.length, i = 0; i < len; i++)result[i] = Math.round(result[i]);
+        if (typeof result === "object") for(let len = result.length, i = 0; i < len; i++)result[i] = Math.round(result[i]);
         return result;
     };
     // Preserve .conversion property if there is one
-    if ('conversion' in fn) wrappedFn.conversion = fn.conversion;
+    if ("conversion" in fn) wrappedFn.conversion = fn.conversion;
     return wrappedFn;
 }
 models.forEach((fromModel)=>{
     convert[fromModel] = {};
-    Object.defineProperty(convert[fromModel], 'channels', {
+    Object.defineProperty(convert[fromModel], "channels", {
         value: conversions[fromModel].channels
     });
-    Object.defineProperty(convert[fromModel], 'labels', {
+    Object.defineProperty(convert[fromModel], "labels", {
         value: conversions[fromModel].labels
     });
     const routes = route(fromModel);
@@ -27831,7 +27242,7 @@ models.forEach((fromModel)=>{
 module.exports = convert;
 
 },{"./conversions":"lE0pm","./route":"fuMRz"}],"lE0pm":[function(require,module,exports) {
-/* MIT license */ /* eslint-disable no-mixed-operators */ const cssKeywords = require('color-name');
+/* MIT license */ /* eslint-disable no-mixed-operators */ const cssKeywords = require("color-name");
 // NOTE: conversions should only return primitive values (i.e. arrays, or
 //       values that give correct `typeof` results).
 //       do not use box values types (i.e. Number(), String(), etc.)
@@ -27840,96 +27251,96 @@ for (const key of Object.keys(cssKeywords))reverseKeywords[cssKeywords[key]] = k
 const convert = {
     rgb: {
         channels: 3,
-        labels: 'rgb'
+        labels: "rgb"
     },
     hsl: {
         channels: 3,
-        labels: 'hsl'
+        labels: "hsl"
     },
     hsv: {
         channels: 3,
-        labels: 'hsv'
+        labels: "hsv"
     },
     hwb: {
         channels: 3,
-        labels: 'hwb'
+        labels: "hwb"
     },
     cmyk: {
         channels: 4,
-        labels: 'cmyk'
+        labels: "cmyk"
     },
     xyz: {
         channels: 3,
-        labels: 'xyz'
+        labels: "xyz"
     },
     lab: {
         channels: 3,
-        labels: 'lab'
+        labels: "lab"
     },
     lch: {
         channels: 3,
-        labels: 'lch'
+        labels: "lch"
     },
     hex: {
         channels: 1,
         labels: [
-            'hex'
+            "hex"
         ]
     },
     keyword: {
         channels: 1,
         labels: [
-            'keyword'
+            "keyword"
         ]
     },
     ansi16: {
         channels: 1,
         labels: [
-            'ansi16'
+            "ansi16"
         ]
     },
     ansi256: {
         channels: 1,
         labels: [
-            'ansi256'
+            "ansi256"
         ]
     },
     hcg: {
         channels: 3,
         labels: [
-            'h',
-            'c',
-            'g'
+            "h",
+            "c",
+            "g"
         ]
     },
     apple: {
         channels: 3,
         labels: [
-            'r16',
-            'g16',
-            'b16'
+            "r16",
+            "g16",
+            "b16"
         ]
     },
     gray: {
         channels: 1,
         labels: [
-            'gray'
+            "gray"
         ]
     }
 };
 module.exports = convert;
 // Hide .channels and .labels properties
 for (const model of Object.keys(convert)){
-    if (!('channels' in convert[model])) throw new Error('missing channels property: ' + model);
-    if (!('labels' in convert[model])) throw new Error('missing channel labels property: ' + model);
-    if (convert[model].labels.length !== convert[model].channels) throw new Error('channel and label counts mismatch: ' + model);
+    if (!("channels" in convert[model])) throw new Error("missing channels property: " + model);
+    if (!("labels" in convert[model])) throw new Error("missing channel labels property: " + model);
+    if (convert[model].labels.length !== convert[model].channels) throw new Error("channel and label counts mismatch: " + model);
     const { channels , labels  } = convert[model];
     delete convert[model].channels;
     delete convert[model].labels;
-    Object.defineProperty(convert[model], 'channels', {
+    Object.defineProperty(convert[model], "channels", {
         value: channels
     });
-    Object.defineProperty(convert[model], 'labels', {
+    Object.defineProperty(convert[model], "labels", {
         value: labels
     });
 }
@@ -28445,7 +27856,7 @@ convert.ansi256.rgb = function(args) {
 convert.rgb.hex = function(args) {
     const integer = ((Math.round(args[0]) & 0xFF) << 16) + ((Math.round(args[1]) & 0xFF) << 8) + (Math.round(args[2]) & 0xFF);
     const string = integer.toString(16).toUpperCase();
-    return '000000'.substring(string.length) + string;
+    return "000000".substring(string.length) + string;
 };
 convert.hex.rgb = function(args) {
     const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
@@ -28455,9 +27866,9 @@ convert.hex.rgb = function(args) {
         0
     ];
     let colorString = match[0];
-    if (match[0].length === 3) colorString = colorString.split('').map((char)=>{
+    if (match[0].length === 3) colorString = colorString.split("").map((char)=>{
         return char + char;
-    }).join('');
+    }).join("");
     const integer = parseInt(colorString, 16);
     const r = integer >> 16 & 0xFF;
     const g = integer >> 8 & 0xFF;
@@ -28674,7 +28085,7 @@ convert.gray.hex = function(gray) {
     const val = Math.round(gray[0] / 100 * 255) & 0xFF;
     const integer = (val << 16) + (val << 8) + val;
     const string = integer.toString(16).toUpperCase();
-    return '000000'.substring(string.length) + string;
+    return "000000".substring(string.length) + string;
 };
 convert.rgb.gray = function(rgb) {
     const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
@@ -28684,7 +28095,7 @@ convert.rgb.gray = function(rgb) {
 };
 
 },{"color-name":"e6EtS"}],"e6EtS":[function(require,module,exports) {
-'use strict';
+"use strict";
 module.exports = {
     "aliceblue": [
         240,
@@ -29429,7 +28840,7 @@ module.exports = {
 };
 
 },{}],"fuMRz":[function(require,module,exports) {
-const conversions = require('./conversions');
+const conversions = require("./conversions");
 /*
 	This function routes a model to all other models.
 
@@ -29509,15 +28920,14 @@ module.exports = function(fromModel) {
 },{"./conversions":"lE0pm"}],"cvHRb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "bgColorInt", ()=>bgColorInt
-);
+parcelHelpers.export(exports, "bgColorInt", ()=>bgColorInt);
 var _bgColor = require("./bg-color");
-const Color = require('color');
-const bgColorInt = ({ color ='blue' , hoverColor =null , activeColor =null  })=>{
+const Color = require("color");
+const bgColorInt = ({ color ="blue" , hoverColor =null , activeColor =null  })=>{
     if (!hoverColor) hoverColor = Color(color).lighten(0.2).saturate(0.2);
     if (!activeColor) activeColor = Color(color).darken(0.2).desaturate(0.2);
     return `
-    ${_bgColor.bgColor(color)}
+    ${(0, _bgColor.bgColor)(color)}
     &:hover {
         background-color: ${hoverColor};
     }
@@ -29530,8 +28940,7 @@ const bgColorInt = ({ color ='blue' , hoverColor =null , activeColor =null  })=>
 },{"./bg-color":"dTLl0","color":"gW2oi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gzrsH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "fontFluid", ()=>fontFluid
-);
+parcelHelpers.export(exports, "fontFluid", ()=>fontFluid);
 const fontFluid = ({ vwMin =300 , vwMax =1200 , fontSizeMin =16 , fontSizeMax =18  } = {})=>{
     let viewportRatio = `(100vw - ${vwMin}px) / (${vwMax} - ${vwMin})`;
     let fontScaleRatio = `(${fontSizeMax} - ${fontSizeMin}) * ${viewportRatio}`;
@@ -29551,9 +28960,8 @@ const fontFluid = ({ vwMin =300 , vwMax =1200 , fontSizeMin =16 , fontSizeMax =1
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ipD0B":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "lift", ()=>lift
-);
-const lift = ({ level =3 , shadowColor ='rgb(0, 0, 0, 50%)'  })=>{
+parcelHelpers.export(exports, "lift", ()=>lift);
+const lift = ({ level =3 , shadowColor ="rgb(0, 0, 0, 50%)"  })=>{
     if (level < 0 || level > 5) level = 0;
     const boxShadow = [
         `0 0 0 0 ${shadowColor}`,
@@ -29569,11 +28977,10 @@ const lift = ({ level =3 , shadowColor ='rgb(0, 0, 0, 50%)'  })=>{
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5syH4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ButtonStyle", ()=>ButtonStyle
-);
+parcelHelpers.export(exports, "ButtonStyle", ()=>ButtonStyle);
 var _style = require("../../style");
 var _ui = require("../ui");
-class ButtonStyle extends _ui.StyleClass {
+class ButtonStyle extends (0, _ui.StyleClass) {
     static default = {
         color: "blue",
         borderRadius: "4px"
@@ -29606,16 +29013,16 @@ class ButtonStyle extends _ui.StyleClass {
         a {
             text-decoration: none;
         }
-        ${_style.lift({
+        ${(0, _style.lift)({
             level: 1
         })}
         &:hover {
-            ${_style.lift({
+            ${(0, _style.lift)({
             level: 2
         })};
         }
         &:active {
-            ${_style.lift({
+            ${(0, _style.lift)({
             level: 1
         })};
         }
@@ -29629,16 +29036,16 @@ class ButtonStyle extends _ui.StyleClass {
         `.trim();
     }
     static _color(style = {}) {
-        if (style.color == undefined) return '';
+        if (style.color == undefined) return "";
         let css = `
-        ${_style.bgColorInt({
+        ${(0, _style.bgColorInt)({
             color: style.color
         })}
         `.trim();
         return css;
     }
     static _borderRadius(style = {}) {
-        if (style.borderRadius == undefined) return '';
+        if (style.borderRadius == undefined) return "";
         let css = `
         border-radius: ${style.borderRadius};
         `.trim();
@@ -29649,13 +29056,12 @@ class ButtonStyle extends _ui.StyleClass {
 },{"../../style":"llAwq","../ui":"jSLlu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"66JnL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "BoxArrow", ()=>BoxArrow
-);
+parcelHelpers.export(exports, "BoxArrow", ()=>BoxArrow);
 var _boxArrowStyle = require("./box-arrow.style");
 var _ui = require("../ui");
 var _uhtml = require("uhtml");
-class BoxArrow extends _ui.StyledElement {
-    static Style = _boxArrowStyle.BoxArrowStyle;
+class BoxArrow extends (0, _ui.StyledElement) {
+    static Style = (0, _boxArrowStyle.BoxArrowStyle);
     static tagStyle(style) {
         super.tagStyle(style);
     }
@@ -29671,7 +29077,7 @@ class BoxArrow extends _ui.StyledElement {
         this.render();
     }
     render() {
-        _uhtml.render(this, _uhtml.html`
+        (0, _uhtml.render)(this, (0, _uhtml.html)`
         <div el="box">${this._innerHTML}</div>
         <div el="arrows">
             <div el="arrow-top"></div>
@@ -29686,20 +29092,19 @@ class BoxArrow extends _ui.StyledElement {
 },{"./box-arrow.style":"dqTvi","../ui":"jSLlu","uhtml":"if09d","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dqTvi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "BoxArrowStyle", ()=>BoxArrowStyle
-);
+parcelHelpers.export(exports, "BoxArrowStyle", ()=>BoxArrowStyle);
 var _style = require("../../style");
 var _ui = require("../ui");
-class BoxArrowStyle extends _ui.StyleClass {
+class BoxArrowStyle extends (0, _ui.StyleClass) {
     static default = {
-        arrow: 'top',
-        arrowSize: '8px',
-        position: '50%',
-        bgColor: '#ccc',
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        borderColor: 'black',
-        borderRadius: '4px'
+        arrow: "top",
+        arrowSize: "8px",
+        position: "50%",
+        bgColor: "#ccc",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: "black",
+        borderRadius: "4px"
     };
     static css(style = {}) {
         style = {
@@ -29766,7 +29171,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _arrow(style = {}) {
-        if (style.arrow == undefined) return '';
+        if (style.arrow == undefined) return "";
         let css = `
         div[el^="arrow-"] {
             display: none;
@@ -29778,7 +29183,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _arrowSize(style = {}) {
-        if (style.arrowSize == undefined) return '';
+        if (style.arrowSize == undefined) return "";
         let css = `
         div[el^="arrow-"] {
             width: ${style.arrowSize};
@@ -29788,7 +29193,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _position(style = {}) {
-        if (style.position == undefined) return '';
+        if (style.position == undefined) return "";
         let css = `
         div[el="arrow-top"] {
             left: ${style.position};
@@ -29806,14 +29211,14 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _bgColor(style = {}) {
-        if (style.bgColor == undefined) return '';
+        if (style.bgColor == undefined) return "";
         let css = `
-        ${_style.bgColor(style.bgColor)}
+        ${(0, _style.bgColor)(style.bgColor)}
         `.trim();
         return css;
     }
     static _borderWidth(style = {}) {
-        if (style.borderWidth == undefined) return '';
+        if (style.borderWidth == undefined) return "";
         let css = `
         border-width: ${style.borderWidth};
         div[el^="arrow-"] {
@@ -29823,7 +29228,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _borderStyle(style = {}) {
-        if (style.borderStyle == undefined) return '';
+        if (style.borderStyle == undefined) return "";
         let css = `
         border-style: ${style.borderStyle};
         div[el^="arrow-"] {
@@ -29833,7 +29238,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _borderColor(style = {}) {
-        if (style.borderColor == undefined) return '';
+        if (style.borderColor == undefined) return "";
         let css = `
         border-color: ${style.borderColor};
         div[el^="arrow-"] {
@@ -29845,7 +29250,7 @@ class BoxArrowStyle extends _ui.StyleClass {
         return css;
     }
     static _borderRadius(style = {}) {
-        if (style.borderRadius == undefined) return '';
+        if (style.borderRadius == undefined) return "";
         let css = `
         border-radius: ${style.borderRadius};
         div[el="box"] {
@@ -29856,6 +29261,6 @@ class BoxArrowStyle extends _ui.StyleClass {
     }
 }
 
-},{"../../style":"llAwq","../ui":"jSLlu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5z2ih","e43Bm"], "e43Bm", "parcelRequirefd77")
+},{"../../style":"llAwq","../ui":"jSLlu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fjlUi","e43Bm"], "e43Bm", "parcelRequirefd77")
 
 //# sourceMappingURL=html-editor.js.map
