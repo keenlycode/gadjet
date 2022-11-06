@@ -1,1 +1,0 @@
-{"mappings":"AAAA;;;;AAEI","sources":["docs-src/guide/ui/switch/switch.scss"],"sourcesContent":[".preview {\n    font-size: 1.2rem;\n    > * {\n        margin: 1rem;\n    }\n}"],"names":[],"version":3,"file":"switch.css.map","sourceRoot":"../../../../"}

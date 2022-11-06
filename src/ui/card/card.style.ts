@@ -42,6 +42,7 @@ export class CardStyle extends StyleClass {
         if (style.borderRadius == undefined) { return '' };
         return `
         border-radius: ${style.borderRadius};
+        overflow: hidden;
         `.trim()
     }
 }
