@@ -1,1 +1,0 @@
-{"mappings":"","sources":["docs-src/guide/ui/table/table.scss"],"sourcesContent":["// table {\n//     td:not(:first-child),\n//     th:not(:first-child) {\n//         border-left: 1px solid;\n//     }\n// }"],"names":[],"version":3,"file":"table.css.map","sourceRoot":"../../../../"}

@@ -1,1 +1,0 @@
-{"mappings":"AACI","sources":["docs-src/guide/ui/badge/badge.scss"],"sourcesContent":[".preview {\n    el-badge {\n        margin: 0.5rem;\n    }\n}"],"names":[],"version":3,"file":"badge.css.map","sourceRoot":"../../../../"}
