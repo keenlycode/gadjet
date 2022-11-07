@@ -16,6 +16,15 @@ Button.classStyle('dark', {color: theme.dark});
 Button.classStyle('light', {color: theme.light});
 
 addStyle`
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
 #highlight {
     display: flex;
     flex-wrap: wrap;
