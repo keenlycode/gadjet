@@ -1,4 +1,4 @@
-import {StyledElement} from '../ui';
+import {Gadjet} from '../ui';
 import {ProgressBar} from '../progress/progress-bar';
 import {FileUploadStyle, FileUploadStyleParam} from './file-upload.style';
 import {define} from '../ui';
@@ -18,12 +18,12 @@ interface FileUploadChildElement {
 }
 
 
-export class FileUpload extends StyledElement {
+export class FileUpload extends Gadjet {
     static Style = FileUploadStyle;
 
-    static onDefine(tagName: string) {
+    static define(tagName: string) {
         define(`${tagName}-progress-bar`, FileUploadProgressBar);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static initStyle(style?: string | FileUploadStyleParam): void {

@@ -1,7 +1,7 @@
-import {StyledElement} from '../ui';
+import {Gadjet} from '../ui';
 import { CardStyle, CardStyleParam } from './card.style';
 
-export class Card extends StyledElement {
+export class Card extends Gadjet {
     static Style = CardStyle;
 
     static tagStyle(style?: string | CardStyleParam): void {

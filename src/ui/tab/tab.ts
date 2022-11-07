@@ -1,9 +1,9 @@
 import { TableStyleParam } from "../table/table.style";
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 import { TabStyle, TabStyleParam } from "./tab.style";
 
 
-export class Tab extends StyledElement {
+export class Tab extends Gadjet {
     static Style = TabStyle;
 
     static tagStyle(style?: TabStyleParam): void {

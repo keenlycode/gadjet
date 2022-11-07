@@ -1,8 +1,8 @@
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 import { MenuStyle } from "./menu.style";
 
 
-export class Menu extends StyledElement {
+export class Menu extends Gadjet {
     static Style = MenuStyle;
 
     constructor() {

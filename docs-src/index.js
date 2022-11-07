@@ -10,6 +10,7 @@ define('el-badge', Badge);
 define('el-card', Card);
 
 Button.tagStyle({color: theme.yellow});
+Button.tagStyle(`border-radius: 5px;`);
 Button.classStyle('violet', {color: theme.violet});
 Button.classStyle('big', `font-size: 2em;`);
 Button.classStyle('dark', {color: theme.dark});

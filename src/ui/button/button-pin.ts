@@ -1,7 +1,7 @@
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 import { ButtonPinStyle, ButtonPinStyleParam } from "./button-pin.style";
 
-export class ButtonPin extends StyledElement {
+export class ButtonPin extends Gadjet {
     static Style = ButtonPinStyle;
 
     static tagStyle(style?: string | ButtonPinStyleParam): void {

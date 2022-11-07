@@ -1,5 +1,5 @@
 import { html, render } from 'uhtml';
-import { define, StyledElement } from '../ui';
+import { define, Gadjet } from '../ui';
 import {    
     FileManagerStyle,
     FileManagerStyleParam,
@@ -16,12 +16,12 @@ interface FileManagerChildElement {
     toolbar: HTMLElement;
 }
 
-export class FileManager extends StyledElement {
+export class FileManager extends Gadjet {
     static Style = FileManagerStyle;
 
-    static onDefine(tagName: string): void {
+    static define(tagName: string): void {
         define(`${tagName}-file-upload`, FileManagerFileUpload);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static tagStyle(style?: string | FileManagerStyleParam): void {

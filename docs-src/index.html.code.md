@@ -2,6 +2,7 @@
 // Javascript
 import {Button} from 'gadjet.js';
 Button.tagStyle({color: '#F4B942'});
+Button.tagStyle(`border-radius: 5px;`);
 Button.classStyle('violet', {color: '#7900FF'});
 Button.classStyle('dark', {color: '#444'});
 Button.classStyle('big', `font-size: 2em;`); // Inject plain CSS

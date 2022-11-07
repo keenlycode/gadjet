@@ -1,10 +1,10 @@
 import { css, cx, injectGlobal} from "@emotion/css";
 
-export const define = (tagName: string, Class: any = StyledElement) => {
+export const define = (tagName: string, Class: any = Gadjet) => {
     // Order of this function belows are very crucial.
     // Class state must be defined before `customElements.define`
     Class.tagName = tagName;
-    Class.onDefine(tagName);
+    Class.define(tagName);
     Class.initStyle();
 }
 
@@ -14,11 +14,11 @@ export class StyleClass {
     static style(style: any = {}): string { return '' };
 }
 
-export class StyledElement extends HTMLElement {
+export class Gadjet extends HTMLElement {
     static Style = StyleClass;
     static tagName: string;
     
-    static onDefine(tagName: string): void {
+    static define(tagName: string): void {
         // To extends this function, sub-elements must be defined before call
         // this function as `super.onDefine(tagName);`
         customElements.define(tagName, this);
@@ -62,7 +62,7 @@ export class StyledElement extends HTMLElement {
     }
 
     styleClass: string; // store style class name;
-    _class: any | StyledElement; // store class to access static props.
+    _class: any | Gadjet; // store class to access static props.
     
     constructor() {
         super();
@@ -78,5 +78,10 @@ export class StyledElement extends HTMLElement {
         };
         className = cx(...this.classList, className);
         this.className = className;
+    }
+
+    notify(name: string, options: object) {
+        const event = new CustomEvent(name, options);
+        this.dispatchEvent(event);
     }
 }

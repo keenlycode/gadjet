@@ -1,8 +1,8 @@
 import { BoxArrowStyle, BoxArrowStyleParam } from "./box-arrow.style";
-import {StyledElement} from '../ui';
+import {Gadjet} from '../ui';
 import {render, html} from 'uhtml';
 
-export class BoxArrow extends StyledElement {
+export class BoxArrow extends Gadjet {
     static Style = BoxArrowStyle;
 
     static tagStyle(style?: string | BoxArrowStyleParam): void {

@@ -1,9 +1,9 @@
 import { 
     ButtonStyle, ButtonStyleParam
 } from './button.style';
-import { StyledElement } from '../ui';
+import { Gadjet } from '../ui';
 
-export class Button extends StyledElement {
+export class Button extends Gadjet {
     static Style = ButtonStyle;
     static tagName: string = 'button';
 

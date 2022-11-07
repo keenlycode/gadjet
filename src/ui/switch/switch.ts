@@ -1,8 +1,8 @@
 import {html, render} from 'uhtml'
-import { StyledElement } from '../ui';
+import { Gadjet } from '../ui';
 import { SwitchStyle, SwitchStyleParam } from './switch.style';
 
-export class Switch extends StyledElement {
+export class Switch extends Gadjet {
     static Style = SwitchStyle;
 
     static tagStyle(style?: SwitchStyleParam): void {

@@ -1,7 +1,7 @@
 import { ButtonGroupStyle, ButtonGroupStyleParam } from "./button-group.style";
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 
-export class ButtonGroup extends StyledElement {
+export class ButtonGroup extends Gadjet {
     static Style = ButtonGroupStyle;
 
     static tagStyle(style?: string | ButtonGroupStyleParam): void {

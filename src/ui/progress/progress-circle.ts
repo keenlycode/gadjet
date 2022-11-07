@@ -1,5 +1,5 @@
 import { render, svg } from "uhtml";
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 import {
     ProgressCircleStyle,
     ProgressCircleStyleParam
@@ -11,7 +11,7 @@ interface ProgressCircleChildElement {
     circle2: SVGCircleElement;
 }
 
-export class ProgressCircle extends StyledElement {
+export class ProgressCircle extends Gadjet {
     static Style = ProgressCircleStyle;
 
     static tagStyle(style?: ProgressCircleStyleParam): void {

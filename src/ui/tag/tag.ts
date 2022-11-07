@@ -1,7 +1,7 @@
-import { StyledElement } from "../ui";
+import { Gadjet } from "../ui";
 import { TagStyle, TagStyleParam } from "./tag.style";
 
-export class Tag extends StyledElement {
+export class Tag extends Gadjet {
     static Style = TagStyle;
 
     static tagStyle(style?: string | TagStyleParam): void {

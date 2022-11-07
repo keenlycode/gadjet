@@ -1,6 +1,6 @@
 import { svg, html, render } from 'uhtml';
 import { InputDateStyle } from "./input-date.style";
-import { StyledElement } from '../ui';
+import { Gadjet } from '../ui';
 
 
 interface InputDateChildElement {
@@ -8,7 +8,7 @@ interface InputDateChildElement {
     display: HTMLElement;
 }
 
-export class InputDate extends StyledElement {
+export class InputDate extends Gadjet {
     static Style = InputDateStyle;
 
     icon = svg`
