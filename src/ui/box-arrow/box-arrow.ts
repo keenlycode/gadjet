@@ -27,7 +27,7 @@ export class BoxArrow extends Gadjet {
 
     render() {
         render(this, html`
-        <div el="box">${this._innerHTML}</div>
+        <div el="box"></div>
         <div el="arrows">
             <div el="arrow-top"></div>
             <div el="arrow-right"></div>
@@ -35,5 +35,7 @@ export class BoxArrow extends Gadjet {
             <div el="arrow-left"></div>
         </div>
         `);
+        const box = this.querySelector('[el="box"]');
+        box.innerHTML = this._innerHTML;
     }
 }
