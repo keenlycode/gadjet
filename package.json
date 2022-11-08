@@ -56,7 +56,6 @@
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
-        "color": "^4.0.1",
         "normalize.css": "^8.0.1",
         "uhtml": "^2.7.6"
     },
@@ -64,6 +63,7 @@
         "@parcel/packager-xml": "^2.2.1",
         "@parcel/transformer-sass": "^2.2.1",
         "@parcel/transformer-xml": "^2.2.1",
+        "color": "^4.2.3",
         "highlight.js": "^11.3.1",
         "parcel": "^2.2.1",
         "sass": "^1.43.4"
