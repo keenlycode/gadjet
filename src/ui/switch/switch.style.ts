@@ -3,6 +3,7 @@ import { StyleClass } from "../ui";
 
 export class SwitchStyleParam {
     pinColor?: string;
+    pinRadius?: string;
     bgColor?: string;
     activeColor?: string;
 }
@@ -11,6 +12,7 @@ export class SwitchStyleParam {
 export class SwitchStyle extends StyleClass {
     static default = {
         pinColor: '#f6f5f4',
+        pinRadius: '0.25em',
         bgColor: '#deddda',
         activeColor: 'blue'
     }
@@ -37,6 +39,31 @@ export class SwitchStyle extends StyleClass {
             margin: 0;
         }
 
+        div[el="label"] {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.2em;
+            ${lift({ level: 1 })}
+            transition: .4s;
+            align-items: center;
+            text-align: center;
+        }
+
+        div[el="pin"] {
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            text-align: center;
+            width: 50%;
+            height: 101%;
+            border: 1px solid #9a9996;
+            border-radius: 0.2em;
+            transition: .2s;
+        }
+
         div[el="label"] > span {
             font-size: 0.8em;
             display: flex;
@@ -57,30 +84,8 @@ export class SwitchStyle extends StyleClass {
 
     static style(style: SwitchStyleParam = {}): string {
         const css = `
-        div[el="label"] {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.2em;
-            ${lift({ level: 1 })}
-            transition: .4s;
-            align-items: center;
-            text-align: center;
-        }
-        div[el="pin"] {
-            box-sizing: border-box;
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            text-align: center;
-            width: 50%;
-            height: 101%;
-            border: 1px solid #9a9996;
-            border-radius: 0.2em;
-            transition: .2s;
-        }
         ${this._pinColor(style)}
+        ${this._pinRadius(style)}
         ${this._bgColor(style)}
         ${this._activeColor(style)}
         `.trim();
@@ -95,6 +100,17 @@ export class SwitchStyle extends StyleClass {
             ${bgColor(style.pinColor)}
         }
         `.trim();
+    }
+
+    static _pinRadius(style: SwitchStyleParam = {}): string {
+        return `
+        div[el="pin"] {
+            border-radius: ${style.pinRadius}
+        }
+        div[el="label"] {
+            border-radius: ${style.pinRadius}
+        }
+        `
     }
 
     static _bgColor(style: SwitchStyleParam = {}): string {
