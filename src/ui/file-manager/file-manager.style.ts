@@ -1,5 +1,5 @@
 import { ButtonStyle } from '../button/button.style';
-import { StyleClass } from '../ui';
+import { StyleClass } from "../../adapter";
 
 
 export interface FileManagerStyleParam {

@@ -2,7 +2,7 @@ import { Editor } from '@tiptap/core';
 import { Level } from '@tiptap/extension-heading';
 import StarterKit from '@tiptap/starter-kit';
 import { FloatingMenu as FloatingMenuExt } from '@tiptap/extension-floating-menu';
-import { define, Gadjet } from '../ui';
+import { define, Adapter } from "../../adapter";
 import { 
     HeadingMenuStyle,
     HeadingMenuStyleParam,
@@ -21,7 +21,7 @@ class HeadingMenuButtonGroup extends InputRadioButtonGroup {};
 class FloatingMenu extends BoxArrow {};
 
 
-class HeadingMenu extends Gadjet {
+class HeadingMenu extends Adapter {
     static Style = HeadingMenuStyle;
 
     static define(tagName: string): void {

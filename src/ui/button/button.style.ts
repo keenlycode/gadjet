@@ -1,5 +1,5 @@
 import {bgColorInt, lift} from '../../style';
-import { StyleClass } from '../ui';
+import { StyleClass } from '../../adapter';
 
 export interface ButtonStyleParam {
     color?: string;

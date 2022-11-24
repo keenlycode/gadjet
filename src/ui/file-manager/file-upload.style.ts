@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { bgColor } from "../../style";
 import { ProgressBarStyle } from "../progress/progress-bar.style";
 

@@ -1,6 +1,5 @@
-import { addStyle } from 'gadjet/src/import';
 import { bgColor, fontFluid, lift } from 'gadjet/src/style';
-import { define, Gadjet } from 'gadjet/src/ui/ui';
+import { addStyle, define, Adapter } from 'gadjet/src/adapter';
 import { Button } from 'gadjet/src/ui/button/button';
 import { Badge } from 'gadjet/src/ui/badge/badge';
 import { Card } from 'gadjet/src/ui/card/card';
@@ -49,7 +48,7 @@ Button.classStyle('big', `font-size: 2em;`);
 Button.classStyle('dark', {color: theme.dark});
 Button.classStyle('light', {color: theme.light});
 
-class Highlight extends Gadjet {};
+class Highlight extends Adapter {};
 define('el-highlight', Highlight);
 Highlight.tagStyle(`
     display: flex;
@@ -112,7 +111,7 @@ Highlight.tagStyle(`
     }
 `);
 
-class Feature extends Gadjet {};
+class Feature extends Adapter {};
 define('el-feature', Feature);
 Feature.tagStyle(`
     el-card {
@@ -127,7 +126,7 @@ Feature.tagStyle(`
     }
 `)
 
-class Explanation extends Gadjet {};
+class Explanation extends Adapter {};
 define('el-explanation', Explanation);
 Explanation.tagStyle(`
     el-box-arrow.top {

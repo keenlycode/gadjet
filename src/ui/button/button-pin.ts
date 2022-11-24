@@ -1,7 +1,7 @@
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { ButtonPinStyle, ButtonPinStyleParam } from "./button-pin.style";
 
-export class ButtonPin extends Gadjet {
+export class ButtonPin extends Adapter {
     static Style = ButtonPinStyle;
 
     static tagStyle(style?: string | ButtonPinStyleParam): void {

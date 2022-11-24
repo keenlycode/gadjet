@@ -1,4 +1,4 @@
-import { addStyle } from 'gadjet/src/import';
+import { addStyle } from 'gadjet/src/adapter';
 import { bgColor, bgColorInt } from 'gadjet/src/style';
 import { color, theme } from './color';
 

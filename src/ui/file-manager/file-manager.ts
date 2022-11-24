@@ -1,5 +1,5 @@
 import { html, render } from 'uhtml';
-import { define, Gadjet } from '../ui';
+import { define, Adapter } from "../../adapter";
 import {    
     FileManagerStyle,
     FileManagerStyleParam,
@@ -9,14 +9,13 @@ import { FileUpload } from './file-upload';
 
 class FileManagerFileUpload extends FileUpload {};
 
-
 interface FileManagerChildElement {
     dashboard: HTMLElement;
     input: HTMLInputElement;
     toolbar: HTMLElement;
 }
 
-export class FileManager extends Gadjet {
+export class FileManager extends Adapter {
     static Style = FileManagerStyle;
 
     static define(tagName: string): void {
@@ -110,8 +109,9 @@ export class FileManager extends Gadjet {
 
     async send(method="POST") {
         let tag = this.tagName.toLowerCase();
-        let elFileUploadList: NodeListOf<FileManagerFileUpload> =
-            this.querySelectorAll(`${tag}-file-upload`);
+        // let elFileUploadList: NodeListOf<FileManagerFileUpload> =
+        //     this.querySelectorAll(`${tag}-file-upload`);
+        let elFileUploadList: NodeListOf<FileManagerFileUpload> = this.querySelectorAll(`${tag}-file-upload`);
         for (let elFileUpload of elFileUploadList) {
             if (elFileUpload.isUploaded) { continue };
             await elFileUpload.send(method);

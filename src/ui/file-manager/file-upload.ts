@@ -1,9 +1,8 @@
-import {Gadjet} from '../ui';
-import {ProgressBar} from '../progress/progress-bar';
-import {FileUploadStyle, FileUploadStyleParam} from './file-upload.style';
-import {define} from '../ui';
-import {render, svg, html} from 'uhtml';
-import {aspectRatio} from '../../style';
+import { define, Adapter } from "../../adapter";
+import { ProgressBar } from '../progress/progress-bar';
+import { FileUploadStyle, FileUploadStyleParam } from './file-upload.style';
+import { render, svg, html } from 'uhtml';
+import { aspectRatio } from '../../style';
 
 
 class FileUploadProgressBar extends ProgressBar {};
@@ -18,7 +17,7 @@ interface FileUploadChildElement {
 }
 
 
-export class FileUpload extends Gadjet {
+export class FileUpload extends Adapter {
     static Style = FileUploadStyle;
 
     static define(tagName: string) {

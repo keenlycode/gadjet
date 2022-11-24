@@ -1,5 +1,5 @@
 import { lift, bgColor } from '../../style';
-import { StyleClass } from '../ui';
+import { StyleClass } from '../../adapter';
 
 export interface CardStyleParam {
     color?: string;
