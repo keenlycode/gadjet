@@ -22,7 +22,7 @@ async def engrave():
 
 async def parcel():
     cmd = "npx parcel watch --no-cache 'docs-src/**/*.(scss|js|ts|jpg|png|svg|xml)'"\
-        + " --dist-dir=docs --public-url ./"
+        + " --dist-dir=docs"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
     await proc.communicate()

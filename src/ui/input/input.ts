@@ -1,4 +1,4 @@
-import { addStyle } from "../../style";
+import { addStyle } from "@nitipit/adapter/src/adapter";
 import { Gadjet } from "../ui";
 import { InputStyle } from './input.style';
 

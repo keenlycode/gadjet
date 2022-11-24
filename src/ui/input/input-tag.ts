@@ -1,7 +1,7 @@
 import { define, Gadjet } from "../ui";
 import { InputTagStyle } from "./input-tag.style";
 import { TagX } from '../tag/tagx';
-import { addStyle } from "../../style";
+import { addStyle } from "@nitipit/adapter/src/adapter";
 import { InputTagStyleParam } from './input-tag.style';
 
 

@@ -24,22 +24,24 @@
         "dist/**/*",
         "src/**/*"
     ],
-    "type": "module",
-    "module": "dist/module/gadjet.js",
-    "source": "src/gadjet.ts",
     "targets": {
-        "main": false,
-        "module": false,
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
             "sourceMap": true,
-            "distDir": "dist/",
+            "distDir": "dist/css/",
             "optimize": true
         },
         "gadjet.js": {
             "source": "src/gadjet.ts",
             "sourceMap": true,
-            "distDir": "dist/",
+            "distDir": "dist/bundle/",
+            "outputFormat": "global",
+            "optimize": true
+        },
+        "module": {
+            "source": "src/gadjet.ts",
+            "sourceMap": true,
+            "distDir": "dist/module/",
             "outputFormat": "esmodule",
             "isLibrary": true,
             "optimize": true
@@ -57,14 +59,17 @@
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
         "normalize.css": "^8.0.1",
-        "uhtml": "^2.7.6"
+        "uhtml": "^2.7.6",
+        "color": "^4.2.3",
+        "highlight.js": "^11.3.1",
+        "@nitipit/adapter": "file:../adapter",
+        "gadjet": "file:./"
     },
     "devDependencies": {
         "@parcel/packager-xml": "^2.2.1",
         "@parcel/transformer-sass": "^2.2.1",
         "@parcel/transformer-xml": "^2.2.1",
-        "color": "^4.2.3",
-        "highlight.js": "^11.3.1",
+        "@types/node": "^18.11.9",
         "parcel": "^2.2.1",
         "sass": "^1.43.4"
     }

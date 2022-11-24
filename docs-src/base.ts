@@ -9,7 +9,7 @@ import bash from 'highlight.js/lib/languages/bash.js';
 import { addStyle } from '@nitipit/adapter/src/adapter';
 import { bgColor } from 'gadjet/src/style/bg-color';
 import { fontFluid } from 'gadjet/src/style/font-fluid';
-import './color.style.js';
+import './color.style.ts';
 import { theme } from './color';
 
 
