@@ -121,7 +121,7 @@ class HeadingMenu extends Adapter {
     }
 }
 
-export class HTMLEditor extends Gadjet {
+export class HTMLEditor extends Adapter {
     static Style = HTMLEditorStyle;
     static define(tagName: string): void {
         define(`${tagName}-float-menu`, FloatingMenu);

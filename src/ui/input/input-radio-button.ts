@@ -48,6 +48,6 @@ export class InputRadioButton extends Adapter {
     }
 }
 
-export class InputRadioButtonGroup extends Gadjet {
+export class InputRadioButtonGroup extends Adapter {
     static Style = InputRadioButtonGroupStyle;
 }
