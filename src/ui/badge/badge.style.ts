@@ -1,5 +1,5 @@
 import { bgColor } from "../../style";
-import {StyleClass} from '../ui';
+import { StyleClass } from '../../import';
 
 export interface BadgeStyleParam {
     color?: string;

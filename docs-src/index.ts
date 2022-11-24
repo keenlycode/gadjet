@@ -1,4 +1,5 @@
-import { addStyle, bgColor, fontFluid, lift } from 'gadjet/src/style';
+import { addStyle } from 'gadjet/src/import';
+import { bgColor, fontFluid, lift } from 'gadjet/src/style';
 import { define, Gadjet } from 'gadjet/src/ui/ui';
 import { Button } from 'gadjet/src/ui/button/button';
 import { Badge } from 'gadjet/src/ui/badge/badge';

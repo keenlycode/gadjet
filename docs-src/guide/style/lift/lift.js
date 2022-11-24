@@ -1,4 +1,4 @@
-import { addStyle } from 'gadjet/src/style/add-style';
+import { addStyle } from 'gadjet/src/import.ts';
 import { lift } from 'gadjet/src/style/lift';
 
 addStyle`
