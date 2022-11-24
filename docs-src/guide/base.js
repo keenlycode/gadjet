@@ -1,5 +1,5 @@
-import { define } from 'gadjet/src/ui/ui';
-import { addStyle, bgColor } from 'gadjet/src/style';
+import { define, addStyle } from '@nitipit/adapter/src/adapter';
+import { bgColor } from 'gadjet/src/style';
 import { theme } from '../color';
 
 import { Sidebar } from 'gadjet/src/ui/sidebar/sidebar';
