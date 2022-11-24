@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import './input';
 
 

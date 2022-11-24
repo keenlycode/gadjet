@@ -1,5 +1,5 @@
-import {Hole, html, render} from 'uhtml';
-import { Gadjet } from '../ui';
+import { Hole, html, render } from 'uhtml';
+import { Adapter } from "../../adapter";
 import { SidebarStyle, SidebarStyleParam } from './sidebar.style';
 
 interface SidebarChildElement {
@@ -11,7 +11,7 @@ interface showParam {
     overlay?: boolean;
 }
 
-export class Sidebar extends Gadjet {
+export class Sidebar extends Adapter {
     static Style = SidebarStyle;
 
     static tagStyle(style?: SidebarStyleParam): void {

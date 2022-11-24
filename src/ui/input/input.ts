@@ -1,9 +1,8 @@
-import { addStyle } from "@nitipit/adapter/src/adapter";
-import { Gadjet } from "../ui";
+import { addStyle, Adapter } from "../../adapter";
 import { InputStyle } from './input.style';
 
 
-export class Input extends Gadjet {
+export class Input extends Adapter {
     static Style = InputStyle;
 }
 

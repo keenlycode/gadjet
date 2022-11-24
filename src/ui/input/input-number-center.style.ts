@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { InputNumberStyle, InputNumberStyleParam } from "./input-number.style";
 
 export class InputNumberCenterStyle extends StyleClass {

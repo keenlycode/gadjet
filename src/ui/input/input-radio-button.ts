@@ -1,4 +1,4 @@
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { render, html } from 'uhtml';
 import { 
     InputRadioButtonGroupStyle,
@@ -11,7 +11,7 @@ interface InputRadioButtonChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputRadioButton extends Gadjet {
+export class InputRadioButton extends Adapter {
     static Style = InputRadioButtonStyle;
 
     static tagStyle(style?: string | InputRadioButtonStyleParam): void {

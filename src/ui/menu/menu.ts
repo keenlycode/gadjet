@@ -1,8 +1,8 @@
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { MenuStyle } from "./menu.style";
 
 
-export class Menu extends Gadjet {
+export class Menu extends Adapter {
     static Style = MenuStyle;
 
     constructor() {

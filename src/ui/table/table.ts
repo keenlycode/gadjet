@@ -1,8 +1,8 @@
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { TableStyle, TableStyleParam } from './table.style';
 
 
-export class Table extends Gadjet {
+export class Table extends Adapter {
     static Style = TableStyle;
     static tagName: string = 'table';
     static tagStyle(style?: string | TableStyleParam): void {

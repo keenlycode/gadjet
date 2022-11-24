@@ -1,4 +1,4 @@
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { InputRangeStyle, InputRangeStyleParam } from "./input-range.style";
 import { Hole, html, render } from 'uhtml';
 
@@ -9,7 +9,7 @@ interface InputRangeChildElement {
 }
 
 
-export class InputRange extends Gadjet {
+export class InputRange extends Adapter {
     static Style = InputRangeStyle;
 
     static tagStyle(style?: string | InputRangeStyleParam): void {

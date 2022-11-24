@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { bgColor } from "../../style";
 const Color = require('color');
 

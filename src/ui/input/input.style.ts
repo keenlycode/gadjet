@@ -1,4 +1,5 @@
-import {StyleClass} from '../ui';
+import { StyleClass } from "../../adapter";
+
 
 export class InputStyle extends StyleClass {
     static css(style = {}): string {

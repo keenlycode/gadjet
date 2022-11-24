@@ -1,12 +1,12 @@
 import { render, html } from "uhtml";
-import { Gadjet } from "../ui";
+import { Adapter } from "../../adapter";
 import { InputRadioStyle, InputRadioStyleParam } from "./input-radio.style";
 
 interface InputRadioChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputRadio extends Gadjet {
+export class InputRadio extends Adapter {
     static Style = InputRadioStyle;
 
     static tagStyle(style?: string | InputRadioStyleParam): void {

@@ -1,4 +1,4 @@
-import { define, Gadjet } from "../ui";
+import { define, Adapter } from "../../adapter";
 import { InputTagStyle } from "./input-tag.style";
 import { TagX } from '../tag/tagx';
 import { addStyle } from "@nitipit/adapter/src/adapter";
@@ -11,7 +11,7 @@ interface InputTagChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputTag extends Gadjet {
+export class InputTag extends Adapter {
     static Style = InputTagStyle;
 
     static define(tagName: string) {

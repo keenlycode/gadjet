@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { bgColor, lift } from "../../style";
 
 export interface TabStyleParam {

@@ -1,5 +1,5 @@
 import { bgColor, lift } from "../../style";
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 
 export class SwitchStyleParam {
     pinColor?: string;

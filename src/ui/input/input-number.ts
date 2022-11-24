@@ -1,5 +1,5 @@
-import { html, render } from 'uhtml'
-import { Gadjet } from '../ui';
+import { html, render } from 'uhtml';
+import { Adapter } from "../../adapter";
 import { InputNumberStyle, InputNumberStyleParam } from './input-number.style';
 
 
@@ -7,7 +7,7 @@ interface InputNumberChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputNumber extends Gadjet {
+export class InputNumber extends Adapter {
     static Style = InputNumberStyle;
 
     static tagStyle(style?: string | InputNumberStyleParam): void {

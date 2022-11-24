@@ -1,8 +1,8 @@
 import {html, render} from 'uhtml'
-import { Gadjet } from '../ui';
+import { Adapter } from "../../adapter";
 import { SwitchStyle, SwitchStyleParam } from './switch.style';
 
-export class Switch extends Gadjet {
+export class Switch extends Adapter {
     static Style = SwitchStyle;
 
     static tagStyle(style?: SwitchStyleParam): void {
