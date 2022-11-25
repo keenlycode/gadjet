@@ -1,4 +1,4 @@
-import { define } from 'gadjet/src/adapter';
+import { define } from 'gadjet/src/ui';
 import { Button } from 'gadjet/src/ui/button/button';
 import { ButtonGroup } from 'gadjet/src/ui/button/button-group';
 

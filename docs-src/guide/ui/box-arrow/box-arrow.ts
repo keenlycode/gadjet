@@ -1,5 +1,5 @@
 import { BoxArrow } from 'gadjet/src/ui/box-arrow/box-arrow';
-import { define } from 'gadjet/src/adapter';
+import { define } from 'gadjet/src/ui';
 import { color } from '../../../color';
 
 define('el-box-arrow', BoxArrow);

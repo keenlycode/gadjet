@@ -1,5 +1,7 @@
 export * from './style';
 
+export { define } from './ui';
+
 export { Badge } from './ui/badge/badge';
 export { BoxArrow } from './ui/box-arrow/box-arrow';
 

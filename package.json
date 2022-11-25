@@ -31,8 +31,7 @@
             "distDir": "dist/css/",
             "optimize": true
         },
-        "gadjet.js": {
-            "source": "src/gadjet.ts",
+        "js": {
             "sourceMap": true,
             "distDir": "dist/bundle/",
             "outputFormat": "global",

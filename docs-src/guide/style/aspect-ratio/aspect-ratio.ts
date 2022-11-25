@@ -1,4 +1,4 @@
-import {addStyle, aspectRatio} from 'gadjet/src/style';
+import { addStyle, aspectRatio } from 'gadjet/src/style';
 
 addStyle`
 .aspectRatio-4-3 {

@@ -1,0 +1,1 @@
+export { addStyle } from 'gadjet/src/adapter';

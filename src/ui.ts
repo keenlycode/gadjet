@@ -1,0 +1,1 @@
+export { define } from '@nitipit/adapter/src/adapter';
