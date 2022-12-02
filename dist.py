@@ -54,7 +54,7 @@ class Gadjet:
 
         # js bundle: gadjet.js
         print('# Javascript bundle')
-        cmd = f"npx parcel build --no-cache --target=js 'src/**/*.ts'"
+        cmd = f"npx parcel build --no-cache --target=bundle 'src/**/*.ts'"
         print(cmd)
         proc = await asyncio.create_subprocess_shell(cmd)
         await proc.communicate()

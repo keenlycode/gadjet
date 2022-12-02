@@ -1,5 +1,5 @@
-import { define } from 'gadjet/src/adapter.ts';
-import {Switch} from 'gadjet/src/ui/switch/switch';
+import { define } from 'gadjet/src/ui';
+import { Switch } from 'gadjet/src/ui/switch/switch';
 
 define('el-switch', Switch);
 
