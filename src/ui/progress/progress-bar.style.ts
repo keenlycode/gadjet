@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/css';
-import { bgColor } from '../../style';
-import { StyleClass } from '../ui';
+import { StyleClass } from "../../adapter";
+
 
 export interface ProgressBarStyleParam {
     progressColor?: string;

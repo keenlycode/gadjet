@@ -1,5 +1,5 @@
 import { html, render } from 'uhtml';
-import { define, StyledElement } from '../ui';
+import { define, Adapter } from "../../adapter";
 import {    
     FileManagerStyle,
     FileManagerStyleParam,
@@ -9,19 +9,18 @@ import { FileUpload } from './file-upload';
 
 class FileManagerFileUpload extends FileUpload {};
 
-
 interface FileManagerChildElement {
     dashboard: HTMLElement;
     input: HTMLInputElement;
     toolbar: HTMLElement;
 }
 
-export class FileManager extends StyledElement {
+export class FileManager extends Adapter {
     static Style = FileManagerStyle;
 
-    static onDefine(tagName: string): void {
+    static define(tagName: string): void {
         define(`${tagName}-file-upload`, FileManagerFileUpload);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static tagStyle(style?: string | FileManagerStyleParam): void {
@@ -110,8 +109,9 @@ export class FileManager extends StyledElement {
 
     async send(method="POST") {
         let tag = this.tagName.toLowerCase();
-        let elFileUploadList: NodeListOf<FileManagerFileUpload> =
-            this.querySelectorAll(`${tag}-file-upload`);
+        // let elFileUploadList: NodeListOf<FileManagerFileUpload> =
+        //     this.querySelectorAll(`${tag}-file-upload`);
+        let elFileUploadList: NodeListOf<FileManagerFileUpload> = this.querySelectorAll(`${tag}-file-upload`);
         for (let elFileUpload of elFileUploadList) {
             if (elFileUpload.isUploaded) { continue };
             await elFileUpload.send(method);

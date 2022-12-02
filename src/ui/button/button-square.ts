@@ -1,7 +1,7 @@
-import { StyledElement } from "../ui";
+import { Adapter } from "../../adapter";
 import { ButtonSquareStyle, ButtonSquareStyleParam } from "./button-square.style";
 
-export class ButtonSquare extends StyledElement {
+export class ButtonSquare extends Adapter {
     static Style = ButtonSquareStyle;
 
     static tagStyle(style?: string | ButtonSquareStyleParam): void {

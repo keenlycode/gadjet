@@ -1,9 +1,8 @@
-import {StyledElement} from '../ui';
-import {ProgressBar} from '../progress/progress-bar';
-import {FileUploadStyle, FileUploadStyleParam} from './file-upload.style';
-import {define} from '../ui';
-import {render, svg, html} from 'uhtml';
-import {aspectRatio} from '../../style';
+import { define, Adapter } from "../../adapter";
+import { ProgressBar } from '../progress/progress-bar';
+import { FileUploadStyle, FileUploadStyleParam } from './file-upload.style';
+import { render, svg, html } from 'uhtml';
+import { aspectRatio } from '../../style';
 
 
 class FileUploadProgressBar extends ProgressBar {};
@@ -18,12 +17,12 @@ interface FileUploadChildElement {
 }
 
 
-export class FileUpload extends StyledElement {
+export class FileUpload extends Adapter {
     static Style = FileUploadStyle;
 
-    static onDefine(tagName: string) {
+    static define(tagName: string) {
         define(`${tagName}-progress-bar`, FileUploadProgressBar);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static initStyle(style?: string | FileUploadStyleParam): void {

@@ -1,7 +1,7 @@
-import { StyledElement } from '../ui';
+import { Adapter } from "../../adapter";
 import { BadgeStyle, BadgeStyleParam } from './badge.style';
 
-export class Badge extends StyledElement {
+export class Badge extends Adapter {
     static Style = BadgeStyle;
 
     static tagStyle(style?: string | BadgeStyleParam): void {

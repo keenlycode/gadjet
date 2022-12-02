@@ -1,8 +1,8 @@
 import { BoxArrowStyle, BoxArrowStyleParam } from "./box-arrow.style";
-import {StyledElement} from '../ui';
+import { Adapter } from "../../adapter";
 import {render, html} from 'uhtml';
 
-export class BoxArrow extends StyledElement {
+export class BoxArrow extends Adapter {
     static Style = BoxArrowStyle;
 
     static tagStyle(style?: string | BoxArrowStyleParam): void {
@@ -27,7 +27,7 @@ export class BoxArrow extends StyledElement {
 
     render() {
         render(this, html`
-        <div el="box">${this._innerHTML}</div>
+        <div el="box"></div>
         <div el="arrows">
             <div el="arrow-top"></div>
             <div el="arrow-right"></div>
@@ -35,5 +35,7 @@ export class BoxArrow extends StyledElement {
             <div el="arrow-left"></div>
         </div>
         `);
+        const box = this.querySelector('[el="box"]');
+        box.innerHTML = this._innerHTML;
     }
 }

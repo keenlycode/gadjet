@@ -1,12 +1,12 @@
-import {Hole, html, render} from 'uhtml';
+import { Hole, html, render } from 'uhtml';
 import {CheckboxStyle, CheckboxStyleParam} from './checkbox.style';
-import { StyledElement } from '../ui';
+import { Adapter } from "../../adapter";
 
 interface CheckboxChildElement {
     checkbox: Element | HTMLElement | Hole;
 }
 
-export class Checkbox extends StyledElement {
+export class Checkbox extends Adapter {
     static Style = CheckboxStyle;
     el: CheckboxChildElement = {
         checkbox: null

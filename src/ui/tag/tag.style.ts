@@ -1,6 +1,6 @@
 const Color = require('color');
 import { bgColor } from "../../style";
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 
 
 export class TagStyleParam {

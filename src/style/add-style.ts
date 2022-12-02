@@ -1,1 +1,1 @@
-export { injectGlobal as addStyle } from '@emotion/css';
+export { addStyle } from 'gadjet/src/adapter';

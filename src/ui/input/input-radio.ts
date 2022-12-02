@@ -1,12 +1,12 @@
 import { render, html } from "uhtml";
-import { StyledElement } from "../ui";
+import { Adapter } from "../../adapter";
 import { InputRadioStyle, InputRadioStyleParam } from "./input-radio.style";
 
 interface InputRadioChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputRadio extends StyledElement {
+export class InputRadio extends Adapter {
     static Style = InputRadioStyle;
 
     static tagStyle(style?: string | InputRadioStyleParam): void {

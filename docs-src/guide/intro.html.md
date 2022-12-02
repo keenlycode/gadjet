@@ -5,13 +5,13 @@ and Javascript (ES6). It relies on **\<web-component/\>**
 and **CSS-in-JS** to acheive it's goals to be **adaptive**, **extensible**
 and **modular** as much as possible.
 
-**gadjet** establish it's core concept on `StyledElement` class which
+**gadjet** establish it's core concept on `Gadjet` class which
 provides dynamic style methods to apply **CSS-in-JS** with **\<web-component/>**
 as described in class structure below.
 
 <el-tag class="title-block">ts</el-tag>
 ```ts
-class StyledElement extends HTMLElement {
+class Gadjet extends HTMLElement {
    static tagStyle(style: string|object): void;
    static classStyle(className: string, style: string|object): void;
    addStyle(style: string|object): void;

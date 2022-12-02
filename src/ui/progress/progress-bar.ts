@@ -1,8 +1,8 @@
 import {render, html} from 'uhtml';
-import { StyledElement } from "../ui";
+import { Adapter } from "../../adapter";
 import { ProgressBarStyleParam, ProgressBarStyle } from './progress-bar.style';
 
-export class ProgressBar extends StyledElement {
+export class ProgressBar extends Adapter {
     static Style = ProgressBarStyle;
 
     static tagStyle(style?: string | ProgressBarStyleParam): void {

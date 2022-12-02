@@ -1,7 +1,7 @@
-import { define, StyledElement } from "../ui";
+import { define, Adapter } from "../../adapter";
 import { InputTagStyle } from "./input-tag.style";
 import { TagX } from '../tag/tagx';
-import { addStyle } from "../../style";
+import { addStyle } from "@nitipit/adapter/src/adapter";
 import { InputTagStyleParam } from './input-tag.style';
 
 
@@ -11,17 +11,17 @@ interface InputTagChildElement {
     input: HTMLInputElement | any;
 }
 
-export class InputTag extends StyledElement {
+export class InputTag extends Adapter {
     static Style = InputTagStyle;
 
-    static onDefine(tagName: string) {
+    static define(tagName: string) {
         define(`${tagName}-tagx`, InputTagX);
         addStyle`
         ${InputTagX.tagName} {
             margin: 0.3em 0.2em;
         }
         `;
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static tagStyle(style?: InputTagStyleParam): void {

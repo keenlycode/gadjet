@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { ButtonStyle } from "./button.style";
 import { aspectRatio } from "../../style";
 

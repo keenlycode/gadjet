@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/css";
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 
 export interface ProgressCircleStyleParam {
     radius?: number;

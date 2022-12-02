@@ -1,8 +1,8 @@
-import { StyledElement } from "../ui";
+import { Adapter } from "../../adapter";
 import { TableStyle, TableStyleParam } from './table.style';
 
 
-export class Table extends StyledElement {
+export class Table extends Adapter {
     static Style = TableStyle;
     static tagName: string = 'table';
     static tagStyle(style?: string | TableStyleParam): void {

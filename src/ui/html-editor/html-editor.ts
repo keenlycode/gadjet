@@ -2,7 +2,7 @@ import { Editor } from '@tiptap/core';
 import { Level } from '@tiptap/extension-heading';
 import StarterKit from '@tiptap/starter-kit';
 import { FloatingMenu as FloatingMenuExt } from '@tiptap/extension-floating-menu';
-import { define, StyledElement } from '../ui';
+import { define, Adapter } from "../../adapter";
 import { 
     HeadingMenuStyle,
     HeadingMenuStyleParam,
@@ -21,13 +21,13 @@ class HeadingMenuButtonGroup extends InputRadioButtonGroup {};
 class FloatingMenu extends BoxArrow {};
 
 
-class HeadingMenu extends StyledElement {
+class HeadingMenu extends Adapter {
     static Style = HeadingMenuStyle;
 
-    static onDefine(tagName: string): void {
+    static define(tagName: string): void {
         define(`${tagName}-button`, HeadingMenuButton);
         define(`${tagName}-button-group`, HeadingMenuButtonGroup);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static initStyle(style?: HeadingMenuStyleParam): void {
@@ -121,12 +121,12 @@ class HeadingMenu extends StyledElement {
     }
 }
 
-export class HTMLEditor extends StyledElement {
+export class HTMLEditor extends Adapter {
     static Style = HTMLEditorStyle;
-    static onDefine(tagName: string): void {
+    static define(tagName: string): void {
         define(`${tagName}-float-menu`, FloatingMenu);
         define(`${tagName}-heading-menu`, HeadingMenu);
-        super.onDefine(tagName);
+        super.define(tagName);
     }
 
     static initStyle(style?: HTMLEditorStyleParam): void {

@@ -1,7 +1,7 @@
 {
     "name": "gadjet",
     "version": "0.1.12dev",
-    "description": "HTML5 User Interface",
+    "description": "Adaptive HTML UI Framework",
     "keywords": [
         "html5",
         "javascript",
@@ -24,22 +24,23 @@
         "dist/**/*",
         "src/**/*"
     ],
-    "type": "module",
-    "module": "dist/module/gadjet.js",
-    "source": "src/gadjet.ts",
     "targets": {
-        "main": false,
-        "module": false,
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
             "sourceMap": true,
-            "distDir": "dist/",
+            "distDir": "dist/css/",
             "optimize": true
         },
-        "gadjet.js": {
+        "bundle": {
+            "sourceMap": true,
+            "distDir": "dist/bundle/",
+            "outputFormat": "global",
+            "optimize": true
+        },
+        "module": {
             "source": "src/gadjet.ts",
             "sourceMap": true,
-            "distDir": "dist/",
+            "distDir": "dist/module/",
             "outputFormat": "esmodule",
             "isLibrary": true,
             "optimize": true
@@ -52,20 +53,21 @@
     },
     "dependencies": {
         "@emotion/css": "^11.5.0",
-        "@popperjs/core": "^2.11.0",
+        "@nitipit/adapter": "file:../adapter",
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
-        "color": "^4.0.1",
+        "color": "^4.2.3",
+        "gadjet": "file:./",
+        "highlight.js": "^11.3.1",
         "normalize.css": "^8.0.1",
         "uhtml": "^2.7.6"
     },
     "devDependencies": {
-        "@parcel/packager-xml": "^2.2.1",
-        "@parcel/transformer-sass": "^2.2.1",
-        "@parcel/transformer-xml": "^2.2.1",
-        "highlight.js": "^11.3.1",
-        "parcel": "^2.2.1",
+        "@parcel/packager-xml": "^2.8.0",
+        "@parcel/transformer-sass": "^2.8.0",
+        "@parcel/transformer-xml": "^2.8.0",
+        "parcel": "^2.8.0",
         "sass": "^1.43.4"
     }
 }

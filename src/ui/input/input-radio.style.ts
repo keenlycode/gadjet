@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 var Color = require('color');
 
 export interface InputRadioStyleParam {

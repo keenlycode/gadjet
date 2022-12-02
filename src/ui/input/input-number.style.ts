@@ -1,4 +1,4 @@
-import { StyleClass } from "../ui";
+import { StyleClass } from "../../adapter";
 import { InputStyle } from './input.style';
 import { ButtonSquareStyle } from "../button/button-square.style";
 
