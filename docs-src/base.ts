@@ -6,12 +6,11 @@ import css from 'highlight.js/lib/languages/css.js';
 import scss from 'highlight.js/lib/languages/scss.js';
 import shell from 'highlight.js/lib/languages/shell.js';
 import bash from 'highlight.js/lib/languages/bash.js';
-import { addStyle } from '@nitipit/adapter/src/adapter';
+import { addStyle } from 'gadjet/src/adapter';
 import { bgColor } from 'gadjet/src/style/bg-color';
 import { fontFluid } from 'gadjet/src/style/font-fluid';
 import './color.style.ts';
 import { theme } from './color';
-
 
 window.addEventListener('load', () => {
     hljs.registerLanguage('html', xml);
@@ -27,7 +26,7 @@ window.addEventListener('load', () => {
 addStyle`
 html {
     ${fontFluid()}
-    font-family: fira-sans;
+    font-family: sans;
     line-height: 1.7;
 }
 
@@ -46,7 +45,7 @@ img {
 
 code, .code {
     ${bgColor(theme.dark)}
-    font-family: fira-code;
+    font-family: mono;
     border-radius: 4px;
     vertical-align: middle;
     font-size: 0.85rem;
@@ -64,5 +63,9 @@ code.hljs {
 
 .text, p {
     max-width: 45rem;
+}
+
+#footer {
+    min-height: 20vh;
 }
 `;

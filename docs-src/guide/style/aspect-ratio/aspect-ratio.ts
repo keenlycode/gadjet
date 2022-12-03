@@ -13,4 +13,23 @@ addStyle`
 .aspectRatio-21-9 {
     ${aspectRatio('21/9')}
 }
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    width: 80%;
+    max-width: 250px;
+    border: 1px solid;
+    margin: 2rem;
+    font-size: 2rem;
+}
+
+.video {
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+}
 `;

@@ -11,11 +11,11 @@ import { Tag } from 'gadjet/src/ui/tag/tag';
 
 var Color = require('color');
 
-define('el-sidebar', Sidebar);
-define('el-button-pin', ButtonPin);
-define('el-button-square', ButtonSquare);
-define('el-badge', Badge);
-define('el-tag', Tag);
+Sidebar.define('el-sidebar');
+ButtonPin.define('el-button-pin');
+ButtonSquare.define('el-button-square');
+Badge.define('el-badge');
+Tag.define('el-tag');
 
 Tag.tagStyle({
     color: theme.yellow
