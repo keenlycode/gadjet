@@ -1,12 +1,9 @@
 import { bgColor, fontFluid, lift } from 'gadjet/src/style';
-import { addStyle, define, Adapter } from 'gadjet/src/adapter';
+import { addStyle, Adapter } from 'gadjet/src/adapter';
 import { Button } from 'gadjet/src/ui/button/button';
 import { Badge } from 'gadjet/src/ui/badge/badge';
-import { Card } from 'gadjet/src/ui/card/card';
-import { BoxArrow } from 'gadjet/src/ui/box-arrow/box-arrow';
 
 import { theme } from './color';
-import { BoxArrowStyle } from '../src/ui/box-arrow/box-arrow.style';
 
 addStyle`
 .container {
@@ -19,27 +16,7 @@ addStyle`
 }
 `;
 
-define('el-badge', Badge);
-define('el-card', Card);
-define('el-box-arrow', BoxArrow);
-BoxArrow.tagStyle(`
-    padding: 0.5rem 0.7rem;
-    p {
-        margin: 0;
-    }
-`);
-BoxArrow.classStyle('top', {
-    arrow: 'top',
-})
-BoxArrow.classStyle('right', {
-    arrow: 'right',
-})
-BoxArrow.classStyle('bottom', {
-    arrow: 'bottom',
-})
-BoxArrow.classStyle('left', {
-    arrow: 'left',
-})
+Badge.define('el-badge');
 
 Button.tagStyle({color: theme.yellow});
 Button.tagStyle(`border-radius: 5px;`);
@@ -49,29 +26,28 @@ Button.classStyle('dark', {color: theme.dark});
 Button.classStyle('light', {color: theme.light});
 
 class Highlight extends Adapter {};
-define('el-highlight', Highlight);
+Highlight.define('el-highlight');
 Highlight.tagStyle(`
     display: flex;
     flex-wrap: wrap;
     h1 {
-        ${fontFluid({fontSizeMin: 50, fontSizeMax: 100})}
+        ${fontFluid({
+            fontSizeMin: 30, fontSizeMax: 70,
+            vwMin: 280, vwMax: 600
+        })}
         margin: 0;
         width: 100%;
         text-align: center;
     }
     h2 {
-        ${fontFluid({fontSizeMin: 25, fontSizeMax: 50})}
+        ${fontFluid({
+            fontSizeMin: 15, fontSizeMax: 40,
+            vwMin: 280, vwMax: 600
+        })}
         width: 100%;
         text-align: center;
     }
-    h3 {
-        ${fontFluid({fontSizeMin: 20, fontSizeMax: 40})}
-        width: 100%;
-        text-align: center;
-        margin-bottom: 0;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid;
-    }
+
 
     [el="hl1"] {
         ${bgColor(theme.violet)}
@@ -81,6 +57,7 @@ Highlight.tagStyle(`
         align-items: center;
         width: 50%;
         height: 100vh;
+        font-size: 1.2em;
         transition: background-color 1s ease;
         @media (max-width: 1000px) {
             width: 100%;
@@ -110,28 +87,3 @@ Highlight.tagStyle(`
         }
     }
 `);
-
-class Feature extends Adapter {};
-define('el-feature', Feature);
-Feature.tagStyle(`
-    el-card {
-        padding: 0rem 1rem;
-        width: 90%;
-        max-width: 450px;
-        margin: 2%;
-        h2 {
-            width: 100%;
-            text-align: center;
-        }
-    }
-`)
-
-class Explanation extends Adapter {};
-define('el-explanation', Explanation);
-Explanation.tagStyle(`
-    el-box-arrow.top {
-        ${BoxArrowStyle.style({
-            "bgColor": theme.yellow
-        })}
-    }
-`)
