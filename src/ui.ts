@@ -1,1 +1,1 @@
-export { define } from '@nitipit/adapter/src/adapter';
+export { define } from './adapter';

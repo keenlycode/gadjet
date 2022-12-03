@@ -14,22 +14,23 @@ def lib():
 
 
 async def engrave():
-    cmd = "engrave dev docs-src docs --server"
+    server = '0.0.0.0:8000'
+    cmd = f"engrave dev docs-src docs --server={server}"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
     await proc.communicate()
 
 
 async def parcel():
-    cmd = "npx parcel watch --no-cache 'docs-src/**/*.(scss|js|ts|jpg|png|svg|xml)'"\
-        + " --target=docs"
+    cmd = "npx parcel watch --no-cache 'docs-src/**/*.(scss|js|ts|jpg|png|svg|xml)' "\
+        + "--target=docs"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
     await proc.communicate()
 
 
-async def typescript():
-    cmd = 'tsc -w -p src/'
+async def gadjet_module():
+    cmd = 'npx tsc -w -p src/'
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
     await proc.communicate()
@@ -38,7 +39,7 @@ async def typescript():
 async def main():
     lib()
     await asyncio.gather(
-        typescript(),
+        gadjet_module(),
         parcel(),
         engrave(),
     )

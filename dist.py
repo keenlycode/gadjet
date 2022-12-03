@@ -16,24 +16,8 @@ class Gadjet:
         self.node_modules_dir = node_modules_dir
 
     async def build(self):
-
-        # Copy fonts
-        print('Copy fonts ...')
-        src_dir = self.src_dir.joinpath('font')
-        dest_dir = self.dist_dir.joinpath('font')
-        shutil.copytree(
-            src_dir,
-            dest_dir,
-            dirs_exist_ok=True,
-        )
-        print('Finished')
-
-        # Copy normalize.css
-        # print('Copy normalize.css')
-        # src = self.node_modules_dir.joinpath('normalize.css/normalize.css')
-        # dest = self.dist_dir.joinpath('normalize.css')
-        # shutil.copyfile(src, dest)
-
+        
+        # Normailize.css
         print('# Build normalize.css')
         path = _dir.joinpath(
             self.node_modules_dir,
@@ -46,7 +30,7 @@ class Gadjet:
 
         # typscript
         print('# Compile typescript to es6 modules')
-        cmd = 'tsc -p src/'
+        cmd = 'npx tsc -p src/'
         print(cmd)
         proc = await asyncio.create_subprocess_shell(cmd)
         await proc.communicate()
@@ -54,7 +38,7 @@ class Gadjet:
 
         # js bundle: gadjet.js
         print('# Javascript bundle')
-        cmd = f"npx parcel build --no-cache --target=bundle 'src/**/*.ts'"
+        cmd = f"npx parcel build --no-cache --target=bundle 'src/gadjet.ts'"
         print(cmd)
         proc = await asyncio.create_subprocess_shell(cmd)
         await proc.communicate()

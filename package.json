@@ -1,6 +1,6 @@
 {
     "name": "gadjet",
-    "version": "0.1.12dev",
+    "version": "0.2.0-dev",
     "description": "Adaptive HTML UI Framework",
     "keywords": [
         "html5",
@@ -37,14 +37,6 @@
             "outputFormat": "global",
             "optimize": true
         },
-        "module": {
-            "source": "src/gadjet.ts",
-            "sourceMap": true,
-            "distDir": "dist/module/",
-            "outputFormat": "esmodule",
-            "isLibrary": true,
-            "optimize": true
-        },
         "docs": {
             "sourceMap": true,
             "distDir": "docs/",
@@ -53,7 +45,7 @@
     },
     "dependencies": {
         "@emotion/css": "^11.5.0",
-        "@nitipit/adapter": "file:../adapter",
+        "@nitipit/adapter": "^1.0.0",
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
@@ -67,7 +59,9 @@
         "@parcel/packager-xml": "^2.8.0",
         "@parcel/transformer-sass": "^2.8.0",
         "@parcel/transformer-xml": "^2.8.0",
+        "@types/node": "^18.11.10",
         "parcel": "^2.8.0",
-        "sass": "^1.43.4"
+        "sass": "^1.43.4",
+        "typescript": "^4.9.3"
     }
 }

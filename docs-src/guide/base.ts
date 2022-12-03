@@ -1,5 +1,5 @@
 import { define } from 'gadjet/src/ui';
-import { addStyle } from 'gadjet/src/style/add-style';
+import { addStyle } from 'gadjet/src/adapter';
 import { bgColor } from 'gadjet/src/style';
 import { theme } from '../color';
 

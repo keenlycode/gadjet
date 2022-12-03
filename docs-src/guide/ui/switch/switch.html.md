@@ -7,8 +7,8 @@
     <el-switch style="margin-left: 2rem;">
         <input type="checkbox" checked>
         <div el="label">
-            <span>ON</span>
-            <span>OFF</span>
+            <span>✔</span>
+            <span></span>
         </div>
     </el-switch>
 </div>
@@ -33,7 +33,7 @@ Switch.tagStyle({
 <el-switch>
     <input type="checkbox" checked>
     <div el="label">
-        <span>ON</span>
+        <span>/</span>
         <span>OFF</span>
     </div>
 </el-switch>
