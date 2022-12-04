@@ -1,20 +1,8 @@
-<script defer>
-var sidebar = null // declare `sidebar` as global variable
-window.addEventListener('load', function () {
-    sidebar = document.querySelector('el-sidebar')
-    var sidebarButton = document.querySelector('#sidebar-button');
-    sidebarButton.addEventListener('click', function () {
-        sidebar.show();
-    });
-});
-</script>
-
-<el-button-pin id="sidebar-button" class="bg-theme-violet-int">☰</el-button-pin>
-<el-sidebar id="sidebar" showAt="1150px">
+<el-sidebar showAt="1150px">
     <div el="content">
         <div el="title">
-            <a href="{{to_root}}" class="bg-theme-violet-int">gadjet</a>
-            <el-button-square onclick="sidebar.hide()" class="bg-theme-yellow-int">✕</el-button-square>
+            <a href="{{to_root}}">gadjet</a>
+            <el-sidebar-close-button>✕</el-sidebar-close-button>
         </div>
         <div el="menu">
             <a class="h" href="{{to_root}}guide/getting-started.html">Getting Started</a>

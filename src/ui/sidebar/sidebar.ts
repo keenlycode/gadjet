@@ -14,15 +14,15 @@ interface showParam {
 export class Sidebar extends Adapter {
     static Style = SidebarStyle;
 
-    static tagStyle(style?: SidebarStyleParam): void {
+    static tagStyle(style?: string | SidebarStyleParam): void {
         super.tagStyle(style);
     }
 
-    static classStyle(class_: string, style?: SidebarStyleParam): void {
+    static classStyle(class_: string, style?: string | SidebarStyleParam): void {
         super.classStyle(class_, style);
     }
 
-    addStyle(style?: SidebarStyleParam): void {
+    addStyle(style?: string | SidebarStyleParam): void {
         super.addStyle(style);
     }
 

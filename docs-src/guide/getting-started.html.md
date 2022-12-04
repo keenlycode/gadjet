@@ -27,7 +27,7 @@ This method require javascript building tools. In this example use Parcel v2
 npm install parcel
 ```
 
-<el-tag class="title-block"><code>index.html</code></el-tag>
+<el-code-title>html<code>index.html</code></el-code-title>
 ```html
 <!doctype html>
 <html lang="en">
@@ -44,7 +44,7 @@ npm install parcel
 </html>
 ```
 
-<el-tag class="title-block"><code>index.js</code></el-tag>
+<el-code-title>js<code>index.js</code></el-tag>
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
