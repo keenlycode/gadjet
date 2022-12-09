@@ -1,26 +1,24 @@
 import hljs from 'highlight.js/lib/core.js';
-import xml from 'highlight.js/lib/languages/xml.js';
+import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript.js';
 import typescript from 'highlight.js/lib/languages/typescript.js';
-import css from 'highlight.js/lib/languages/css.js';
-import scss from 'highlight.js/lib/languages/scss.js';
-import shell from 'highlight.js/lib/languages/shell.js';
-import bash from 'highlight.js/lib/languages/bash.js';
-import { addStyle } from 'gadjet/src/adapter';
-import { bgColor } from 'gadjet/src/style/bg-color';
-import { fontFluid } from 'gadjet/src/style/font-fluid';
 import { theme } from './color';
 
-window.addEventListener('load', () => {
-    hljs.registerLanguage('html', xml);
-    hljs.registerLanguage('javascript', javascript);
-    hljs.registerLanguage('typescript', typescript);
-    hljs.registerLanguage('css', css);
-    hljs.registerLanguage('scss', scss);
-    hljs.registerLanguage('shell', shell);
-    hljs.registerLanguage('bash', bash);
-    hljs.highlightAll();
-});
+import { addStyle, aspectRatio, bgColor, fontFluid, lift } from 'gadjet/src/style';
+import { Adapter } from 'gadjet/src/adapter';
+
+window.addStyle = addStyle;
+window.aspectRatio = aspectRatio;
+window.bgColor = bgColor;
+window.fontFluid = fontFluid;
+window.lift = lift;
+window.Adapter = Adapter;
+window.hljs = hljs;
+
+hljs.registerLanguage('html', xml);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
+hljs.highlightAll();
 
 addStyle`
 html {

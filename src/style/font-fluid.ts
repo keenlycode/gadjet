@@ -1,14 +1,9 @@
-interface FontFluidParam {
-    vwMin?: number,
-    vwMax?: number,
-    fontSizeMin?: number,
-    fontSizeMax?: number
-}
+import { FontFluidParam } from './font-fluid.d';
 
 export const fontFluid = ({
     vwMin = 300, vwMax = 1200,
     fontSizeMin = 16, fontSizeMax = 18
-}: FontFluidParam = {}) => {
+}: FontFluidParam = {}): string => {
     let viewportRatio = `(100vw - ${vwMin}px) / (${vwMax} - ${vwMin})`;
     let fontScaleRatio = `(${fontSizeMax} - ${fontSizeMin}) * ${viewportRatio}`;
     return `

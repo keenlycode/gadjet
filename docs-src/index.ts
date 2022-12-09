@@ -1,8 +1,5 @@
-import { bgColor, fontFluid, lift } from 'gadjet/src/style';
-import { addStyle, Adapter } from 'gadjet/src/adapter';
 import { Button } from 'gadjet/src/ui/button/button';
 import { Badge } from 'gadjet/src/ui/badge/badge';
-
 import { theme } from './color';
 
 addStyle`
@@ -13,8 +10,7 @@ addStyle`
     width: 90%;
     max-width: 1200px;
     margin: auto;
-}
-`;
+}`;
 
 Badge.define('el-badge');
 

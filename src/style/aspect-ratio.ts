@@ -1,4 +1,4 @@
-export const aspectRatio = (ratio: string = '1/1') => {
+export const aspectRatio = (ratio: string = '1/1'): string => {
     return `
     aspect-ratio: ${ratio};
     @supports not (aspect-ratio: ${ratio}) {
