@@ -1,6 +1,11 @@
 const Color = require('color');
 import { bgColor } from './bg-color';
-import { bgColorIntParam } from './bg-color-int.d';
+
+interface bgColorIntParam {
+    color?: string;
+    hoverColor?: string;
+    activeColor?: string;
+}
 
 export const bgColorInt = ({
     color = 'blue',
