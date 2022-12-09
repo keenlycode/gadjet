@@ -8,7 +8,7 @@
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { Button } from 'gadjet/dist/module/ui/button/button.js';
@@ -17,7 +17,7 @@ Button.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <button>Button</button>
 ```
@@ -31,7 +31,7 @@ Button.tagStyle({
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
@@ -41,7 +41,7 @@ ButtonPin.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-button-pin>+</el-button-pin>
 ```
@@ -53,7 +53,7 @@ ButtonPin.tagStyle({
 </div>
 
 ### Coding
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { ButtonSquare } from 'gadjet/dist/module/ui/button/button-square.js';
@@ -64,7 +64,7 @@ ButtonSquare.tagStyle({
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-button-square>✕</el-button-square>
 ```
@@ -84,7 +84,7 @@ ButtonSquare.tagStyle({
     </el-button-group>
 </div>
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { ButtonGroup } from 'gadjet/dist/module/ui/button/button-group.js';
@@ -94,7 +94,7 @@ ButtonGroup.tagStyle({
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-button-group style="width: 10rem;">
     <button>OK</button>

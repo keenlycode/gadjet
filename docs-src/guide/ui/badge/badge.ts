@@ -1,7 +1,7 @@
+import { addStyle } from 'gadjet/src/style/add-style';
 import { Badge } from 'gadjet/src/ui/badge/badge';
 import { color } from '../../../color';
-import { addStyle } from 'gadjet/src/style';
-import '../../../_component/code-title';
+
 
 Badge.define('el-badge');
 
@@ -23,8 +23,8 @@ Badge.classStyle('purple', {
 
 addStyle`
 .preview {
-    el-badge {
+    ${Badge.tagName} {
         margin: 0.5rem;
     }
 }
-`
+`;

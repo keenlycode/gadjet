@@ -19,7 +19,10 @@
 
 ## Coding
 ---
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js
+    <code>\<script defer\></code>
+</el-code-title>
+
 ```js
 import { define } from 'gadjet/dist/module/ui/ui.js';
 import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
@@ -38,7 +41,7 @@ BoxArrow.tagStyle({
 BoxArrow.classStyle('right', {arrow: 'left'});
 
 ```
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-box-arrow>Top Arow</el-box-arrow>
 <el-box-arrow class="right">Right Arrow</el-box-arrow>

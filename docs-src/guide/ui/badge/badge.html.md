@@ -13,8 +13,6 @@
 ## Coding
 ---
 
-<el-code-title>ES6 module</el-code-title>
-
 <el-code-title>js `<script defer>`</el-code-title>
 ```js
 import { Badge } from 'gadjet/dist/bundle/gadjet.js';
