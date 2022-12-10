@@ -1,7 +1,8 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { 
     ButtonStyle, ButtonStyleParam
 } from './button.style';
-import { Adapter } from '../../adapter';
+
 
 export class Button extends Adapter {
     static Style = ButtonStyle;

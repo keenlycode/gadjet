@@ -1,11 +1,4 @@
-import { addStyle } from 'gadjet/src/adapter';
-import { bgColor } from 'gadjet/src/style';
-import { theme } from '../color';
-
-import '../_component/sidebar';
-
 addStyle`
-
 body {
     padding-bottom: 10rem;
 }
@@ -32,9 +25,6 @@ body {
     @media (min-width: 1450px) {
         margin-left: auto;
     }
-}
-
-.container {
 }
 
 .container a {

@@ -1,4 +1,4 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor } from "../../style";
 import { ProgressBarStyle } from "../progress/progress-bar.style";
 

@@ -1,7 +1,8 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor } from '../../style';
 import { ButtonStyle } from '../button/button.style';
 const Color = require('color');
+
 
 export interface InputRadioButtonStyleParam {
     activeColor?: string;

@@ -1,4 +1,4 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { InputRangeStyle, InputRangeStyleParam } from "./input-range.style";
 import { Hole, html, render } from 'uhtml';
 

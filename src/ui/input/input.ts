@@ -1,4 +1,4 @@
-import { addStyle, Adapter } from "../../adapter";
+import { addStyle, Adapter } from "@nitipit/adapter/src/adapter";
 import { InputStyle } from './input.style';
 
 

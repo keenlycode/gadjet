@@ -1,6 +1,7 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import {render, html} from 'uhtml';
-import { Adapter } from "../../adapter";
 import { ProgressBarStyleParam, ProgressBarStyle } from './progress-bar.style';
+
 
 export class ProgressBar extends Adapter {
     static Style = ProgressBarStyle;

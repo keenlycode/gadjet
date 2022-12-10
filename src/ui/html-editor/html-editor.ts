@@ -1,8 +1,8 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { Editor } from '@tiptap/core';
 import { Level } from '@tiptap/extension-heading';
 import StarterKit from '@tiptap/starter-kit';
 import { FloatingMenu as FloatingMenuExt } from '@tiptap/extension-floating-menu';
-import { define, Adapter } from "../../adapter";
 import { 
     HeadingMenuStyle,
     HeadingMenuStyleParam,

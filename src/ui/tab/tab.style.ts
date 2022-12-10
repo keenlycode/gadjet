@@ -1,5 +1,6 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor, lift } from "../../style";
+
 
 export interface TabStyleParam {
     tabColor?: string;

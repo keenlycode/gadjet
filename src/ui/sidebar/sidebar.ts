@@ -1,6 +1,7 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { Hole, html, render } from 'uhtml';
-import { Adapter } from "../../adapter";
 import { SidebarStyle, SidebarStyleParam } from './sidebar.style';
+
 
 interface SidebarChildElement {
     content: Element | HTMLElement | Hole;

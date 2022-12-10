@@ -1,7 +1,6 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { svg, html, render } from 'uhtml';
 import { InputDateStyle } from "./input-date.style";
-import { Adapter } from "../../adapter";
-
 
 interface InputDateChildElement {
     input: HTMLInputElement | any;

@@ -1,4 +1,4 @@
-import { define, Adapter } from "../../adapter";
+import { define, Adapter } from "@nitipit/adapter/src/adapter";
 import { InputTagStyle } from "./input-tag.style";
 import { TagX } from '../tag/tagx';
 import { addStyle } from "@nitipit/adapter/src/adapter";

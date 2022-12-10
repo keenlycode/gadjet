@@ -1,4 +1,4 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { render, html } from 'uhtml';
 import { 
     InputRadioButtonGroupStyle,

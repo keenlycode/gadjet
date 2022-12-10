@@ -1,4 +1,4 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { InputStyle } from './input.style';
 import { ButtonSquareStyle } from "../button/button-square.style";
 

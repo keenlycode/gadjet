@@ -1,4 +1,4 @@
-import { Adapter } from '../../adapter';
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { OverlayStyle, OverlayStyleParam } from './overlay.style';
 
 export class Overlay extends Adapter {

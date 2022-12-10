@@ -2,6 +2,7 @@ import { TagStyle } from "./tag.style";
 import { bgColorInt } from "../../style";
 const Color = require('color');
 
+
 export interface TagXStyleParam {
     color?: string;
     borderRadius?: string;

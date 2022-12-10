@@ -1,5 +1,5 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { render, svg } from "uhtml";
-import { Adapter } from "../../adapter";
 import {
     ProgressCircleStyle,
     ProgressCircleStyleParam

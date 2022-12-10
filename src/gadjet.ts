@@ -1,6 +1,6 @@
 export * from './style';
 
-export { define } from './adapter';
+import { define } from "@nitipit/adapter/src/adapter";
 
 export { Badge } from './ui/badge/badge';
 export { BoxArrow } from './ui/box-arrow/box-arrow';

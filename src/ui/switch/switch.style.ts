@@ -1,5 +1,6 @@
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor, lift } from "../../style";
-import { StyleClass } from "../../adapter";
+
 
 export class SwitchStyleParam {
     pinColor?: string;

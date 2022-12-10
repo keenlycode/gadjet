@@ -1,4 +1,4 @@
-import { define, Adapter } from "../../adapter";
+import { define, Adapter } from "@nitipit/adapter/src/adapter";
 import { ProgressBar } from '../progress/progress-bar';
 import { FileUploadStyle, FileUploadStyleParam } from './file-upload.style';
 import { render, svg, html } from 'uhtml';

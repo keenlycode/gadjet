@@ -4,7 +4,13 @@ import javascript from 'highlight.js/lib/languages/javascript.js';
 import typescript from 'highlight.js/lib/languages/typescript.js';
 import { theme } from './color';
 
-import { addStyle, aspectRatio, bgColor, fontFluid, lift } from 'gadjet/src/style';
+import {
+    addStyle,
+    aspectRatio,
+    bgColor,
+    fontFluid,
+    lift 
+} from 'gadjet/src/style';
 import { Adapter } from 'gadjet/src/adapter';
 
 window.addStyle = addStyle;
@@ -13,6 +19,7 @@ window.bgColor = bgColor;
 window.fontFluid = fontFluid;
 window.lift = lift;
 window.Adapter = Adapter;
+window.theme = theme;
 window.hljs = hljs;
 
 hljs.registerLanguage('html', xml);

@@ -1,5 +1,5 @@
+import { define, Adapter } from "@nitipit/adapter/src/adapter";
 import { html, render } from 'uhtml';
-import { define, Adapter } from "../../adapter";
 import {    
     FileManagerStyle,
     FileManagerStyleParam,

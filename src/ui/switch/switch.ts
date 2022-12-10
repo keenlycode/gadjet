@@ -1,5 +1,5 @@
-import {html, render} from 'uhtml'
-import { Adapter } from '../../adapter';
+import { Adapter } from "@nitipit/adapter/src/adapter";
+import { html, render } from 'uhtml'
 import { SwitchStyle, SwitchStyleParam } from './switch.style';
 
 export class Switch extends Adapter {
