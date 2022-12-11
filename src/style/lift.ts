@@ -1,7 +1,5 @@
-export interface LiftParam {
-    level?: number;
-    shadowColor?: string;
-}
+import { LiftParam } from "./lift.d";
+
 
 export const lift = ({
     level = 3,
