@@ -1,4 +1,4 @@
-import { addStyle } from 'gadjet/src/adapter';
+import { addStyle } from '@nitipit/adapter/src/adapter';
 import { lift } from 'gadjet/src/style/lift';
 
 addStyle`

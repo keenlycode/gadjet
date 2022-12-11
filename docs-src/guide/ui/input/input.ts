@@ -1,4 +1,4 @@
-import {define, addStyle} from 'gadjet/src/adapter';
+import {addStyle} from '@nitipit/adapter/src/adapter';
 import {InputDate} from 'gadjet/src/ui/input/input-date';
 import {InputNumber} from 'gadjet/src/ui/input/input-number';
 import {InputNumberCenter} from 'gadjet/src/ui/input/input-number-center';
@@ -10,15 +10,15 @@ import {
 import {InputRange} from 'gadjet/src/ui/input/input-range';
 import {InputTag} from 'gadjet/src/ui/input/input-tag';
 
-define('el-input-date', InputDate);
-define('el-input-number', InputNumber);
-define('el-input-number-center', InputNumberCenter);
-define('el-input-radio', InputRadio);
 
-define('el-input-radio-button', InputRadioButton);
-define('el-input-radio-button-group', InputRadioButtonGroup);
-define('el-input-range', InputRange);
-define('el-input-tag', InputTag);
+InputDate.define('el-input-date');
+InputNumber.define('el-input-number');
+InputNumberCenter.define('el-input-number-center');
+InputRadio.define('el-input-radio');
+InputRadioButton.define('el-input-radio-button');
+InputRadioButtonGroup.define('el-input-radio-button-group');
+InputRange.define('el-input-range');
+InputTag.define('el-input-tag');
 
 addStyle`
 el-input-radio {

@@ -1,4 +1,4 @@
-import { Adapter } from 'gadjet/src/adapter';
+import { Adapter } from '@nitipit/adapter/src/adapter';
 
 class Paragraph extends Adapter {};
 Paragraph.define('el-paragraph');

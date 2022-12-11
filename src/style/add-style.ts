@@ -1,1 +1,1 @@
-export { addStyle } from '../adapter';
+export { addStyle } from '@nitipit/adapter/src/adapter';

@@ -11,7 +11,7 @@ import {
     fontFluid,
     lift 
 } from 'gadjet/src/style';
-import { Adapter } from 'gadjet/src/adapter';
+import { Adapter } from '@nitipit/adapter/src/adapter';
 
 window.addStyle = addStyle;
 window.aspectRatio = aspectRatio;
