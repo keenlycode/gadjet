@@ -1,0 +1,1 @@
+export declare function addStyle(s: TemplateStringsArray): void;
