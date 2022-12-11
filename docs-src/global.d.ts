@@ -3,7 +3,7 @@ import { LanguageFn } from 'highlight.js';
 import {
     FontFluidParam,
     LiftParam } from 'gadjet/src/style';
-import { Adapter } from 'gadjet/src/adapter';
+import { Adapter } from '@nitipit/adapter/src/adapter.d';
 
 export declare interface hljs {
     registerLanguage(lang: string, LanguageFn);

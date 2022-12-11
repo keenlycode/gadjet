@@ -25,8 +25,10 @@ class HeadingMenu extends Adapter {
     static Style = HeadingMenuStyle;
 
     static define(tagName: string): void {
-        define(`${tagName}-button`, HeadingMenuButton);
-        define(`${tagName}-button-group`, HeadingMenuButtonGroup);
+        // define(`${tagName}-button`, HeadingMenuButton);
+        // define(`${tagName}-button-group`, HeadingMenuButtonGroup);
+        HeadingMenuButton.define(`${tagName}-button`);
+        HeadingMenuButtonGroup.define(`${tagName}-button-group`);
         super.define(tagName);
     }
 
@@ -124,8 +126,8 @@ class HeadingMenu extends Adapter {
 export class HTMLEditor extends Adapter {
     static Style = HTMLEditorStyle;
     static define(tagName: string): void {
-        define(`${tagName}-float-menu`, FloatingMenu);
-        define(`${tagName}-heading-menu`, HeadingMenu);
+        FloatingMenu.define(`${tagName}-float-menu`);
+        HeadingMenu.define(`${tagName}-heading-menu`);
         super.define(tagName);
     }
 
