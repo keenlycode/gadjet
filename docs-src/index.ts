@@ -2,6 +2,10 @@ import { Button } from 'gadjet/src/ui/button/button';
 import { Badge } from 'gadjet/src/ui/badge/badge';
 import { theme } from './color';
 
+import './global.d';
+
+sidebar.showAt = null;
+
 addStyle`
 .container {
     display: flex;

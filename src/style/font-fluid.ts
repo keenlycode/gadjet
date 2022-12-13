@@ -1,6 +1,5 @@
 import { FontFluidParam } from './font-fluid.d';
 
-
 export const fontFluid = ({
     vwMin = 300, vwMax = 1200,
     fontSizeMin = 16, fontSizeMax = 18

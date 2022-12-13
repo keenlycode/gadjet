@@ -1,3 +1,6 @@
+import { theme } from '../color';
+import '../global.d';
+
 addStyle`
 body {
     padding-bottom: 10rem;

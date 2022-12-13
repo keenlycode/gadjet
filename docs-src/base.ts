@@ -13,6 +13,8 @@ import {
 } from 'gadjet/src/style';
 import { Adapter } from '@nitipit/adapter/src/adapter';
 
+import './global.d';
+
 window.addStyle = addStyle;
 window.aspectRatio = aspectRatio;
 window.bgColor = bgColor;

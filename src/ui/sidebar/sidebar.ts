@@ -31,24 +31,28 @@ export class Sidebar extends Adapter {
         content: null,
         overlay: null
     };
-    showAt: string = "1000px";
+    _showAt: string = "1000px";
     mediaQuery: MediaQueryList;
+
+    set showAt(value: string | null) {
+        this._showAt = value;
+        this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
+    }
+
+    get showAt(): string {
+        return this._showAt;
+    }
 
     constructor() {
         super();
-        this.showAt = this.getAttribute('showAt') || this.showAt;
+        this.showAt = this.getAttribute('showAt') || this._showAt;
         this.el.content = this.querySelector('[el="content"]')
             || html`<div el="content">`;
         this.el.overlay = this.querySelector('[el="overlay"]')
             || html`<div el="overlay">`;
 
         this.render();
-        this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
-        if (this.mediaQuery.matches) {
-            setTimeout(() => {
-                this.show({overlay: false})
-            }, 0)
-        }
+        this.mediaChange();
         this.mediaQuery.addEventListener("change", () => {
             this.mediaChange();
         });
