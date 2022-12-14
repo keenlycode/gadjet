@@ -4,11 +4,11 @@
 
 {% block head %}
 {{ super() }}
-<script defer src="test.js?v={{_v}}"></script>
+<script defer src="widget.js?v={{_v}}"></script>
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<el-widget-container>
     <div class="block">
         <el-card>
             <div class="row">
@@ -24,10 +24,11 @@
     <div class="block">
         <el-box-arrow class="bottom">Pick a date !</el-box-arrow>
         <el-input-date></el-input-date>
-        <el-button-group style="margin-left: 1rem;">
+        <el-button-group style="margin-left: 1em;">
             <button>Set</button>
             <button class="light">Reset</button>
         </el-button-group>
+        <el-progress-bar value="25"></el-progress-bar>
     </div>
-</div>
+</el-widget-container>
 {% endblock %}

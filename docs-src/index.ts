@@ -1,6 +1,6 @@
-import { Button } from 'gadjet/src/ui/button/button';
-import { Badge } from 'gadjet/src/ui/badge/badge';
 import { theme } from './color';
+
+import './widget/widget';
 
 import './global.d';
 

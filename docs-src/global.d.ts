@@ -22,6 +22,7 @@ declare global {
         Adapter: A;
         theme: any;
         hljs: hljs;
+        Color: any;
         baseUrl: URL;
         sidebar: Sidebar;
         sidebarButton: ButtonPin;
@@ -33,6 +34,7 @@ declare global {
     function lift(param: LiftParam);
     class Adapter extends A {}
     var hljs: hljs;
+    var Color: any;
     var baseUrl: URL;
     var sidebar: Sidebar;
     var sidebarButton: ButtonPin;

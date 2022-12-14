@@ -92,6 +92,12 @@ img {
     width: 100%;
 }
 
+.flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 code, .code {
     ${bgColor(theme.dark)}
     font-family: mono;
