@@ -26,6 +26,9 @@ SidebarButton.tagStyle(`
     font-size: 1.25rem;
     z-index: 100;
 `);
+SidebarButton.tagStyle({
+    color: theme.yellow
+})
 
 class SidebarCloseButton extends ButtonSquare {};
 SidebarCloseButton.define('el-sidebar-close-button');

@@ -31,11 +31,12 @@ export class Sidebar extends Adapter {
         content: null,
         overlay: null
     };
-    _showAt: string = "1000px";
+    _showAt: string | null = "1000px";
     mediaQuery: MediaQueryList;
 
     set showAt(value: string | null) {
         this._showAt = value;
+        if (!this._showAt) { return };
         this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
     }
 

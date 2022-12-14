@@ -4,6 +4,11 @@ import javascript from 'highlight.js/lib/languages/javascript.js';
 import typescript from 'highlight.js/lib/languages/typescript.js';
 import { theme } from './color';
 
+import { Badge } from 'gadjet/src/ui/badge/badge';
+import { Button } from 'gadjet/src/ui/button/button';
+
+import { Icon } from '@nitipit/icon/src/icon';
+
 import {
     addStyle,
     aspectRatio,
@@ -15,6 +20,7 @@ import { Adapter } from '@nitipit/adapter/src/adapter';
 
 import './global.d';
 
+window.baseUrl = new URL('../', document.currentScript!.src);
 window.addStyle = addStyle;
 window.aspectRatio = aspectRatio;
 window.bgColor = bgColor;
@@ -24,10 +30,41 @@ window.Adapter = Adapter;
 window.theme = theme;
 window.hljs = hljs;
 
+window.addEventListener('load', () => {
+    Icon.href = `${window.baseUrl}/asset/icon/gadjet/symbol-defs.svg`;
+    customElements.define('el-icon', Icon);
+})
+
 hljs.registerLanguage('html', xml);
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 hljs.highlightAll();
+
+Badge.define('el-badge');
+Badge.tagStyle({
+    color: theme.blueGreen
+})
+Badge.tagStyle(`
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+`)
+
+Button.tagStyle({color: theme.yellow});
+Button.tagStyle(`
+    border-radius: 5px;
+    align-items: center;
+`);
+Button.classStyle('violet', {color: theme.violet});
+Button.classStyle('big', `font-size: 2em;`);
+Button.classStyle('dark', {color: theme.dark});
+Button.classStyle('light', {color: theme.light});
+
+addStyle`
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}`;
 
 addStyle`
 html {
@@ -43,6 +80,12 @@ a {
 
 img {
     width: 100%;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .row {

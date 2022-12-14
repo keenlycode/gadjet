@@ -3,7 +3,8 @@ import scss from 'highlight.js/lib/languages/scss.js';
 import shell from 'highlight.js/lib/languages/shell.js';
 import bash from 'highlight.js/lib/languages/bash.js';
 
-import { Sidebar } from '../src/ui/sidebar/sidebar';
+import { Sidebar } from 'gadjet/src/ui/sidebar/sidebar';
+import { ButtonPin } from 'gadjet/src/ui/button/button-pin';
 
 import './global.d';
 
@@ -17,5 +18,5 @@ hljs.registerLanguage('scss', scss);
 hljs.registerLanguage('shell', shell);
 hljs.registerLanguage('bash', bash);
 
-const sidebar = document.querySelector('el-sidebar');
-window.sidebar = sidebar as Sidebar;
+window.sidebar = document.querySelector('el-sidebar') as Sidebar;
+window.sidebarButton = document.querySelector('el-sidebar-button') as ButtonPin;

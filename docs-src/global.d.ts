@@ -6,6 +6,7 @@ import {
     LiftParam
 } from 'gadjet/src/style.d';
 import { Sidebar } from '../src/ui/sidebar/sidebar';
+import { ButtonPin } from '../src/ui/button/button-pin';
 
 export interface hljs {
     registerLanguage(lang: string, langFn: LanguageFn);
@@ -21,7 +22,9 @@ declare global {
         Adapter: A;
         theme: any;
         hljs: hljs;
+        baseUrl: URL;
         sidebar: Sidebar;
+        sidebarButton: ButtonPin;
     }
     function addStyle(ts: TemplateStringsArray, ...strings);
     function aspectRatio(ratio: string);
@@ -30,5 +33,7 @@ declare global {
     function lift(param: LiftParam);
     class Adapter extends A {}
     var hljs: hljs;
+    var baseUrl: URL;
     var sidebar: Sidebar;
+    var sidebarButton: ButtonPin;
 }

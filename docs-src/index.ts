@@ -6,25 +6,6 @@ import './global.d';
 
 sidebar.showAt = null;
 
-addStyle`
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}`;
-
-Badge.define('el-badge');
-
-Button.tagStyle({color: theme.yellow});
-Button.tagStyle(`border-radius: 5px;`);
-Button.classStyle('violet', {color: theme.violet});
-Button.classStyle('big', `font-size: 2em;`);
-Button.classStyle('dark', {color: theme.dark});
-Button.classStyle('light', {color: theme.light});
-
 class Highlight extends Adapter {};
 Highlight.define('el-highlight');
 Highlight.tagStyle(`
