@@ -16,11 +16,24 @@ class WidgetContainer extends Adapter {}
 WidgetContainer.define("el-widget-container");
 WidgetContainer.tagStyle(`
     display: flex;
-    margin-top: 5rem;
     justify-content: center;
     align-items: center;
     el-card {
         margin-right: 0.8em;
+    }
+    ${fontFluid({
+        vwMin: 300, vwMax: 800,
+        fontSizeMin: 14, fontSizeMax: 20
+    })}
+
+    .block {
+        all: unset;
+        display: flex;
+        flex-wrap: wrap;
+        justify-cotent: center;
+        align-items: center;
+        position: relative;
+        max-width: 400px;
     }
 `)
 
@@ -28,13 +41,12 @@ Switch.define('el-switch');
 Switch.tagStyle({
     activeColor: theme.violet
 })
-Switch.tagStyle(`font-size: 0.8em;`);
 
 InputDate.define('el-input-date');
 InputDate.tagStyle(`
-    font-size: 0.9em;
     span[el="display"] {
-        min-width: 5em;
+        min-width: 3em;
+        width: 5em;
     }
 `)
 
@@ -54,7 +66,7 @@ BoxArrow.classStyle('bottom', {
 BoxArrow.classStyle('bottom', `
     position: absolute;
     bottom: 3.2em;
-    left: 1.2em;
+    left: 1.8em;
     padding-left: 1em;
     padding-right: 1em;
 `);
@@ -82,14 +94,3 @@ ProgressBar.tagStyle(`
     position: absolute;
     top: 3.2em;
 `)
-
-addStyle`
-.block {
-    display: flex;
-    flex-wrap: wrap;
-    justify-cotent: center;
-    align-items: center;
-    position: relative;
-    max-width: 300px;
-}
-`

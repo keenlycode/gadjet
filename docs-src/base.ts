@@ -98,6 +98,17 @@ img {
     flex-wrap: wrap;
 }
 
+.block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-cotent: center;
+    align-items: center;
+    position: relative;
+    max-width: 500px;
+    min-width: 280px;
+    width: 100%;
+}
+
 code, .code {
     ${bgColor(theme.dark)}
     font-family: mono;

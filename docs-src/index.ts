@@ -1,6 +1,6 @@
 import { theme } from './color';
 
-import './widget/widget';
+import './_index.html/widget';
 
 import './global.d';
 

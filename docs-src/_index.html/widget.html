@@ -1,14 +1,4 @@
-{% extends '_base.html' %}
-
-{% set to_root = '../' %}
-
-{% block head %}
-{{ super() }}
-<script defer src="widget.js?v={{_v}}"></script>
-{% endblock %}
-
-{% block body %}
-<el-widget-container>
+<el-widget-container style="margin-top: 7em;">
     <div class="block">
         <el-card>
             <div class="row">
@@ -28,7 +18,6 @@
             <button>Set</button>
             <button class="light">Reset</button>
         </el-button-group>
-        <el-progress-bar value="25"></el-progress-bar>
+        <el-progress-bar></el-progress-bar>
     </div>
 </el-widget-container>
-{% endblock %}
