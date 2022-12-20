@@ -16,18 +16,6 @@ class Gadjet:
         self.node_modules_dir = node_modules_dir
 
     async def build(self):
-        
-        # Normailize.css
-        print('# Build normalize.css')
-        path = _dir.joinpath(
-            self.node_modules_dir,
-            'normalize.css/normalize.css')
-        cmd = f"npx parcel build --no-cache --target=normalize.css"
-        print(cmd)
-        proc = await asyncio.create_subprocess_shell(cmd)
-        await proc.communicate()
-        print('Finished')
-
         # typscript
         print('# Compile typescript to es6 modules')
         cmd = 'npx tsc -p src/'
