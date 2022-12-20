@@ -15,7 +15,7 @@ class SidebarButton extends ButtonPin {
     }
 
     render() {
-        render(this, html`☰`);
+        render(this, html`<el-icon name="menu"></el-icon>`);
     }
 };
 SidebarButton.define('el-sidebar-button');

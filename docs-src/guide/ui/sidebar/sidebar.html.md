@@ -3,7 +3,9 @@
 ## Preview
 ---
 <div class="preview">
-    <el-button-pin id="sidebar-button-preview" class="bg-green-int" style="font-size: 3rem;">☰</el-button-pin>
+    <el-button-pin id="sidebar-button-preview" style="font-size: 3rem;">
+        <el-icon name="menu"></el-icon>
+    </el-button-pin>
 </div>
 
 ## Coding

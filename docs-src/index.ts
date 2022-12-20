@@ -5,6 +5,7 @@ import './_index.html/widget';
 import './global.d';
 
 sidebar.showAt = null;
+sidebar.mediaChange();
 
 class Highlight extends Adapter {};
 Highlight.define('el-highlight');

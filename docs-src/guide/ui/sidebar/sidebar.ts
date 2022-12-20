@@ -1,6 +1,14 @@
-import '../../../global.d';
+import { ButtonPin } from 'gadjet/src/ui/button/button-pin';
 
-const sidebarButton = document.querySelector('#sidebar-button-preview');
+import '../../../global.d';
+import { theme } from '../../../color';
+
+ButtonPin.define('el-button-pin');
+
+const sidebarButton = document.querySelector('#sidebar-button-preview') as ButtonPin;
+sidebarButton!.addStyle({
+    color: theme.yellow
+});
 
 sidebarButton?.addEventListener('click', () => {
     sidebar.show();

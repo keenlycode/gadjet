@@ -36,6 +36,7 @@ export class Sidebar extends Adapter {
 
     set showAt(value: string | null) {
         this._showAt = value;
+        this.setAttribute('showAt', value);
         this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
     }
 
