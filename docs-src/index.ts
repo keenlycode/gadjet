@@ -38,7 +38,8 @@ Highlight.tagStyle(`
         justify-content: center;
         align-items: center;
         width: 50%;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
         font-size: 1.2em;
         transition: background-color 1s ease;
         @media (max-width: 1000px) {
@@ -52,7 +53,8 @@ Highlight.tagStyle(`
         justify-content: center;
         align-items: center;
         width: 50%;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
         box-sizing: border-box;
         padding: 1rem;
         transition: background-color 1s ease;

@@ -1,6 +1,9 @@
 import asyncio
 import shutil
 from pathlib import Path
+import re
+from watchfiles import awatch
+import os
 
 
 _dir = Path(__file__).parent
@@ -14,11 +17,18 @@ def lib():
 
 
 def asset():
-    shutil.copytree(
-        _dir.joinpath('docs-src/asset/'),
-        'docs/asset/',
-        dirs_exist_ok=True,
-    )
+    docs_src_dir = _dir.joinpath('docs-src')
+    for path in docs_src_dir.glob('**/*'):
+        path = str(path.relative_to(docs_src_dir))
+        if re.search('.*\.(webm|jpg|svg|png|ttf|xml)$', path):
+            src = docs_src_dir.joinpath(path)
+            dest = _dir.joinpath('docs/', path)
+            try:
+                os.makedirs(dest.parent)
+            except FileExistsError:
+                pass
+            shutil.copy(src, dest)
+
 
 
 async def engrave():
@@ -30,7 +40,7 @@ async def engrave():
 
 
 async def parcel():
-    cmd = "npx parcel watch --no-cache 'docs-src/**/*.(scss|js|ts|jpg|png|xml|svg)' "\
+    cmd = "npx parcel watch --no-cache 'docs-src/**/*.(scss|js|ts)' "\
         + "--target=docs"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
@@ -53,4 +63,5 @@ async def main():
         engrave(),
     )
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
