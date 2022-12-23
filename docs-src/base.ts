@@ -107,6 +107,7 @@ img {
     max-width: 500px;
     min-width: 280px;
     width: 100%;
+    padding: 1rem;
 }
 
 code, .code {
@@ -129,6 +130,10 @@ code.hljs {
 
 .text, p {
     max-width: 45rem;
+}
+
+video {
+    max-width: 100%;
 }
 
 #footer {
