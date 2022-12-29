@@ -2,7 +2,6 @@ import hljs from 'highlight.js/lib/core.js';
 import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript.js';
 import typescript from 'highlight.js/lib/languages/typescript.js';
-import { theme } from './color';
 
 import { Badge } from 'gadjet/src/ui/badge/badge';
 import { Button } from 'gadjet/src/ui/button/button';
@@ -17,6 +16,8 @@ import {
     lift 
 } from 'gadjet/src/style';
 import { Adapter } from '@nitipit/adapter/src/adapter';
+
+import { theme } from './color';
 
 import './global.d';
 

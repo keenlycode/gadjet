@@ -11,12 +11,12 @@ $ npm install gadjet
 ---
 ### 1. Use bundle script
 
-Just copy `node_modules/gadjet/dist/gadjet.js` and place to directory
+Just copy `node_modules/gadjet/dist/bundle/gadjet.js` and place to directory
 which can be access by web browser, then every functions and modules will be
 ready to import.
 
 ```js
-import { define, addStyle, StyledElement, Button, Badge } from 'gadjet.js';
+import { Button, Badge } from 'gadjet.js';
 ```
 
 ### 2. Use Javascript modules
@@ -46,15 +46,14 @@ npm install parcel
 
 <el-code-title>js<code>index.js</code></el-tag>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
 
-define('el-input-tag', InputTag);
+InputTag.define('el-input-tag);
 ```
 
 Then run `parcel`
 
-<el-tag class="title-block">bash</el-tag>
+<el-code-title>bash</el-code-title>
 ```bash
 $ parcel webpage.html
 Server running at http://localhost:1234
@@ -74,14 +73,13 @@ This require Javascript building tools which support typescript
 except the import path which start with `gadjet/src/` instead of
 `gadjet/dist/module/`. For example
 
-<el-tag class="title-block">ts</el-tag>
+<el-code-title>ts</el-code-title>
 ```ts
-import { define } from 'gadjet/src/ui/ui';
 import { InputTag } from 'gadjet/src/ui/input/input-tag';
 ```
 
 ## Style, Class and Element API
 ---
 
-Style functions, component classes and elements have thier own API. You can learn
+Style functions and UI have thier own API. You can learn
 more at their documentation page.

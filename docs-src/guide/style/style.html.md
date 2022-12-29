@@ -15,7 +15,7 @@ button {
 }
 `;
 ```
-<el-tag class="title-blockquote">note</el-tag> 
+<el-blockquote-title>note</el-blockquote-title> 
 > **gadjet** implement **CSS-in-JS** by using feature from `@emotion/css`.
 > If you look into the <a href="https://github.com/nitipit/gadjet/blob/main/src/style.ts" target=_blank>
 > source code</a>, you will see that `addStyle`
@@ -49,17 +49,17 @@ import { aspectRatio } from 'gadjet/dist/module/style/aspect-ratio.js';
 ## Style portions
 ---
 <a href="./aspect-ratio/aspect-ratio.html">
-    <el-tag>aspectRatio</el-tag>
-</a>
+    aspectRatio
+</a>|
 <a href="./bg-color/bg-color.html">
-    <el-tag>bgColor</el-tag>
-</a>
+    bgColor
+</a>|
 <a href="./bg-color-int/bg-color-int.html">
-    <el-tag>bgColorInt</el-tag>
-</a>
+    bgColorInt
+</a>|
 <a href="./font-fluid/font-fluid.html">
-    <el-tag>fontFluid</el-tag>
-</a>
+    fontFluid
+</a>|
 <a href="./lift/lift.html">
-    <el-tag>lift</el-tag>
+    lift
 </a>

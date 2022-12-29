@@ -11,7 +11,7 @@ Background color with proper text color (black or white);
 
 ## Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
 ```
@@ -22,12 +22,12 @@ import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
 bgColor(color: string = 'blue') => string;
 ```
 
-<el-tag class="title-block">param <code>color: string = 'blue'</code></el-tag>
+<el-code-title>param <code>color: string = 'blue'</code></el-code-title>
 <blockquote class="fn-detail">
 CSS color for background
 </blockquote>
 
-<el-tag class="title-block">return</el-tag>
+<el-code-title>return</el-code-title>
 <blockquote class="fn-detail">
 CSS string
 </blockquote>
@@ -35,7 +35,7 @@ CSS string
 ## Usage
 ---
 
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { addStyle } from 'gadjet/dist/style.js';
 import { bgColor } from 'gadjet/dist/module/style/bg-color.js';

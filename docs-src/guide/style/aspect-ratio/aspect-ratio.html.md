@@ -18,7 +18,7 @@ Refer to
 
 ## Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import {aspectRatio} from 'gadjet/dist/module/style/aspect-ratio.js';
 ```
@@ -29,12 +29,12 @@ import {aspectRatio} from 'gadjet/dist/module/style/aspect-ratio.js';
 aspectRatio(ratio?: string = '1/1') => string;
 ```
 
-<el-tag class="title-block">param <code>ratio: string = '1/1'</code></el-tag>
+<el-code-title>param <code>ratio: string = '1/1'</code></el-code-title>
 <blockquote class="fn-detail">
 width/height ratio
 </blockquote>
 
-<el-tag class="title-block">return</el-tag>
+<el-code-title>return</el-code-title>
 <blockquote class="fn-detail">
 CSS string
 </blockquote>

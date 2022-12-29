@@ -1,4 +1,7 @@
 // Generated from coolors.co
+import { addStyle } from "gadjet/src/style/add-style";
+import { bgColor } from "gadjet/src/style/bg-color";
+
 export const theme = {
     violet: '#7900FF',
     frost: '#6B9AC4',
@@ -17,3 +20,24 @@ export const color = {
     purple: '#9141ac',
     brown: '#986a44'
 }
+
+addStyle`
+.bg-theme-violet {
+    ${bgColor(theme.violet)}
+}
+.bg-theme-frost {
+    ${bgColor(theme.frost)}
+}
+.bg-theme-blueGreen {
+    ${bgColor(theme.blueGreen)}
+}
+.bg-theme-yellow {
+    ${bgColor(theme.yellow)}
+}
+.bg-theme-light {
+    ${bgColor(theme.light)}
+}
+.bg-theme-dark {
+    ${bgColor(theme.dark)}
+}
+`;
