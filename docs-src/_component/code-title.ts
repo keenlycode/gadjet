@@ -8,10 +8,10 @@ class CodeTitle extends Tag {};
 CodeTitle.define('el-code-title');
 
 CodeTitle.tagStyle({
-    color: theme.yellow
+    color: theme.blueGreen
 })
 
-const codeColor = Color(theme.yellow).lighten(0.5);
+const codeColor = Color(theme.blueGreen).lighten(0.3);
 
 CodeTitle.tagStyle(`
     margin-bottom: -1rem;

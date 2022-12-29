@@ -32,7 +32,7 @@ window.theme = theme;
 window.hljs = hljs;
 
 window.addEventListener('load', () => {
-    Icon.href = `${window.baseUrl}/asset/icon/gadjet/symbol-defs.svg`;
+    Icon.href = `${window.baseUrl.href}asset/icon/gadjet/symbol-defs.svg`;
     customElements.define('el-icon', Icon);
 })
 
@@ -68,6 +68,20 @@ addStyle`
 }`;
 
 addStyle`
+@font-face {
+    font-family: 'sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Fira Sans'),
+        url(${baseUrl.href}asset/font/Fira_Sans/FiraSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'mono';
+    src: local('Fira Code'),
+        url(${baseUrl.href}asset/font/Fira_Code/static/FiraCode-Regular.ttf);
+}
+
 html {
     ${fontFluid()}
     font-family: sans;
