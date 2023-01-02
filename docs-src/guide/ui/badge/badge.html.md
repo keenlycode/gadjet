@@ -5,7 +5,7 @@
 <div class="preview">
     <el-badge class="blue">1</el-badge>
     <el-badge class="green" style="font-size: 1.5em;">10</el-badge>
-    <el-badge class="yellow" style="font-size: 2em;">100</el-badge>
+    <el-badge class="yellow" style="font-size: 2em;">10000</el-badge>
     <el-badge class="red" style="font-size: 1.5em;">+</el-badge>
     <el-badge class="purple">-</el-badge>
 </div>

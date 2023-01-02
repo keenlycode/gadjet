@@ -12,7 +12,7 @@ Return CSS string from background, proper text color and interactive color
 
 ## Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { bgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
 ```
@@ -26,23 +26,23 @@ bgColorInt({
     activeColor?: string = null
 }) => string;
 ```
-<el-tag class="title-block">param <code>{ color?: string = 'blue' }</code></el-tag>
+<el-code-title>param <code>{ color?: string = 'blue' }</code></el-code-title>
 <blockquote class="fn-detail">
 CSS color for background
 </blockquote>
 
-<el-tag class="title-block">param <code>{ hoverColor?: string = null }</code></el-tag>
+<el-code-title>param <code>{ hoverColor?: string = null }</code></el-code-title>
 <blockquote class="fn-detail">
 CSS color when hover, will be generated according to <code>color</code> if not provided.
 </blockquote>
 
 
-<el-tag class="title-block">param <code>{ activeColor?: string = null }</code></el-tag>
+<el-code-title>param <code>{ activeColor?: string = null }</code></el-code-title>
 <blockquote class="fn-detail">
 CSS color when click / press, will be generated according to <code>color</code> if not provided.
 </blockquote>
 
-<el-tag class="title-block">return</el-tag>
+<el-code-title>return</el-code-title>
 <blockquote class="fn-detail">
 CSS string
 </blockquote>
@@ -50,7 +50,7 @@ CSS string
 ## Usage
 ---
 
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { addStyle } from 'gadjet/dist/style.js';
 import { BgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';

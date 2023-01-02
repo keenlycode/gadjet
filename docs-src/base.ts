@@ -44,11 +44,7 @@ hljs.highlightAll();
 Badge.define('el-badge');
 Badge.tagStyle({
     color: theme.blueGreen
-})
-Badge.tagStyle(`
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-`)
+});
 
 Button.tagStyle({color: theme.yellow});
 Button.tagStyle(`

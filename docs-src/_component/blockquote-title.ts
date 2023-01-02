@@ -4,6 +4,10 @@ import '../global.d';
 
 class BlockquoteTitle extends Tag {};
 BlockquoteTitle.define('el-blockquote-title');
+BlockquoteTitle.tagStyle({
+    color: theme.blueGreen
+});
+
 BlockquoteTitle.tagStyle(`
     margin-left: 1rem;
     margin-bottom: -1rem;
@@ -11,9 +15,6 @@ BlockquoteTitle.tagStyle(`
     border-bottom-right-radius: 0;
     box-shadow: none;
 `);
-BlockquoteTitle.tagStyle({
-    color: theme.blueGreen
-});
 
 addStyle`
 blockquote.fn-detail {

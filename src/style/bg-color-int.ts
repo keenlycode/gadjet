@@ -1,27 +1,20 @@
-const Color = require('color');
+import Color from 'color';
 import { bgColor } from './bg-color';
-import { bgColorIntParam } from './bg-color-int.d';
 
 
-export const bgColorInt = ({
-    color = 'blue',
-    hoverColor = null,
-    activeColor = null
-}: bgColorIntParam): string => {
-    if (!hoverColor) {
-        hoverColor = Color(color).lighten(0.2).saturate(0.2);
-    }
-    if (!activeColor) {
-        activeColor = Color(color).darken(0.2).desaturate(0.2);
+export const bgColorInt = (color='blue'): string => {
+    const color_ = new Color(color);
+    let hoverColor: Color;
+
+    if (color_.isDark()) {
+        hoverColor = color_.lighten(0.2).saturate(0.2);
+    } else {
+        hoverColor = color_.darken(0.2).saturate(0.2);
     }
 
     return `
-    ${bgColor(color)}
+    ${bgColor(color_.toString())}
     &:hover {
-        background-color: ${hoverColor};
-    }
-    &:active {
-        background-color: ${activeColor};
-    }
-    `.trim();
+        background-color: ${hoverColor.toString()};
+    }`.trim();
 }

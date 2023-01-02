@@ -14,7 +14,7 @@ Simple `box-shadow` style to lift element.
 
 ## Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { lift } from 'gadjet/dist/module/style/lift.js';
 ```
@@ -28,17 +28,17 @@ lift({
 }) => string;
 ```
 
-<el-tag class="title-block">param <code>{ level?: number = 3 }</code></el-tag>
+<el-code-title>param <code>{ level?: number = 3 }</code></el-code-title>
 <blockquote class="fn-detail">
 Lifting level from 0 - 5
 </blockquote>
 
-<el-tag class="title-block">param <code>{ shadowColor?: string = rgb(0, 0, 0, 50%) }</code></el-tag>
+<el-code-title>param <code>{ shadowColor?: string = rgb(0, 0, 0, 50%) }</code></el-code-title>
 <blockquote class="fn-detail">
 CSS color for box-shadow color
 </blockquote>
 
-<el-tag class="title-block">return</el-tag>
+<el-code-title>return</el-code-title>
 <blockquote class="fn-detail">
 CSS string
 </blockquote>

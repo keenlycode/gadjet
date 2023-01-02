@@ -45,9 +45,12 @@ export class SwitchStyle extends StyleClass {
             width: 100%;
             height: 100%;
             ${lift({ level: 1 })}
+            overflow: hidden;
             transition: .4s;
             align-items: center;
             text-align: center;
+            padding-left: 0.2em;
+            padding-right: 0.2em;
         }
 
         div[el="pin"] {

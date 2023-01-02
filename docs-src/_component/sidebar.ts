@@ -72,13 +72,13 @@ Sidebar.tagStyle(`
             font-weight: bold;
             width: 100%;
             text-decoration: none;
-            ${bgColorInt({color: theme.violet})}
+            ${bgColorInt(theme.violet)}
         }
 
         el-sidebar-close-button {
             font-size: 1.5rem;
             border-radius: 0;
-            ${bgColorInt({color: theme.yellow})}
+            ${bgColorInt(theme.yellow)}
         }
     }
 

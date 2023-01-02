@@ -19,9 +19,10 @@ export class BadgeStyle extends StyleClass {
         font-size: 1em;
         line-height: initial;
         border-radius: 20em;
-        padding: 0.2em;
-        min-width: 1.6em;
-        min-height: 1.6em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        min-width: 1.5em;
+        min-height: 1.7em;
         ${this.style(style)}
         `.trim();
     }
