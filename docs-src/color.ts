@@ -28,7 +28,7 @@ addStyle`
 }
 
 .bg-theme-violet-int {
-    ${bgColorInt(theme.violet)}
+    ${bgColorInt({color: theme.violet})}
 }
 
 .bg-theme-frost {
@@ -36,7 +36,7 @@ addStyle`
 }
 
 .bg-theme-frost-int {
-    ${bgColorInt(theme.frost)}
+    ${bgColorInt({color: theme.frost})}
 }
 
 .bg-theme-blueGreen {
@@ -44,7 +44,7 @@ addStyle`
 }
 
 .bg-theme-blueGreen-int {
-    ${bgColorInt(theme.blueGreen)}
+    ${bgColorInt({color: theme.blueGreen})}
 }
 
 .bg-theme-yellow {
@@ -52,7 +52,7 @@ addStyle`
 }
 
 .bg-theme-yellow-int {
-    ${bgColorInt(theme.yellow)}
+    ${bgColorInt({color: theme.yellow})}
 }
 
 .bg-theme-light {

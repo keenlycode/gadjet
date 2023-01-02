@@ -1,15 +1,1 @@
-@import '../node_modules/highlight.js/styles/atom-one-dark.css';
-
-@font-face {
-    font-family: 'sans';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Fira Sans'),
-        url('./asset/font/Fira_Sans/FiraSans-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'mono';
-    src: local('Fira Code'),
-        url('./asset/font/Fira_Code/static/FiraCode-Regular.ttf');
-}
+@import '../node_modules/highlight.js/styles/atom-one-dark-reasonable.css';

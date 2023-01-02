@@ -59,7 +59,7 @@ export class ButtonStyle extends StyleClass {
     static _color(style: ButtonStyleParam = {}): string {
         if (style.color == undefined) { return '' };
         let css = `
-        ${bgColorInt(style.color)}
+        ${bgColorInt({color: style.color})}
         `.trim();
 
         return css;

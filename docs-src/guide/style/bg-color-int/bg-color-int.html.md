@@ -1,7 +1,6 @@
 # Interactive background color
 
-Return CSS string from background, proper text color and interactive color
-(on hover and press). Auto generate `hoverColor` and `activeColor` if not provided.
+Set CSS for background, text and and hovering color.
 
 ## Preview
 ---
@@ -22,24 +21,15 @@ import { bgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
 ```ts
 bgColorInt({
     color?: string = 'blue',
-    hoverColor?: string = null,
-    activeColor?: string = null
+    lighten?: number = 0.2, // Can be 0 - 1
+    saturate?: number = 0.2 // Can be 0 - 1
 }) => string;
 ```
-<el-code-title>param <code>{ color?: string = 'blue' }</code></el-code-title>
+<el-code-title>param <code>color?: string = 'blue'</code></el-code-title>
 <blockquote class="fn-detail">
-CSS color for background
-</blockquote>
+CSS color for background.
 
-<el-code-title>param <code>{ hoverColor?: string = null }</code></el-code-title>
-<blockquote class="fn-detail">
-CSS color when hover, will be generated according to <code>color</code> if not provided.
-</blockquote>
-
-
-<el-code-title>param <code>{ activeColor?: string = null }</code></el-code-title>
-<blockquote class="fn-detail">
-CSS color when click / press, will be generated according to <code>color</code> if not provided.
+- Text color will be white or black depends on background color.
 </blockquote>
 
 <el-code-title>return</el-code-title>

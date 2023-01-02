@@ -2,15 +2,14 @@ import Color from 'color';
 import { bgColor } from './bg-color';
 
 
-export const bgColorInt = (color='blue'): string => {
-    const color_ = new Color(color);
-    let hoverColor: Color;
+export const bgColorInt = ({
+        color = 'blue',
+        lighten = 0.2,
+        saturate = 0.2
+    }): string => {
 
-    if (color_.isDark()) {
-        hoverColor = color_.lighten(0.2).saturate(0.2);
-    } else {
-        hoverColor = color_.darken(0.2).saturate(0.2);
-    }
+    const color_ = new Color(color);
+    const hoverColor = color_.lighten(lighten).saturate(saturate);
 
     return `
     ${bgColor(color_.toString())}
