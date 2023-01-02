@@ -21,21 +21,31 @@ import { bgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
 ```ts
 bgColorInt({
     color?: string = 'blue',
-    lighten?: number = 0.2, // Can be 0 - 1
-    saturate?: number = 0.2 // Can be 0 - 1
+    lighten?: number = 0.2, // Can be -1 to 1
+    saturate?: number = 0.2 // Can be -1 to 1
 }) => string;
 ```
 <el-code-title>param <code>color?: string = 'blue'</code></el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 CSS color for background.
 
 - Text color will be white or black depends on background color.
-</blockquote>
+</el-function-detail>
+
+<el-code-title>param <code>lighten?: number = 0.2</code></el-code-title>
+<el-function-detail>
+Lighten level of background when hovering, range [-1, 1]
+</el-function-detail>
+
+<el-code-title>param <code>saturate?: number = 0.2</code></el-code-title>
+<el-function-detail>
+Saturation level of background when hovering, range [-1, 1]
+</el-function-detail>
 
 <el-code-title>return</el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---

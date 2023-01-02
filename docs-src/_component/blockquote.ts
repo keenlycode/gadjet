@@ -17,8 +17,11 @@ BlockquoteTitle.tagStyle(`
 `);
 
 addStyle`
-blockquote.fn-detail {
-    margin-left: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}`;
+blockquote {
+    border-left: 4px solid ${theme.blueGreen};
+    margin: 0;
+    margin-left: 1rem;
+    padding: 0.2rem 1rem 0.2rem 0.8rem;
+    ${bgColor(theme.light)}
+}
+`;

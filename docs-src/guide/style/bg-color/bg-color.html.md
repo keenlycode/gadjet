@@ -23,14 +23,14 @@ bgColor(color: string = 'blue') => string;
 ```
 
 <el-code-title>param <code>color: string = 'blue'</code></el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 CSS color for background
-</blockquote>
+</el-function-detail>
 
 <el-code-title>return</el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---

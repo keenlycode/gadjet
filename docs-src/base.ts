@@ -121,24 +121,6 @@ img {
     padding: 1rem;
 }
 
-code, .code {
-    ${bgColor(theme.dark)}
-    font-family: mono;
-    border-radius: 4px;
-    vertical-align: middle;
-    font-size: 0.85rem;
-    padding: 0.2rem;
-    line-height: 1.5;
-}
-
-code.hljs {
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    display: block;
-    padding: 0.5rem;
-    overflow: auto;
-}
-
 .text, p {
     max-width: 45rem;
 }

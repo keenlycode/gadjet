@@ -30,14 +30,14 @@ aspectRatio(ratio?: string = '1/1') => string;
 ```
 
 <el-code-title>param <code>ratio: string = '1/1'</code></el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 width/height ratio
-</blockquote>
+</el-function-detail>
 
 <el-code-title>return</el-code-title>
-<blockquote class="fn-detail">
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---
