@@ -9,7 +9,7 @@ Set CSS for background, text and and hovering color.
     <div class="bg-theme-blueGreen-int" style="padding: 0.5rem;">Blue Green</div>
 </div>
 
-## Import
+## Module path
 ---
 <el-code-title>js</el-code-title>
 ```js
@@ -52,15 +52,14 @@ CSS string
 
 <el-code-title>js</el-code-title>
 ```js
-import { addStyle } from 'gadjet/dist/style.js';
-import { BgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
+import { addStyle, bgColorInt } from 'gadjet/dist/bundle/gadjet.js';
 
 addStyle`
 div {
     ${bgColorInt({
         color: 'blue',
-        hoverColor: null,
-        activeColor: null
+        lighten: 0.2,
+        saturate: 0.2
     })} 
 }`;
 ```

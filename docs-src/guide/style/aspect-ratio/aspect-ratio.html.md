@@ -16,7 +16,7 @@ Refer to
     <iframe width="560" height="315" src="https://www.youtube.com/embed/WhWc3b3KhnY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## Import
+## Module path
 ---
 <el-code-title>js</el-code-title>
 ```js
@@ -43,7 +43,7 @@ CSS string
 ---
 
 ```js
-import { addStyle } from 'gadjet/dist/module/style/add-style.js';
+import { addStyle, aspectRatio } from 'gadjet/dist/bundle/gadjet.js';
 
 addStyle`
 div {

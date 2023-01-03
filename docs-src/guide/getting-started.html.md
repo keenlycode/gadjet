@@ -73,6 +73,11 @@ This require Javascript building tools which support typescript
 except the import path which start with `gadjet/src/` instead of
 `gadjet/dist/module/`. For example
 
+<el-blockquote-title>Note</el-blockquote-title>
+
+> Using **Typescript** with coding tools (VS Code) will provide you a better coding environment
+> such as autocomplete, suggestion or variables type.
+
 <el-code-title>ts</el-code-title>
 ```ts
 import { InputTag } from 'gadjet/src/ui/input/input-tag';
