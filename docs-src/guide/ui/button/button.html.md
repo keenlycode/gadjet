@@ -39,11 +39,18 @@ Button.tagStyle({
     <el-button-pin>+</el-button-pin>
 </div>
 
+### Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
+```
+
 ### Coding
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
+import { ButtonPin } from 'gadjet/dist/bundle/gadjet.js';
 
 ButtonPin.define('el-button-pin');
 ButtonPin.tagStyle({
@@ -62,12 +69,19 @@ ButtonPin.tagStyle({
     <el-button-square>✕</el-button-square>
 </div>
 
+### Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { Button } from 'gadjet/dist/module/ui/button/button-square.js';
+```
+
 ### Coding
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { ButtonSquare } from 'gadjet/dist/module/ui/button/button-square.js';
-define('el-button-square', ButtonSquare);
+import { ButtonSquare } from 'gadjet/dist/bundle/gadjet.js';
+
+ButtonSquare.define('el-button-square');
 ButtonSquare.tagStyle({
     color: 'blue',
     borderRadius: '4px'
@@ -94,11 +108,20 @@ ButtonSquare.tagStyle({
     </el-button-group>
 </div>
 
+### Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { ButtonGroup } from 'gadjet/dist/module/ui/button/button-group.js';
+```
+
+### Coding
+
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { ButtonGroup } from 'gadjet/dist/module/ui/button/button-group.js';
-define('el-button-group', ButtonGroup);
+import { ButtonGroup } from 'gadjet/dist/bundle/gadjet.js';
+
+ButtonGroup.define('el-button-group');
 ButtonGroup.tagStyle({
     borderRadius: '4px'
 });
