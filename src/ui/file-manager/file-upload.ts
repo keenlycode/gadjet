@@ -25,8 +25,8 @@ export class FileUpload extends Adapter {
         super.define(tagName);
     }
 
-    static initStyle(style?: string | FileUploadStyleParam): void {
-        super.initStyle(style);
+    static initStyle(): void {
+        super.initStyle();
         FileUploadProgressBar.tagStyle(`
             position: absolute;
             bottom:0;

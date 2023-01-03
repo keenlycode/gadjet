@@ -8,10 +8,6 @@ export class Button extends Adapter {
     static Style = ButtonStyle;
     static tagName: string = 'button';
 
-    static initStyle(style?: ButtonStyleParam): void {
-        super.initStyle(style)
-    }
-
     static tagStyle(style?: string | ButtonStyleParam): void {
         super.tagStyle(style)
     }

@@ -1,5 +1,5 @@
 import { StyleClass } from "@nitipit/adapter/src/adapter";
-import { bgColorInt, lift } from '../../style';
+import { bgColor, bgColorInt, lift } from '../../style';
 
 
 export interface ButtonStyleParam {

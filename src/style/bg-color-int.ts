@@ -14,6 +14,13 @@ export const bgColorInt = ({
     return `
     ${bgColor(color_.toString())}
     &:hover {
-        background-color: ${hoverColor.toString()};
+        background-color: ${
+            color_.lighten(lighten).saturate(saturate).toString()
+        };
+    }
+    &:active {
+        background-color: ${
+            color_.lighten(-lighten).saturate(saturate).toString()
+        };
     }`.trim();
 }

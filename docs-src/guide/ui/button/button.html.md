@@ -3,8 +3,15 @@
 ## Button
 ---
 <div class="preview">
-    <button class="blue">Button</button>
+    <button>Button</button>
 </div>
+
+### Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { Button } from 'gadjet/dist/module/ui/button/button.js';
+```
 
 ### Coding
 
@@ -15,6 +22,10 @@ Button.tagStyle({
     color: 'blue'
 })
 ```
+
+<el-blockquote-title>Note</el-blockquote-title>
+> After import `Button` class, it will automatically apply style
+> on standard \<button\> element. No need to define a tag name.
 
 <el-code-title>html</el-code-title>
 ```html
@@ -32,9 +43,9 @@ Button.tagStyle({
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
-define('el-button-pin', ButtonPin);
+
+ButtonPin.define('el-button-pin');
 ButtonPin.tagStyle({
     color: 'blue'
 })

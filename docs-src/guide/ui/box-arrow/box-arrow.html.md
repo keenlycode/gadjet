@@ -17,6 +17,13 @@
     </el-box-arrow>
 </div>
 
+## Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
+```
+
 ## Coding
 ---
 <el-code-title>js

@@ -25,20 +25,13 @@ class HeadingMenu extends Adapter {
     static Style = HeadingMenuStyle;
 
     static define(tagName: string): void {
-        // define(`${tagName}-button`, HeadingMenuButton);
-        // define(`${tagName}-button-group`, HeadingMenuButtonGroup);
         HeadingMenuButton.define(`${tagName}-button`);
         HeadingMenuButtonGroup.define(`${tagName}-button-group`);
-        super.define(tagName);
-    }
-
-    static initStyle(style?: HeadingMenuStyleParam): void {
-        style = {...this.Style.default, ...style};
-        super.initStyle(style);
         HeadingMenuButton.tagStyle({
-            buttonColor: style.buttonColor,
-            activeColor: style.activeColor
+            buttonColor: this.Style.default.buttonColor,
+            activeColor: this.Style.default.activeColor
         });
+        super.define(tagName);
     }
 
     static tagStyle(style?: HeadingMenuStyleParam): void {
@@ -131,17 +124,12 @@ export class HTMLEditor extends Adapter {
         super.define(tagName);
     }
 
-    static initStyle(style?: HTMLEditorStyleParam): void {
-        style = {...HTMLEditorStyle.default, ...style}
-        super.initStyle(style);
+    static initStyle(): void {
+        super.initStyle();
         FloatingMenu.tagStyle({
             arrow: 'left',
-            bgColor: style.menuColor
+            bgColor: this.Style.default.menuColor
         });
-        HeadingMenuButton.tagStyle({
-            buttonColor: style.menuColor,
-            activeColor: style.activeColor
-        })
     }
 
     static tagStyle(style?: string | HTMLEditorStyleParam): void {

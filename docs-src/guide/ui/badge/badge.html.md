@@ -10,6 +10,13 @@
     <el-badge class="purple">-</el-badge>
 </div>
 
+## Module and Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { Badge } from 'gadjet/dist/module/ui/badge/badge.js';
+```
+
 ## Coding
 ---
 
