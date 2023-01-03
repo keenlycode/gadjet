@@ -1,4 +1,4 @@
-import { Adapter } from "@nitipit/adapter/src/adapter";
+import { Adapter, addStyle } from "@nitipit/adapter/src/adapter";
 import { 
     ButtonStyle, ButtonStyleParam
 } from './button.style';
