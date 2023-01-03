@@ -23,7 +23,7 @@ has been emitted.
 <el-code-title>js</el-code-title>
 ```js
 // user-interface.js
-import {Switch} from 'gadjet/dist/module/ui/switch/switch.js';
+import { Switch } from 'gadjet/dist/module/ui/switch/switch.js';
 Switch.define('el-switch');
 ```
 
@@ -37,7 +37,6 @@ Switch.define('el-switch');
 
 ```js
 // window.onload.js
-import {define} from 'gadjet/dist/module/ui/ui.js';
 import {Switch} from 'gadjet/dist/module/ui/switch/switch.js';
 
 window.addEventListener('load', () => {

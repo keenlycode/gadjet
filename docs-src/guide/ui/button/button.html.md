@@ -10,7 +10,6 @@
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { Button } from 'gadjet/dist/module/ui/button/button.js';
 Button.tagStyle({
     color: 'blue'

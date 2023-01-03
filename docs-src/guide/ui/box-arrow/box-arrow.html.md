@@ -24,9 +24,9 @@
 </el-code-title>
 
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
-define('el-box-arrow', BoxArrow);
+import { BoxArrow } from 'gadjet/dist/bundle/gadjet.js';
+
+BoxArrow.define('el-box-arrow');
 BoxArrow.tagStyle({
     arrow: 'top', // arrow direction: top, right, bottom or left
     arrowSize: '8px',
