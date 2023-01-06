@@ -16,18 +16,20 @@
 
 ## Coding
 ---
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
+
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { Card } from 'gadjet/dist/module/ui/card/card.js';
-define('el-card', Card);
+
+Card.define('el-card');
 Card.tagStyle({
     color: '#eee',
     borderRadius: '4px'
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
+
 ```html
 <el-card></el-card>
 ```

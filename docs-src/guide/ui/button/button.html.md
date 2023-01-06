@@ -25,7 +25,8 @@ Button.tagStyle({
 
 <el-blockquote-title>Note</el-blockquote-title>
 > After import `Button` class, it will automatically apply style
-> on standard \<button\> element. No need to define a tag name.
+> on standard \<button\> element. However, you can extend `Button` and
+> define to a custom tag name.
 
 <el-code-title>html</el-code-title>
 ```html
