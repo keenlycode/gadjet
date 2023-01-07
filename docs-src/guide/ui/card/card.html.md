@@ -14,12 +14,19 @@
     </el-card>
 </div>
 
-## Coding
+## Module & Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { Card } from 'gadjet/dist/module/ui/card/card.js';
+```
+
+## Usage
 ---
 <el-code-title>js <code>\<script defer></code></el-code-title>
 
 ```js
-import { Card } from 'gadjet/dist/module/ui/card/card.js';
+import { Card } from 'gadjet/dist/bundle/gadjet.js';
 
 Card.define('el-card');
 Card.tagStyle({

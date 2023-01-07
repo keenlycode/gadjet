@@ -24,7 +24,6 @@
         "dist/**/*",
         "src/**/*"
     ],
-    "main": "dist/bundle/gadjet.js",
     "targets": {
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
