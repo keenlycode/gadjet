@@ -31,7 +31,7 @@
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { Checkbox } from 'gadjet/dist/module/ui/checkbox/checkbox.js';
+import { Checkbox } from 'gadjet/dist/bundle/gadjet.js';
 
 Checkbox.define('el-checkbox');
 Checkbox.tagStyle({

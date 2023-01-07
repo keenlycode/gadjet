@@ -24,6 +24,7 @@
         "dist/**/*",
         "src/**/*"
     ],
+    "main": "dist/bundle/gadjet.js",
     "targets": {
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
@@ -48,16 +49,17 @@
         }
     },
     "dependencies": {
-        "@emotion/css": "^11.5.0",
+        "@nitipit/adapter": "file:../adapter",
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
-        "color": "^4.2.3",
-        "gadjet": "file:./",
-        "uhtml": "^2.7.6"
+        "uhtml": "^2.7.6",
+        "@emotion/css": "^11.5.0",
+        "color": "^4.2.3"
     },
     "devDependencies": {
         "@nitipit/icon": "^0.0.6",
+        "gadjet": "file:./",
         "@parcel/packager-xml": "^2.8.0",
         "@parcel/transformer-sass": "^2.8.0",
         "@parcel/transformer-xml": "^2.8.0",
