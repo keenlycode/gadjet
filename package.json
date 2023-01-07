@@ -31,6 +31,10 @@
             "distDir": "dist/css/",
             "optimize": true
         },
+        "": {
+            "outputFormat": "global",
+            "optimize": true
+        },
         "bundle": {
             "sourceMap": true,
             "distDir": "dist/bundle/",
