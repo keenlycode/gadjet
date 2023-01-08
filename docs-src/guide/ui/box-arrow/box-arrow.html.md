@@ -31,7 +31,7 @@ import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
 </el-code-title>
 
 ```js
-import { BoxArrow } from 'gadjet/dist/bundle/gadjet.js';
+import { BoxArrow } from 'gadjet';
 
 BoxArrow.define('el-box-arrow');
 BoxArrow.tagStyle({

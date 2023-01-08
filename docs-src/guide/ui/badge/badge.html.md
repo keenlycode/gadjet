@@ -22,7 +22,7 @@ import { Badge } from 'gadjet/dist/module/ui/badge/badge.js';
 
 <el-code-title>js `<script defer>`</el-code-title>
 ```js
-import { Badge } from 'gadjet/dist/bundle/gadjet.js';
+import { Badge } from 'gadjet';
 
 Badge.define('el-badge');
 Badge.tagStyle({

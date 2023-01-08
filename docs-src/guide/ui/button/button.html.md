@@ -17,7 +17,7 @@ import { Button } from 'gadjet/dist/module/ui/button/button.js';
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { Button } from 'gadjet/dist/module/ui/button/button.js';
+import { Button } from 'gadjet';
 Button.tagStyle({
     color: 'blue'
 })
@@ -51,7 +51,7 @@ import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { ButtonPin } from 'gadjet/dist/bundle/gadjet.js';
+import { ButtonPin } from 'gadjet';
 
 ButtonPin.define('el-button-pin');
 ButtonPin.tagStyle({
@@ -80,7 +80,7 @@ import { Button } from 'gadjet/dist/module/ui/button/button-square.js';
 ### Usage
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { ButtonSquare } from 'gadjet/dist/bundle/gadjet.js';
+import { ButtonSquare } from 'gadjet';
 
 ButtonSquare.define('el-button-square');
 ButtonSquare.tagStyle({
@@ -120,7 +120,7 @@ import { ButtonGroup } from 'gadjet/dist/module/ui/button/button-group.js';
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { ButtonGroup } from 'gadjet/dist/bundle/gadjet.js';
+import { ButtonGroup } from 'gadjet';
 
 ButtonGroup.define('el-button-group');
 ButtonGroup.tagStyle({
