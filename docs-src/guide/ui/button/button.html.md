@@ -6,14 +6,14 @@
     <button>Button</button>
 </div>
 
-### Module and Import
+### Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
 import { Button } from 'gadjet/dist/module/ui/button/button.js';
 ```
 
-### Coding
+### Usage
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
@@ -40,14 +40,14 @@ Button.tagStyle({
     <el-button-pin>+</el-button-pin>
 </div>
 
-### Module and Import
+### Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
 import { ButtonPin } from 'gadjet/dist/module/ui/button/button-pin.js';
 ```
 
-### Coding
+### Usage
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
@@ -70,14 +70,14 @@ ButtonPin.tagStyle({
     <el-button-square>✕</el-button-square>
 </div>
 
-### Module and Import
+### Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
 import { Button } from 'gadjet/dist/module/ui/button/button-square.js';
 ```
 
-### Coding
+### Usage
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
 import { ButtonSquare } from 'gadjet/dist/bundle/gadjet.js';
@@ -109,14 +109,14 @@ ButtonSquare.tagStyle({
     </el-button-group>
 </div>
 
-### Module and Import
+### Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
 import { ButtonGroup } from 'gadjet/dist/module/ui/button/button-group.js';
 ```
 
-### Coding
+### Usage
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js

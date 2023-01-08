@@ -24,6 +24,7 @@
         "dist/**/*",
         "src/**/*"
     ],
+    "module": "./dist/module/gadjet.js",
     "targets": {
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
@@ -31,6 +32,7 @@
             "distDir": "dist/css/",
             "optimize": true
         },
+        "module": false,
         "": {
             "outputFormat": "global",
             "optimize": true

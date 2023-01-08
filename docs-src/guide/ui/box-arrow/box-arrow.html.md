@@ -17,14 +17,14 @@
     </el-box-arrow>
 </div>
 
-## Module and Import
+## Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
 import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
 ```
 
-## Coding
+## Usage
 ---
 <el-code-title>js
     <code>\<script defer\></code>
@@ -45,7 +45,7 @@ BoxArrow.tagStyle({
     borderRadius: '4px'
 })
 
-BoxArrow.classStyle('right', {arrow: 'left'});
+BoxArrow.classStyle('right', {arrow: 'right'});
 
 ```
 <el-code-title>html</el-code-title>
