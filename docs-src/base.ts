@@ -1,10 +1,6 @@
 import hljs from 'highlight.js/lib/core.js';
 import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript.js';
-import typescript from 'highlight.js/lib/languages/typescript.js';
-
-import { Badge } from 'gadjet/src/ui/badge/badge';
-import { Button } from 'gadjet/src/ui/button/button';
 
 import { Icon } from '@nitipit/icon/src/icon';
 
@@ -13,8 +9,10 @@ import {
     aspectRatio,
     bgColor,
     fontFluid,
-    lift 
-} from 'gadjet/src/style';
+    lift,
+    Badge,
+    Button
+} from 'gadjet/src/gadjet';
 import { Adapter } from '@nitipit/adapter/src/adapter';
 
 import { theme } from './color';
@@ -38,7 +36,6 @@ window.addEventListener('load', () => {
 
 hljs.registerLanguage('html', xml);
 hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('typescript', typescript);
 hljs.highlightAll();
 
 Badge.define('el-badge');

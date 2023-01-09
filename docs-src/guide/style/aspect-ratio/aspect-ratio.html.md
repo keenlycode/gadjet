@@ -20,7 +20,7 @@ Refer to
 ---
 <el-code-title>js</el-code-title>
 ```js
-import {aspectRatio} from 'gadjet/dist/module/style/aspect-ratio.js';
+import { aspectRatio } from 'gadjet/dist/module/style/aspect-ratio.js';
 ```
 
 ## Function signature
@@ -43,7 +43,7 @@ CSS string
 ---
 
 ```js
-import { addStyle, aspectRatio } from 'gadjet/dist/bundle/gadjet.js';
+import { addStyle, aspectRatio } from 'gadjet';
 
 addStyle`
 div {

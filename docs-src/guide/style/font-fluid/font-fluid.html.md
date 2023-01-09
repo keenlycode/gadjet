@@ -8,7 +8,7 @@ Dynamic font size relative to viewport width.
     <p class="font-fluid">Try resizing your browser to see font size change</p>
 </div>
 
-## Module path
+## Module & Import
 ---
 
 <el-code-title>js</el-code-title>
@@ -58,7 +58,7 @@ CSS string
 
 <el-code-title>js</el-code-title>
 ```js
-import { addStyle, fontFluid } from 'gadjet/dist/bundle/gadjet.js';
+import { addStyle, fontFluid } from 'gadjet';
 
 addStyle`
 html {

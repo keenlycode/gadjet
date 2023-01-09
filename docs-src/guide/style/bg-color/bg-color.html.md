@@ -9,7 +9,7 @@ Background color with proper text color (black or white);
     <div class="bg-theme-violet" style="padding: 0.5rem;">#7900FF</div>
 </div>
 
-## Module path
+## Module & Import
 ---
 <el-code-title>js</el-code-title>
 ```js
@@ -37,7 +37,7 @@ CSS string
 
 <el-code-title>js</el-code-title>
 ```js
-import { addStyle, bgColor } from 'gadjet/dist/bundle/gadjet.js';
+import { addStyle, bgColor } from 'gadjet';
 
 addStyle`
 div {

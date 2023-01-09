@@ -3,7 +3,7 @@
 ## Installation
 ---
 
-```bash
+```shell
 $ npm install gadjet
 ```
 
@@ -23,8 +23,8 @@ import { Button, Badge } from 'gadjet.js';
 
 This method require javascript building tools. In this example use Parcel v2
 
-```
-npm install parcel
+```shell
+$ npm install parcel
 ```
 
 <el-code-title>html<code>index.html</code></el-code-title>
@@ -46,15 +46,15 @@ npm install parcel
 
 <el-code-title>js<code>index.js</code></el-tag>
 ```js
-import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
+import { InputTag } from 'gadjet';
 
 InputTag.define('el-input-tag);
 ```
 
 Then run `parcel`
 
-<el-code-title>bash</el-code-title>
-```bash
+<el-code-title>shell</el-code-title>
+```shell
 $ parcel webpage.html
 Server running at http://localhost:1234
 ✨ Built in 48ms
@@ -69,14 +69,12 @@ Will give you the result on webpage at [](http://localhost:1234).
 ### 3. Use Typescript modules
 
 This require Javascript building tools which support typescript
-(Parcel v2 is recommended). Everthing is the same as using Javascript modules
-except the import path which start with `gadjet/src/` instead of
-`gadjet/dist/module/`. For example
+(Parcel v2 is recommended). The import path will start with `gadjet/src/ui/`
 
 <el-blockquote-title>Note</el-blockquote-title>
 
 > Using **Typescript** with coding tools (VS Code) will provide you a better coding environment
-> such as autocomplete, suggestion or variables type.
+> such as autocomplete, suggestion or variable type check.
 
 <el-code-title>ts</el-code-title>
 ```ts

@@ -47,7 +47,7 @@ CSS string
 ---
 
 ```js
-import { addStyle, lift } from 'gadjet/dist/bundle/gadjet.js';
+import { addStyle, lift } from 'gadjet';
 
 addStyle`
 div {

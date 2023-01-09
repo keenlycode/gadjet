@@ -26,7 +26,7 @@ import { Card } from 'gadjet/dist/module/ui/card/card.js';
 <el-code-title>js <code>\<script defer></code></el-code-title>
 
 ```js
-import { Card } from 'gadjet/dist/bundle/gadjet.js';
+import { Card } from 'gadjet';
 
 Card.define('el-card');
 Card.tagStyle({
