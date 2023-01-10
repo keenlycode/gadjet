@@ -4,12 +4,20 @@
 ---
 <el-file-manager></el-file-manager>
 
-## Coding
+## Module & Import
+---
+
+<el-code-title>js</el-code-title>
+```js
+import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.js';
+```
+
+## Usage
 ---
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.js';
+import { FileManager } from 'gadjet';
 
 FileManager.define('el-file-manager');
 FileManager.tagStyle({
@@ -19,8 +27,7 @@ FileManager.tagStyle({
     completeColor: 'green',
     errorColor: 'red'
 })
-const fm = document.createElement('el-file-manager');
-document.body.append(fm);
+const fm = document.querySelector('el-file-manager');
 fm.loadFiles(['1.jpg', '2.jpg', '3.jpg']);
 ```
 
