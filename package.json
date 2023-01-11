@@ -33,19 +33,14 @@
             "optimize": true
         },
         "module": false,
-        "": {
-            "outputFormat": "global",
-            "optimize": true
-        },
         "bundle": {
-            "sourceMap": true,
             "distDir": "dist/bundle/",
-            "outputFormat": "global",
-            "optimize": true
+            "sourceMap": true,
+            "optimize": false
         },
         "docs": {
-            "sourceMap": true,
             "distDir": "docs/",
+            "sourceMap": true,
             "optimize": true
         }
     },

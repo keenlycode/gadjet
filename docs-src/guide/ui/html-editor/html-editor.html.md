@@ -7,12 +7,18 @@ with it's StarterKit extension.
 ---
 <el-html-editor></el-html-editor>
 
-## Coding
+## Module & Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { HTMLEditor } from 'gadjet/dist/module/ui/html-editor/html-editor.js';
+```
+
+## Usage
 ---
 
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { HTMLEditor } from 'gadjet/dist/module/ui/html-editor/html-editor.js';
+import { HTMLEditor } from 'gadjet/dist/bundle/ui/html-editor/html-editor.js';
 
 define('el-html-editor', HTMLEditor);
 ```
