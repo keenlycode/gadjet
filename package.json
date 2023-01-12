@@ -36,7 +36,7 @@
         "bundle": {
             "distDir": "dist/module/",
             "sourceMap": true,
-            "optimize": false,
+            "optimize": true,
             "outputFormat": "commonjs",
             "isLibrary": true
         },

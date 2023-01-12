@@ -11,12 +11,12 @@ $ npm install gadjet
 ---
 ### 1. Use bundle script
 
-Just copy `node_modules/gadjet/dist/bundle/gadjet.js` and place to directory
+Just copy `node_modules/gadjet/dist/module/gadjet.bundle.js` and place to directory
 which can be access by web browser, then every functions and modules will be
 ready to import.
 
 ```js
-import { Button, Badge } from 'gadjet.js';
+import { Button, Badge } from 'gadjet/dist/module/gadjet.bundle.js';
 ```
 
 ### 2. Use Javascript modules

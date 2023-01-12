@@ -14,10 +14,18 @@ import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.js'
 
 ## Usage
 ---
+To use **FileManager**, it must be imported separately since it's not included
+by default in **gadjet** module & bundle.
+
+In an example codes below import the standalone **FileManager** bundle ( ~ 80KB )
+<el-blockquote-title>Note</el-blockquote-title>
+> Import **FileManager** module with javascript building tool (**Parcel** for example) 
+> can reduce **FileManager** size to just about ~ 20KB
+
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { FileManager } from 'gadjet';
+import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.bundle.js';
 
 FileManager.define('el-file-manager');
 FileManager.tagStyle({
