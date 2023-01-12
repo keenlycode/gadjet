@@ -5,7 +5,7 @@ from pathlib import Path
 _dir = Path(__file__).parent
 
 async def bundle():
-    print('# gadjet.js bundle')
+    print('# bundle')
     cmd = "npx parcel build --no-cache " +\
         "--target bundle " +\
         "--no-cache " +\

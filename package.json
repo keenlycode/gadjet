@@ -34,9 +34,11 @@
         },
         "module": false,
         "bundle": {
-            "distDir": "dist/bundle/",
+            "distDir": "dist/module/",
             "sourceMap": true,
-            "optimize": false
+            "optimize": false,
+            "outputFormat": "commonjs",
+            "isLibrary": true
         },
         "docs": {
             "distDir": "docs/",

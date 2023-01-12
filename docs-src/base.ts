@@ -12,7 +12,8 @@ import {
     lift,
     Badge,
     Button
-} from 'gadjet/src/gadjet';
+} from 'gadjet';
+
 import { Adapter } from '@nitipit/adapter/src/adapter';
 
 import { theme } from './color';
