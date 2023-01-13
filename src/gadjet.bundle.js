@@ -1,3 +1,1 @@
-import * as gadjet from './gadjet';
-
-export { gadjet };
+export * from './gadjet';

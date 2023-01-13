@@ -13,8 +13,6 @@ export { ButtonSquare } from './ui/button/button-square';
 export { Card } from './ui/card/card';
 export { Checkbox } from './ui/checkbox/checkbox';
 
-// export { FileManager } from './ui/file-manager/file-manager';
-
 export { Input } from './ui/input/input';
 export { InputDate } from './ui/input/input-date';
 export { InputNumber } from './ui/input/input-number';
@@ -33,4 +31,5 @@ export { Table } from './ui/table/table';
 export { Tag } from './ui/tag/tag';
 export { TagX } from './ui/tag/tagx';
 
+// export { FileManager } from './ui/file-manager/file-manager';
 // export { HTMLEditor } from './ui/html-editor/html-editor';

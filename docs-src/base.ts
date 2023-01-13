@@ -44,7 +44,7 @@ Badge.tagStyle({
     color: theme.blueGreen
 });
 
-Button.initStyle();
+Button.define('button');
 
 Button.tagStyle({color: theme.yellow});
 

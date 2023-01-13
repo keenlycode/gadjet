@@ -6,9 +6,7 @@ _dir = Path(__file__).parent
 
 async def bundle():
     print('# bundle')
-    cmd = "npx parcel build --no-cache " +\
-        "--target bundle " +\
-        "--no-cache " +\
+    cmd = "npx parcel build --no-cache --target bundle " +\
         "'src/**/*.bundle.js'"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
