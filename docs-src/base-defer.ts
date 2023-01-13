@@ -6,23 +6,18 @@ import typescript from 'highlight.js/lib/languages/typescript.js';
 
 const Color = require('color');
 
-import { Sidebar } from 'gadjet/src/ui/sidebar/sidebar';
-import { ButtonPin } from 'gadjet/src/ui/button/button-pin';
-
 import './_component/blockquote';
 import './_component/code';
 import './_component/paragraph';
 import './_component/sidebar';
 import './_component/function-detail';
 
-import { hljs } from './base';
+window.hljs.registerLanguage('css', css);
+window.hljs.registerLanguage('scss', scss);
+window.hljs.registerLanguage('shell', shell);
+window.hljs.registerLanguage('bash', bash);
+window.hljs.registerLanguage('typescript', typescript);
 
-hljs.registerLanguage('css', css);
-hljs.registerLanguage('scss', scss);
-hljs.registerLanguage('shell', shell);
-hljs.registerLanguage('bash', bash);
-hljs.registerLanguage('typescript', typescript);
-
-window.sidebar = document.querySelector('el-sidebar') as Sidebar;
-window.sidebarButton = document.querySelector('el-sidebar-button') as ButtonPin;
+window.sidebar = document.querySelector('el-sidebar')
+window.sidebarButton = document.querySelector('el-sidebar-button');
 window.Color = Color;

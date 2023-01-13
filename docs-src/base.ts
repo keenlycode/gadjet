@@ -4,12 +4,7 @@ import javascript from 'highlight.js/lib/languages/javascript.js';
 
 import { Icon } from '@nitipit/icon/src/icon';
 
-import {
-    addStyle,
-    fontFluid,
-    Badge,
-    Button
-} from 'gadjet/src/gadjet';
+import * as gadjet from 'gadjet/src/gadjet';
 
 import { theme } from './color';
 
@@ -18,13 +13,19 @@ const baseUrl = new URL('../', document.currentScript!.src);
 window.addEventListener('load', () => {
     Icon.href = `${baseUrl.href}asset/icon/gadjet/symbol-defs.svg`;
     customElements.define('el-icon', Icon);
-})
+});
 
 hljs.registerLanguage('html', xml);
 hljs.registerLanguage('javascript', javascript);
 hljs.highlightAll();
 
-export { hljs };
+window.hljs = hljs;
+window.gadjet = gadjet;
+
+const Badge = gadjet.Badge;
+const Button = gadjet.Button;
+const addStyle = gadjet.addStyle;
+const fontFluid = gadjet.fontFluid;
 
 Badge.define('el-badge');
 Badge.tagStyle({

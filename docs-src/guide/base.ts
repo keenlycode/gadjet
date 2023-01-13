@@ -1,7 +1,6 @@
 import { theme } from '../color';
-import { addStyle } from 'gadjet/dist/module/gadjet';
 
-addStyle`
+window.gadjet.addStyle`
 body {
     padding-bottom: 10rem;
 }

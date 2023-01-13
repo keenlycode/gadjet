@@ -1,9 +1,8 @@
-import { addStyle, bgColor, Tag } from 'gadjet/src/gadjet';
 const Color = require('color');
 
 import { theme } from '../color';
 
-class CodeTitle extends Tag {};
+class CodeTitle extends window.gadjet.Tag {};
 CodeTitle.define('el-code-title');
 
 CodeTitle.tagStyle({
@@ -21,13 +20,13 @@ CodeTitle.tagStyle(`
         margin-left: 0.5rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-        ${bgColor(codeColor)}
+        ${window.gadjet.bgColor(codeColor)}
     }
 `)
 
-addStyle`
+window.gadjet.addStyle`
 code, .code {
-    ${bgColor(theme.dark)}
+    ${window.gadjet.bgColor(theme.dark)}
     font-family: mono;
     border-radius: 4px;
     vertical-align: middle;
