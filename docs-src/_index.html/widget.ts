@@ -5,8 +5,11 @@ import {
     ButtonGroup,
     Button,
     BoxArrow,
-    ProgressBar
-} from 'gadjet/dist/module/gadjet';
+    ProgressBar,
+    fontFluid
+} from 'gadjet/src/gadjet';
+
+import { Adapter } from '@nitipit/adapter/src/adapter';
 
 import { theme } from '../color';
 

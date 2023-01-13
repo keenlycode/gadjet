@@ -15,6 +15,8 @@ import './_component/paragraph';
 import './_component/sidebar';
 import './_component/function-detail';
 
+import { hljs } from './base';
+
 hljs.registerLanguage('css', css);
 hljs.registerLanguage('scss', scss);
 hljs.registerLanguage('shell', shell);

@@ -1,5 +1,7 @@
-import { theme } from './color';
+import { Adapter } from '@nitipit/adapter/src/adapter';
+import { fontFluid, bgColor, lift } from 'gadjet/src/gadjet';
 
+import { theme } from './color';
 import './_index.html/widget';
 
 sidebar.showAt = null;

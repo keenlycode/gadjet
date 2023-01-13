@@ -24,6 +24,8 @@ hljs.registerLanguage('html', xml);
 hljs.registerLanguage('javascript', javascript);
 hljs.highlightAll();
 
+export { hljs };
+
 Badge.define('el-badge');
 Badge.tagStyle({
     color: theme.blueGreen
