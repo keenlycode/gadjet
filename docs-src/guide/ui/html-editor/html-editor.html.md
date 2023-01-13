@@ -7,14 +7,12 @@ with it's StarterKit extension.
 ---
 <el-html-editor></el-html-editor>
 
-## Bundle
----
-```js
-
-```
-
 ## Module & Import
 ---
+
+**HTMLEditor** must be imported separately, since it's not included in **Gadjet**
+bundle & module.
+
 <el-code-title>js</el-code-title>
 ```js
 import { HTMLEditor } from 'gadjet/dist/module/ui/html-editor/html-editor.js';

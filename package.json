@@ -43,7 +43,8 @@
         "docs": {
             "distDir": "docs/",
             "sourceMap": true,
-            "optimize": true
+            "optimize": true,
+            "outputFormat": "global"
         }
     },
     "dependencies": {

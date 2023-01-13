@@ -6,7 +6,7 @@ import {
     Button,
     BoxArrow,
     ProgressBar
-} from 'gadjet/src/gadjet';
+} from 'gadjet/dist/module/gadjet';
 
 import { theme } from '../color';
 

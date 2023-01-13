@@ -12,7 +12,7 @@ import {
     lift,
     Badge,
     Button
-} from 'gadjet';
+} from 'gadjet/dist/module/gadjet';
 
 import { Adapter } from '@nitipit/adapter/src/adapter';
 
@@ -44,7 +44,10 @@ Badge.tagStyle({
     color: theme.blueGreen
 });
 
+Button.initStyle();
+
 Button.tagStyle({color: theme.yellow});
+
 Button.tagStyle(`
     border-radius: 5px;
     align-items: center;
