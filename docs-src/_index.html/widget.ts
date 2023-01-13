@@ -10,8 +10,6 @@ import {
 
 import { theme } from '../color';
 
-import '../global.d';
-
 class WidgetContainer extends Adapter {}
 WidgetContainer.define("el-widget-container");
 WidgetContainer.tagStyle(`

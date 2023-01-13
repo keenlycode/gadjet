@@ -2,8 +2,6 @@ import { theme } from './color';
 
 import './_index.html/widget';
 
-import './global.d';
-
 sidebar.showAt = null;
 sidebar.mediaChange();
 

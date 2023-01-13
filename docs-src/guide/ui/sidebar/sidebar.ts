@@ -1,6 +1,5 @@
 import { ButtonPin } from 'gadjet/src/ui/button/button-pin';
 
-import '../../../global.d';
 import { theme } from '../../../color';
 
 ButtonPin.define('el-button-pin');

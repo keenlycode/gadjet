@@ -1,5 +1,5 @@
 import { theme } from '../color';
-import '../global.d';
+import { addStyle } from 'gadjet/dist/module/gadjet';
 
 addStyle`
 body {

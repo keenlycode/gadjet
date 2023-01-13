@@ -1,5 +1,7 @@
+import { Adapter } from '@nitipit/adapter/src/adapter';
+import { bgColor } from 'gadjet/src/gadjet';
+
 import { theme } from '../color';
-import '../global.d';
 
 class FunctionDetail extends Adapter {};
 FunctionDetail.define('el-function-detail');

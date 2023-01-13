@@ -2,8 +2,6 @@ import asyncio
 from pathlib import Path
 
 
-_dir = Path(__file__).parent
-
 async def bundle():
     print('# bundle')
     cmd = "npx parcel build --no-cache --target bundle " +\
@@ -35,7 +33,7 @@ async def main():
     await asyncio.gather(
         module(),
         bundle(),
-        # docs(),
+        docs(),
     )
 
 

@@ -1,6 +1,5 @@
-import { Tag } from 'gadjet/src/ui/tag/tag';
+import { addStyle, bgColor, Tag } from 'gadjet/src/gadjet';
 import { theme } from '../color';
-import '../global.d';
 
 class BlockquoteTitle extends Tag {};
 BlockquoteTitle.define('el-blockquote-title');

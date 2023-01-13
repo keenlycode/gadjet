@@ -1,5 +1,4 @@
-import { Tag } from 'gadjet/src/ui/tag/tag';
-import { bgColor } from 'gadjet/src/style/bg-color';
+import { addStyle, bgColor, Tag } from 'gadjet/src/gadjet';
 const Color = require('color');
 
 import { theme } from '../color';

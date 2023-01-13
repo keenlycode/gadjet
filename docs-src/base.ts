@@ -6,32 +6,17 @@ import { Icon } from '@nitipit/icon/src/icon';
 
 import {
     addStyle,
-    aspectRatio,
-    bgColor,
     fontFluid,
-    lift,
     Badge,
     Button
-} from 'gadjet/dist/module/gadjet';
-
-import { Adapter } from '@nitipit/adapter/src/adapter';
+} from 'gadjet/src/gadjet';
 
 import { theme } from './color';
 
-import './global.d';
-
-window.baseUrl = new URL('../', document.currentScript!.src);
-window.addStyle = addStyle;
-window.aspectRatio = aspectRatio;
-window.bgColor = bgColor;
-window.fontFluid = fontFluid;
-window.lift = lift;
-window.Adapter = Adapter;
-window.theme = theme;
-window.hljs = hljs;
+const baseUrl = new URL('../', document.currentScript!.src);
 
 window.addEventListener('load', () => {
-    Icon.href = `${window.baseUrl.href}asset/icon/gadjet/symbol-defs.svg`;
+    Icon.href = `${baseUrl.href}asset/icon/gadjet/symbol-defs.svg`;
     customElements.define('el-icon', Icon);
 })
 
@@ -45,7 +30,6 @@ Badge.tagStyle({
 });
 
 Button.define('button');
-
 Button.tagStyle({color: theme.yellow});
 
 Button.tagStyle(`

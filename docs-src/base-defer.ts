@@ -9,8 +9,6 @@ const Color = require('color');
 import { Sidebar } from 'gadjet/src/ui/sidebar/sidebar';
 import { ButtonPin } from 'gadjet/src/ui/button/button-pin';
 
-import './global.d';
-
 import './_component/blockquote';
 import './_component/code';
 import './_component/paragraph';
