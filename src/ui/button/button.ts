@@ -9,11 +9,12 @@ export class Button extends Adapter {
     static tagName: string = 'button';
 
     static define(tagName: string) {
-        if (tagName === "button") {
-            this.initStyle()
-        } else {
-            super.define(tagName);
-        }
+        if (tagName.toLocaleLowerCase() === "button") {
+            this.tagName = "button";
+            this.initStyle();
+            return;
+        };
+        super.define(tagName);
     }
 
     static tagStyle(style?: string | ButtonStyleParam): void {

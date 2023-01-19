@@ -11,18 +11,18 @@
 ## Coding
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { Sidebar } from 'gadjet/dist/module/ui/sidebar/sidebar.js';
-define('el-sidebar', Sidebar);
+import { Sidebar } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Sidebar.define('el-sidebar');
 Sidebar.tagStyle({
     bgColor: '#eee',
     overlayColor: 'rgba(0,0,0,0.7)'
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-sidebar showAt="1000px">
     <div el="content">
@@ -37,17 +37,17 @@ Sidebar.tagStyle({
 ## Element API
 ---
 
-<el-tag class="title-block">prop<code>showAt: string = "1000px"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>showAt: string = "1000px"</code></el-code-title>
+<el-function-detail>
 Viewport width to show sidebar.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>show()</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>show()</code></el-code-title>
+<el-function-detail>
 Show sidebar.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>hide()</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>hide()</code></el-code-title>
+<el-function-detail>
 Hide sidebar.
-</blockquote>
+</el-function-detail>

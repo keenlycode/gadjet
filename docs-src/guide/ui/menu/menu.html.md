@@ -44,18 +44,18 @@
 ## Coding
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { Menu } from 'gadjet/dist/module/ui/menu/menu.js';
-define('el-menu', Menu);
+import { Menu } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Menu.define('el-menu');
 Menu.tagStyle({
     activeColor: 'blue',
     arrowColor: 'blue'
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-menu>
 <ul>

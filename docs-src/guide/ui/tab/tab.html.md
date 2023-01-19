@@ -14,11 +14,11 @@
 ## Coding
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { Tab } from 'gadjet/dist/module/ui/tab/tab.js';
-define('el-tab', Tab);
+import { Tab } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Tab.define('el-tab');
 Tab.tagStyle({
     tabColor: '#ccc',
     hoverColor: '#ddd',
@@ -28,7 +28,7 @@ Tab.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-tab>
     <div>Personal Info</div>
@@ -39,8 +39,8 @@ Tab.tagStyle({
 
 ## Element API
 ---
-<el-tag class="title-block">fn <code>setupTab(): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn <code>setupTab(): void</code></el-code-title>
+<el-function-detail>
 Setup javascript and event for tabs. Should be called if tab elements has
 been modified.
-</blockquote>
+</el-function-detail>

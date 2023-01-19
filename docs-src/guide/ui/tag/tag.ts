@@ -1,7 +1,8 @@
-import { addStyle } from '@nitipit/adapter/src/adapter';
-import { Tag } from 'gadjet/src/ui/tag/tag';
-import { TagX } from 'gadjet/src/ui/tag/tagx';
-
+import {
+    addStyle,
+    Tag,
+    TagX
+} from 'gadjet/dist/module/gadjet.bundle.js';
 
 class MyTag extends Tag {};
 MyTag.define('my-tag');

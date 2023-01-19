@@ -55,10 +55,12 @@
 ## Coding
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
-```js
-import { Table } from 'gadjet/dist/module/ui/table/table.js';
+<el-code-title>js <code>\<script defer></code></el-code-title>
 
+```js
+import { Table } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Table.define('table');
 Table.tagStyle({
     theadBgColor: '#ccc',
     activeColor: 'blue',
@@ -67,7 +69,7 @@ Table.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <table class="table">
     <thead>

@@ -10,14 +10,14 @@
 ---
 <el-code-title>js</el-code-title>
 ```js
-import { Button } from 'gadjet/dist/module/ui/button/button.js';
+import { Button } from 'gadjet/dist/module/gadjet.bundle.js';
 ```
 
 ### Usage
 
 <el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { Button } from 'gadjet';
+import { Button } from 'gadjet/dist/module/gadjet.bundle.js';
 Button.tagStyle({
     color: 'blue'
 })
