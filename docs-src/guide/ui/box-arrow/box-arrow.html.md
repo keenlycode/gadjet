@@ -17,13 +17,23 @@
     </el-box-arrow>
 </div>
 
-## Coding
+## Module & Import
 ---
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js</el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { BoxArrow } from 'gadjet/dist/module/ui/box-arrow/box-arrow.js';
-define('el-box-arrow', BoxArrow);
+```
+
+## Usage
+---
+<el-code-title>js
+    <code>\<script defer\></code>
+</el-code-title>
+
+```js
+import { BoxArrow } from 'gadjet';
+
+BoxArrow.define('el-box-arrow');
 BoxArrow.tagStyle({
     arrow: 'top', // arrow direction: top, right, bottom or left
     arrowSize: '8px',
@@ -35,10 +45,10 @@ BoxArrow.tagStyle({
     borderRadius: '4px'
 })
 
-BoxArrow.classStyle('right', {arrow: 'left'});
+BoxArrow.classStyle('right', {arrow: 'right'});
 
 ```
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-box-arrow>Top Arow</el-box-arrow>
 <el-box-arrow class="right">Right Arrow</el-box-arrow>

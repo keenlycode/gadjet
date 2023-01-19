@@ -1,5 +1,5 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { BoxArrowStyle, BoxArrowStyleParam } from "./box-arrow.style";
-import { Adapter } from "../../adapter";
 import {render, html} from 'uhtml';
 
 export class BoxArrow extends Adapter {

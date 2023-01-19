@@ -16,11 +16,11 @@ Refer to
     <iframe width="560" height="315" src="https://www.youtube.com/embed/WhWc3b3KhnY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## Import
+## Module path
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
-import {aspectRatio} from 'gadjet/dist/module/style/aspect-ratio.js';
+import { aspectRatio } from 'gadjet/dist/module/style/aspect-ratio.js';
 ```
 
 ## Function signature
@@ -29,21 +29,21 @@ import {aspectRatio} from 'gadjet/dist/module/style/aspect-ratio.js';
 aspectRatio(ratio?: string = '1/1') => string;
 ```
 
-<el-tag class="title-block">param <code>ratio: string = '1/1'</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>param <code>ratio: string = '1/1'</code></el-code-title>
+<el-function-detail>
 width/height ratio
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">return</el-tag>
-<blockquote class="fn-detail">
+<el-code-title>return</el-code-title>
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---
 
 ```js
-import { addStyle } from 'gadjet/dist/module/style/add-style.js';
+import { addStyle, aspectRatio } from 'gadjet';
 
 addStyle`
 div {

@@ -1,4 +1,4 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { ButtonPinStyle, ButtonPinStyleParam } from "./button-pin.style";
 
 export class ButtonPin extends Adapter {

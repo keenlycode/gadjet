@@ -1,5 +1,6 @@
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor, lift } from "../../style";
-import { StyleClass } from "../../adapter";
+
 
 export class SwitchStyleParam {
     pinColor?: string;
@@ -12,7 +13,7 @@ export class SwitchStyleParam {
 export class SwitchStyle extends StyleClass {
     static default = {
         pinColor: '#f6f5f4',
-        pinRadius: '0.25em',
+        pinRadius: '10em',
         bgColor: '#deddda',
         activeColor: 'blue'
     }
@@ -23,8 +24,8 @@ export class SwitchStyle extends StyleClass {
         display: inline-flex;
         font-weight: bold;
         line-height: initial;
-        width: 4.5em;
-        height: 1.5em;
+        width: 3.8em;
+        height: 2em;
         align-items: center;
         position: relative;
 
@@ -43,24 +44,25 @@ export class SwitchStyle extends StyleClass {
             display: flex;
             width: 100%;
             height: 100%;
-            border-radius: 0.2em;
             ${lift({ level: 1 })}
+            overflow: hidden;
             transition: .4s;
             align-items: center;
             text-align: center;
+            padding-left: 0.2em;
+            padding-right: 0.2em;
         }
 
         div[el="pin"] {
             box-sizing: border-box;
             position: absolute;
             top: 50%;
-            left: 0;
+            left: 0.1em;
             transform: translateY(-50%);
             text-align: center;
-            width: 50%;
-            height: 101%;
+            width: 1.8em;
+            height: 1.8em;
             border: 1px solid #9a9996;
-            border-radius: 0.2em;
             transition: .2s;
         }
 
@@ -73,7 +75,7 @@ export class SwitchStyle extends StyleClass {
         }
 
         input[type="checkbox"]:checked ~ div[el="pin"] {
-            transform: translate(101%, -50%);
+            transform: translate(1.8em, -50%);
             will-change: transform;
         }
         ${this.style(style)}

@@ -4,15 +4,31 @@
 ---
 <el-file-manager></el-file-manager>
 
-## Coding
+## Module & Import
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js</el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
 import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.js';
+```
 
-define('el-file-manager', FileManager);
+## Usage
+---
+To use **FileManager**, it must be imported separately since it's not included
+by default in **gadjet** module & bundle.
+
+In an example codes below import the standalone **FileManager** bundle ( ~80KB )
+
+<el-blockquote-title>Note</el-blockquote-title>
+> Import **FileManager** module together with **Gadjet** with Javascript building tool (E.g. **Parcel**) 
+> can reduce **FileManager** size to just about ~20KB
+
+
+<el-code-title>js <code>\<script defer></code></el-code-title>
+```js
+import { FileManager } from 'gadjet/dist/module/ui/file-manager/file-manager.bundle.js';
+
+FileManager.define('el-file-manager');
 FileManager.tagStyle({
     buttonColor: 'blue',
     deleteButtonColor: 'red',
@@ -24,39 +40,39 @@ const fm = document.querySelector('el-file-manager');
 fm.loadFiles(['1.jpg', '2.jpg', '3.jpg']);
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-file-manager uploadUrl="./"></el-file-manager>
 ```
 
 ## Element API
 ---
-<el-tag class="title-block">prop<code>uploadURL: string = './'</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>uploadURL: string = './'</code></el-code-title>
+<el-function-detail>
 URL for upload with <b>HTTP POST</b>
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>loadFile(url: string): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>loadFile(url: string): void</code></el-code-title>
+<el-function-detail>
 Load file from a URL to File object and display thumbnail.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>loadFiles(urls: Array\<string>): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>loadFiles(urls: Array\<string>): void</code></el-code-title>
+<el-function-detail>
 Load files from list of URL and display thumbnails.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>openFileSelector(): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>openFileSelector(): void</code></el-code-title>
+<el-function-detail>
 Open files selector
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>send(): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>send(): void</code></el-code-title>
+<el-function-detail>
 Upload all files separately to <code>uploadURL</code> by <b>HTTP POST</b>.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>delete(): void</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>delete(): void</code></el-code-title>
+<el-function-detail>
 Remove all files and send <b>HTTP DELETE</b> to each file's url.
-</blockquote>
+</el-function-detail>

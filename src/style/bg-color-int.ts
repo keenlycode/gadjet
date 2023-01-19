@@ -1,31 +1,26 @@
-const Color = require('color');
-import {bgColor} from './bg-color';
+import Color from 'color';
+import { bgColor } from './bg-color';
 
-interface bgColorIntParam {
-    color?: string;
-    hoverColor?: string;
-    activeColor?: string;
-}
 
 export const bgColorInt = ({
-    color = 'blue',
-    hoverColor = null,
-    activeColor = null
-}: bgColorIntParam) => {
-    if (!hoverColor) {
-        hoverColor = Color(color).lighten(0.2).saturate(0.2);
-    }
-    if (!activeColor) {
-        activeColor = Color(color).darken(0.2).desaturate(0.2);
-    }
+        color = 'blue',
+        lighten = 0.2,
+        saturate = 0.2
+    }): string => {
+
+    const color_ = new Color(color);
+    const hoverColor = color_.lighten(lighten).saturate(saturate);
 
     return `
-    ${bgColor(color)}
+    ${bgColor(color_.toString())}
     &:hover {
-        background-color: ${hoverColor};
+        background-color: ${
+            color_.lighten(lighten).saturate(saturate).toString()
+        };
     }
     &:active {
-        background-color: ${activeColor};
-    }
-    `.trim();
+        background-color: ${
+            color_.lighten(-lighten).saturate(saturate).toString()
+        };
+    }`.trim();
 }

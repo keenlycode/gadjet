@@ -1,5 +1,5 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { ButtonGroupStyle, ButtonGroupStyleParam } from "./button-group.style";
-import { Adapter } from "../../adapter";
 
 export class ButtonGroup extends Adapter {
     static Style = ButtonGroupStyle;

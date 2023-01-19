@@ -9,9 +9,9 @@ Background color with proper text color (black or white);
     <div class="bg-theme-violet" style="padding: 0.5rem;">#7900FF</div>
 </div>
 
-## Import
+## Module & Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
 ```
@@ -22,23 +22,22 @@ import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
 bgColor(color: string = 'blue') => string;
 ```
 
-<el-tag class="title-block">param <code>color: string = 'blue'</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>param <code>color: string = 'blue'</code></el-code-title>
+<el-function-detail>
 CSS color for background
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">return</el-tag>
-<blockquote class="fn-detail">
+<el-code-title>return</el-code-title>
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---
 
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
-import { addStyle } from 'gadjet/dist/style.js';
-import { bgColor } from 'gadjet/dist/module/style/bg-color.js';
+import { addStyle, bgColor } from 'gadjet';
 
 addStyle`
 div {

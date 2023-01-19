@@ -8,18 +8,18 @@
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { Tag } from 'gadjet/dist/module/ui/tag/tag.js';
-define('el-tag', Tag);
+import { Tag } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Tag.define('el-tag');
 Tag.tagStyle({
     color: 'blue',
     borderRadius: '4px'
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-tag>Tag</el-tag>
 ```
@@ -32,34 +32,34 @@ Tag.tagStyle({
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { TagX } from 'gadjet/dist/module/ui/tag/tagx.js';
-define('el-tagx', TagX);
+import { TagX } from 'gadjet/dist/module/gadjet.bundle.js';
+
+TagX.define('el-tagx');
 TagX.tagStyle({
     color: 'blue',
     borderRadius: '4px'
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-tagx>Tag</el-tagx>
 ```
 
 ### Element API
 
-<el-tag class="title-block">fn<code>remove()</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>remove()</code></el-code-title>
+<el-function-detail>
 Remove tag.
-</blockquote>
+</el-function-detail>
 
 
-<el-tag class="title-block">event<code>remove</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>event<code>remove</code></el-code-title>
+<el-function-detail>
 Emitted when tag is removed<br>
-<el-tag class="title-block">Example</el-tag>
+<el-code-title>Example</el-code-title>
 <pre>
 <code class="hljs language-js">document.querySelector('el-tag').addEventListener(
     'remove', (event) => {
@@ -67,4 +67,4 @@ Emitted when tag is removed<br>
     }
 )</code>
 </pre>
-</blockquote>
+</el-function-detail>

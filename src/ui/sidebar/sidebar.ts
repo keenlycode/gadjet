@@ -1,6 +1,7 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { Hole, html, render } from 'uhtml';
-import { Adapter } from "../../adapter";
 import { SidebarStyle, SidebarStyleParam } from './sidebar.style';
+
 
 interface SidebarChildElement {
     content: Element | HTMLElement | Hole;
@@ -14,15 +15,15 @@ interface showParam {
 export class Sidebar extends Adapter {
     static Style = SidebarStyle;
 
-    static tagStyle(style?: SidebarStyleParam): void {
+    static tagStyle(style?: string | SidebarStyleParam): void {
         super.tagStyle(style);
     }
 
-    static classStyle(class_: string, style?: SidebarStyleParam): void {
+    static classStyle(class_: string, style?: string | SidebarStyleParam): void {
         super.classStyle(class_, style);
     }
 
-    addStyle(style?: SidebarStyleParam): void {
+    addStyle(style?: string | SidebarStyleParam): void {
         super.addStyle(style);
     }
 
@@ -30,24 +31,29 @@ export class Sidebar extends Adapter {
         content: null,
         overlay: null
     };
-    showAt: string = "1000px";
+    _showAt: string | null = "1000px";
     mediaQuery: MediaQueryList;
+
+    set showAt(value: string | null) {
+        this._showAt = value;
+        this.setAttribute('showAt', value);
+        this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
+    }
+
+    get showAt(): string {
+        return this._showAt;
+    }
 
     constructor() {
         super();
-        this.showAt = this.getAttribute('showAt') || this.showAt;
+        this.showAt = this.getAttribute('showAt') || this._showAt;
         this.el.content = this.querySelector('[el="content"]')
             || html`<div el="content">`;
         this.el.overlay = this.querySelector('[el="overlay"]')
             || html`<div el="overlay">`;
 
         this.render();
-        this.mediaQuery = window.matchMedia(`(min-width: ${this.showAt})`);
-        if (this.mediaQuery.matches) {
-            setTimeout(() => {
-                this.show({overlay: false})
-            }, 0)
-        }
+        this.mediaChange();
         this.mediaQuery.addEventListener("change", () => {
             this.mediaChange();
         });

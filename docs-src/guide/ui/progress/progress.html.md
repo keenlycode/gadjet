@@ -21,11 +21,11 @@
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import {define} from 'gadjet/dist/module/ui/ui.js';
-import {ProgressBar} from 'gadjet/dist/module/ui/progress/progress-bar.js';
-define('el-progress-bar', ProgressBar);
+import {ProgressBar} from 'gadjet/dist/module/gadjet.bundle.js';
+
+ProgressBar.define('el-progress-bar');
 ProgressBar.tagStyle({
     progressColor: 'blue',
     barColor: '#ccc',
@@ -34,7 +34,7 @@ ProgressBar.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-progress-bar></el-progress-bar>
 <el-progress-bar value="0" max="100"></el-progress-bar>
@@ -44,15 +44,15 @@ ProgressBar.tagStyle({
 
 ### Element API
 
-<el-tag class="title-block">prop<code>value</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>value</code></el-code-title>
+<el-function-detail>
 Progress value, will change to loop if set to <code>null</code>
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>max</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>max</code></el-code-title>
+<el-function-detail>
 Get/set progress max value.
-</blockquote>
+</el-function-detail>
 
 ## Progress Circle
 ---
@@ -62,11 +62,11 @@ Get/set progress max value.
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { ProgressCircle } from 'gadjet/dist/module/ui/progress/progress-circle.js';
-define('el-progress-circle', ProgressCircle);
+import { ProgressCircle } from 'gadjet/dist/module/gadjet.bundle.js';
+
+ProgressCircle.define('el-progress-circle');
 ProgressCircle.tagStyle({
     radius: 75,
     trackWidth: 25,
@@ -75,19 +75,19 @@ ProgressCircle.tagStyle({
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-progress-circle></el-progress-circle>
 ```
 
 ### Element API
 
-<el-tag class="title-block">prop<code>value</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>value</code></el-code-title>
+<el-function-detail>
 Get/set progress value, will change to loop if set to <code>null</code>
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>max</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>max</code></el-code-title>
+<el-function-detail>
 Get/set progress max value.
-</blockquote>
+</el-function-detail>

@@ -1,6 +1,6 @@
 export * from './style';
 
-export { define } from './ui';
+export { define } from "@nitipit/adapter/src/adapter";
 
 export { Badge } from './ui/badge/badge';
 export { BoxArrow } from './ui/box-arrow/box-arrow';
@@ -12,8 +12,6 @@ export { ButtonSquare } from './ui/button/button-square';
 
 export { Card } from './ui/card/card';
 export { Checkbox } from './ui/checkbox/checkbox';
-export { FileManager } from './ui/file-manager/file-manager';
-export { HTMLEditor } from './ui/html-editor/html-editor';
 
 export { Input } from './ui/input/input';
 export { InputDate } from './ui/input/input-date';
@@ -32,3 +30,6 @@ export { Table } from './ui/table/table';
 
 export { Tag } from './ui/tag/tag';
 export { TagX } from './ui/tag/tagx';
+
+// export { FileManager } from './ui/file-manager/file-manager';
+// export { HTMLEditor } from './ui/html-editor/html-editor';

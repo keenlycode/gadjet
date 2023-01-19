@@ -1,6 +1,6 @@
-import { StyleClass } from "../../adapter";
-
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 const Color = require('color');
+
 
 export interface CheckboxStyleParam {
     bgColor?: string;

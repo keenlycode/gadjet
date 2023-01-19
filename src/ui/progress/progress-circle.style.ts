@@ -1,5 +1,6 @@
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { keyframes } from "@emotion/css";
-import { StyleClass } from "../../adapter";
+
 
 export interface ProgressCircleStyleParam {
     radius?: number;

@@ -2,6 +2,7 @@ import { TagStyle } from "./tag.style";
 import { bgColorInt } from "../../style";
 const Color = require('color');
 
+
 export interface TagXStyleParam {
     color?: string;
     borderRadius?: string;
@@ -43,7 +44,7 @@ export class TagXStyle extends TagStyle {
     static _color(style: TagXStyleParam = {}): string {
         if (style.color == undefined) { return '' };
         return `
-        ${bgColorInt({ color: style.color })}
+        ${bgColorInt({color: style.color})}
         box-shadow: 0 0.17em 0 0 ${Color(style.color).darken(0.5)};
         `.trim();
     }

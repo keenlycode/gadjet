@@ -3,7 +3,7 @@
 ## Installation
 ---
 
-```bash
+```shell
 $ npm install gadjet
 ```
 
@@ -11,23 +11,23 @@ $ npm install gadjet
 ---
 ### 1. Use bundle script
 
-Just copy `node_modules/gadjet/dist/gadjet.js` and place to directory
+Just copy `node_modules/gadjet/dist/module/gadjet.bundle.js` and place to directory
 which can be access by web browser, then every functions and modules will be
 ready to import.
 
 ```js
-import { define, addStyle, StyledElement, Button, Badge } from 'gadjet.js';
+import { Button, Badge } from 'gadjet/dist/module/gadjet.bundle.js';
 ```
 
 ### 2. Use Javascript modules
 
 This method require javascript building tools. In this example use Parcel v2
 
-```
-npm install parcel
+```shell
+$ npm install parcel
 ```
 
-<el-tag class="title-block"><code>index.html</code></el-tag>
+<el-code-title>html<code>index.html</code></el-code-title>
 ```html
 <!doctype html>
 <html lang="en">
@@ -44,18 +44,17 @@ npm install parcel
 </html>
 ```
 
-<el-tag class="title-block"><code>index.js</code></el-tag>
+<el-code-title>js<code>index.js</code></el-tag>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
+import { InputTag } from 'gadjet';
 
-define('el-input-tag', InputTag);
+InputTag.define('el-input-tag);
 ```
 
 Then run `parcel`
 
-<el-tag class="title-block">bash</el-tag>
-```bash
+<el-code-title>shell</el-code-title>
+```shell
 $ parcel webpage.html
 Server running at http://localhost:1234
 ✨ Built in 48ms
@@ -70,18 +69,20 @@ Will give you the result on webpage at [](http://localhost:1234).
 ### 3. Use Typescript modules
 
 This require Javascript building tools which support typescript
-(Parcel v2 is recommended). Everthing is the same as using Javascript modules
-except the import path which start with `gadjet/src/` instead of
-`gadjet/dist/module/`. For example
+(Parcel v2 is recommended). The import path will start with `gadjet/src/ui/`
 
-<el-tag class="title-block">ts</el-tag>
+<el-blockquote-title>Note</el-blockquote-title>
+
+> Using **Typescript** with coding tools (VS Code) will provide you a better coding environment
+> such as autocomplete, suggestion or variable type check.
+
+<el-code-title>ts</el-code-title>
 ```ts
-import { define } from 'gadjet/src/ui/ui';
 import { InputTag } from 'gadjet/src/ui/input/input-tag';
 ```
 
 ## Style, Class and Element API
 ---
 
-Style functions, component classes and elements have thier own API. You can learn
+Style functions and UI have thier own API. You can learn
 more at their documentation page.

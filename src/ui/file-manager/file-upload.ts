@@ -1,4 +1,4 @@
-import { define, Adapter } from "../../adapter";
+import { define, Adapter } from "@nitipit/adapter/src/adapter";
 import { ProgressBar } from '../progress/progress-bar';
 import { FileUploadStyle, FileUploadStyleParam } from './file-upload.style';
 import { render, svg, html } from 'uhtml';
@@ -25,8 +25,8 @@ export class FileUpload extends Adapter {
         super.define(tagName);
     }
 
-    static initStyle(style?: string | FileUploadStyleParam): void {
-        super.initStyle(style);
+    static initStyle(): void {
+        super.initStyle();
         FileUploadProgressBar.tagStyle(`
             position: absolute;
             bottom:0;

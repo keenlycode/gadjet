@@ -1,4 +1,9 @@
-import { define } from 'gadjet/dist/module/ui';
-import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
+import { addStyle, InputTag } from 'gadjet/src/gadjet';
 
-define('el-input-tag', InputTag);
+InputTag.define('el-input-tag');
+
+addStyle`
+h3 {
+    margin-top: 2rem;
+}
+`;

@@ -1,6 +1,6 @@
 {
     "name": "gadjet",
-    "version": "0.1.12dev",
+    "version": "1.0.0",
     "description": "Adaptive HTML UI Framework",
     "keywords": [
         "html5",
@@ -24,6 +24,7 @@
         "dist/**/*",
         "src/**/*"
     ],
+    "module": "./dist/module/gadjet.js",
     "targets": {
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
@@ -31,43 +32,41 @@
             "distDir": "dist/css/",
             "optimize": true
         },
+        "module": false,
         "bundle": {
-            "sourceMap": true,
-            "distDir": "dist/bundle/",
-            "outputFormat": "global",
-            "optimize": true
-        },
-        "module": {
-            "source": "src/gadjet.ts",
-            "sourceMap": true,
             "distDir": "dist/module/",
-            "outputFormat": "esmodule",
-            "isLibrary": true,
-            "optimize": true
+            "sourceMap": true,
+            "optimize": true,
+            "outputFormat": "commonjs",
+            "isLibrary": true
         },
         "docs": {
-            "sourceMap": true,
             "distDir": "docs/",
-            "optimize": true
+            "sourceMap": true,
+            "optimize": true,
+            "outputFormat": "global"
         }
     },
     "dependencies": {
-        "@emotion/css": "^11.5.0",
         "@nitipit/adapter": "file:../adapter",
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
-        "color": "^4.2.3",
-        "gadjet": "file:./",
-        "highlight.js": "^11.3.1",
-        "normalize.css": "^8.0.1",
-        "uhtml": "^2.7.6"
+        "uhtml": "^2.7.6",
+        "@emotion/css": "^11.5.0",
+        "color": "^4.2.3"
     },
     "devDependencies": {
+        "@nitipit/icon": "^0.0.6",
+        "gadjet": "file:./",
         "@parcel/packager-xml": "^2.8.0",
         "@parcel/transformer-sass": "^2.8.0",
         "@parcel/transformer-xml": "^2.8.0",
+        "@types/color": "^3.0.3",
+        "@types/node": "^18.11.10",
+        "highlight.js": "^11.3.1",
         "parcel": "^2.8.0",
-        "sass": "^1.43.4"
+        "sass": "^1.43.4",
+        "typescript": "^4.9.3"
     }
 }

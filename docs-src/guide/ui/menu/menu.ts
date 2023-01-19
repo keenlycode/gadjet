@@ -1,4 +1,8 @@
-import { define } from 'gadjet/src/adapter';
 import { Menu } from 'gadjet/src/ui/menu/menu';
 
-define('el-menu', Menu);
+
+Menu.define('el-menu');
+Menu.tagStyle(`
+    max-width: 300px;
+    width: 100%;
+`)

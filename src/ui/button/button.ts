@@ -1,14 +1,20 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { 
     ButtonStyle, ButtonStyleParam
 } from './button.style';
-import { Adapter } from '../../adapter';
+
 
 export class Button extends Adapter {
     static Style = ButtonStyle;
     static tagName: string = 'button';
 
-    static initStyle(style?: ButtonStyleParam): void {
-        super.initStyle(style)
+    static define(tagName: string) {
+        if (tagName.toLocaleLowerCase() === "button") {
+            this.tagName = "button";
+            this.initStyle();
+            return;
+        };
+        super.define(tagName);
     }
 
     static tagStyle(style?: string | ButtonStyleParam): void {
@@ -23,5 +29,3 @@ export class Button extends Adapter {
         super.addStyle(style);   
     }
 }
-
-Button.initStyle();

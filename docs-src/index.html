@@ -9,11 +9,17 @@
 <el-highlight>
     <div el="hl1">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 90%; min-width: 300px;">
-            <h1>gadjet<sub><el-badge class="bg-theme-yellow" style="font-size: 0.3em; margin-left: 0.5rem;">0.1.12</el-badge></sub></h1>
-            <h2>HTML User Interface<br>with Component Based Style</h2>
-            <a href="guide/intro.html"><button style="font-size: 2em;">Guide</button></a>
+            <h1 class="blueGreen">gadjet<sub><el-badge class="bg-theme-yellow" style="font-size: 0.3em; margin-left: 0.5rem;">1.0.0</el-badge></sub></h1>
+            <h2>HTML user interface<br>with component based styles</h2>
+            <a href="guide/getting-started.html"><button>Guide</button></a>
             <a href="https://github.com/nitipit/gadjet">
-                <button class="light" style="font-size: 2em; margin-left: 1rem;">Github</button>
+                <button class="light" style="margin-left: 1rem;">
+                    <el-icon name="github" style="
+                        margin-bottom: 0.2rem;
+                        margin-right: 0.2rem;
+                    "></el-icon>
+                    Github
+                </button>
             </a>
         </div>
     </div>
@@ -23,25 +29,10 @@
         </div>
     </div>
 </el-highlight>
-<el-feature>
-    <div class="container" style="margin-top: 2rem;">
-        <el-card>
-            {{markdown('index.html.web-component.md')}}
-        </el-card>
-        <el-card>
-            {{markdown('index.html.css-in-js.md')}}
-        </el-card>
-        <el-card>
-            {{markdown('index.html.modular.md')}}
-        </el-card>
-        <el-card>
-            {{markdown('index.html.typescript.md')}}
-        </el-card>
-    </div>
-</el-feature>
-<el-explanation>
-    <div class="container" style="margin-top: 5rem;">
-        {{markdown('index.html.explanation.md')}}
-    </div>
-</el-explanation>
+
+{% include '_index.html/widget.html' %}
+{% include '_index.html/made-for-developer.html' %}
+{% include '_index.html/component-based-styles.html' %}
+{% include '_index.html/small.html' %}
+
 {% endblock %}

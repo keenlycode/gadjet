@@ -1,5 +1,5 @@
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { ButtonStyle } from '../button/button.style';
-import { StyleClass } from "../../adapter";
 
 
 export interface FileManagerStyleParam {

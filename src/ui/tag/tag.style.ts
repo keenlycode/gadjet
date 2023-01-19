@@ -1,6 +1,6 @@
-const Color = require('color');
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor } from "../../style";
-import { StyleClass } from "../../adapter";
+const Color = require('color');
 
 
 export class TagStyleParam {

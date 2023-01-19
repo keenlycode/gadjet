@@ -1,5 +1,6 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { InputNumberStyle, InputNumberStyleParam } from "./input-number.style";
+
 
 export class InputNumberCenterStyle extends StyleClass {
     static css(style: InputNumberStyleParam = {}): string {

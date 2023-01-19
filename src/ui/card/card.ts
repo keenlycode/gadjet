@@ -1,4 +1,4 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { CardStyle, CardStyleParam } from './card.style';
 
 export class Card extends Adapter {

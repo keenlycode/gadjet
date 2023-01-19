@@ -1,4 +1,4 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 
 
 export class InputStyle extends StyleClass {

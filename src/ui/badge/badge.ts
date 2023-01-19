@@ -1,4 +1,4 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { BadgeStyle, BadgeStyleParam } from './badge.style';
 
 export class Badge extends Adapter {

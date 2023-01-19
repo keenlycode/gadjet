@@ -1,5 +1,6 @@
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { bgColor } from "../../style";
-import { StyleClass } from "../../adapter";
+
 
 export interface BoxArrowStyleParam {
     arrow?: string,

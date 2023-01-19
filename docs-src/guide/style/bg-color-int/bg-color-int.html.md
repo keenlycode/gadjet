@@ -1,7 +1,6 @@
 # Interactive background color
 
-Return CSS string from background, proper text color and interactive color
-(on hover and press). Auto generate `hoverColor` and `activeColor` if not provided.
+Set CSS for background, text and and hovering color.
 
 ## Preview
 ---
@@ -10,9 +9,9 @@ Return CSS string from background, proper text color and interactive color
     <div class="bg-theme-blueGreen-int" style="padding: 0.5rem;">Blue Green</div>
 </div>
 
-## Import
+## Module & Import
 ---
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
 import { bgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
 ```
@@ -22,45 +21,45 @@ import { bgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
 ```ts
 bgColorInt({
     color?: string = 'blue',
-    hoverColor?: string = null,
-    activeColor?: string = null
+    lighten?: number = 0.2, // Can be -1 to 1
+    saturate?: number = 0.2 // Can be -1 to 1
 }) => string;
 ```
-<el-tag class="title-block">param <code>{ color?: string = 'blue' }</code></el-tag>
-<blockquote class="fn-detail">
-CSS color for background
-</blockquote>
+<el-code-title>param <code>color?: string = 'blue'</code></el-code-title>
+<el-function-detail>
+CSS color for background.
 
-<el-tag class="title-block">param <code>{ hoverColor?: string = null }</code></el-tag>
-<blockquote class="fn-detail">
-CSS color when hover, will be generated according to <code>color</code> if not provided.
-</blockquote>
+- Text color will be white or black depends on background color.
+</el-function-detail>
 
+<el-code-title>param <code>lighten?: number = 0.2</code></el-code-title>
+<el-function-detail>
+Lighten level of background when hovering, range [-1, 1]
+</el-function-detail>
 
-<el-tag class="title-block">param <code>{ activeColor?: string = null }</code></el-tag>
-<blockquote class="fn-detail">
-CSS color when click / press, will be generated according to <code>color</code> if not provided.
-</blockquote>
+<el-code-title>param <code>saturate?: number = 0.2</code></el-code-title>
+<el-function-detail>
+Saturation level of background when hovering, range [-1, 1]
+</el-function-detail>
 
-<el-tag class="title-block">return</el-tag>
-<blockquote class="fn-detail">
+<el-code-title>return</el-code-title>
+<el-function-detail>
 CSS string
-</blockquote>
+</el-function-detail>
 
 ## Usage
 ---
 
-<el-tag class="title-block">js</el-tag>
+<el-code-title>js</el-code-title>
 ```js
-import { addStyle } from 'gadjet/dist/style.js';
-import { BgColorInt } from 'gadjet/dist/module/style/bg-color-int.js';
+import { addStyle, bgColorInt } from 'gadjet';
 
 addStyle`
 div {
     ${bgColorInt({
         color: 'blue',
-        hoverColor: null,
-        activeColor: null
+        lighten: 0.2,
+        saturate: 0.2
     })} 
 }`;
 ```

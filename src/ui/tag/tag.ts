@@ -1,5 +1,6 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { TagStyle, TagStyleParam } from "./tag.style";
+
 
 export class Tag extends Adapter {
     static Style = TagStyle;

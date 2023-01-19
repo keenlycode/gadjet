@@ -26,23 +26,38 @@
     </el-checkbox>
 </div>
 
-## Coding
+
+## Module & Import
+---
+<el-code-title>js</el-code-title>
+```js
+import { Checkbox } from 'gadjet/dist/module/ui/checkbox/checkbox.js';
+```
+
+## Usage
 ---
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { Checkbox } from 'gadjet/dist/module/ui/checkbox/checkbox.js';
-define('el-checkbox', Checkbox);
+import { Checkbox } from 'gadjet';
+
+Checkbox.define('el-checkbox');
 Checkbox.tagStyle({
     bgColor: '#ccc',
     activeColor: 'blue'
 })
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-checkbox>
     <input type="checkbox" checked>
 </el-checkbox>
 ```
+
+## Sub Element
+---
+<el-code-title><code>&lt;input type="checkbox" checked&gt;</code></el-code-title>
+<el-function-detail>
+Standard HTML input for checkbox.
+</el-function-detail>

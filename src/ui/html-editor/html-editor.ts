@@ -1,8 +1,8 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { Editor } from '@tiptap/core';
 import { Level } from '@tiptap/extension-heading';
 import StarterKit from '@tiptap/starter-kit';
 import { FloatingMenu as FloatingMenuExt } from '@tiptap/extension-floating-menu';
-import { define, Adapter } from "../../adapter";
 import { 
     HeadingMenuStyle,
     HeadingMenuStyleParam,
@@ -25,18 +25,13 @@ class HeadingMenu extends Adapter {
     static Style = HeadingMenuStyle;
 
     static define(tagName: string): void {
-        define(`${tagName}-button`, HeadingMenuButton);
-        define(`${tagName}-button-group`, HeadingMenuButtonGroup);
-        super.define(tagName);
-    }
-
-    static initStyle(style?: HeadingMenuStyleParam): void {
-        style = {...this.Style.default, ...style};
-        super.initStyle(style);
+        HeadingMenuButton.define(`${tagName}-button`);
+        HeadingMenuButtonGroup.define(`${tagName}-button-group`);
         HeadingMenuButton.tagStyle({
-            buttonColor: style.buttonColor,
-            activeColor: style.activeColor
+            buttonColor: this.Style.default.buttonColor,
+            activeColor: this.Style.default.activeColor
         });
+        super.define(tagName);
     }
 
     static tagStyle(style?: HeadingMenuStyleParam): void {
@@ -124,22 +119,17 @@ class HeadingMenu extends Adapter {
 export class HTMLEditor extends Adapter {
     static Style = HTMLEditorStyle;
     static define(tagName: string): void {
-        define(`${tagName}-float-menu`, FloatingMenu);
-        define(`${tagName}-heading-menu`, HeadingMenu);
+        FloatingMenu.define(`${tagName}-float-menu`);
+        HeadingMenu.define(`${tagName}-heading-menu`);
         super.define(tagName);
     }
 
-    static initStyle(style?: HTMLEditorStyleParam): void {
-        style = {...HTMLEditorStyle.default, ...style}
-        super.initStyle(style);
+    static initStyle(): void {
+        super.initStyle();
         FloatingMenu.tagStyle({
             arrow: 'left',
-            bgColor: style.menuColor
+            bgColor: this.Style.default.menuColor
         });
-        HeadingMenuButton.tagStyle({
-            buttonColor: style.menuColor,
-            activeColor: style.activeColor
-        })
     }
 
     static tagStyle(style?: string | HTMLEditorStyleParam): void {

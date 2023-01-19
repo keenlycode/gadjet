@@ -1,4 +1,4 @@
-import { StyleClass } from "../../adapter";
+import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { ButtonStyle } from "./button.style";
 import { aspectRatio } from "../../style";
 

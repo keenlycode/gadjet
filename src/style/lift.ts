@@ -1,12 +1,10 @@
-export interface LiftParam {
-    level?: number;
-    shadowColor?: string;
-}
+import { LiftParam } from "./lift.d";
+
 
 export const lift = ({
     level = 3,
     shadowColor = 'rgb(0, 0, 0, 50%)'
-}: LiftParam) => {
+}: LiftParam): string => {
     if (level < 0 || level > 5) {
         level = 0;
     };
@@ -20,11 +18,4 @@ export const lift = ({
         `0 16px 33px 0 ${shadowColor}`,
     ]
     return `box-shadow: ${boxShadow[level]};`.trim();
-}
-
-export interface FontFluidParam {
-    vwMin?: number;
-    vwMax?: number;
-    fontSizeMax?: number;
-    fontSizeMin?: number;
 }

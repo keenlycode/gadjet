@@ -1,10 +1,19 @@
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { TableStyle, TableStyleParam } from './table.style';
 
 
 export class Table extends Adapter {
     static Style = TableStyle;
     static tagName: string = 'table';
+
+    static define(tagName: string): void {
+        if (tagName.toLowerCase() === 'table') {
+            this.tagName = tagName;
+            this.initStyle();
+            return;
+        };
+        super.define(tagName);
+    }
     static tagStyle(style?: string | TableStyleParam): void {
         super.tagStyle(style);
     }
@@ -15,5 +24,3 @@ export class Table extends Adapter {
         super.addStyle(style);
     }
 }
-
-Table.initStyle();

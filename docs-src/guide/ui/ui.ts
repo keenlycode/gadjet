@@ -1,7 +1,6 @@
-import { define } from 'gadjet/src/ui';
 import { Switch } from 'gadjet/src/ui/switch/switch';
 
-define('el-switch', Switch);
+Switch.define('el-switch');
 
 Switch.classStyle('light', {
     pinColor: '#EFF2F1',
@@ -14,7 +13,7 @@ Switch.classStyle('yellow', {
 });
 
 const elSwitch = document.querySelector('el-switch#green');
-elSwitch.addStyle({
+elSwitch!.addStyle({
     pinColor: '#97D8C4',
     activeColor: '#F4B942'
 });

@@ -1,5 +1,5 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { html, render } from 'uhtml';
-import { Adapter } from "../../adapter";
 import { InputNumberStyle, InputNumberStyleParam } from './input-number.style';
 
 

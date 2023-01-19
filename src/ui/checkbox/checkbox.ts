@@ -1,6 +1,6 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { Hole, html, render } from 'uhtml';
 import {CheckboxStyle, CheckboxStyleParam} from './checkbox.style';
-import { Adapter } from "../../adapter";
 
 interface CheckboxChildElement {
     checkbox: Element | HTMLElement | Hole;

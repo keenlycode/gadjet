@@ -9,14 +9,14 @@
 </div>
 
 ### Coding
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputDate } from 'gadjet/dist/module/ui/input/input-date.js';
-define('el-input-date', InputDate);
+import { InputDate } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputDate.define('el-input-date');
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-date>
     <input type="date">
@@ -39,17 +39,17 @@ define('el-input-date', InputDate);
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputNumber } from 'gadjet/dist/module/ui/input/input-number.js';
-define('el-input-number', InputNumber);
+import { InputNumber } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputNumber.define('el-input-number');
 InputNumber.tagStyle({
     color: 'blue'
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-number>
     <input type="number"
@@ -64,20 +64,20 @@ InputNumber.tagStyle({
 ```
 
 ### Element API
-<el-tag class="title-block">prop<code>stepIntervalThreshold: string | number = "700"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepIntervalThreshold: string | number = "700"</code></el-code-title>
+<el-function-detail>
 Threshold time (ms) when press & hold button before trigger step interval.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>stepInterval: string | number = "100"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepInterval: string | number = "100"</code></el-code-title>
+<el-function-detail>
 Increase or decrease step interval time (ms). Lesser is faster.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>stepChangeDelay: string | number = "1000"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepChangeDelay: string | number = "1000"</code></el-code-title>
+<el-function-detail>
 Delay time before emit <b>change</b> event. Can reduce unneccessary change event.
-</blockquote>
+</el-function-detail>
 
 ## Number Center
 ---
@@ -93,14 +93,14 @@ Delay time before emit <b>change</b> event. Can reduce unneccessary change event
 </div>
 
 ### Coding
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputNumberCenter } from 'gadjet/dist/module/ui/input/input-number-center.js';
-define('el-input-number-center', InputNumberCenter);
+import { InputNumberCenter } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputNumberCenter.define('el-input-number-center');
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-number-center>
     <input type="number" value="0"
@@ -113,20 +113,20 @@ define('el-input-number-center', InputNumberCenter);
 ```
 
 ### Element API
-<el-tag class="title-block">prop<code>stepIntervalThreshold: string | number = "700"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepIntervalThreshold: string | number = "700"</code></el-code-title>
+<el-function-detail>
 Threshold time (ms) when press & hold button before trigger step interval.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>stepInterval: string | number = "100"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepInterval: string | number = "100"</code></el-code-title>
+<el-function-detail>
 Increase or decrease step interval time (ms). Lesser is faster.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">prop<code>stepChangeDelay: string | number = "1000"</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>stepChangeDelay: string | number = "1000"</code></el-code-title>
+<el-function-detail>
 Delay time before emit <b>change</b> event. Can reduce unneccessary change event.
-</blockquote>
+</el-function-detail>
 
 ## Radio
 ---
@@ -146,11 +146,12 @@ Delay time before emit <b>change</b> event. Can reduce unneccessary change event
 </div>
 
 ### Coding
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputRadio } from 'gadjet/dist/module/ui/input/input-radio.js';
-define('el-input-radio', InputRadio);
+import { InputRadio } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputRadio.define('el-input-radio');
 InputRadio.tagStyle({
     color: '#ccc',
     boxShadowColor: '#777',
@@ -158,7 +159,7 @@ InputRadio.tagStyle({
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-number-radio>
     <input type="radio" name="color" value="red" checked>
@@ -196,20 +197,20 @@ Green
 </div>
 
 ### Coding
-
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputRadioButton, InputRadioButtonGroup } from 'gadjet/dist/module/ui/input/input-radio.js';
-define('el-input-radio-button', InputRadioButton);
-define('el-input-radio-button-group', InputRadioButtonGroup);
+import { InputRadioButton, InputRadioButtonGroup } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputRadioButton.define('el-input-radio-button');
+InputRadioButtonGroup.define('el-input-radio-button-group');
+
 InputRadioButton.tagStyle({
     activeColor: 'blue',
     buttonColor: '#ccc'
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-radio-button-group>
     <el-input-radio-button>
@@ -235,12 +236,11 @@ InputRadioButton.tagStyle({
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputRange } from 'gadjet/dist/module/ui/input/input-range.js';
+import { InputRange } from 'gadjet/dist/module/gadjet.bundle.js';
 
-define('el-input-range', InputRange);
+InputRage.define('el-input-range');
 InputRange.tagStyle({
     trackColor: '#ccc',
     fillColor: 'blue',
@@ -249,7 +249,7 @@ InputRange.tagStyle({
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-range></el-input-range>
 ```
@@ -264,18 +264,18 @@ InputRange.tagStyle({
 
 ### Coding
 
-<el-tag class="title-block">js <code>\<script defer></code></el-tag>
+<el-code-title>js <code>\<script defer></code></el-code-title>
 ```js
-import { define } from 'gadjet/dist/module/ui/ui.js';
-import { InputTag } from 'gadjet/dist/module/ui/input/input-tag.js';
-define('el-input-tag', InputTag);
+import { InputTag } from 'gadjet/dist/module/gadjet.bundle.js';
+
+InputTag.define('el-input-tag');
 InputTag.tagStyle({
     tagColor: 'blue',
     tagBorderRadius: '4px'
 });
 ```
 
-<el-tag class="title-block">html</el-tag>
+<el-code-title>html</el-code-title>
 ```html
 <el-input-tag>
     <el-input-tag-tagx>tag</el-input-tag-tagx>
@@ -284,22 +284,22 @@ InputTag.tagStyle({
 
 ### Element API
 
-<el-tag class="title-block">prop<code>tags: Array = []<string></code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>prop<code>tags: Array = []<string></code></el-code-title>
+<el-function-detail>
 Get/set tags.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>addTag(tag: string)</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>addTag(tag: string)</code></el-code-title>
+<el-function-detail>
 Add a tag.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>addTags(tag: Array\<string>)</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>addTags(tag: Array\<string>)</code></el-code-title>
+<el-function-detail>
 Add tags.
-</blockquote>
+</el-function-detail>
 
-<el-tag class="title-block">fn<code>clearTags()</code></el-tag>
-<blockquote class="fn-detail">
+<el-code-title>fn<code>clearTags()</code></el-code-title>
+<el-function-detail>
 Clear all tags.
-</blockquote>
+</el-function-detail>

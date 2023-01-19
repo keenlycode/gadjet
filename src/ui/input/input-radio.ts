@@ -1,5 +1,5 @@
+import { Adapter } from "@nitipit/adapter/src/adapter";
 import { render, html } from "uhtml";
-import { Adapter } from "../../adapter";
 import { InputRadioStyle, InputRadioStyleParam } from "./input-radio.style";
 
 interface InputRadioChildElement {

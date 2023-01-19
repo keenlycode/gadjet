@@ -1,19 +1,19 @@
-import {html, render} from 'uhtml'
-import { Adapter } from "../../adapter";
+import { Adapter } from "@nitipit/adapter/src/adapter";
+import { html, render } from 'uhtml'
 import { SwitchStyle, SwitchStyleParam } from './switch.style';
 
 export class Switch extends Adapter {
     static Style = SwitchStyle;
 
-    static tagStyle(style?: SwitchStyleParam): void {
+    static tagStyle(style?: string | SwitchStyleParam): void {
         super.tagStyle(style);
     }
 
-    static classStyle(class_: string, style?: SwitchStyleParam): void {
+    static classStyle(class_: string, style?: string | SwitchStyleParam): void {
         super.classStyle(class_, style);
     }
 
-    addStyle(style?: SwitchStyleParam): void {
+    addStyle(style?: string | SwitchStyleParam): void {
         super.addStyle(style);
     }
 

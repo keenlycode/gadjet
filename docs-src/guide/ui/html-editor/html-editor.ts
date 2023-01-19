@@ -1,4 +1,4 @@
-import { define } from 'gadjet/src/adapter';
-import { HTMLEditor } from 'gadjet/src/ui/html-editor/html-editor';
+import { HTMLEditor } from 'gadjet/dist/module/ui/html-editor/html-editor';
 
-define('el-html-editor', HTMLEditor);
+
+HTMLEditor.define('el-html-editor');
