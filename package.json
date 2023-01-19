@@ -1,6 +1,6 @@
 {
     "name": "gadjet",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "HTML user interface with component based styles",
     "keywords": [
         "html5",
@@ -48,22 +48,22 @@
         }
     },
     "dependencies": {
-        "@nitipit/adapter": "file:../adapter",
+        "@emotion/css": "^11.5.0",
+        "@nitipit/adapter": "^1.0.1",
         "@tiptap/core": "^2.0.0-beta.129",
         "@tiptap/extension-floating-menu": "^2.0.0-beta.37",
         "@tiptap/starter-kit": "^2.0.0-beta.131",
-        "uhtml": "^2.7.6",
-        "@emotion/css": "^11.5.0",
-        "color": "^4.2.3"
+        "color": "^4.2.3",
+        "uhtml": "^2.7.6"
     },
     "devDependencies": {
         "@nitipit/icon": "^0.0.6",
-        "gadjet": "file:./",
         "@parcel/packager-xml": "^2.8.0",
         "@parcel/transformer-sass": "^2.8.0",
         "@parcel/transformer-xml": "^2.8.0",
         "@types/color": "^3.0.3",
         "@types/node": "^18.11.10",
+        "gadjet": "file:./",
         "highlight.js": "^11.3.1",
         "parcel": "^2.8.0",
         "sass": "^1.43.4",
