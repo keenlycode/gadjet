@@ -1,7 +1,7 @@
 {
     "name": "gadjet",
     "version": "1.0.0",
-    "description": "Adaptive HTML UI Framework",
+    "description": "HTML user interface with component based styles",
     "keywords": [
         "html5",
         "javascript",

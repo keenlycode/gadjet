@@ -1,5 +1,5 @@
-# gadjet v0.1.12-dev
+# gadjet v1.0.0
 
-HTML5 User Interface
+HTML user interface with component based styles
 
 Website: https://nitipit.github.io/gadjet/
