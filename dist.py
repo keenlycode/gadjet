@@ -33,8 +33,8 @@ async def main():
     await asyncio.gather(
         module(),
         bundle(),
-        docs(),
     )
+    await docs()
 
 
 asyncio.run(main())
