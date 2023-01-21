@@ -9,11 +9,11 @@ import os
 _dir = Path(__file__).parent
 
 
-def lib():
-    shutil.copytree(
-        _dir.joinpath('dist/'),
-        'docs/lib/gadjet/',
-        dirs_exist_ok=True)
+# def lib():
+#     shutil.copytree(
+#         _dir.joinpath('dist/'),
+#         'docs/lib/gadjet/',
+#         dirs_exist_ok=True)
 
 
 def asset():
