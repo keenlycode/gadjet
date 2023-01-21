@@ -9,13 +9,6 @@ import os
 _dir = Path(__file__).parent
 
 
-# def lib():
-#     shutil.copytree(
-#         _dir.joinpath('dist/'),
-#         'docs/lib/gadjet/',
-#         dirs_exist_ok=True)
-
-
 def asset():
     docs_src_dir = _dir.joinpath('docs-src')
     for path in docs_src_dir.glob('**/*'):
@@ -55,7 +48,7 @@ async def gadjet_module():
 
 
 async def main():
-    lib()
+    # lib()
     asset()
     await asyncio.gather(
         gadjet_module(),
