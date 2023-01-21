@@ -11,13 +11,6 @@ async def bundle():
     await proc.communicate()
     print('Finished')
 
-async def docs():
-    cmd = "npx parcel build --no-cache --target docs " +\
-        "'docs-src/**/*.(scss|js|ts)'"
-    print(cmd)
-    proc = await asyncio.create_subprocess_shell(cmd)
-    await proc.communicate()
-
 
 async def module():
     # typscript
@@ -34,7 +27,6 @@ async def main():
         module(),
         bundle(),
     )
-    await docs()
 
 
 asyncio.run(main())

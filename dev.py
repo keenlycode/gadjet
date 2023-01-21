@@ -2,7 +2,6 @@ import asyncio
 import shutil
 from pathlib import Path
 import re
-from watchfiles import awatch
 import os
 
 
@@ -32,7 +31,7 @@ async def engrave():
     await proc.communicate()
 
 
-async def parcel():
+async def docs():
     cmd = "npx parcel watch --no-cache --target docs " +\
         "'docs-src/**/*.(scss|js|ts)' "
     print(cmd)
@@ -52,7 +51,7 @@ async def main():
     asset()
     await asyncio.gather(
         gadjet_module(),
-        parcel(),
+        docs(),
         engrave(),
     )
 
