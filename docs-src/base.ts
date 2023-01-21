@@ -8,7 +8,7 @@ import * as gadjet from 'gadjet/src/gadjet';
 
 import { theme } from './color';
 
-const baseUrl = new URL('../', document.currentScript!.src);
+const baseUrl = new URL('./', document.currentScript!.src);
 
 window.addEventListener('load', () => {
     Icon.href = `${baseUrl.href}asset/icon/gadjet/symbol-defs.svg`;
