@@ -1,0 +1,114 @@
+<html>
+<head>
+
+<title>gadjet : HTML User Interface with \<web-component/\> based styles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="../../base.css?v=38">
+<script src="../../base.js?v=38"></script>
+<script defer src="../../base-defer.js?v=38"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNJ0R8Y1D7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NNJ0R8Y1D7');
+</script>
+
+
+
+
+<script defer src="../../guide/base.js?v=38"></script>
+
+<script defer src="style.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+<h1>Style Portion</h1>
+<p><strong>gadjet</strong> provide useful style portion which can be used with HTML elements and
+can be injected to HTML page by tag template <code>addStyle</code>.</p>
+<p><el-code-title>js</el-code-title></p>
+<pre><code class="language-js">import { addStyle, bgColorInt } from 'gadjet/dist/bundle/gadjet.js';
+
+// Add interactive background color to &lt;button&gt; element
+addStyle`
+button {
+    ${bgColorInt('blue')}
+}`;
+</code></pre>
+<p><el-blockquote-title>note</el-blockquote-title></p>
+<blockquote>
+<p><strong>gadjet</strong> implement <strong>CSS-in-JS</strong> by using feature from <code>@emotion/css</code>.
+If you look into the <a href="https://github.com/nitipit/gadjet/blob/main/src/style.ts" target=_blank>
+source code</a>, you will see that <code>addStyle</code>
+is just a function that point to <code>injectGlobal</code> from
+<a href="https://emotion.sh/docs/@emotion/css" target=_blank>@emotion/css</a>.</p>
+</blockquote>
+<h2>Style portions</h2>
+<hr />
+<a href="./aspect-ratio/aspect-ratio.html">
+    aspectRatio
+</a>|
+<a href="./bg-color/bg-color.html">
+    bgColor
+</a>|
+<a href="./bg-color-int/bg-color-int.html">
+    bgColorInt
+</a>|
+<a href="./font-fluid/font-fluid.html">
+    fontFluid
+</a>|
+<a href="./lift/lift.html">
+    lift
+</a>
+
+</div>
+
+
+<el-sidebar showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="../../">gadjet</a>
+            <el-sidebar-close-button>✕</el-sidebar-close-button>
+        </div>
+        <div el="menu">
+            <a class="h" href="../../guide/getting-started.html">Getting Started</a>
+            <a class="h" href="../../guide/style/style.html">Style Portion</a>
+            <div class="list">
+                <a href="../../guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="../../guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="../../guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="../../guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="../../guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="../../guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="../../guide/ui/badge/badge.html">Badge</a>
+                <a href="../../guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="../../guide/ui/button/button.html">Buttons</a>
+                <a href="../../guide/ui/card/card.html">Card</a>
+                <a href="../../guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="../../guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="../../guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="../../guide/ui/input/input.html">Input</a>
+                <a href="../../guide/ui/menu/menu.html">Menu</a>
+                <a href="../../guide/ui/progress/progress.html">Progress</a>
+                <a href="../../guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="../../guide/ui/switch/switch.html">Switch</a>
+                <a href="../../guide/ui/tab/tab.html">Tab</a>
+                <a href="../../guide/ui/table/table.html">Table</a>
+                <a href="../../guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>
+
+
+<div id="footer"></div>
+
+</body>
+</html>

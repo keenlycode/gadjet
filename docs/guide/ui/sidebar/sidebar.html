@@ -1,0 +1,120 @@
+<html>
+<head>
+
+<title>gadjet : HTML User Interface with \<web-component/\> based styles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="../../../base.css?v=38">
+<script src="../../../base.js?v=38"></script>
+<script defer src="../../../base-defer.js?v=38"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNJ0R8Y1D7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NNJ0R8Y1D7');
+</script>
+
+
+
+
+<script defer src="../../../guide/base.js?v=38"></script>
+
+<script defer src="sidebar.js?v=38"></script>
+
+</head>
+<body>
+
+<div class="container">
+<h1>Sidebar</h1>
+<h2>Preview</h2>
+<hr />
+<div class="preview">
+    <el-button-pin id="sidebar-button-preview" style="font-size: 3rem;">
+        <el-icon name="menu"></el-icon>
+    </el-button-pin>
+</div>
+<h2>Coding</h2>
+<hr />
+<p><el-code-title>js <code>&lt;script defer&gt;</code></el-code-title></p>
+<pre><code class="language-js">import { Sidebar } from 'gadjet/dist/module/gadjet.bundle.js';
+
+Sidebar.define('el-sidebar');
+Sidebar.tagStyle({
+    bgColor: '#eee',
+    overlayColor: 'rgba(0,0,0,0.7)'
+});
+</code></pre>
+<p><el-code-title>html</el-code-title></p>
+<pre><code class="language-html">&lt;el-sidebar showAt=&quot;1000px&quot;&gt;
+    &lt;div el=&quot;content&quot;&gt;
+    &lt;!-- Sidebar content --&gt;
+    &lt;/div&gt;
+    &lt;div el=&quot;overlay&quot;&gt;
+    &lt;!-- Overlay when show sidebar --&gt;
+    &lt;/div&gt;
+&lt;/el-sidebar&gt;
+</code></pre>
+<h2>Element API</h2>
+<hr />
+<p><el-code-title>prop<code>showAt: string = &quot;1000px&quot;</code></el-code-title></p>
+<el-function-detail>
+Viewport width to show sidebar.
+</el-function-detail>
+<p><el-code-title>fn<code>show()</code></el-code-title></p>
+<el-function-detail>
+Show sidebar.
+</el-function-detail>
+<p><el-code-title>fn<code>hide()</code></el-code-title></p>
+<el-function-detail>
+Hide sidebar.
+</el-function-detail>
+
+</div>
+
+
+<el-sidebar showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="../../../">gadjet</a>
+            <el-sidebar-close-button>✕</el-sidebar-close-button>
+        </div>
+        <div el="menu">
+            <a class="h" href="../../../guide/getting-started.html">Getting Started</a>
+            <a class="h" href="../../../guide/style/style.html">Style Portion</a>
+            <div class="list">
+                <a href="../../../guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="../../../guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="../../../guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="../../../guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="../../../guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="../../../guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="../../../guide/ui/badge/badge.html">Badge</a>
+                <a href="../../../guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="../../../guide/ui/button/button.html">Buttons</a>
+                <a href="../../../guide/ui/card/card.html">Card</a>
+                <a href="../../../guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="../../../guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="../../../guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="../../../guide/ui/input/input.html">Input</a>
+                <a href="../../../guide/ui/menu/menu.html">Menu</a>
+                <a href="../../../guide/ui/progress/progress.html">Progress</a>
+                <a href="../../../guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="../../../guide/ui/switch/switch.html">Switch</a>
+                <a href="../../../guide/ui/tab/tab.html">Tab</a>
+                <a href="../../../guide/ui/table/table.html">Table</a>
+                <a href="../../../guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>
+
+
+<div id="footer"></div>
+
+</body>
+</html>

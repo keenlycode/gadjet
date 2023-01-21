@@ -1,0 +1,179 @@
+<html>
+<head>
+
+<title>gadjet : HTML User Interface with \<web-component/\> based styles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="./base.css?v=38">
+<script src="./base.js?v=38"></script>
+<script defer src="./base-defer.js?v=38"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNJ0R8Y1D7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NNJ0R8Y1D7');
+</script>
+
+<script defer src="index.js?v=38"></script>
+<meta name="google-site-verification" content="xFq3Nl0sI_UsBeeLA_mS9GuUnf73Llq_p1GbCymLFy4" />
+
+</head>
+<body>
+
+<el-highlight>
+    <div el="hl1">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 90%; min-width: 300px;">
+            <h1 class="blueGreen">gadjet<sub><el-badge class="bg-theme-yellow" style="font-size: 0.3em; margin-left: 0.5rem;">1.0.4</el-badge></sub></h1>
+            <h2>HTML user interface<br>with component based styles</h2>
+            <a href="guide/getting-started.html"><button>Guide</button></a>
+            <a href="https://github.com/nitipit/gadjet">
+                <button class="light" style="margin-left: 1rem;">
+                    <el-icon name="github" style="
+                        margin-bottom: 0.2rem;
+                        margin-right: 0.2rem;
+                    "></el-icon>
+                    Github
+                </button>
+            </a>
+        </div>
+    </div>
+    <div el="hl2">
+        <div class="text" style="width: 90%; min-width: 300px;">
+            <pre><code class="language-js">// Javascript
+import {Button} from 'gadjet.js';
+Button.tagStyle({color: '#F4B942'});
+Button.tagStyle(`border-radius: 5px;`);
+Button.classStyle('violet', {color: '#7900FF'});
+Button.classStyle('dark', {color: '#444'});
+Button.classStyle('big', `font-size: 2em;`); // Inject plain CSS
+</code></pre>
+<pre><code class="language-html">&lt;!-- html --&gt;
+&lt;button&gt;Button&lt;/button&gt;
+&lt;button class=&quot;violet&quot;&gt;Violet&lt;/button&gt;
+&lt;button class=&quot;big dark&quot;&gt;Big Dark&lt;/button&gt;
+</code></pre>
+<div class="row" style="display: flex; justify-content: center;">
+    <button class="yellow">Button</button>
+    <button class="violet" style="margin-left: 1rem;">Violet</button>
+</div>
+<div class="row" style="display: flex; justify-content: center;">
+    <button class="big dark" style="margin-top: 1rem;">Big Dark</button>
+</div>
+
+        </div>
+    </div>
+</el-highlight>
+
+<el-widget-container style="margin-top: 5em;">
+    <div class="block">
+        <el-card>
+            <div class="row">
+                <el-switch>
+                    <input type="checkbox" checked>
+                </el-switch>
+            </div>
+            <div class="row">
+                <el-switch></el-switch>
+            </div>
+        </el-card>
+    </div>
+    <div class="block">
+        <el-box-arrow class="bottom">Pick a date !</el-box-arrow>
+        <el-input-date></el-input-date>
+        <el-button-group style="margin-left: 1em;">
+            <button>Set</button>
+            <button class="light">Reset</button>
+        </el-button-group>
+        <el-progress-bar></el-progress-bar>
+    </div>
+</el-widget-container>
+<h2 style="margin-top: 4em; width: 100%; text-align: center;">Made for Developers.</h2>
+<div class="container flex">
+    <div class="block" style="justify-content: center; font-size: 0.7em;">
+        <div class="row flex">
+            <img src="for-developer.svg" style="width: 90%; max-width: 400px;">
+        </div>
+        <div class="row flex">
+            <a href="https://www.freepik.com/free-vector/digital-marketing-team-constructing-landing-home-page_11235349.htm#query=developers&position=27&from_view=search&track=sph">Image by pch.vector</a> on Freepik</p>
+        </div>
+    </div>
+    <div class="block">
+        <p style="font-size: 1.25em;">
+            Built on Web standard. Components can be easily imported,
+            used, modified or style with <strong>Javascript</strong>.
+        </p>
+    </div>
+</div>
+<h2 style="margin-top: 2em; width: 100%; text-align: center;">Component based styles</h2>
+<div class="container flex">
+    <div class="block" style="justify-content: center; font-size: 0.7em;">
+        <video loop autoplay muted>
+            <source src="friendly-api.webm?v=38">
+        </video>
+    </div>
+    <div class="block">
+        <p style="font-size: 1.25em;">
+            <strong>CSS</strong> is integrated into components with <strong>Javascript APIs</strong>
+            which is easy to customize. <strong>CSS</strong> injection is implemented very close to the standards,
+            easy to learn and manageable, but also flexible for advance style implementation like themes,
+            color schemes, adaptive or interactive styles.
+        </p>
+    </div>
+</div>
+<h2 style="margin-top: 4em; width: 100%; text-align: center;">Small</h2>
+<div class="container flex">
+    <div class="block" style="justify-content: center;">
+        <span style="font-size: 1.5em; margin-right: 1em;">Just</span>
+        <strong style="font-size: 3em;">~32 KB</strong>
+        <el-badge style="font-size: 1.5em; margin-left: 1em;">gzip</el-badge>
+    </div>
+</div>
+
+
+
+<el-sidebar showAt="1150px">
+    <div el="content">
+        <div el="title">
+            <a href="./">gadjet</a>
+            <el-sidebar-close-button>✕</el-sidebar-close-button>
+        </div>
+        <div el="menu">
+            <a class="h" href="./guide/getting-started.html">Getting Started</a>
+            <a class="h" href="./guide/style/style.html">Style Portion</a>
+            <div class="list">
+                <a href="./guide/style/aspect-ratio/aspect-ratio.html">aspectRatio</a>
+                <a href="./guide/style/bg-color/bg-color.html">bgColor</a>
+                <a href="./guide/style/bg-color-int/bg-color-int.html">bgColorInt</a>
+                <a href="./guide/style/font-fluid/font-fluid.html">fontFluid</a>
+                <a href="./guide/style/lift/lift.html">lift</a>
+            </div>
+            <a class="h" href="./guide/ui/ui.html">UI</a>
+            <div class="list">
+                <a href="./guide/ui/badge/badge.html">Badge</a>
+                <a href="./guide/ui/box-arrow/box-arrow.html">Box Arrow</a>
+                <a href="./guide/ui/button/button.html">Buttons</a>
+                <a href="./guide/ui/card/card.html">Card</a>
+                <a href="./guide/ui/checkbox/checkbox.html">Checkbox</a>
+                <a href="./guide/ui/file-manager/file-manager.html">File Manager</a>
+                <a href="./guide/ui/html-editor/html-editor.html">HTML Editor</a>
+                <a href="./guide/ui/input/input.html">Input</a>
+                <a href="./guide/ui/menu/menu.html">Menu</a>
+                <a href="./guide/ui/progress/progress.html">Progress</a>
+                <a href="./guide/ui/sidebar/sidebar.html">Sidebar</a>
+                <a href="./guide/ui/switch/switch.html">Switch</a>
+                <a href="./guide/ui/tab/tab.html">Tab</a>
+                <a href="./guide/ui/table/table.html">Table</a>
+                <a href="./guide/ui/tag/tag.html">Tag</a>
+            </div>
+        </div>
+    </div>
+</el-sidebar>
+
+
+<div id="footer"></div>
+
+</body>
+</html>
