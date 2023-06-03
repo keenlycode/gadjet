@@ -1,27 +1,29 @@
 import { StyleClass } from "@nitipit/adapter/src/adapter";
-import { aspectRatio, bgColor } from "../../style";
+import { aspectRatio, bgColor, bgColorInt } from "../../style";
 const Color = require('color');
 
 export interface MenuStyleParam {
-    hoverColor?: string;
-    arrowColor?: string;
+    bgColor?: string;
 }
 
 export class MenuStyle extends StyleClass {
     static readonly default: MenuStyleParam = {
-        hoverColor: 'blue',
-        arrowColor: 'blue'
+        bgColor: '#3584e4'
     }
 
     static css(style: MenuStyleParam = {}) {
         style = {...this.default, ...style};
+        let color = "black";
+        if (Color(style.bgColor).isDark()) {
+            color = "white";
+        }
         const css = `
         display: block;
         padding: 0;
         margin: 0;
         border: 1px solid blue;
         border-radius: 0.2em;
-
+        ${bgColor(style.bgColor)}
         ul {
             margin: 0;
             margin-left: 1rem;
@@ -65,6 +67,7 @@ export class MenuStyle extends StyleClass {
                     padding-left: 0.75rem;
                     width: 100%;
                     height: 3em;
+                    color: inherit;
                 }
                 .arrow {
                     display: flex;
@@ -74,13 +77,16 @@ export class MenuStyle extends StyleClass {
                     cursor: pointer;
                     ${aspectRatio("1")}
                     i {
-                        border: solid ${style.arrowColor};
+                        border: solid ${color};
                         border-width: 0 3px 3px 0;
                         display: inline-block;
                         padding: 3px;
                         transition: transform 0.2s;
                         transform: rotate(-45deg);
                     }
+                }
+                .arrow:hover {
+                    ${bgColorInt({color: style.bgColor})}
                 }
             }
         }
@@ -91,34 +97,35 @@ export class MenuStyle extends StyleClass {
     }
 
     static style(style: MenuStyleParam = {}): string {
-        const css = `
-        ${this._hoverColor(style)}
-        ${this._arrowColor(style)}
-        `.trim();
-        return css;
+        // const css = `
+        // ${this._hoverColor(style)}
+        // ${this._arrowColor(style)}
+        // `.trim();
+        // return css;
+        return '';
     }
 
-    static _hoverColor(style: MenuStyleParam = {}): string {
-        if (style.hoverColor == undefined) { return '' };
-        let arrowColor = 'black';
-        if (Color(style.hoverColor).isDark()) {
-            arrowColor = 'white';
-        }
-        return `
-        a {
-            -webkit-tap-highlight-color: ${Color(style.hoverColor)};
-        }
-        a:hover {
-            ${bgColor(style.hoverColor)};
-        }
-        `.trim();
-    }
-    static _arrowColor(style: MenuStyleParam = {}): string {
-        if (style.arrowColor == undefined) { return '' };
-        return `
-        .arrow i {
-            border-bottom: 0.25em solid ${style.arrowColor};
-        }
-        `.trim();
-    }
+    // static _hoverColor(style: MenuStyleParam = {}): string {
+    //     if (style.hoverColor == undefined) { return '' };
+    //     let arrowColor = 'black';
+    //     if (Color(style.hoverColor).isDark()) {
+    //         arrowColor = 'white';
+    //     }
+    //     return `
+    //     a {
+    //         -webkit-tap-highlight-color: ${Color(style.hoverColor)};
+    //     }
+    //     a:hover {
+    //         ${bgColor(style.hoverColor)};
+    //     }
+    //     `.trim();
+    // }
+    // static _arrowColor(style: MenuStyleParam = {}): string {
+    //     if (style.arrowColor == undefined) { return '' };
+    //     return `
+    //     .arrow i {
+    //         border-bottom: 0.25em solid ${style.arrowColor};
+    //     }
+    //     `.trim();
+    // }
 }
