@@ -7,62 +7,82 @@ export class Menu extends Adapter {
 
     constructor() {
         super();
-        let a_items = this.querySelectorAll('a');
-        for (let item of a_items) {
-            let innerHTML = item.innerHTML;
-            let divContent = document.createElement('div');
-            let divArrow = document.createElement('div');
-            let caret = document.createElement('i');
+        // let a_items = this.querySelectorAll('a');
+        // for (let item of a_items) {
+        //     let innerHTML = item.innerHTML;
+        //     let divContent = document.createElement('div');
+        //     let divArrow = document.createElement('div');
+        //     let caret = document.createElement('i');
 
-            divContent.classList.add('content');
+        //     divContent.classList.add('content');
+        //     divArrow.classList.add('arrow');
+        //     item.innerHTML = '';
+        //     divContent.innerHTML = innerHTML;
+        //     item.append(divContent);
+        //     item.append(divArrow);
+        //     if (item.closest('li').querySelector('ul')) {
+        //         divArrow.append(caret);
+        //     };
+
+        //     item.addEventListener('click', (event: Event) => {
+        //         this.toggleShow(event.currentTarget as HTMLElement)
+        //     });
+
+        //     if (item.classList.contains('show')) {
+        //         this._show(item.parentElement);
+        //     };
+        // };
+
+        const li_items = this.querySelectorAll('li');
+        for (const li of li_items) {
+            const divItem = document.createElement('div');
+            const a = li.querySelector('a');
+            const divArrow = document.createElement('div');
+            const caret = document.createElement('i');
+            divItem.classList.add('item')
             divArrow.classList.add('arrow');
-            item.innerHTML = '';
-            divContent.innerHTML = innerHTML;
-            item.append(divContent);
-            item.append(divArrow);
-            if (item.closest('li').querySelector('ul')) {
-                divArrow.append(caret);
-            };
-
-            item.addEventListener('click', (event: Event) => {
-                this.toggleShow(event.currentTarget as HTMLElement)
-            });
-
-            if (item.classList.contains('show')) {
-                this._show(item.parentElement);
-            };
-        };
+            divArrow.append(caret);
+            const _ul = li.querySelector('ul');
+            divItem.append(a);
+            li.insertBefore(divItem, _ul);
+            if (_ul) {
+                divItem.append(divArrow);
+            }
+            divArrow.addEventListener('click', (event: Event) => {
+                this.toggleShow(_ul as HTMLElement);
+            })
+        }
     };
 
-    toggleShow(a: HTMLElement) {
-        if (a.classList.contains('show')) {
-            this._hide(a.parentElement);
+    toggleShow(ul: HTMLElement) {
+        if (ul.closest('li').classList.contains('show')) {
+            this._hide(ul);
         } else {
-            this._show(a.parentElement);
+            this._show(ul);
         };
     }
 
-    _hide(li: HTMLElement) {
-        for (let a of li.querySelectorAll('a')) {
-            a.classList.remove('show');
-            let ul = a.parentElement.querySelector('ul');
-            if (!ul) { continue };
-            ul.style.height = `${ul.scrollHeight}px`;
+    _hide(ul: HTMLElement) {
+        ul.closest('li').classList.remove('show');
 
-            // setTimeout to create height transition.
-            setTimeout(function (ul) {
-                ul.style.height = '0px';
-            }, 0, ul);
+        // set height for transition
+        ul.style.height = `${ul.scrollHeight}px`;
+
+        // setTimeout to create height transition.
+        setTimeout(function (ul: HTMLElement) {
+            ul.style.height = '0px';
+        }, 0, ul);
+
+        for (const _ul of ul.querySelectorAll('ul')) {
+            this._hide(_ul);
         }
     }
 
-    _show(li: HTMLElement) {
-        let a = li.querySelector('a');
-        a.classList.add('show');
-        let ul = a.closest(`ul, ${this.tagName}`) as HTMLElement;
-        ul.style.height = 'auto';
-        ul = li.querySelector('ul');
-        if (!ul) { return };
+    _show(ul: HTMLElement) {
+        const ul_closet = ul.parentElement.closest('ul') as HTMLElement;
+        ul_closet.style.height = 'auto';
+        ul_closet.classList.add('show');
+        ul.closest('li').classList.add('show');
         ul.style.height = `${ul.scrollHeight}px`;
     }
 }

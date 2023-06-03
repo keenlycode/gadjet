@@ -24,7 +24,7 @@ window.gadjet = gadjet;
 
 const Badge = gadjet.Badge;
 const Button = gadjet.Button;
-const addStyle = gadjet.addStyle;
+const css = gadjet.addStyle;
 const fontFluid = gadjet.fontFluid;
 
 Badge.define('el-badge');
@@ -44,14 +44,8 @@ Button.classStyle('big', `font-size: 2em;`);
 Button.classStyle('dark', {color: theme.dark});
 Button.classStyle('light', {color: theme.light});
 
-addStyle`
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}`;
 
-addStyle`
+css`
 @font-face {
     font-family: 'sans';
     font-style: normal;
@@ -70,6 +64,10 @@ html {
     ${fontFluid()}
     font-family: sans;
     line-height: 1.7;
+}
+
+body {
+    margin: 0;
 }
 
 a {
@@ -100,7 +98,7 @@ img {
 .block {
     display: flex;
     flex-wrap: wrap;
-    justify-cotent: center;
+    justify-content: center;
     align-items: center;
     position: relative;
     max-width: 500px;

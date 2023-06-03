@@ -1,5 +1,5 @@
 import { StyleClass } from "@nitipit/adapter/src/adapter";
-import { bgColor } from "../../style";
+import { aspectRatio, bgColor } from "../../style";
 const Color = require('color');
 
 export interface MenuStyleParam {
@@ -22,54 +22,66 @@ export class MenuStyle extends StyleClass {
         border: 1px solid blue;
         border-radius: 0.2em;
 
-        .arrow i {
-            font-size: 1.2em;
-            float: right;
-            border-left: 0.25em solid transparent;
-            border-right: 0.25em solid transparent;
-            will-change: transform;
-            transform: rotateZ(90deg);
-            transition: transform 0.2s;
-        }
-
         ul {
             margin: 0;
-            padding-left: 1em;
+            margin-left: 1rem;
+            width: 100%;
+            padding: 0;
+            box-sizing: border-box;
+            border-left: 1px dashed;
             transition: height 0.2s;
             will-change: transition;
         }
 
         > ul {
             padding-left: 0;
+            margin-left: 0;
+            border-left: 0;
+            height: auto;
+        }
+
+        li.show > div.item > .arrow i {
+            transform: rotateZ(45deg);
         }
 
         li {
             list-style: none;
-            display: block;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
             overflow-y: hidden;
             overflow-x: hidden;
-        }
-
-        a {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            padding: 0.5em 1em;
-            div.content {
+            div.item {
+                display: flex;
                 width: 100%;
-            }
-            div.arrow {
-                min-width: 1em;
-            }
-        }
-
-        a ~ ul {
-            height: 0;
-        }
-
-        a.show {
-            .arrow i {
-                transform: rotateZ(180deg);
+                ~ ul {
+                    height: 0;
+                }
+                a {
+                    display: flex;
+                    align-items: center;
+                    box-sizing: border-box;
+                    padding-left: 0.75rem;
+                    width: 100%;
+                    height: 3em;
+                }
+                .arrow {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 3.5em;
+                    cursor: pointer;
+                    ${aspectRatio("1")}
+                    i {
+                        border: solid ${style.arrowColor};
+                        border-width: 0 3px 3px 0;
+                        display: inline-block;
+                        padding: 3px;
+                        transition: transform 0.2s;
+                        transform: rotate(-45deg);
+                    }
+                }
             }
         }
         ${this.style(style)}
@@ -98,9 +110,6 @@ export class MenuStyle extends StyleClass {
         }
         a:hover {
             ${bgColor(style.hoverColor)};
-            .arrow i {
-                border-bottom-color: ${arrowColor};
-            }
         }
         `.trim();
     }
