@@ -1,7 +1,7 @@
 import hljs from 'highlight.js/lib/core.js';
 import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript.js';
-
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
 import { Icon } from '@nitipit/icon/src/icon';
 
 import * as gadjet from 'gadjet/src/gadjet';
