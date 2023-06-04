@@ -55,16 +55,20 @@ export class Menu extends Adapter {
     }
 
     _show(ul: HTMLElement) {
-        const ul_closet = ul.parentElement.closest('ul') as HTMLElement;
+        const ul_closet = ul.parentElement.closest('ul');
+
+        if (!(ul.closest('li').classList.contains('show'))) {
+            ul.closest('li').classList.add('show');
+
+            // set height for transition
+            ul.style.height = `0`;
+            ul.style.height = `${ul.scrollHeight}px`;
+        }
+
         ul_closet.style.height = 'auto';
-        ul.closest('li').classList.add('show');
-
-        // set height for transition
-        ul.style.height = `${ul.scrollHeight}px`;
-
-        // if (ul_closet === this.ul_root) {
-        //     return;
-        // }
-        // this._show(ul_closet);
+        if (ul_closet === this.ul_root) {
+            return;
+        }
+        this._show(ul_closet);
     }
 }

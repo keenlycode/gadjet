@@ -46,6 +46,14 @@ export class MenuStyle extends StyleClass {
             transform: rotateZ(45deg);
         }
 
+        li > ul {
+            height: 0;
+        }
+
+        li.show > ul {
+            height: auto;
+        }
+
         li {
             list-style: none;
             display: flex;
@@ -57,9 +65,6 @@ export class MenuStyle extends StyleClass {
             div.item {
                 display: flex;
                 width: 100%;
-                ~ ul {
-                    height: 0;
-                }
                 a {
                     display: flex;
                     align-items: center;
