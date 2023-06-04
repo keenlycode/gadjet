@@ -26,7 +26,7 @@ export class MenuStyle extends StyleClass {
         ${bgColor(style.bgColor)}
         ul {
             margin: 0;
-            margin-left: 1rem;
+            margin-left: 1.25rem;
             width: 100%;
             padding: 0;
             box-sizing: border-box;
@@ -69,16 +69,29 @@ export class MenuStyle extends StyleClass {
                     display: flex;
                     align-items: center;
                     box-sizing: border-box;
-                    padding-left: 0.75rem;
+                    padding-left: 0.7rem;
                     width: 100%;
-                    height: 3em;
                     color: inherit;
+                }
+                .dot {
+                    display: flex;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 3em;
+                    ${aspectRatio("1")}
+                    > div {
+                        width: 0.4em;
+                        height: 0.4em;
+                        border-radius: 50%;
+                        background: ${color};
+                    }
                 }
                 .arrow {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 3.5em;
+                    width: 3em;
                     cursor: pointer;
                     ${aspectRatio("1")}
                     i {

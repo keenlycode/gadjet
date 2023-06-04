@@ -50,8 +50,7 @@ import { Menu } from 'gadjet/dist/module/gadjet.bundle.js';
 
 Menu.define('el-menu');
 Menu.tagStyle({
-    activeColor: 'blue',
-    arrowColor: 'blue'
+    bgColor: '#3584e4'
 });
 ```
 

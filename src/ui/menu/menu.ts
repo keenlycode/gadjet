@@ -15,14 +15,22 @@ export class Menu extends Adapter {
             const a = li.querySelector('a');
             const divArrow = document.createElement('div');
             const caret = document.createElement('i');
+            const divDot = document.createElement('div');
+            const dot = document.createElement('div');
+
             divItem.classList.add('item')
             divArrow.classList.add('arrow');
             divArrow.append(caret);
-            const _ul = li.querySelector('ul');
+            divDot.append(dot);
+            divDot.classList.add('dot');
             divItem.append(a);
+            
+            const _ul = li.querySelector('ul');
             li.insertBefore(divItem, _ul);
             if (_ul) {
                 divItem.append(divArrow);
+            } else {
+                divItem.append(divDot);
             }
             divArrow.addEventListener('click', (event: Event) => {
                 this.toggleShow(_ul as HTMLElement);
