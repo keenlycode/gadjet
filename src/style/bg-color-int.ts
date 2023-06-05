@@ -2,24 +2,24 @@ import Color from 'color';
 import { bgColor } from './bg-color';
 
 
-export interface bgColorIntParam {
+export interface BGColorIntParam {
     color: string,
     lighten?: number,
     saturate?: number
 }
 
-const paramDefault: bgColorIntParam = {
+const paramDefault: BGColorIntParam = {
     color:'blue',
     lighten: 0.2,
     saturate: 0.2
 }
 
 
-export const bgColorInt = (param: bgColorIntParam | string): string => {
+export const bgColorInt = (param: BGColorIntParam | string): string => {
     if (typeof(param) === "string") {
         param = {color: param};
     }
-    param = param as bgColorIntParam;
+    param = param as BGColorIntParam;
     param = {...paramDefault, ...param};
     const color = new Color(param.color);
 

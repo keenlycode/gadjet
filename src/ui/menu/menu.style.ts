@@ -1,28 +1,30 @@
 import Color from 'color'
 import { StyleClass } from "@nitipit/adapter/src/adapter";
-import { aspectRatio, bgColor, bgColorInt, bgColorIntParam } from "../../style";
+import { aspectRatio, bgColor, bgColorInt, BGColorIntParam } from "../../style";
 
 export interface MenuStyleParam {
-    bgColor?: bgColorIntParam;
-    barBgColor?: bgColorIntParam;
+    bgColor?: BGColorIntParam | string;
+    barBgColor?: BGColorIntParam | string;
 }
 
 export class MenuStyle extends StyleClass {
     static readonly default: MenuStyleParam = {
-        bgColor: {
-            color: "#3584e4",
-            lighten: 0.2,
-            saturate: 0.2,
-        },
-        barBgColor: {
-            color: "#f6f5f4",
-            lighten: 0.2,
-            saturate: 0.2,
-        }
+        bgColor: { color: "#3584e4" },
+        barBgColor: { color: "#f6f5f4" }
     }
 
     static css(style: MenuStyleParam = {}) {
+        if (typeof(style.bgColor) === "string") {
+            style.bgColor = { color: style.bgColor };
+        }
+        if (typeof(style.barBgColor) === "string") {
+            style.barBgColor = { color: style.barBgColor };
+        }
+
         style = {...this.default, ...style};
+
+        style.bgColor = style.bgColor as BGColorIntParam;
+        style.barBgColor = style.barBgColor as BGColorIntParam;
 
         let barColor = "black";
         if (new Color(style.barBgColor.color).isDark()) {
