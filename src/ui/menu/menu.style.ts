@@ -95,15 +95,17 @@ export class MenuStyle extends StyleClass {
                     width: 100%;
                     color: inherit;
                 }
-                .dot {
+                .barButton {
                     display: flex;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     max-width: 3em;
                     width: 100%;
-                    ${bgColor(style.barBgColor.color)}
                     ${aspectRatio("1")}
+                }
+                .dot {
+                    ${bgColor(style.barBgColor.color)}
                     > div {
                         width: 0.4em;
                         height: 0.4em;
@@ -112,15 +114,9 @@ export class MenuStyle extends StyleClass {
                     }
                 }
                 .arrow {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    max-width: 3em;
-                    width: 100%;
                     cursor: pointer;
                     ${bgColorInt(style.barBgColor)}
-                    ${aspectRatio("1")}
-                    i {
+                    > i {
                         border: solid ${barColor};
                         border-width: 0 3px 3px 0;
                         display: inline-block;

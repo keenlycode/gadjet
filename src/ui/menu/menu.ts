@@ -20,10 +20,10 @@ export class Menu extends Adapter {
             const dot = document.createElement('div');
 
             divItem.classList.add('item')
-            divArrow.classList.add('arrow');
+            divArrow.classList.add('barButton', 'arrow');
             divArrow.append(caret);
             divDot.append(dot);
-            divDot.classList.add('dot');
+            divDot.classList.add('barButton', 'dot');
             divItem.append(a);
             
             const _ul = li.querySelector('ul');
