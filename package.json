@@ -24,7 +24,12 @@
         "dist/**/*",
         "src/**/*"
     ],
+    "scripts": {
+        "build": "parcel build --no-cache --target esmodule --target cjs --target global",
+        "docs": "parcel build --no-cache --target docs 'docs-src/**/*.(js|ts)'"
+    },
     "module": "./dist/module/gadjet.js",
+    "types": "dist/types.d.ts",
     "targets": {
         "normalize.css": {
             "source": "node_modules/normalize.css/normalize.css",
@@ -33,11 +38,27 @@
             "optimize": true
         },
         "module": false,
-        "bundle": {
+        "esmodule": {
             "distDir": "dist/module/",
             "sourceMap": true,
             "optimize": true,
+            "outputFormat": "esmodule",
+            "isLibrary": true
+        },
+        "cjs": {
+            "distDir": "dist/cjs/",
+            "sourceMap": true,
+            "optimize": true,
             "outputFormat": "commonjs",
+            "isLibrary": true
+        },
+        "global": {
+            "source": "src/gadjet.ts",
+            "distDir": "dist/global/",
+            "context": "browser",
+            "sourceMap": true,
+            "optimize": true,
+            "outputFormat": "global",
             "isLibrary": true
         },
         "docs": {
@@ -65,7 +86,8 @@
         "@types/node": "^18.11.10",
         "gadjet": "file:./",
         "highlight.js": "^11.3.1",
-        "parcel": "^2.8.0",
+        "normalize.css": "^8.0.1",
+        "parcel": "^2.9.1",
         "sass": "^1.43.4",
         "typescript": "^4.9.3"
     }

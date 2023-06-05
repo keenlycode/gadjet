@@ -4,11 +4,13 @@ const Color = require('color');
 
 export interface MenuStyleParam {
     bgColor?: string;
+    activeColor?: string;
 }
 
 export class MenuStyle extends StyleClass {
     static readonly default: MenuStyleParam = {
-        bgColor: '#3584e4'
+        bgColor: '#3584e4',
+        activeColor: Color('#3584e4').lighten(0.2).saturate(0.2)
     }
 
     static css(style: MenuStyleParam = {}) {
@@ -52,6 +54,14 @@ export class MenuStyle extends StyleClass {
 
         li.show > ul {
             height: auto;
+        }
+
+        a.selected {
+            background: ${style.activeColor};
+        }
+
+        a:hover {
+            background: ${style.activeColor};
         }
 
         li {

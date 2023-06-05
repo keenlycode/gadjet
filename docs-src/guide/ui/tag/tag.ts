@@ -2,7 +2,7 @@ import {
     addStyle,
     Tag,
     TagX
-} from 'gadjet/dist/module/gadjet.bundle.js';
+} from 'gadjet/src/gadjet';
 
 class MyTag extends Tag {};
 MyTag.define('my-tag');

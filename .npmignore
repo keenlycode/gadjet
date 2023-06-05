@@ -1,8 +1,0 @@
-.*
-docs*
-node_modules
-venv
-.gitignore
-.npmignore
-*.py
-require.pip

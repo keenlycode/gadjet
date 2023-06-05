@@ -6,6 +6,7 @@ export class Menu extends Adapter {
     static Style = MenuStyle;
 
     ul_root: HTMLElement;
+    selected: HTMLElement;
 
     constructor() {
         super();
@@ -32,11 +33,24 @@ export class Menu extends Adapter {
             } else {
                 divItem.append(divDot);
             }
+
             divArrow.addEventListener('click', (event: Event) => {
                 this.toggleShow(_ul as HTMLElement);
-            })
+            });
+            a.addEventListener('click', (event) => {
+                this.select(a);
+            });
         }
     };
+
+    select(a: HTMLElement) {
+        try {
+            this.selected.classList.remove('selected');
+        } catch {};
+        this.selected = a;
+        a.classList.add('selected');
+        this._show(a.closest('ul'));
+    }
 
     toggleShow(ul: HTMLElement) {
         if (ul.closest('li').classList.contains('show')) {
