@@ -40,7 +40,7 @@ export class MenuStyle extends StyleClass {
         ${bgColor(style.bgColor.color)}
         ul {
             margin: 0;
-            margin-left: 1.25rem;
+            margin-left: 0.8em;
             width: 100%;
             padding: 0;
             box-sizing: border-box;
@@ -102,7 +102,7 @@ export class MenuStyle extends StyleClass {
                     align-items: center;
                     max-width: 3em;
                     width: 100%;
-                    ${bgColorInt(style.barBgColor)}
+                    ${bgColor(style.barBgColor.color)}
                     ${aspectRatio("1")}
                     > div {
                         width: 0.4em;

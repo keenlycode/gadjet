@@ -8,7 +8,6 @@ export interface bgColorIntParam {
     saturate?: number
 }
 
-
 const paramDefault: bgColorIntParam = {
     color:'blue',
     lighten: 0.2,
@@ -18,15 +17,10 @@ const paramDefault: bgColorIntParam = {
 
 export const bgColorInt = (param: bgColorIntParam | string): string => {
     if (typeof(param) === "string") {
-        param = {
-            color: param,
-            lighten: 0.2,
-            saturate: 0.2
-        }
+        param = {color: param};
     }
     param = param as bgColorIntParam;
     param = {...paramDefault, ...param};
-    console.log(param);
     const color = new Color(param.color);
 
     return `
