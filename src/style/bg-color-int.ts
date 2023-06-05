@@ -9,7 +9,6 @@ export const bgColorInt = ({
     }): string => {
 
     const color_ = new Color(color);
-    const hoverColor = color_.lighten(lighten).saturate(saturate);
 
     return `
     ${bgColor(color_.toString())}
