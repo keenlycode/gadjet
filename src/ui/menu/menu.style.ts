@@ -1,6 +1,6 @@
+import Color from 'color'
 import { StyleClass } from "@nitipit/adapter/src/adapter";
 import { aspectRatio, bgColor, bgColorInt } from "../../style";
-const Color = require('color');
 
 export interface MenuStyleParam {
     bgColor?: string;
@@ -17,10 +17,10 @@ export class MenuStyle extends StyleClass {
         style = {...this.default, ...style};
         let color = "black";
         let barColor = "black";
-        if (Color(style.bgColor).isDark()) {
+        if (new Color(style.bgColor).isDark()) {
             color = "white";
         }
-        if (Color(style.barBgColor).isDark()) {
+        if (new Color(style.barBgColor).isDark()) {
             barColor = "white";
         }
         const css = `
