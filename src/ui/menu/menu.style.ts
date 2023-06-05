@@ -4,27 +4,32 @@ const Color = require('color');
 
 export interface MenuStyleParam {
     bgColor?: string;
-    activeColor?: string;
+    barBgColor?: string;
 }
 
 export class MenuStyle extends StyleClass {
     static readonly default: MenuStyleParam = {
         bgColor: '#3584e4',
-        activeColor: Color('#3584e4').lighten(0.2).saturate(0.2)
+        barBgColor: '#f6f5f4'
     }
 
     static css(style: MenuStyleParam = {}) {
         style = {...this.default, ...style};
         let color = "black";
+        let barColor = "black";
         if (Color(style.bgColor).isDark()) {
             color = "white";
+        }
+        if (Color(style.barBgColor).isDark()) {
+            barColor = "white";
         }
         const css = `
         display: block;
         padding: 0;
         margin: 0;
         border: 1px solid blue;
-        border-radius: 0.2em;
+        border-radius: 0.5em;
+        overflow: hidden;
         ${bgColor(style.bgColor)}
         ul {
             margin: 0;
@@ -33,7 +38,7 @@ export class MenuStyle extends StyleClass {
             padding: 0;
             box-sizing: border-box;
             border-left: 1px dashed;
-            transition: height 0.2s;
+            transition: height 200ms;
             will-change: transition;
         }
 
@@ -57,11 +62,11 @@ export class MenuStyle extends StyleClass {
         }
 
         a.selected {
-            background: ${style.activeColor};
+            background: ${bgColorInt({color: style.bgColor})};
         }
 
         a:hover {
-            background: ${style.activeColor};
+            background: ${bgColorInt({color: style.bgColor})};
         }
 
         li {
@@ -88,33 +93,34 @@ export class MenuStyle extends StyleClass {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 3em;
+                    max-width: 3em;
+                    width: 100%;
+                    ${bgColor(style.barBgColor)}
                     ${aspectRatio("1")}
                     > div {
                         width: 0.4em;
                         height: 0.4em;
                         border-radius: 50%;
-                        background: ${color};
+                        background: ${barColor};
                     }
                 }
                 .arrow {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 3em;
+                    max-width: 3em;
+                    width: 100%;
                     cursor: pointer;
+                    ${bgColorInt({color: style.barBgColor})}
                     ${aspectRatio("1")}
                     i {
-                        border: solid ${color};
+                        border: solid ${barColor};
                         border-width: 0 3px 3px 0;
                         display: inline-block;
                         padding: 3px;
                         transition: transform 0.2s;
                         transform: rotate(-45deg);
                     }
-                }
-                .arrow:hover {
-                    ${bgColorInt({color: style.bgColor})}
                 }
             }
         }

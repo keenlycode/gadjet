@@ -49,7 +49,13 @@ export class Menu extends Adapter {
         } catch {};
         this.selected = a;
         a.classList.add('selected');
-        this._show(a.closest('ul'));
+        let el = a.closest('ul');
+        if (el === this.ul_root) {
+            return;
+        };
+        if (!(el.closest('li').classList.contains('show'))) {
+            this._show(a.closest('ul'));
+        }
     }
 
     toggleShow(ul: HTMLElement) {
@@ -67,7 +73,7 @@ export class Menu extends Adapter {
         ul.style.height = `${ul.scrollHeight}px`;
 
         // setTimeout to create height transition.
-        setTimeout(function (ul: HTMLElement) {
+        setTimeout((ul: HTMLElement) => {
             ul.style.height = '0px';
         }, 0, ul);
 
@@ -79,13 +85,15 @@ export class Menu extends Adapter {
     _show(ul: HTMLElement) {
         ul.style.height = `0`;
         ul.style.height = `${ul.scrollHeight}px`;
+        
+        setTimeout((ul: HTMLElement) => {
+            ul.style.height = 'auto';
+        }, 200, ul);
 
-        ul.closest('li').classList.add('show');
-        ul = ul.parentElement.closest('ul');
         while (ul !== this.ul_root) {
             ul.closest('li').classList.add('show');
-            ul.style.height = 'auto';
             ul = ul.parentElement.closest('ul');
+            ul.style.height = 'auto';
         }
     }
 }
