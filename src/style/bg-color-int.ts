@@ -2,24 +2,31 @@ import Color from 'color';
 import { bgColor } from './bg-color';
 
 
-export const bgColorInt = ({
-        color = 'blue',
-        lighten = 0.2,
-        saturate = 0.2
+export interface bgColorIntParam {
+    color: string,
+    lighten?: number,
+    saturate?: number
+}
+
+
+export const bgColorInt = (param: bgColorIntParam = {
+        color:'blue',
+        lighten: 0.2,
+        saturate: 0.2
     }): string => {
 
-    const color_ = new Color(color);
+    const color_ = new Color(param.color);
 
     return `
     ${bgColor(color_.toString())}
     &:hover {
         background-color: ${
-            color_.lighten(lighten).saturate(saturate).toString()
+            color_.lighten(param.lighten).saturate(param.saturate).toString()
         };
     }
     &:active {
         background-color: ${
-            color_.lighten(-lighten).saturate(saturate).toString()
+            color_.lighten(-param.lighten).saturate(param.saturate).toString()
         };
     }`.trim();
 }

@@ -1,28 +1,35 @@
 import Color from 'color'
 import { StyleClass } from "@nitipit/adapter/src/adapter";
-import { aspectRatio, bgColor, bgColorInt } from "../../style";
+import { aspectRatio, bgColor, bgColorInt, bgColorIntParam } from "../../style";
 
 export interface MenuStyleParam {
-    bgColor?: string;
-    barBgColor?: string;
+    bgColor?: bgColorIntParam;
+    barBgColor?: bgColorIntParam;
 }
 
 export class MenuStyle extends StyleClass {
     static readonly default: MenuStyleParam = {
-        bgColor: '#3584e4',
-        barBgColor: '#f6f5f4'
+        bgColor: {
+            color: "#3584e4",
+            lighten: 0.2,
+            saturate: 0.2,
+        },
+        barBgColor: {
+            color: "#f6f5f4",
+            lighten: 0.2,
+            saturate: 0.2,
+        }
     }
 
     static css(style: MenuStyleParam = {}) {
         style = {...this.default, ...style};
-        let color = "black";
         let barColor = "black";
-        if (new Color(style.bgColor).isDark()) {
-            color = "white";
-        }
-        if (new Color(style.barBgColor).isDark()) {
+        if (new Color(style.barBgColor.color).isDark()) {
             barColor = "white";
         }
+        const bgColorActive = new Color(style.bgColor.color)
+            .lighten(style.bgColor.lighten)
+            .saturate(style.bgColor.saturate)
         const css = `
         display: block;
         padding: 0;
@@ -30,7 +37,7 @@ export class MenuStyle extends StyleClass {
         border: 1px solid blue;
         border-radius: 0.5em;
         overflow: hidden;
-        ${bgColor(style.bgColor)}
+        ${bgColor(style.bgColor.color)}
         ul {
             margin: 0;
             margin-left: 1.25rem;
@@ -62,11 +69,11 @@ export class MenuStyle extends StyleClass {
         }
 
         a.selected {
-            background: ${bgColorInt({color: style.bgColor})};
+            background: ${bgColorActive};
         }
 
-        a:hover {
-            background: ${bgColorInt({color: style.bgColor})};
+        a {
+            ${bgColorInt(style.bgColor)}
         }
 
         li {
@@ -95,7 +102,7 @@ export class MenuStyle extends StyleClass {
                     align-items: center;
                     max-width: 3em;
                     width: 100%;
-                    ${bgColor(style.barBgColor)}
+                    ${bgColorInt(style.barBgColor)}
                     ${aspectRatio("1")}
                     > div {
                         width: 0.4em;
@@ -111,7 +118,7 @@ export class MenuStyle extends StyleClass {
                     max-width: 3em;
                     width: 100%;
                     cursor: pointer;
-                    ${bgColorInt({color: style.barBgColor})}
+                    ${bgColorInt(style.barBgColor)}
                     ${aspectRatio("1")}
                     i {
                         border: solid ${barColor};
@@ -136,6 +143,7 @@ export class MenuStyle extends StyleClass {
         // ${this._arrowColor(style)}
         // `.trim();
         // return css;
+        // continue
         return '';
     }
 
