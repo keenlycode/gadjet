@@ -23,6 +23,7 @@ export class MenuStyle extends StyleClass {
 
     static css(style: MenuStyleParam = {}) {
         style = {...this.default, ...style};
+
         let barColor = "black";
         if (new Color(style.barBgColor.color).isDark()) {
             barColor = "white";
@@ -37,6 +38,26 @@ export class MenuStyle extends StyleClass {
         border: 1px solid blue;
         border-radius: 0.5em;
         overflow: hidden;
+
+        .barButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 3em;
+            width: 100%;
+            ${aspectRatio("1")}
+        }
+
+        a {
+            min-height: 3em;
+        }
+
+        &.flat {
+            .barButton {
+                display: none;
+            }
+        }
+
         ${bgColor(style.bgColor.color)}
         ul {
             margin: 0;
@@ -96,13 +117,6 @@ export class MenuStyle extends StyleClass {
                     color: inherit;
                 }
                 .barButton {
-                    display: flex;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    max-width: 3em;
-                    width: 100%;
-                    ${aspectRatio("1")}
                 }
                 .dot {
                     ${bgColor(style.barBgColor.color)}

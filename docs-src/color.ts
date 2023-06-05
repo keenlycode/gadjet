@@ -22,8 +22,6 @@ export const color = {
     brown: '#986a44'
 }
 
-console.log(bgColorInt({color: theme.violet}))
-
 addStyle`
 .bg-theme-violet {
     ${bgColor(theme.violet)}

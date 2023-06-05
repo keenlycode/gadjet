@@ -34,6 +34,15 @@ export class Menu extends Adapter {
                 divItem.append(divDot);
             }
 
+            // If use in 'flat' mode 
+            if (this.classList.contains('flat')) {
+                for (const ul of this.querySelectorAll('ul')) {
+                    ul.style.height = 'auto';
+                }
+                continue;
+            }
+
+            // Code reach here if use in 'default' or 'stack' mode
             divArrow.addEventListener('click', (event: Event) => {
                 this.toggleShow(_ul as HTMLElement);
             });
