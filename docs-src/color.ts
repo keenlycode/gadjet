@@ -22,13 +22,15 @@ export const color = {
     brown: '#986a44'
 }
 
+console.log(bgColorInt({color: theme.violet}))
+
 addStyle`
 .bg-theme-violet {
     ${bgColor(theme.violet)}
 }
 
 .bg-theme-violet-int {
-    ${bgColorInt({color: theme.violet})}
+    ${bgColorInt(theme.violet)}
 }
 
 .bg-theme-frost {
@@ -36,7 +38,7 @@ addStyle`
 }
 
 .bg-theme-frost-int {
-    ${bgColorInt({color: theme.frost})}
+    ${bgColorInt(theme.frost)}
 }
 
 .bg-theme-blueGreen {
@@ -44,7 +46,7 @@ addStyle`
 }
 
 .bg-theme-blueGreen-int {
-    ${bgColorInt({color: theme.blueGreen})}
+    ${bgColorInt(theme.blueGreen)}
 }
 
 .bg-theme-yellow {
@@ -52,13 +54,22 @@ addStyle`
 }
 
 .bg-theme-yellow-int {
-    ${bgColorInt({color: theme.yellow})}
+    ${bgColorInt(theme.yellow)}
 }
 
 .bg-theme-light {
     ${bgColor(theme.light)}
 }
+
+.bg-theme-light-int {
+    ${bgColorInt(theme.light)}
+}
+
 .bg-theme-dark {
     ${bgColor(theme.dark)}
+}
+
+.bg-theme-dark-int {
+    ${bgColorInt(theme.dark)}
 }
 `;

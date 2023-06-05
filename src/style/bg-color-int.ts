@@ -9,24 +9,36 @@ export interface bgColorIntParam {
 }
 
 
-export const bgColorInt = (param: bgColorIntParam = {
-        color:'blue',
-        lighten: 0.2,
-        saturate: 0.2
-    }): string => {
+const paramDefault: bgColorIntParam = {
+    color:'blue',
+    lighten: 0.2,
+    saturate: 0.2
+}
 
-    const color_ = new Color(param.color);
+
+export const bgColorInt = (param: bgColorIntParam | string): string => {
+    if (typeof(param) === "string") {
+        param = {
+            color: param,
+            lighten: 0.2,
+            saturate: 0.2
+        }
+    }
+    param = param as bgColorIntParam;
+    param = {...paramDefault, ...param};
+    console.log(param);
+    const color = new Color(param.color);
 
     return `
-    ${bgColor(color_.toString())}
+    ${bgColor(color.toString())}
     &:hover {
         background-color: ${
-            color_.lighten(param.lighten).saturate(param.saturate).toString()
+            color.lighten(param.lighten).saturate(param.saturate).toString()
         };
     }
     &:active {
         background-color: ${
-            color_.lighten(-param.lighten).saturate(param.saturate).toString()
+            color.lighten(-param.lighten).saturate(param.saturate).toString()
         };
     }`.trim();
 }
