@@ -10,8 +10,7 @@ async def engrave():
 
 
 async def docs():
-    cmd = "npx parcel watch --no-cache --target docs " +\
-        "'docs-src/**/*.(js|ts)' "
+    cmd = "npm run docs-watch"
     print(cmd)
     proc = await asyncio.create_subprocess_shell(cmd)
     await proc.communicate()

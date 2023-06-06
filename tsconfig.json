@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "paths": {
+            "gadjet": ["./src/gadjet"]
+        }
+    },
+}

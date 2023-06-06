@@ -17,7 +17,7 @@
             </li>
             <li>
                 <a>1-2</a>
-                <ul id="test">
+                <ul>
                     <li><a>1-2-1</a></li>
                 </ul>
             </li>
@@ -50,7 +50,8 @@ import { Menu } from 'gadjet/dist/module/gadjet.bundle.js';
 
 Menu.define('el-menu');
 Menu.tagStyle({
-    bgColor: '#3584e4'
+    bgColor: '#3584e4',
+    barBgColor: "#f6f5f4"
 });
 ```
 
@@ -62,7 +63,7 @@ Menu.tagStyle({
         <a>1</a>
         <ul>
             <li>
-                <a>1-1</a>
+                <a href="#">1-1</a>
                 <ul>
                     <li><a>1-1-1</a></li>
                     <li><a>1-1-2</a></li>

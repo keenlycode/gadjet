@@ -1,5 +1,4 @@
-import { Menu } from 'gadjet/src/ui/menu/menu';
-
+import { Menu } from 'gadjet';
 
 Menu.define('el-menu');
 Menu.tagStyle(`

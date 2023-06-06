@@ -11,7 +11,6 @@ export interface FileUploadStyleParam {
     
 }
 
-
 export class FileUploadStyle extends StyleClass {
     static readonly default: FileUploadStyleParam = {
         buttonColor: 'blue',

@@ -1,4 +1,9 @@
-import { FontFluidParam } from './font-fluid.d';
+export interface FontFluidParam {
+    vwMin?: number,
+    vwMax?: number,
+    fontSizeMin?: number,
+    fontSizeMax?: number
+}
 
 export const fontFluid = ({
     vwMin = 300, vwMax = 1200,

@@ -30,6 +30,3 @@ export { Table } from './ui/table/table';
 
 export { Tag } from './ui/tag/tag';
 export { TagX } from './ui/tag/tagx';
-
-// export { FileManager } from './ui/file-manager/file-manager';
-// export { HTMLEditor } from './ui/html-editor/html-editor';

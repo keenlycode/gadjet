@@ -26,13 +26,6 @@ export class MenuStyle extends StyleClass {
         style.bgColor = style.bgColor as BGColorIntParam;
         style.barBgColor = style.barBgColor as BGColorIntParam;
 
-        let barColor = "black";
-        if (new Color(style.barBgColor.color).isDark()) {
-            barColor = "white";
-        }
-        const bgColorActive = new Color(style.bgColor.color)
-            .lighten(style.bgColor.lighten)
-            .saturate(style.bgColor.saturate)
         const css = `
         display: block;
         padding: 0;
@@ -60,7 +53,6 @@ export class MenuStyle extends StyleClass {
             }
         }
 
-        ${bgColor(style.bgColor.color)}
         ul {
             margin: 0;
             margin-left: 0.8em;
@@ -91,14 +83,6 @@ export class MenuStyle extends StyleClass {
             height: auto;
         }
 
-        a.selected {
-            background: ${bgColorActive};
-        }
-
-        a {
-            ${bgColorInt(style.bgColor)}
-        }
-
         li {
             list-style: none;
             display: flex;
@@ -121,19 +105,15 @@ export class MenuStyle extends StyleClass {
                 .barButton {
                 }
                 .dot {
-                    ${bgColor(style.barBgColor.color)}
                     > div {
                         width: 0.4em;
                         height: 0.4em;
                         border-radius: 50%;
-                        background: ${barColor};
                     }
                 }
                 .arrow {
                     cursor: pointer;
-                    ${bgColorInt(style.barBgColor)}
                     > i {
-                        border: solid ${barColor};
                         border-width: 0 3px 3px 0;
                         display: inline-block;
                         padding: 3px;
@@ -150,36 +130,51 @@ export class MenuStyle extends StyleClass {
     }
 
     static style(style: MenuStyleParam = {}): string {
-        // const css = `
-        // ${this._hoverColor(style)}
-        // ${this._arrowColor(style)}
-        // `.trim();
-        // return css;
-        // continue
-        return '';
+        const css = `
+        ${this._bgColor(style)}
+        ${this._barBgColor(style)}
+        `.trim();
+        return css;
     }
 
-    // static _hoverColor(style: MenuStyleParam = {}): string {
-    //     if (style.hoverColor == undefined) { return '' };
-    //     let arrowColor = 'black';
-    //     if (Color(style.hoverColor).isDark()) {
-    //         arrowColor = 'white';
-    //     }
-    //     return `
-    //     a {
-    //         -webkit-tap-highlight-color: ${Color(style.hoverColor)};
-    //     }
-    //     a:hover {
-    //         ${bgColor(style.hoverColor)};
-    //     }
-    //     `.trim();
-    // }
-    // static _arrowColor(style: MenuStyleParam = {}): string {
-    //     if (style.arrowColor == undefined) { return '' };
-    //     return `
-    //     .arrow i {
-    //         border-bottom: 0.25em solid ${style.arrowColor};
-    //     }
-    //     `.trim();
-    // }
+    static _bgColor(style: MenuStyleParam = {}): string {
+        if (style.bgColor == undefined) { return '' };
+        const bgColor_ = style.bgColor as BGColorIntParam;
+
+        const bgColorActive = new Color(bgColor_.color)
+            .lighten(bgColor_.lighten)
+            .saturate(bgColor_.saturate)
+
+        return `
+        ${bgColor(bgColor_.color)}
+        a {
+            ${bgColorInt(bgColor_)}
+        }
+        a.selected {
+            background: ${bgColorActive};
+        }
+        `.trim();
+    }
+
+    static _barBgColor(style: MenuStyleParam = {}): string {
+        if (style.barBgColor == undefined) { return '' };
+        const barBgColor = style.barBgColor as BGColorIntParam;
+        let barColor = "black";
+        if (new Color(barBgColor.color).isDark()) {
+            barColor = "white";
+        }
+        return `
+        .dot {
+            ${bgColor(barBgColor.color)}
+            > div {
+                background: ${barColor};
+            }
+        }
+        .arrow {
+            ${bgColorInt(barBgColor)}
+            > i {
+                border: solid ${barColor};
+        }
+        `.trim();
+    }
 }
