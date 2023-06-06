@@ -139,16 +139,18 @@ export class MenuStyle extends StyleClass {
 
     static _bgColor(style: MenuStyleParam = {}): string {
         if (style.bgColor == undefined) { return '' };
-        const bgColor_ = style.bgColor as BGColorIntParam;
+        if (typeof(style.bgColor) === "string") {
+            style.bgColor = { color: style.bgColor };
+        }
 
-        const bgColorActive = new Color(bgColor_.color)
-            .lighten(bgColor_.lighten)
-            .saturate(bgColor_.saturate)
+        const bgColorActive = new Color(style.bgColor.color)
+            .lighten(style.bgColor.lighten)
+            .saturate(style.bgColor.saturate)
 
         return `
-        ${bgColor(bgColor_.color)}
+        ${bgColor(style.bgColor.color)}
         a {
-            ${bgColorInt(bgColor_)}
+            ${bgColorInt(style.bgColor)}
         }
         a.selected {
             background: ${bgColorActive};
@@ -158,20 +160,22 @@ export class MenuStyle extends StyleClass {
 
     static _barBgColor(style: MenuStyleParam = {}): string {
         if (style.barBgColor == undefined) { return '' };
-        const barBgColor = style.barBgColor as BGColorIntParam;
+        if (typeof(style.barBgColor) === "string") {
+            style.barBgColor = { color: style.barBgColor };
+        }
         let barColor = "black";
-        if (new Color(barBgColor.color).isDark()) {
+        if (new Color(style.barBgColor.color).isDark()) {
             barColor = "white";
         }
         return `
         .dot {
-            ${bgColor(barBgColor.color)}
+            ${bgColor(style.barBgColor.color)}
             > div {
                 background: ${barColor};
             }
         }
         .arrow {
-            ${bgColorInt(barBgColor)}
+            ${bgColorInt(style.barBgColor)}
             > i {
                 border: solid ${barColor};
         }
